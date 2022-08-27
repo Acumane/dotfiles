@@ -1,0 +1,104 @@
+﻿;##############################  APP-SPECIFIC KEYS  ##############################
+
+;——— Browser features ——————————————————————————————————————————————————————————
+#IfWinActive ahk_exe brave.exe
+!+j::Send !{PgUp}               ; shift/move tabs
+!+l::Send !{PgDn}
+![::                            ; expand/collapse groups
+!]::
+	Send !+6
+Return
+!^l::                           ; move to next window
+!^j::
+	Send !+7
+Return
+!^i::Send !+8
+!BackSpace::Send !{Del}         ; close duplicate tabs
+!r::Send ^+t                    ; open recently closed
+
+!p::Send ^p                     ; print dialog
+!h::Send ^h                     ; history
+!b::Send ^+b                    ; bookmarks bar
+^b::^d                          ; bookmark site
+!c::Send {F6}                   ; focus address bar
+!s::Send ^e                     ; search
+~!z::Send {F11}                 ; fullscreen
+!`::                            ; console
+!/::
+	Send {F12}
+Return
+
+;——— Google Tasks (embed) ——————————————————————————————————————————————————————
+#IfWinActive Tasks ahk_exe brave.exe
+Tab::Send ^]                    ; indent
++Tab::Send ^[                   ; unindent
+
+;——— Visual Studio Code ————————————————————————————————————————————————————————
+#IfWinActive ahk_exe Code.exe
+^Tab::Send ^+t                  ; Markdown bullet points (cycle)
+
+;——— Krita —————————————————————————————————————————————————————————————————————
+#IfWinActive ahk_exe krita.exe
+!m::Send ^.                     ; side-menu
+
+;——— Files —————————————————————————————————————————————————————————————————————
+#IfWinActive ahk_exe Explorer.EXE
+^h::Send {F2}                   ; rename
+^=::SendInput ^{WheelUp}        ; resize/scale
+^-::SendInput ^{WheelDown}
+
+;——— Discord ———————————————————————————————————————————————————————————————————
+#IfWinActive ahk_exe Discord.exe
+!i::Send ^+{Tab}                ; vertical tab alternation
+!k::Send ^{Tab}
+!m::Send ^u                     ; side menu
+!c::Send ^k                     ; quick panel
+!.::Send ^e                     ; emoji picker
+^m::Send ^+m                    ; mute
+!p::Send ^p                     ; pins
+!l::
+!j::
+    Send ^!{Right}
+Return
+
+;——— Spotify ———————————————————————————————————————————————————————————————————
+#IfWinActive ahk_exe Spotify.exe
+!s::Send ^l                     ; search
+
+;——— Unreal Editor —————————————————————————————————————————————————————————————
+#IfWinActive ahk_exe UnrealEditor.exe
+LShift::q
+
+;####################################  GAMES  ###################################
+;——— Minecraft —————————————————————————————————————————————————————————————————
+#IfWinActive ahk_exe javaw.exe
+`::F3                               ; debug
+^r::SendInput, {F3 down}{A}{F3 up}  ; reload chunks
+WheelLeft::1                        ; first slot
+WheelRight::9                       ; last slot
+
+;——— Star Citizen ——————————————————————————————————————————————————————————————
+#IfWinActive ahk_exe starcitizen.exe
+F2::                                ; cancel all yaw/pitch vel
+	KeyWait F2
+	KeyWait F2, D T.075
+	if !ErrorLevel
+		Send {F3}
+        Sleep 200 ; (wait 50ms) 
+		Send {F3}
+Return
+
+~z & Space::                        ; reset freelook
+	Send {x down}
+	Sleep 25
+	Send {NumpadMult down}
+	Sleep 200
+	Send {NumpadMult up}
+	Send {x up}
+Return
+
+#IfWinActive ahk_exe KSP_x64.exe
+WheelUp::Send =
+WheelDown::Send -
+
+#IfWinActive
