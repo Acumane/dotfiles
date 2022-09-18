@@ -6,6 +6,33 @@ map j <Left>
 map k <Down>
 vnoremap h i
 vnoremap H A
+vnoremap b <C-v>
+
+nnoremap ' viwS'
+nnoremap ` viwS`
+nnoremap " viwS"
+nnoremap ( viwS)
+nnoremap ) viwS)
+nnoremap [ viwS]
+nnoremap ] viwS]
+" nnoremap { viwS}
+" nnoremap } viwS}
+" nnoremap < viwS>
+" nnoremap > viwS>
+
+
+vnoremap ' S'
+vnoremap ` S`
+vnoremap " S"
+vnoremap ( S)
+vnoremap ) S)
+vnoremap [ S]
+vnoremap ] S]
+" vnoremap { S}
+" vnoremap } S}
+" vnoremap < S>
+" vnoremap > S>
+
 noremap h i
 noremap H a
 
@@ -59,6 +86,7 @@ noremap t     H
 noremap b     L
 noremap T     gg
 noremap B     G
+" e.g. 5gt
 noremap gt    gg
 
 noremap I     {
