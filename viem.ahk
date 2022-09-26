@@ -3,19 +3,50 @@
 #SingleInstance Force
 SendMode Input
 SetWorkingDir %A_ScriptDir%
+DetectHiddenWindows On
+SetTitleMatchMode 2
+mainON := 1
+symON := 0
 
 if !A_IsAdmin
     Run, % "*RunAs " (A_IsCompiled ? "" : A_AhkPath " ") Chr(34) A_ScriptFullPath Chr(34)
 
-If FileExist("viem.ico")
-    Menu Tray,Icon,viem.ico
+Menu Tray, Icon, viem.ico, , 1
+
+Run %A_ScriptDir%\sym.ahk
 
 ^+r::Reload
 
 ;############################  SYSTEM-WIDE KEYBINDS  ############################
 
-;——— Win (#) ———————————————————————————————————————————————————————————————————
+!F1::
+    Suspend Toggle
+    mainON := !mainON ; toggle
+    If mainON {
+        If symON
+            Menu Tray, Icon, viem.sym.ico
+        Else
+            Menu Tray, Icon, viem.ico
+    }
+    Else {
+        If symON
+            Menu Tray, Icon, viem.sym-off.ico
+        Else
+            Menu Tray, Icon, viem-off.ico
+    }
+Return
 
+;——— Symbolic layer ————————————————————————————————————————————————————————————
+!F2::
+    symON := !symON
+	PostMessage 0x0111, 65305, , , sym.ahk - AutoHotkey
+    If symON
+        Menu Tray, Icon, viem.sym.ico
+    Else
+        Menu Tray, Icon, viem.ico
+Return
+
+;——— Win (#) ———————————————————————————————————————————————————————————————————
 #+i::Send {F11}                 ; fullscreen
 #i::
     Send {Blind}{Up}
@@ -44,8 +75,10 @@ Return
 #b::Run "%A_Programs%\Brave"    ; Browser
 
 ;——— Other (^,!,+) —————————————————————————————————————————————————————————————
-
 !-::Send —
+::aka::a.k.a.
+::eg::e.g.
+::ie::i.e.
 
 ^d::Send {Del}                  ; accessible Del/Esc
 Ctrl::Send {Esc}
@@ -66,7 +99,6 @@ Ctrl::Send {Esc}
 #If
 
 ;——— Alt navigation ————————————————————————————————————————————————————————————
-
 LAlt::
   KeyWait LAlt
   KeyWait LAlt, D T.1

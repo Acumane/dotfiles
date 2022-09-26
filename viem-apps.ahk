@@ -36,6 +36,7 @@ Tab::Send ^]                    ; indent
 ;——— Visual Studio Code ————————————————————————————————————————————————————————
 #IfWinActive ahk_exe Code.exe
 ^Tab::Send ^+t                  ; Markdown bullet points (cycle)
+; Media_Play_Pause::Send, {F5} ; debug: restart
 
 ;——— Krita —————————————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe krita.exe
@@ -63,7 +64,9 @@ Return
 
 ;——— Spotify ———————————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe Spotify.exe
-!s::Send ^l                     ; search
+!,::Send ^p                     ; settings
+^j::Send +{Left}                ; scrub backward
+^l::Send +{Right}               ; scrub forward
 
 ;——— Unreal Editor —————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe UnrealEditor.exe
