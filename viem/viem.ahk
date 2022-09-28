@@ -13,7 +13,7 @@ if !A_IsAdmin
 
 Menu Tray, Icon, viem.ico, , 1
 
-Run %A_ScriptDir%\sym.ahk
+Run %A_ScriptDir%\viem.sym.ahk
 
 ^+r::Reload
 
@@ -39,7 +39,7 @@ Return
 ;——— Symbolic layer ————————————————————————————————————————————————————————————
 !F2::
     symON := !symON
-	PostMessage 0x0111, 65305, , , sym.ahk - AutoHotkey
+	PostMessage 0x0111, 65305, , , viem.sym.ahk - AutoHotkey
     If symON
         Menu Tray, Icon, viem.sym.ico
     Else
@@ -135,4 +135,4 @@ Return
 !`::Send ^``                    ; console
 
 
-#Include %A_ScriptDir%\viem-apps.ahk
+#Include %A_ScriptDir%\viem.apps.ahk

@@ -20,6 +20,7 @@ Return
 !h::Send ^h                     ; history
 !b::Send ^+b                    ; bookmarks bar
 ^b::^d                          ; bookmark site
+^+b::^+d                          ; bookmark all tabs
 !c::Send {F6}                   ; focus address bar
 !s::Send ^e                     ; search
 ~!z::Send {F11}                 ; fullscreen
@@ -67,6 +68,16 @@ Return
 !,::Send ^p                     ; settings
 ^j::Send +{Left}                ; scrub backward
 ^l::Send +{Right}               ; scrub forward
+
+;——— Epic Pen ——————————————————————————————————————————————————————————————————
+#If true
+#w::Send ^!i                      ; toggle ink layer
+!w::Send ^!t                      ; toggle toolbar
+^w::Send ^!p                      ; switch to pen
+#BackSpace::Send ^!{c}            ; clear
+;Esc                                unfocus
+;^],[                               brush size
+#If
 
 ;——— Unreal Editor —————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe UnrealEditor.exe

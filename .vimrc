@@ -1,69 +1,110 @@
 "Requires viem.ahk
 
+
 "Improved arrow navigation and commands
 map i <Up>
 map j <Left>
 map k <Down>
-vnoremap h i
-vnoremap H A
-vnoremap b <C-v>
 
-nnoremap ' viwS'
+"(i)nsert -> (h)ere OR (i)nner
+noremap h i
+nnoremap H a
+" remove annoying up/down motions, use i as (i)nner motion
+onoremap <Up> i
+onoremap <Down> <Nop>
+" for visual mode(s):
+noremap H A
+
+"pair alternatives
+onoremap iq i"
+onoremap ip i)
+onoremap ib i}
+onoremap it i>
+
+onoremap aq a"
+onoremap ap a)
+onoremap ab a}
+onoremap at a>
+
+"Better autowrapping:
 nnoremap ` viwS`
+nnoremap ' viwS'
 nnoremap " viwS"
 nnoremap ( viwS)
 nnoremap ) viwS)
 nnoremap [ viwS]
 nnoremap ] viwS]
-" nnoremap { viwS}
-" nnoremap } viwS}
-" nnoremap < viwS>
-" nnoremap > viwS>
+nnoremap { viwS}
+nnoremap } viwS}
+nnoremap < viwS>
+nnoremap > viwS>
 
-
-vnoremap ' S'
 vnoremap ` S`
+vnoremap ' S'
 vnoremap " S"
 vnoremap ( S)
 vnoremap ) S)
 vnoremap [ S]
 vnoremap ] S]
-" vnoremap { S}
-" vnoremap } S}
-" vnoremap < S>
-" vnoremap > S>
+vnoremap { S}
+vnoremap } S}
+vnoremap < S>
+vnoremap > S>
 
-noremap h i
-noremap H a
+nmap d` ds`
+nmap d' ds'
+nmap d" ds"
+nmap dq ds"
+nmap dp ds)
+nmap d( ds)
+nmap d) ds)
+nmap d[ ds]
+nmap d] ds]
+nmap d{ ds}
+nmap d} ds}
+nmap db ds}
+nmap d< ds>
+nmap d> ds>
 
-" better line appending!
-nnoremap a<space> J
-nnoremap aa gJ
+"consistent w/ v
+nnoremap ~ g~
+nnoremap u gu
+nnoremap U gU
+"(must now use Ctrl+u/r)
 
+"better line appending!
+nnoremap a<space>i J
+nnoremap ai gJ
 
-" consistent bracket pair nav
+"consistent bracket pair nav
 nnoremap o %
 nnoremap O %
 
-" renaming change->replace, changing cut, and adding true delete
-noremap r c
+" Z = zz (NOT zL), where z is r,c,x,d
+" renaming change->replace:
+noremap r "_c
+nnoremap R "_cc
+nnoremap rr "_cc
 noremap c y
-nnoremap rc r
+nnoremap C yy
+nnoremap cc yy
+"special replace character->rc:
+nnoremap rl r
+"old del->cut, keep transpose:
 noremap x d
-noremap X D
+nnoremap X dd
 nnoremap xx dd
+"restoring transpose:
+nnoremap xp xp
+
+"adding true delete:
 noremap d "_d
-nnoremap D "_D
+nnoremap D "_dd
 nnoremap dd "_dd
 
+"expected Ctrl+A function:
 noremap <C-a> ggvG$
 inoremap <C-a> <Esc>ggvG$
-
-
-
-"Consistent X, D, C*, R* keymaps
-nnoremap R C
-nnoremap C y$
 
 "Unmapping awkward power navigation keys
 map $ <Nop>
@@ -71,22 +112,20 @@ map ^ <Nop>
 map { <Nop>
 map } <Nop>
 
+map <enter> <Nop>
+
 "better word navigation
 "       w
-noremap <C-w>   W
-noremap W       b
-noremap <C-W>   B
+noremap W     b
 "       e
-noremap <C-e>   E
-noremap E       ge
-noremap <C-E>   gE
+noremap E     ge
 
 noremap t     H
-" noremap m     M
-noremap b     L
+" TEMP: n- to save block mode
+nnoremap b     L
 noremap T     gg
 noremap B     G
-" e.g. 5gt
+" e.g.  5gt
 noremap gt    gg
 
 noremap I     {
@@ -98,7 +137,7 @@ noremap L     $
 noremap n o
 noremap N O
 
-"Can now use tabs in NORMAL mode in stead of >> and <<
+"Can now use tabs in NORMAL mode instead of >> and <<
 nmap >> <Nop>
 nmap << <Nop>
 vmap >> <Nop>
@@ -108,9 +147,10 @@ nnoremap <S-Tab> <<
 vnoremap <Tab>   >><Esc>gv
 vnoremap <S-Tab> <<<Esc>gv
 
-"Multi-cursor mode
-noremap M gb
-"gh -> hover
-
-" TODO:
-" revisit word nav
+"better block mode
+vnoremap b <C-v>
+"       gh     gesture: hover
+"multi-cursor mode
+noremap m gb
+"       n      next/skip
+"       M      undo cursor
