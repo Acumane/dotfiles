@@ -76,9 +76,6 @@ Return
 
 ;——— Other (^,!,+) —————————————————————————————————————————————————————————————
 !-::Send —
-::aka::a.k.a.
-::eg::e.g.
-::ie::i.e.
 
 ^d::Send {Del}                  ; accessible Del/Esc
 Ctrl::Send {Esc}
@@ -127,6 +124,7 @@ Return
 !l::Send ^{Tab}                 ; next/prev tab
 !j::Send ^+{Tab}
 
+!z::Send, {F11}                 ; fullscreen
 #+n::Send ^+n                   ; new private/special window
 #q::WinClose A                  ; close window
 !q::Send ^w                     ; close tab

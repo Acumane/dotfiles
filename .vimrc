@@ -113,6 +113,10 @@ map { <Nop>
 map } <Nop>
 
 map <enter> <Nop>
+" <C-a> replaces
+omap ie <Nop>
+omap ae <Nop>
+omap he <Nop>
 
 "better word navigation
 "       w
@@ -128,10 +132,12 @@ noremap B     G
 " e.g.  5gt
 noremap gt    gg
 
-noremap I     {
-noremap K     }
-noremap J     ^
-noremap L     $
+nnoremap I     {
+nnoremap K     }
+noremap J      ^
+nnoremap L     $
+
+vnoremap L     $h
 
 "better newline!
 noremap n o

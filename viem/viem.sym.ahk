@@ -63,7 +63,9 @@ Suspend On
 ::elem::∈
 ::!elem::∉
 ::<=::≤
+::leq::≤
 ::>=::≥
+::geq::≥
 
 ;—— Identities ——————————
 ::!=::≠
@@ -78,6 +80,7 @@ Suspend On
 
 ::so::∴
 ::such::꞉
+::col::꞉
 ::1::⊤
 ::taut::⊤
 ::0::⊥ 
@@ -110,3 +113,13 @@ Suspend On
 ::tm::™
 ::<::⟨
 ::>::⟩
+
+;—— accented ————————————
+::e/::é
+::..o::ö
+::~n::ñ
+
+;—— abbreviations ———————
+::aka::a.k.a.
+::eg::e.g.
+::ie::i.e.

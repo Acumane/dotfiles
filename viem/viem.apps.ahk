@@ -20,7 +20,7 @@ Return
 !h::Send ^h                     ; history
 !b::Send ^+b                    ; bookmarks bar
 ^b::^d                          ; bookmark site
-^+b::^+d                          ; bookmark all tabs
+^+b::^+d                        ; bookmark all tabs
 !c::Send {F6}                   ; focus address bar
 !s::Send ^e                     ; search
 ~!z::Send {F11}                 ; fullscreen
@@ -37,7 +37,7 @@ Tab::Send ^]                    ; indent
 ;——— Visual Studio Code ————————————————————————————————————————————————————————
 #IfWinActive ahk_exe Code.exe
 ^Tab::Send ^+t                  ; Markdown bullet points (cycle)
-; Media_Play_Pause::Send, {F5} ; debug: restart
+; Media_Play_Pause::Send, {F5}    ; run/debug
 
 ;——— Krita —————————————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe krita.exe
@@ -58,6 +58,7 @@ Tab::Send ^]                    ; indent
 !.::Send ^e                     ; emoji picker
 ^m::Send ^+m                    ; mute
 !p::Send ^p                     ; pins
+!z::Send ^+f                    ; fullscreen
 !l::
 !j::
     Send ^!{Right}
