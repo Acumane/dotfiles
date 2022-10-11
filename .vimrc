@@ -1,6 +1,5 @@
 "Requires viem.ahk
 
-
 "Improved arrow navigation and commands
 map i <Up>
 map j <Left>
@@ -38,6 +37,7 @@ nnoremap { viwS}
 nnoremap } viwS}
 nnoremap < viwS>
 nnoremap > viwS>
+nnoremap * viwS*
 
 vnoremap ` S`
 vnoremap ' S'
@@ -50,6 +50,7 @@ vnoremap { S}
 vnoremap } S}
 vnoremap < S>
 vnoremap > S>
+vnoremap * S*
 
 nmap d` ds`
 nmap d' ds'
@@ -68,8 +69,6 @@ nmap d> ds>
 
 "consistent w/ v
 nnoremap ~ g~
-nnoremap u gu
-nnoremap U gU
 "(must now use Ctrl+u/r)
 
 "better line appending!
@@ -126,14 +125,14 @@ noremap E     ge
 
 noremap t     H
 " TEMP: n- to save block mode
-nnoremap b     L
+nnoremap b    L
 noremap T     gg
 noremap B     G
 " e.g.  5gt
 noremap gt    gg
 
-nnoremap I     {
-nnoremap K     }
+noremap I     {
+noremap K     }
 noremap J      ^
 nnoremap L     $
 

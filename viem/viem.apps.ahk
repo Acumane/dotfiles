@@ -37,7 +37,8 @@ Tab::Send ^]                    ; indent
 ;——— Visual Studio Code ————————————————————————————————————————————————————————
 #IfWinActive ahk_exe Code.exe
 ^Tab::Send ^+t                  ; Markdown bullet points (cycle)
-; Media_Play_Pause::Send, {F5}    ; run/debug
+#r::Send, {F10}
+Media_Play_Pause::Send, {F5}    ; run/debug
 
 ;——— Krita —————————————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe krita.exe

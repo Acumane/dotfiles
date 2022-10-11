@@ -8,6 +8,9 @@ SetTitleMatchMode 2
 mainON := 1
 symON := 0
 
+GroupAdd termInp, ahk_exe Code.exe
+GroupAdd termInp, ahk_exe WindowsTerminal.exe
+
 if !A_IsAdmin
     Run, % "*RunAs " (A_IsCompiled ? "" : A_AhkPath " ") Chr(34) A_ScriptFullPath Chr(34)
 
@@ -66,7 +69,6 @@ Return
 #m::#n                          ; Win side-menu
 #,::#i                          ; settings 
 #c::#a                          ; connect
-#r::Send ^r                     ; refresh
 
 #f::#e                          ; Files
 #e::Run "%A_Programs%\Gmail"    ; Gmail
@@ -89,11 +91,12 @@ Ctrl::Send {Esc}
 ^+j::SendInput ^{Left}          ; power L/R
 ^+l::SendInput ^{Right}
 
-#If true ; (noremap)
+#IfWinNotActive ahk_group termInp
+#r::Send ^r                     ; refresh
 ^p::Send {Blind}v               ; mnemonic paste, (un/re)do
 ^u::Send {Blind}z
 ^r::Send {Blind}+z
-#If
+#IfWinNotActive
 
 ;——— Alt navigation ————————————————————————————————————————————————————————————
 LAlt::
