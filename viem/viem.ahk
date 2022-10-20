@@ -10,6 +10,8 @@ symON := 0
 
 GroupAdd termInp, ahk_exe Code.exe
 GroupAdd termInp, ahk_exe WindowsTerminal.exe
+GroupAdd Browser, ahk_exe brave.exe
+GroupAdd Browser, ahk_exe msedge.exe
 
 if !A_IsAdmin
     Run, % "*RunAs " (A_IsCompiled ? "" : A_AhkPath " ") Chr(34) A_ScriptFullPath Chr(34)
@@ -132,8 +134,7 @@ Return
 #q::WinClose A                  ; close window
 !q::Send ^w                     ; close tab
 
-!,::Send ^,                     ; settings
+; !,::Send ^,                   ; settings
 !`::Send ^``                    ; console
-
 
 #Include %A_ScriptDir%\viem.apps.ahk

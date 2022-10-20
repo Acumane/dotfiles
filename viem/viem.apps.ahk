@@ -1,7 +1,7 @@
 ﻿;##############################  APP-SPECIFIC KEYS  ##############################
 
 ;——— Browser features ——————————————————————————————————————————————————————————
-#IfWinActive ahk_exe brave.exe
+#IfWinActive ahk_group Browser
 !+j::Send !{PgUp}               ; shift/move tabs
 !+l::Send !{PgDn}
 ![::                            ; expand/collapse groups

@@ -70,6 +70,8 @@ nmap d> ds>
 "consistent w/ v
 nnoremap ~ g~
 "(must now use Ctrl+u/r)
+nnoremap u gu
+nnoremap U gU
 
 "better line appending!
 nnoremap a<space>i J

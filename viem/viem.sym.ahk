@@ -46,8 +46,10 @@ Suspend On
 
 ;—— Quantifiers —————————
 ::@::∀
+::A::∀
 ::forall::∀
 ::?::∃
+::E::∃
 ::exists::∃
 ::!?::∄
 ::!exists::∄
