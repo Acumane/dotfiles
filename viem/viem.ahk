@@ -12,6 +12,9 @@ GroupAdd termInp, ahk_exe Code.exe
 GroupAdd termInp, ahk_exe WindowsTerminal.exe
 GroupAdd Browser, ahk_exe brave.exe
 GroupAdd Browser, ahk_exe msedge.exe
+GroupAdd Browser, ahk_exe chrome.exe
+GroupAdd noBinds, ahk_exe krita.exe
+GroupAdd noBinds, ahk_exe starcitizen.exe
 
 if !A_IsAdmin
     Run, % "*RunAs " (A_IsCompiled ? "" : A_AhkPath " ") Chr(34) A_ScriptFullPath Chr(34)
@@ -19,7 +22,7 @@ if !A_IsAdmin
 Menu Tray, Icon, viem.ico, , 1
 
 Run %A_ScriptDir%\viem.sym.ahk
-
+; Run %A_ScriptDir%\viem.spell.ahk
 ^+r::Reload
 
 ;############################  SYSTEM-WIDE KEYBINDS  ############################
@@ -65,6 +68,7 @@ Return
 #j::Send {Blind}{Left}          ; Window positioning
 #l::Send {Blind}{Right}
 
+#q::WinClose A                  ; close window
 #w::Return
 #Space::Send #+s                ; Win screenshots
 #p::Send {Blind}v               ; clipboard
@@ -122,19 +126,23 @@ Alt::
     }
 Return
 
-;#############################  TAB-BASED APP KEYS  #############################
-
-!n::Send ^t                     ; new tab
-#n::Send ^n                     ; new window
 !l::Send ^{Tab}                 ; next/prev tab
 !j::Send ^+{Tab}
 
+
+;#############################  TAB-BASED APP KEYS  #############################
+
+
+#IfWinNotActive ahk_group noBinds
+!n::Send ^t                     ; new tab
+#n::Send ^n                     ; new window
+
 !z::Send, {F11}                 ; fullscreen
 #+n::Send ^+n                   ; new private/special window
-#q::WinClose A                  ; close window
 !q::Send ^w                     ; close tab
 
 ; !,::Send ^,                   ; settings
 !`::Send ^``                    ; console
 
+#IfWinNotActive
 #Include %A_ScriptDir%\viem.apps.ahk

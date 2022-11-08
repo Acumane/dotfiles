@@ -70,6 +70,7 @@ Return
 !,::Send ^p                     ; settings
 ^j::Send +{Left}                ; scrub backward
 ^l::Send +{Right}               ; scrub forward
+!s::Send ^l                     ; search
 
 ;——— Epic Pen ——————————————————————————————————————————————————————————————————
 #If true
