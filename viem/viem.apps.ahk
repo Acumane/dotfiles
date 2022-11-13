@@ -1,4 +1,13 @@
-﻿;##############################  APP-SPECIFIC KEYS  ##############################
+﻿#NoEnv
+#NoTrayIcon
+#SingleInstance Force
+SendMode Input
+
+GroupAdd Browser, ahk_exe brave.exe
+GroupAdd Browser, ahk_exe msedge.exe
+GroupAdd Browser, ahk_exe chrome.exe
+
+;##############################  APP-SPECIFIC KEYS  ##############################
 
 ;——— Browser features ——————————————————————————————————————————————————————————
 #IfWinActive ahk_group Browser
@@ -91,8 +100,9 @@ LShift::q
 #IfWinActive ahk_exe javaw.exe
 `::F3                               ; debug
 ^r::SendInput, {F3 down}{A}{F3 up}  ; reload chunks
-WheelLeft::1                        ; first slot
-WheelRight::9                       ; last slot
+~c::Send {Blind}{F1}
+; WheelLeft::1                        ; first slot
+; WheelRight::9                       ; last slot
 
 ;——— Star Citizen ——————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe starcitizen.exe

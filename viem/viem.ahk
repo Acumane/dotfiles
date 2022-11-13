@@ -8,13 +8,14 @@ SetTitleMatchMode 2
 mainON := 1
 symON := 0
 
-GroupAdd termInp, ahk_exe Code.exe
-GroupAdd termInp, ahk_exe WindowsTerminal.exe
-GroupAdd Browser, ahk_exe brave.exe
-GroupAdd Browser, ahk_exe msedge.exe
-GroupAdd Browser, ahk_exe chrome.exe
-GroupAdd noBinds, ahk_exe krita.exe
-GroupAdd noBinds, ahk_exe starcitizen.exe
+GroupAdd Terminal, ahk_exe Code.exe
+GroupAdd Terminal, ahk_exe WindowsTerminal.exe
+
+GroupAdd noGlobal, ahk_exe krita.exe
+GroupAdd noGlobal, ahk_exe starcitizen.exe
+GroupAdd noGlobal, ahk_exe javaw.exe
+GroupAdd noGlobal, ahk_exe KSP_x64.exe
+
 
 if !A_IsAdmin
     Run, % "*RunAs " (A_IsCompiled ? "" : A_AhkPath " ") Chr(34) A_ScriptFullPath Chr(34)
@@ -22,7 +23,10 @@ if !A_IsAdmin
 Menu Tray, Icon, viem.ico, , 1
 
 Run %A_ScriptDir%\viem.sym.ahk
+Run %A_ScriptDir%\viem.apps.ahk
 ; Run %A_ScriptDir%\viem.spell.ahk
+
+
 ^+r::Reload
 
 ;############################  SYSTEM-WIDE KEYBINDS  ############################
@@ -82,6 +86,10 @@ Return
 #s::Run "%A_Programs%\Spotify"  ; Spotify
 #b::Run "%A_Programs%\Brave"    ; Browser
 
+
+#if (!WinActive("ahk_group noGlobal"))
+;↓↓↓
+
 ;——— Other (^,!,+) —————————————————————————————————————————————————————————————
 !-::Send —
 
@@ -97,7 +105,7 @@ Ctrl::Send {Esc}
 ^+j::SendInput ^{Left}          ; power L/R
 ^+l::SendInput ^{Right}
 
-#IfWinNotActive ahk_group termInp
+#IfWinNotActive ahk_group Terminal
 #r::Send ^r                     ; refresh
 ^p::Send {Blind}v               ; mnemonic paste, (un/re)do
 ^u::Send {Blind}z
@@ -132,8 +140,6 @@ Return
 
 ;#############################  TAB-BASED APP KEYS  #############################
 
-
-#IfWinNotActive ahk_group noBinds
 !n::Send ^t                     ; new tab
 #n::Send ^n                     ; new window
 
@@ -144,5 +150,5 @@ Return
 ; !,::Send ^,                   ; settings
 !`::Send ^``                    ; console
 
-#IfWinNotActive
-#Include %A_ScriptDir%\viem.apps.ahk
+
+; #Include %A_ScriptDir%\viem.apps.ahk

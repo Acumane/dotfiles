@@ -14,16 +14,28 @@ onoremap <Down> <Nop>
 " for visual mode(s):
 noremap H A
 
-"pair alternatives
+"Brute-force fix until I find the issue ig :/
 onoremap iq i"
 onoremap ip i)
-onoremap ib i}
+onoremap ib i]
+onoremap iB i}
 onoremap it i>
-
 onoremap aq a"
 onoremap ap a)
-onoremap ab a}
+onoremap ab a]
+onoremap aB a}
 onoremap at a>
+
+vnoremap aq a"
+vnoremap ap a)
+vnoremap ab a]
+vnoremap aB a}
+vnoremap at a>
+vnoremap hq i"
+vnoremap hp i)
+vnoremap hb i]
+vnoremap hB i}
+vnoremap ht i>
 
 "Better autowrapping:
 nnoremap ` viwS`
@@ -56,16 +68,18 @@ nmap d` ds`
 nmap d' ds'
 nmap d" ds"
 nmap dq ds"
-nmap dp ds)
 nmap d( ds)
 nmap d) ds)
+nmap dp ds)
 nmap d[ ds]
 nmap d] ds]
+nmap db ds]
 nmap d{ ds}
 nmap d} ds}
-nmap db ds}
+nmap dB ds}
 nmap d< ds>
 nmap d> ds>
+nmap dt ds>
 
 "consistent w/ v
 nnoremap ~ g~
@@ -110,8 +124,6 @@ inoremap <C-a> <Esc>ggvG$
 "Unmapping awkward power navigation keys
 map $ <Nop>
 map ^ <Nop>
-map { <Nop>
-map } <Nop>
 
 map <enter> <Nop>
 " <C-a> replaces
