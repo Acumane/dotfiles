@@ -86,31 +86,13 @@ Return
 #s::Run "%A_Programs%\Spotify"  ; Spotify
 #b::Run "%A_Programs%\Brave"    ; Browser
 
-
-#if (!WinActive("ahk_group noGlobal"))
-;↓↓↓
-
-;——— Other (^,!,+) —————————————————————————————————————————————————————————————
-!-::Send —
-
-^d::Send {Del}                  ; accessible Del/Esc
-Ctrl::Send {Esc}
-+BackSpace::Send ^{BackSpace}   ; consistent Backspace
-
-^i::SendInput {Up}              ; arrows -> ijkl
-^k::SendInput {Down}
-^j::SendInput {Left}
-^l::SendInput {Right}
-
-^+j::SendInput ^{Left}          ; power L/R
-^+l::SendInput ^{Right}
-
 #IfWinNotActive ahk_group Terminal
 #r::Send ^r                     ; refresh
 ^p::Send {Blind}v               ; mnemonic paste, (un/re)do
 ^u::Send {Blind}z
 ^r::Send {Blind}+z
 #IfWinNotActive
+
 
 ;——— Alt navigation ————————————————————————————————————————————————————————————
 LAlt::
@@ -137,6 +119,24 @@ Return
 !l::Send ^{Tab}                 ; next/prev tab
 !j::Send ^+{Tab}
 
+#If (!WinActive("ahk_group noGlobal"))
+;↓↓↓
+
+;——— Other (^,!,+) —————————————————————————————————————————————————————————————
+!-::Send —
+
+^d::Send {Del}                  ; accessible Del/Esc
+Ctrl::Send {Esc}
++BackSpace::Send ^{BackSpace}   ; consistent Backspace
+
+^i::SendInput {Up}              ; arrows -> ijkl
+^k::SendInput {Down}
+^j::SendInput {Left}
+^l::SendInput {Right}
+
+^+j::SendInput ^{Left}          ; power L/R
+^+l::SendInput ^{Right}
+
 
 ;#############################  TAB-BASED APP KEYS  #############################
 
@@ -149,6 +149,3 @@ Return
 
 ; !,::Send ^,                   ; settings
 !`::Send ^``                    ; console
-
-
-; #Include %A_ScriptDir%\viem.apps.ahk

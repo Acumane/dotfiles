@@ -34,6 +34,8 @@ Suspend On
 ::_0::₀
 ::_1::₁
 ::_2::₂
+::_3::₃
+::_e::ₑ
 ::_i::ᵢ
 ::_j::ⱼ
 ::_k::ₖ
@@ -118,6 +120,7 @@ Suspend On
 ::alpha::α
 ::beta::β
 ::delta::Δ
+::epsilon::ε
 :C:theta::θ
 :C:Theta::Θ
 ::lambda::λ
@@ -134,6 +137,7 @@ Suspend On
 ::perp::⊥
 ::orth::⊥
 ::cross::×
+::minus::−
 ::*::·
 ::dot::·
 ::dots::⋯

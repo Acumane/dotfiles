@@ -81,19 +81,10 @@ Return
 ^l::Send +{Right}               ; scrub forward
 !s::Send ^l                     ; search
 
-;——— Epic Pen ——————————————————————————————————————————————————————————————————
-#If true
-#w::Send ^!i                      ; toggle ink layer
-!w::Send ^!t                      ; toggle toolbar
-^w::Send ^!p                      ; switch to pen
-#BackSpace::Send ^!{c}            ; clear
-;Esc                                unfocus
-;^],[                               brush size
-#If
-
 ;——— Unreal Editor —————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe UnrealEditor.exe
 LShift::q
+
 
 ;####################################  GAMES  ###################################
 ;——— Minecraft —————————————————————————————————————————————————————————————————
@@ -106,26 +97,27 @@ LShift::q
 
 ;——— Star Citizen ——————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe starcitizen.exe
-F2::                                ; cancel all yaw/pitch vel
-	KeyWait F2
-	KeyWait F2, D T.075
-	if !ErrorLevel
-		Send {F3}
-        Sleep 200 ; (wait 50ms) 
-		Send {F3}
+
+~#m::
+	If !WinExist("ahk_exe VoiceMacro.exe") {
+		Run "%A_Programs%\VoiceMacro"
+	}
 Return
 
-~z & Space::                        ; reset freelook
-	Send {x down}
-	Sleep 25
-	Send {NumpadMult down}
-	Sleep 200
-	Send {NumpadMult up}
-	Send {x up}
-Return
-
+;——— Kerbal Space Program ——————————————————————————————————————————————————————
 #IfWinActive ahk_exe KSP_x64.exe
 WheelUp::Send =
 WheelDown::Send -
-
 #IfWinActive
+
+
+;###################################  GLOBAL  ###################################
+;——— Epic Pen ——————————————————————————————————————————————————————————————————
+#IfWinExist ahk_exe EpicPen.exe
+#w::Send ^!i                      ; toggle ink layer
+!w::Send ^!t                      ; toggle toolbar
+^w::Send ^!p                      ; switch to pen
+#BackSpace::Send ^!{c}            ; clear
+;Esc                                unfocus
+;^],[                               brush size
+#IfWinExist
