@@ -34,6 +34,8 @@ alias vim="vim -u $DOT/.vimrc"
 alias open="explorer.exe"
 alias app="sudo dnf"
 alias zshr="source $DOT/.zshrc"
+alias "new -f"="touch"
+alias "new -d"="mkdir"
 
 # Basic auto/tab complete:
 autoload -U compinit
