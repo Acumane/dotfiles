@@ -6,6 +6,8 @@ SendMode Input
 GroupAdd Browser, ahk_exe brave.exe
 GroupAdd Browser, ahk_exe msedge.exe
 GroupAdd Browser, ahk_exe chrome.exe
+; GroupAdd Browser, ahk_exe firefox.exe
+; GroupAdd Browser, ahk_exe librewolf.exe
 
 ;##############################  APP-SPECIFIC KEYS  ##############################
 
@@ -37,6 +39,13 @@ Return
 !/::
 	Send {F12}
 Return
+
+;——— Spotify ———————————————————————————————————————————————————————————————————
+#IfWinActive ahk_exe Morgen.exe
+!x::Send {\}
+!k::Send {.}
+!m::!a
+
 
 ;——— Google Tasks (embed) ——————————————————————————————————————————————————————
 #IfWinActive Tasks ahk_exe brave.exe

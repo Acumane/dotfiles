@@ -85,6 +85,7 @@ Return
 #t::Run "%A_Programs%\Tasks"    ; Tasks
 #s::Run "%A_Programs%\Spotify"  ; Spotify
 #b::Run "%A_Programs%\Brave"    ; Browser
+#/::Run "%A_Programs%\Terminal" ; Terminal
 
 #IfWinNotActive ahk_group Terminal
 #r::Send ^r                     ; refresh
@@ -99,14 +100,14 @@ LAlt::
   KeyWait LAlt
   KeyWait LAlt, D T.1
   If !ErrorLevel
-    Send !{Left}
+    Send {Browser_Back}
 Return
 
 RAlt::
   KeyWait RAlt
   KeyWait RAlt, D T.1
   If !ErrorLevel
-    Send !{Right}
+    Send {Browser_Forward}
 Return
 
 Alt::
@@ -127,6 +128,7 @@ Return
 
 ^d::Send {Del}                  ; accessible Del/Esc
 Ctrl::Send {Esc}
+Ctrl & Esc::Return
 +BackSpace::Send ^{BackSpace}   ; consistent Backspace
 
 ^i::SendInput {Up}              ; arrows -> ijkl

@@ -81,11 +81,12 @@ nmap d< ds>
 nmap d> ds>
 nmap dt ds>
 
-"consistent w/ v
-nnoremap ~ g~
-"(must now use Ctrl+u/r)
+
+map ~ <Nop>
+"~: cycles Case -> case -> CASE
 nnoremap u gu
 nnoremap U gU
+" *must now use Ctrl+u/r
 
 "better line appending!
 nnoremap a<space>i J

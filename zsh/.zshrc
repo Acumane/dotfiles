@@ -24,7 +24,7 @@ RPROMPT='%F{240}%2~%f'
 exec 2>>( sed -u "s/^/${fg[red]}/; s/\$/${reset_color}/" )
 
 # —— VIM ————————————————————
-source "$DOT/keyrc.zsh"
+source "$DOT/zsh/keyrc.zsh"
 
 # —— PLUGINS ————————————————————
 zgenom load zsh-users/zsh-autosuggestions
@@ -33,7 +33,7 @@ zgenom load zsh-users/zsh-autosuggestions
 alias vim="vim -u $DOT/.vimrc"
 alias open="explorer.exe"
 alias app="sudo dnf"
-alias zshr="source $DOT/.zshrc"
+alias zshr="source $DOT/zsh/.zshrc"
 alias "new -f"="touch"
 alias "new -d"="mkdir"
 
