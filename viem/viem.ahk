@@ -86,6 +86,7 @@ Return
 #s::Run "%A_Programs%\Spotify"  ; Spotify
 #b::Run "%A_Programs%\Brave"    ; Browser
 #/::Run "%A_Programs%\Terminal" ; Terminal
+#Esc::Run "%A_Programs%\Taskmgr" ; Terminal
 
 #IfWinNotActive ahk_group Terminal
 #r::Send ^r                     ; refresh
@@ -117,8 +118,8 @@ Alt::
     }
 Return
 
-!l::Send ^{Tab}                 ; next/prev tab
-!j::Send ^+{Tab}
+~!l::Send ^{Tab}                 ; next/prev tab
+~!j::Send ^+{Tab}
 
 #If (!WinActive("ahk_group noGlobal"))
 ;↓↓↓

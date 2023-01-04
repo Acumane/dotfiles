@@ -64,7 +64,7 @@ Media_Play_Pause::Send, {F5}    ; run/debug
 
 ;——— Files —————————————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe Explorer.EXE
-^h::Send {F2}                   ; rename
+~^h::Send {F2}                   ; rename
 ^=::SendInput ^{WheelUp}        ; resize/scale
 ^-::SendInput ^{WheelDown}
 

@@ -1,5 +1,5 @@
 # —— PATHS ——————————————————————
-export HOME="/home/bren"                  # explicit for root
+export HOME="/home/bren"                # explicit for root
 export CACHE="$HOME/.cache"
 export LOCAL="$HOME/.local/share"
 export DOT="$HOME/dotfiles"
@@ -10,11 +10,11 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 source "$LOCAL/zgenom/zgenom.zsh"
-zgenom autoupdate
+# zgenom autoupdate
 
-setopt autocd                             # no cd necessary! 
-stty stop undef                           # Disable freeze terminal on Ctrl+s
-zle_highlight=('paste:none')              # Disable highlight on paste
+setopt autocd                           # no cd necessary! 
+stty stop undef                         # Disable freeze terminal on Ctrl+s
+zle_highlight=('paste:none')            # Disable highlight on paste
 
 # —— PROMPT —————————————————————
 autoload -U colors && colors
@@ -33,9 +33,9 @@ zgenom load zsh-users/zsh-autosuggestions
 alias vim="vim -u $DOT/.vimrc"
 alias open="explorer.exe"
 alias app="sudo dnf"
-alias zshr="source $DOT/zsh/.zshrc"
-alias "new -f"="touch"
-alias "new -d"="mkdir"
+alias zshreload="source $DOT/zsh/.zshrc && echo Sourced .zshrc"
+alias "mkfile"="touch"                  # mkdir
+alias browser="chromium-browser"
 
 # Basic auto/tab complete:
 autoload -U compinit
