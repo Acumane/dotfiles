@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2, 
+
+  "name": "Draw", 
+  "description": "tldraw.com", 
+  "version": "1.0", 
+  "display": "standalone", 
+  "icons": {"128": "tldraw.ico"}, 
+  "app": {
+    "urls": ["https://www.tldraw.com/"], 
+    "launch": {"web_url": "https://www.tldraw.com/"}
+  }, 
+  "permissions": []
+}

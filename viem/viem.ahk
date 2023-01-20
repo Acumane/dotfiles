@@ -97,6 +97,7 @@ Return
 
 
 ;——— Alt navigation ————————————————————————————————————————————————————————————
+
 LAlt::
   KeyWait LAlt
   KeyWait LAlt, D T.1
@@ -113,13 +114,13 @@ Return
 
 Alt::
     If WinActive("ahk_group AltTabWindow") {
-        j::ShiftAltTab
         l::AltTab
+        j::ShiftAltTab
     }
 Return
 
-~!l::Send ^{Tab}                 ; next/prev tab
-~!j::Send ^+{Tab}
+!l::Send ^{Tab}                 ; next/prev tab
+!j::Send ^+{Tab}
 
 #If (!WinActive("ahk_group noGlobal"))
 ;↓↓↓
@@ -130,6 +131,7 @@ Return
 ^d::Send {Del}                  ; accessible Del/Esc
 Ctrl::Send {Esc}
 Ctrl & Esc::Return
+Shift & Esc::Return
 +BackSpace::Send ^{BackSpace}   ; consistent Backspace
 
 ^i::SendInput {Up}              ; arrows -> ijkl

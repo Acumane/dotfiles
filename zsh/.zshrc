@@ -1,4 +1,7 @@
 # —— PATHS ——————————————————————
+export PATH=/home/bren/.local/bin:$PATH
+export PATH=/home/bren/.local/share/DrMemory-Linux-2.5.0/bin64:$PATH
+
 export HOME="/home/bren"                # explicit for root
 export CACHE="$HOME/.cache"
 export LOCAL="$HOME/.local/share"
@@ -21,7 +24,7 @@ autoload -U colors && colors
 PROMPT="%n %F{245}›%f "
 RPROMPT='%F{240}%2~%f'
 # Color-coded error msgs:
-exec 2>>( sed -u "s/^/${fg[red]}/; s/\$/${reset_color}/" )
+# exec 2>>( sed -u "s/^/${fg[white]}/; s/\$/${reset_color}/" )
 
 # —— VIM ————————————————————
 source "$DOT/zsh/keyrc.zsh"
@@ -36,6 +39,10 @@ alias app="sudo dnf"
 alias zshreload="source $DOT/zsh/.zshrc && echo Sourced .zshrc"
 alias "mkfile"="touch"                  # mkdir
 alias browser="chromium-browser"
+alias q="codequestion"
+alias \?="codequestion"
+alias rn="mv"
+alias py="python"
 
 # Basic auto/tab complete:
 autoload -U compinit

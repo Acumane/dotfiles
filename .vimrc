@@ -50,6 +50,7 @@ nnoremap } viwS}
 nnoremap < viwS>
 nnoremap > viwS>
 nnoremap * viwS*
+nnoremap _ viwS_
 
 vnoremap ` S`
 vnoremap ' S'
@@ -63,6 +64,7 @@ vnoremap } S}
 vnoremap < S>
 vnoremap > S>
 vnoremap * S*
+vnoremap _ S_
 
 nmap d` ds`
 nmap d' ds'
@@ -80,6 +82,8 @@ nmap dB ds}
 nmap d< ds>
 nmap d> ds>
 nmap dt ds>
+nmap d* ds*
+nmap d_ ds_
 
 
 map ~ <Nop>
