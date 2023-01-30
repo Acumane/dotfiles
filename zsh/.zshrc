@@ -37,12 +37,16 @@ alias vim="vim -u $DOT/.vimrc"
 alias open="explorer.exe"
 alias app="sudo dnf"
 alias zshreload="source $DOT/zsh/.zshrc && echo Sourced .zshrc"
-alias "mkfile"="touch"                  # mkdir
+alias "mkfile"="touch"              # mkdir
+alias "mk"="touch"
+alias "new"="touch"
+alias "newf"="touch"
+alias "newd"="mkdir"
 alias browser="chromium-browser"
-alias q="codequestion"
-alias \?="codequestion"
+alias cq="codequestion"
 alias rn="mv"
 alias py="python"
+alias dl="wget"
 
 # Basic auto/tab complete:
 autoload -U compinit

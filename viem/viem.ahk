@@ -5,6 +5,7 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 DetectHiddenWindows On
 SetTitleMatchMode 2
+SetKeyDelay, 0, 50
 mainON := 1
 symON := 0
 
@@ -46,17 +47,17 @@ Run %A_ScriptDir%\viem.apps.ahk
         Else
             Menu Tray, Icon, viem-off.ico
     }
-Return
+    Return
 
 ;——— Symbolic layer ————————————————————————————————————————————————————————————
 !F2::
     symON := !symON
-	PostMessage 0x0111, 65305, , , viem.sym.ahk - AutoHotkey
+    PostMessage 0x0111, 65305, , , viem.sym.ahk - AutoHotkey
     If symON
         Menu Tray, Icon, viem.sym.ico
     Else
         Menu Tray, Icon, viem.ico
-Return
+    Return
 
 ;——— Win (#) ———————————————————————————————————————————————————————————————————
 #+i::Send {F11}                 ; fullscreen
@@ -66,7 +67,8 @@ Return
     KeyWait i, D T.075
     If !ErrorLevel
         Send {F11}
-Return
+    Return
+
 #+k::Send #d                    ; minimize ALL
 #k::Send {Blind}{Down}
 #j::Send {Blind}{Left}          ; Window positioning
@@ -99,28 +101,35 @@ Return
 ;——— Alt navigation ————————————————————————————————————————————————————————————
 
 LAlt::
-  KeyWait LAlt
-  KeyWait LAlt, D T.1
-  If !ErrorLevel
-    Send {Browser_Back}
-Return
+    KeyWait LAlt
+    KeyWait LAlt, D T.1
+    If !ErrorLevel
+        Send {Browser_Back}
+    Return
 
 RAlt::
-  KeyWait RAlt
-  KeyWait RAlt, D T.1
-  If !ErrorLevel
-    Send {Browser_Forward}
-Return
+    KeyWait RAlt
+    KeyWait RAlt, D T.1
+    If !ErrorLevel
+        Send {Browser_Forward}
+    Return
 
 Alt::
     If WinActive("ahk_group AltTabWindow") {
         l::AltTab
         j::ShiftAltTab
     }
-Return
+    Return
 
-!l::Send ^{Tab}                 ; next/prev tab
-!j::Send ^+{Tab}
+!l::
+    Send ^{Tab}                 ; next/prev tab
+    SendInput {Ctrl Up}
+    Return
+
+!j::
+    Send ^+{Tab}
+    SendInput {Ctrl Up}{Shift Up}
+    Return
 
 #If (!WinActive("ahk_group noGlobal"))
 ;↓↓↓

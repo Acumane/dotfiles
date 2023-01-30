@@ -6,8 +6,8 @@ SendMode Input
 GroupAdd Browser, ahk_exe brave.exe
 GroupAdd Browser, ahk_exe msedge.exe
 GroupAdd Browser, ahk_exe chrome.exe
-; GroupAdd Browser, ahk_exe firefox.exe
-; GroupAdd Browser, ahk_exe librewolf.exe
+GroupAdd Firefox, ahk_exe firefox.exe
+GroupAdd Firefox, ahk_exe librewolf.exe
 
 ;##############################  APP-SPECIFIC KEYS  ##############################
 
@@ -17,12 +17,12 @@ GroupAdd Browser, ahk_exe chrome.exe
 !+l::Send !{PgDn}
 ![::                            ; expand/collapse groups
 !]::
-	Send !+6
-Return
+    Send !+6
+    Return
 !^l::                           ; move to next window
 !^j::
-	Send !+7
-Return
+    Send !+7
+    Return
 !^i::Send !+8
 !BackSpace::Send !{Del}         ; close duplicate tabs
 !r::Send ^+t                    ; open recently closed
@@ -37,8 +37,8 @@ Return
 ~!z::Send {F11}                 ; fullscreen
 !`::                            ; console
 !/::
-	Send {F12}
-Return
+    Send {F12}
+    Return
 
 ;——— Spotify ———————————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe Morgen.exe
@@ -81,7 +81,7 @@ Media_Play_Pause::Send, {F5}    ; run/debug
 !l::
 !j::
     Send ^!{Right}
-Return
+    Return
 
 ;——— Spotify ———————————————————————————————————————————————————————————————————
 #IfWinActive ahk_exe Spotify.exe
@@ -108,17 +108,16 @@ LShift::q
 #IfWinActive ahk_exe starcitizen.exe
 
 ~#m::
-	If !WinExist("ahk_exe VoiceMacro.exe") {
-		Run "%A_Programs%\VoiceMacro"
-	}
-Return
+    If !WinExist("ahk_exe VoiceMacro.exe") {
+        Run "%A_Programs%\VoiceMacro"
+    }
+    Return
 
 ;——— Kerbal Space Program ——————————————————————————————————————————————————————
 #IfWinActive ahk_exe KSP_x64.exe
 WheelUp::Send =
 WheelDown::Send -
 #IfWinActive
-
 
 ;###################################  GLOBAL  ###################################
 ;——— Epic Pen ——————————————————————————————————————————————————————————————————
