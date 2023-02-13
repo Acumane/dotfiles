@@ -7,6 +7,7 @@ export CACHE="$HOME/.cache"
 export LOCAL="$HOME/.local/share"
 export DOT="$HOME/dotfiles"
 export C="/mnt/c/Users/Bren"
+export PROMPT_EOL_MARK=""
 
 HISTFILE=$CACHE/zsh/histfile
 HISTSIZE=10000
@@ -37,16 +38,44 @@ alias vim="vim -u $DOT/.vimrc"
 alias open="explorer.exe"
 alias app="sudo dnf"
 alias zshreload="source $DOT/zsh/.zshrc && echo Sourced .zshrc"
-alias "mkfile"="touch"              # mkdir
-alias "mk"="touch"
-alias "new"="touch"
-alias "newf"="touch"
-alias "newd"="mkdir"
+alias mkfile="touch"              # mkdir
+alias mk="touch"
+alias mkf="touch"              # mkdir
+alias mkd="mkdir"
+alias new="touch"
+alias newf="touch"
+alias newd="mkdir"
+alias cp="cp -r"
+alias rm="rm -r"
+# alias "rmd"="rmdir"
 alias browser="chromium-browser"
 alias cq="codequestion"
 alias rn="mv"
 alias py="python"
-alias dl="wget"
+alias dl="wget -N -P ~/dl"
+alias ls="ls -CAF"
+alias la="la -lAF"
+alias read="cat"
+alias sudo^="sudo !!"
+alias tar='tar -czvf'
+alias untar='tar -zxvf' 
+alias ping='ping -c 5'
+alias search='find'
+alias find='grep --color -i'
+alias gip='curl ifconfig.me'
+# alias gip='curl ipinfo.io/ip'
+
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+
+# alias ^='cd ..'
+# alias < ='cd -'
+# ip ? 
+# https://github.com/olets/zsh-abbr
+# https://github.com/MichaelAquilina/zsh-you-should-use
+
+
 
 # Basic auto/tab complete:
 autoload -U compinit

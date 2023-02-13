@@ -1,3 +1,7 @@
+/* :root {
+	font-size: 8px
+} */
+
 p, center, h5, h6, ul, ol, dl {
 	font-family: "IBM Plex Sans";
 }
@@ -5,7 +9,6 @@ p, center, h5, h6, ul, ol, dl {
 img {
 	margin: auto;
 	display: block;
-	/* filter: invert(1); */
 	padding: 10px;
 	border: 1px solid #30343a;
 	border-radius: .5em;
@@ -36,7 +39,7 @@ h6 {
 }
 
 code {
-	font-size: .92rem;
+	/* font-size: 92%; */
 	font-family: Hack;
 }
 
@@ -100,6 +103,11 @@ blockquote {
 
 .vscode-light a {
 	color: #0060ff;
+}
+
+
+.vscode-light img {
+	filter: invert(1);
 }
 
 .vscode-light code {
