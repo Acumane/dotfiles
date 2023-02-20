@@ -1,5 +1,5 @@
 /* :root {
-	font-size: 8px
+	font-size: 10px
 } */
 
 p, center, h5, h6, ul, ol, dl {
@@ -39,7 +39,8 @@ h6 {
 }
 
 code {
-	/* font-size: 92%; */
+	font-size: .92rem !important;
+	/* line-height: normal; */
 	font-family: Hack;
 }
 
@@ -107,7 +108,7 @@ blockquote {
 
 
 .vscode-light img {
-	filter: invert(1);
+	/* filter: invert(0.4); */
 }
 
 .vscode-light code {

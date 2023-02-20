@@ -34,47 +34,42 @@ source "$DOT/zsh/keyrc.zsh"
 zgenom load zsh-users/zsh-autosuggestions
 
 # —— ALIASES ————————————————————
-alias vim="vim -u $DOT/.vimrc"
-alias open="explorer.exe"
-alias app="sudo dnf"
-alias zshreload="source $DOT/zsh/.zshrc && echo Sourced .zshrc"
-alias mkfile="touch"              # mkdir
-alias mk="touch"
-alias mkf="touch"              # mkdir
-alias mkd="mkdir"
-alias new="touch"
-alias newf="touch"
-alias newd="mkdir"
-alias cp="cp -r"
-alias rm="rm -r"
-# alias "rmd"="rmdir"
-alias browser="chromium-browser"
-alias cq="codequestion"
-alias rn="mv"
-alias py="python"
-alias dl="wget -N -P ~/dl"
+alias reload="source $DOT/zsh/.zshrc && echo Sourced .zshrc"
+
 alias ls="ls -CAF"
 alias la="la -lAF"
-alias read="cat"
-alias sudo^="sudo !!"
+alias cp="cp -r"
+alias rm="rm -r"
+alias rn="mv"
+alias mk="touch"
+alias mkd="mkdir"
+
 alias tar='tar -czvf'
 alias untar='tar -zxvf' 
 alias ping='ping -c 5'
-alias search='find'
+alias ip='curl ifconfig.me'
+
+alias dl="wget -N -P ~/dl"
+alias dlv="yt-dlp -P ~/dl -f mp4"
+alias dla="yt-dlp -P ~/dl -x --audio-format mp3"
+
+alias py="python"
+alias app="sudo dnf"
+alias cq="codequestion"
+alias open="explorer.exe"
+alias chrome="chromium-browser"
+
 alias find='grep --color -i'
-alias gip='curl ifconfig.me'
-# alias gip='curl ipinfo.io/ip'
+alias search='find'
+alias print="cat"
+alias read="less"
 
 alias ..='cd ..'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
 
-# alias ^='cd ..'
-# alias < ='cd -'
-# ip ? 
 # https://github.com/olets/zsh-abbr
 # https://github.com/MichaelAquilina/zsh-you-should-use
-
 
 
 # Basic auto/tab complete:
@@ -83,5 +78,11 @@ zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit -d $CACHE/zsh/zcompdump
 _comp_options+=(globdots)                 # inc. hidden files.
+
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic
+
 
 # clear
