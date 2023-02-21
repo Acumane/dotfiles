@@ -25,6 +25,7 @@ Menu Tray, Icon, viem.ico, , 1
 
 Run %A_ScriptDir%\viem.sym.ahk
 Run %A_ScriptDir%\viem.apps.ahk
+Run %A_ScriptDir%\VD\viem.vd.ahk
 ; Run %A_ScriptDir%\viem.spell.ahk
 
 
@@ -70,11 +71,14 @@ Run %A_ScriptDir%\viem.apps.ahk
     Return
 
 #+k::Send #d                    ; minimize ALL
+#IfWinNotActive ahk_exe FluentSearch.exe
 #k::Send {Blind}{Down}
 #j::Send {Blind}{Left}          ; Window positioning
 #l::Send {Blind}{Right}
-
 #q::WinClose A                  ; close window
+#IfWinNotActive
+
+
 #w::Return
 #Space::Send #+s                ; Win screenshots
 #p::Send {Blind}v               ; clipboard
@@ -139,14 +143,17 @@ Alt::
 
 ^d::Send {Del}                  ; accessible Del/Esc
 Ctrl::Send {Esc}
+Alt & Esc::Return
 Ctrl & Esc::Return
 Shift & Esc::Return
 +BackSpace::Send ^{BackSpace}   ; consistent Backspace
 
+#IfWinNotActive ahk_exe FluentSearch.exe
 ^i::SendInput {Up}              ; arrows -> ijkl
 ^k::SendInput {Down}
 ^j::SendInput {Left}
 ^l::SendInput {Right}
+#IfWinNotActive ahk_exe FluentSearch.exe
 
 ^+j::SendInput ^{Left}          ; power L/R
 ^+l::SendInput ^{Right}

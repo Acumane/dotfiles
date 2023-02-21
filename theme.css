@@ -39,8 +39,7 @@ h6 {
 }
 
 code {
-	font-size: .92rem !important;
-	/* line-height: normal; */
+	font-size: 95% !important;
 	font-family: Hack;
 }
 
