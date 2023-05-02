@@ -9,6 +9,11 @@ export DOT="$HOME/dotfiles"
 export C="/mnt/c/Users/Bren"
 export PROMPT_EOL_MARK=""
 
+# pnpm
+export PNPM_HOME="/home/bren/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
+
 HISTFILE=$CACHE/zsh/histfile
 HISTSIZE=10000
 SAVEHIST=10000
@@ -36,8 +41,8 @@ zgenom load zsh-users/zsh-autosuggestions
 # —— ALIASES ————————————————————
 alias reload="source $DOT/zsh/.zshrc && echo Sourced .zshrc"
 
-alias ls="ls -CAF"
-alias la="la -lAF"
+alias ls="ls -CAF --color=auto"
+alias la="la -lAF --color=autoj"
 alias cp="cp -r"
 alias rm="rm -r"
 alias rn="mv"
@@ -47,12 +52,17 @@ alias mkd="mkdir"
 alias tar='tar -czvf'
 alias untar='tar -zxvf' 
 alias ping='ping -c 5'
+alias root="sudo -s"
+alias kernel="uname -r"
 alias ip='curl ifconfig.me'
+alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
 
 alias dl="wget -N -P ~/dl"
 alias dlv="yt-dlp -P ~/dl -f mp4"
 alias dla="yt-dlp -P ~/dl -x --audio-format mp3"
 
+
+alias np="pnpm"
 alias py="python"
 alias app="sudo dnf"
 alias cq="codequestion"
@@ -63,6 +73,7 @@ alias find='grep --color -i'
 alias search='find'
 alias print="cat"
 alias read="less"
+
 
 alias ..='cd ..'
 alias ...='cd ../../../'

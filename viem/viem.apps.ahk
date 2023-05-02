@@ -32,8 +32,8 @@ GroupAdd Firefox, ahk_exe librewolf.exe
 !b::Send ^+b                    ; bookmarks bar
 ^b::^d                          ; bookmark site
 ^+b::^+d                        ; bookmark all tabs
-!c::Send {F6}                   ; focus address bar
-!s::Send ^e                     ; search
+; !c::Send {F6}                   ; focus address bar
+; !s::Send ^e                     ; search
 ~!z::Send {F11}                 ; fullscreen
 !`::                            ; console
 !/::

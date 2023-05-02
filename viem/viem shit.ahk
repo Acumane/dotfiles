@@ -5,18 +5,9 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 DetectHiddenWindows On
 SetTitleMatchMode 2
-SetKeyDelay, 0, 20
+; SetKeyDelay, 0, 20
 mainON := 1
 symON := 0
-
-GroupAdd Terminal, ahk_exe Code.exe
-GroupAdd Terminal, ahk_exe WindowsTerminal.exe
-
-GroupAdd noGlobal, ahk_exe krita.exe
-GroupAdd noGlobal, ahk_exe starcitizen.exe
-GroupAdd noGlobal, ahk_exe javaw.exe
-GroupAdd noGlobal, ahk_exe KSP_x64.exe
-
 
 if !A_IsAdmin
     Run, % "*RunAs " (A_IsCompiled ? "" : A_AhkPath " ") Chr(34) A_ScriptFullPath Chr(34)
@@ -87,6 +78,7 @@ Run %A_ScriptDir%\VD\viem.vd.ahk
 #c::#a                          ; connect
 
 #f::#e                          ; Files
+#r::Send ^r                     ; refresh
 #e::Run "%A_Programs%\Gmail"    ; Gmail
 #t::Run "%A_Programs%\Tasks"    ; Tasks
 #s::Run "%A_Programs%\Spotify"  ; Spotify
@@ -94,12 +86,28 @@ Run %A_ScriptDir%\VD\viem.vd.ahk
 #/::Run "%A_Programs%\Terminal" ; Terminal
 #Esc::Run "%A_Programs%\Taskmgr" ; Terminal
 
-#IfWinNotActive ahk_group Terminal
-#r::Send ^r                     ; refresh
+;——— Other (^,!,+) —————————————————————————————————————————————————————————————
+!-::Send —
+
+^d::Send {Del}                  ; accessible Del/Esc
+Ctrl::Send {Esc}
+; Alt & Esc::Return
+; Shift & Esc::Return
++BackSpace::Send ^{BackSpace}   ; consistent Backspace
+
+#IfWinNotActive ahk_exe FluentSearch.exe
+^i::SendInput {Up}              ; arrows -> ijkl
+^k::SendInput {Down}
+^j::SendInput {Left}
+^l::SendInput {Right}
+#IfWinNotActive ahk_exe FluentSearch.exe
+
+^+j::SendInput ^{Left}          ; power L/R
+^+l::SendInput ^{Right}
+
 ^p::Send {Blind}v               ; mnemonic paste, (un/re)do
 ^u::Send {Blind}z
 ^r::Send {Blind}+z
-#IfWinNotActive
 
 
 ;——— Alt navigation ————————————————————————————————————————————————————————————
@@ -118,38 +126,19 @@ RAlt::
         Send {Browser_Forward}
     Return
 
-#IfWinActive ahk_group AltTabWindow
-    l::AltTab
-    j::ShiftAltTab
-#IfWinActive
-
-#If (!WinActive("ahk_group noGlobal"))
-;↓↓↓
-
-;——— Other (^,!,+) —————————————————————————————————————————————————————————————
-!-::Send —
-
-^d::Send {Del}                  ; accessible Del/Esc
-Ctrl::Send {Esc}
-Alt & Esc::Return
-Shift & Esc::Return
-+BackSpace::Send ^{BackSpace}   ; consistent Backspace
-
-#IfWinNotActive ahk_exe FluentSearch.exe
-^i::SendInput {Up}              ; arrows -> ijkl
-^k::SendInput {Down}
-^j::SendInput {Left}
-^l::SendInput {Right}
-#IfWinNotActive ahk_exe FluentSearch.exe
-
-^+j::SendInput ^{Left}          ; power L/R
-^+l::SendInput ^{Right}
-
+Alt::
+    If WinActive("ahk_group AltTabWindow") {
+        j::ShiftAltTab
+        l::AltTab
+    }
+    Return
 
 ;#############################  TAB-BASED APP KEYS  #############################
 
 !n::Send ^t                     ; new tab
 #n::Send ^n                     ; new window
+!l::Send ^{Tab}                 ; next/prev tab
+!j::Send ^+{Tab}
 
 !z::Send, {F11}                 ; fullscreen
 #+n::Send ^+n                   ; new private/special window

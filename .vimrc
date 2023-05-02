@@ -12,9 +12,9 @@ nnoremap H a
 onoremap <Up> i
 onoremap <Down> <Nop>
 " for visual mode(s):
-noremap H A
+vnoremap H A
 
-"Brute-force fix until I find the issue ig :/
+
 onoremap iq i"
 onoremap ip i)
 onoremap ib i]
@@ -37,7 +37,7 @@ vnoremap hb i]
 vnoremap hB i}
 vnoremap ht i>
 
-"Better autowrapping:
+"Autowrapping word in normal mode
 nnoremap ` viwS`
 nnoremap ' viwS'
 nnoremap " viwS"
@@ -51,7 +51,9 @@ nnoremap < viwS>
 nnoremap > viwS>
 nnoremap * viwS*
 nnoremap _ viwS_
+nnoremap $ viwS$
 
+"Autowrapping selection in visual mode
 vnoremap ` S`
 vnoremap ' S'
 vnoremap " S"
@@ -65,7 +67,9 @@ vnoremap < S>
 vnoremap > S>
 vnoremap * S*
 vnoremap _ S_
+vnoremap $ S$
 
+"delete given pair
 nmap d` ds`
 nmap d' ds'
 nmap d" ds"
@@ -84,13 +88,44 @@ nmap d> ds>
 nmap dt ds>
 nmap d* ds*
 nmap d_ ds_
+nmap d$ ds$
 
+
+"replace given pair
+nmap rpq cs)"
+nmap rpb cs)]
+nmap rqp cs")
+nmap rqb cs"]
+nmap rbq cs]"
+nmap rbp cs])
+
+nmap r` cs`
+nmap r' cs'
+nmap r" cs"
+nmap rq cs"
+nmap r( cs)
+nmap r) cs)
+nmap rp cs)
+nmap r[ cs]
+nmap r] cs]
+nmap rb cs]
+nmap r{ cs}
+nmap r} cs}
+nmap rB cs}
+nmap r< cs>
+nmap r> cs>
+nmap rt cs>
+nmap r* cs*
+nmap r_ cs_
+nmap r$ cs$
 
 map ~ <Nop>
 "~: cycles Case -> case -> CASE
 nnoremap u gu
 nnoremap U gU
 " *must now use Ctrl+u/r
+
+map <space> a<space><esc>
 
 "better line appending!
 nnoremap a<space>i J
@@ -146,7 +181,7 @@ noremap t     H
 " TEMP: n- to save block mode
 nnoremap b    L
 noremap T     gg
-noremap B     G
+map B     GL
 " e.g.  5gt
 noremap gt    gg
 
@@ -162,10 +197,8 @@ noremap n o
 noremap N O
 
 "Can now use tabs in NORMAL mode instead of >> and <<
-nmap >> <Nop>
-nmap << <Nop>
-vmap >> <Nop>
-vmap << <Nop>
+map >> <Nop>
+map << <Nop>
 nnoremap <Tab>   >>
 nnoremap <S-Tab> <<
 vnoremap <Tab>   >><Esc>gv

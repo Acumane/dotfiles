@@ -61,6 +61,7 @@ Suspend On
 ::<->::↔
 ::<—>::↔
 ::->::→
+::<-::←
 ::->::→
 ::—>::→
 ::<=>::⇔
@@ -91,7 +92,7 @@ Suspend On
 
 ;—— Sets ————————————————
 ; ::intersect::∩
-; ::subset::⊂
+::subset::⊂
 ; ::supset::⊃
 ; ::union::∪
 ::comp::̅
@@ -112,7 +113,8 @@ Suspend On
 ::cong::≅
 ::===::≡
 ::equiv::≡
-::indep::⫫
+::cindep::⫫
+::indep::⊥
 
 ;—— Logic ———————————————
 
@@ -133,8 +135,10 @@ Suspend On
 :C:Theta::Θ
 ::lambda::λ
 ; ::mu::μ
+::tau::τ
 ::sigma::Σ
-; ::pi::π
+::pi::π
+::gamma::γ
 ::omega::Ω
 ::grad::∇
 ::nabla::∇
