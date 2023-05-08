@@ -1,0 +1,12 @@
+modmap:
+  - remap:
+      CapsLock:
+        held: LeftCtrl
+        alone: Esc
+keymap:
+  - remap:
+      C-i: up
+      C-j: left
+      C-k: down
+      C-l: right
+      C-d: delete
