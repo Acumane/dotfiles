@@ -1,0 +1,122 @@
+{
+	"calendar.google.com": {
+		"css": "div.gb_Pd.gb_7c.gb_8c {\n  display: none;\n}\n\ndiv.erDb5d {\n  display: none;\n}\n\ndiv.TBA7qc {\n  display: none;\n}\n\nbutton.VfPpkd-Bz112c-LgbsSe.yHy1rc.eT1oJ.mN1ivc.rW4BGe.CXtcdb {\n  display: none;\n  \n}\n\nbutton.VfPpkd-Bz112c-LgbsSe.yHy1rc.eT1oJ.rW4BGe.CXtcdb {\n  display: none;\n}\n\ndiv.gb_Df.gb_2a.gb_pg.gb_o {\n  padding-right: 300px;\n}\n\ndiv.Kk7lMc-DWWcKd-OomVLb-haAclf.gboEAb {\n  display: none;\n}\n\nspan.gb_yc.gb_le {\n  display: none;\n  \n}\n\ndiv.gb_Qd.gb_8c.gb_9c {\n  display: none;\n  \n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-01-18T18:32:44.446-05:00", 
+		"readability": false
+	}, 
+	"chat.openai.com": {
+		"css": "div.px-3.pt-2.pb-3.text-center {\n  font-size: 0;\n  padding: 0;\n}\n\nform.stretch.mx-2.flex {\n  padding-top: 16px;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-02-26T16:14:24.833-05:00", 
+		"readability": false
+	}, 
+	"excalidraw.com": {
+		"css": "div.layer-ui__wrapper__top-right.zen-mode-transition {\n  display: none\n  \n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-01-05T23:01:28.604-08:00", 
+		"readability": false
+	}, 
+	"mail.google.com": {
+		"css": "form.gb_Ne.gb_lf {\n  background-color: #f5f5f5;\n}\n\ndiv.Nt {\n  background-color: #fafafa;\n}\n\ndiv.apa.nH.oy8Mbf {\n  background-color: #ffffff;\n}\n\ntr.zA.yO {\n  background-color: #ffffff;\n  color: #434343;\n}\n\ntr.zA.zE {\n  background-color: #f5f5f5;\n  color: #212121;\n}\n\nspan.y2 {\n  color: #757575;\n}\n\ntr.aps.zA.yO {\n  background-color: #eceff1;\n}\n\ndiv.qj.aEe {\n  display:inherit\n}\n\ndiv.qj {\n  display: none;\n}\n\na.gb_ye.gb_we.gb_dd.t6 {\n  display: none;\n}\n\ndiv.ma {\n  display: none;\n}\n\nimg.gb_Dc {\n  display: none;\n}\n\ndiv.apH.T-I-J3.J-J5-Ji.apJ {\n  display: none;\n}\n\ndiv.G-asx.J-J5-Ji {\n  display: none;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-01-10T17:27:32.148-05:00", 
+		"readability": false
+	}, 
+	"outlook.office.com": {
+		"css": "div.___lluazi0.f22iagw.f122n59.f1ctqxl6.f1l02sjl.f124akge.f1vx9l62 {\n  display: none\n  \n}\n\nbutton._2sngRVSfiZnZSR2_elJ0bG.o365sx-waffle.o365sx-button {\n  display: none;\n}\n\ndiv._2PD4N73oeFPjGiZPjuIOYA.o365sx-appName {\n  display: none;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-03-06T22:43:22.373-05:00", 
+		"readability": false
+	}, 
+	"searx.fmac.xyz": {
+		"css": "label.tooltips {\n  margin-left: 5px;\n}\n\na.link_on_top_donate {\n  display: none;\n  \n}\n\na.link_on_top_about {\n  display: none;\n}\n\nnav a span {\n  display: none;\n}\n\ndiv.category_name {\n  padding-left: 1px;\n  text-transform: lowercase;\n}\n\n#search_logo {\n  display: none;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2022-12-21T17:31:41.266-08:00", 
+		"readability": false
+	}, 
+	"submitty.cs.rpi.edu": {
+		"css": "body { background-blend-mode: hue; background-color: #eeeeef; }", 
+		"enabled": true, 
+		"modifiedTime": "2023-04-07T15:41:09.273-04:00", 
+		"readability": false
+	}, 
+	"tasksboard.com": {
+		"css": ".lkYgsq {\r\n  font-weight: bold;\r\n}\r\n\r\n.dwZjMP {\r\n  visibility: hidden;\r\n}\r\n\r\n.dwZjMP:after {\r\n  content:\"📝 main\";\r\n  visibility: visible;\r\n  display: block;\r\n  position: absolute;\r\n  font-size: 20px;\r\n  padding-bottom: 8px;\r\n  font-weight: bold;\r\n}\r\n\r\ndiv.sc-bwANAz.fGVrpl {\r\n  /* Disable emoji selector */\r\n  pointer-events: none;\r\n}\r\n\r\ndiv.sc-bGWzfD.boNVRK {\r\n  /* Line under board title */\r\n  border-bottom: 1px solid #dededf;\r\n}\r\n\r\ndiv.sc-iMJOuO.jhAXle {\r\n  /* Header */\r\n  display: none;\r\n  \r\n}\r\n\r\n#board {\r\n  /* Fill old header space */\r\n  padding-top: 0px;\r\n}\r\n\r\nsc-btIRyd {\r\n  display: none;\r\n}\r\n", 
+		"enabled": true, 
+		"modifiedTime": "2023-03-09T14:56:18.915-05:00", 
+		"readability": false
+	}, 
+	"trello.com": {
+		"css": "div.board-main-content {\n  background-color: #222222;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2021-12-20T19:22:38.945-08:00", 
+		"readability": false
+	}, 
+	"web.webex.com": {
+		"css": "", 
+		"enabled": true, 
+		"modifiedTime": "2022-10-06T19:59:11.055-04:00", 
+		"readability": false
+	}, 
+	"www.amazon.com": {
+		"css": "img._universal-detail-ilm-card_style_image__2jCsj {\n  display: none\n  \n}\n\nul.a-unordered-list.a-horizontal.a-size-small {\n  display: none\n  \n}\n\n#nav-subnav {\n  display: none;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2022-12-23T14:26:11.743-08:00", 
+		"readability": false
+	}, 
+	"www.codewars.com": {
+		"css": "li.item-list {\n  display: none\n  \n}\n\nli.notifications-item.has-menu.static {\n  display: none;\n}\n\n\n.w-full .md\\3Aw-2\\/12 {\n  display: none;\n}\n\n\nfooter.p-3.text-ui-text.mb-0.text-center.w-auto.h-50px {\n  display: none;\n}\n\n.md\\3Ah-full .description-footer {\n  display: none;\n}\n\n.w-256 .my-4 {\n  display: none;\n}\n\n.w-256 > .w-full > .mt-4 {\n  display: none;\n}\n\n#shell_content > .my-4 > .flex {\n  display: none;\n}\n\n.ads-container .cw-ad {\n  display: none;\n}\n\ndiv > #house_ad_display > .cw-ad {\n  display: none;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-01-22T01:32:54.385-05:00", 
+		"readability": false
+	}, 
+	"www.cs.rpi.edu": {
+		"css": "body {\n  background-blend-mode: hue;\n  background-color: #eeeeef;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2022-04-08T01:20:13.069-04:00", 
+		"readability": false
+	}, 
+	"www.google.com": {
+		"css": "div.logo.Ib7Efc {\r\n  display: none;\r\n}\r\n\r\n.YQ4gaf {\r\n  display: none;\r\n}\r\n\r\nbutton.Tg7LZd {\r\n  display: none;\r\n}\r\n\r\ndiv.nDcEnd {\r\n  padding-right: 12px;\r\n}\r\n\r\ndiv.logo {\r\n  display: none;\r\n}\r\ndiv.extension-body {\r\n  background-color: #ffffff;\r\n  border: 1px solid #dadce0;\r\n  \r\n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-03-22T12:51:49.254-04:00", 
+		"readability": false
+	}, 
+	"www.linkedin.com": {
+		"css": "div.authentication-outlet {\n  background-color: #f3f3f3;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2022-05-18T23:42:49.480-07:00", 
+		"readability": false
+	}, 
+	"www.merriam-webster.com": {
+		"css": "div.sidebar-container.d-flex.flex-column.flex-shrink-0.thesaurus-sidebar {   display: none; }\r\n\r\na svg path {   display: none; }\r\n\r\ndiv.est.font-logo.rounded.text-center {   display: none; } \r\n\r\ndiv.container-top-ads.bg-mw-black.w-100.position-relative {   display: none; }\r\n\r\ndiv.left-sidebar {   display: none; }\r\n\r\ndiv.left-sidebar-container.d-flex.justify-content-end {   display: none; }\r\n\r\na.w-100.text-white.text-decoration-none.btn.btn-blue {   display: none; }  div.fixed-wrapper.non-sticky {   display: none; }\r\n\r\na.btn.btn-gradient.text-white.btn-md.active.text-decoration-none.mr-1.mr-lg-3.me-1.me-lg-3.d-lg-none.d-xl-none.d-xxl-inline {   display: none; }\r\n\r\ndiv.redesign-container {\r\n  background: none;\r\n}\r\n\r\ndiv.search-form-container.d-flex.col.rounded.flex-wrap.flex-lg-nowrap.me-xl-2 {\r\n  margin-right: 200px;\r\n}\r\n\r\ndiv.additional-content-area {\r\n  display: none;\r\n}", 
+		"enabled": true, 
+		"modifiedTime": "2022-12-10T03:44:56.826+00:00", 
+		"readability": false
+	}, 
+	"www.pythoncheatsheet.org": {
+		"css": ".ml-14 > a > .flex {\r\n  display: none;\r\n}\r\n\r\n.absolute > .hidden > .inline-flex {\r\n  display: none;\r\n} \r\n\r\n.hidden > div:nth-child(1) > .inline-flex {\r\n  display: none;\r\n}\r\n\r\n.hidden > div:nth-child(2) > .inline-flex {\r\n  display: none;\r\n}\r\n\r\nkbd.DocSearch-Button-Key {\r\n  display: none;\r\n  \r\n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-03-17T01:11:55.431-04:00", 
+		"readability": false
+	}, 
+	"www.reddit.com": {
+		"css": "div._1vXXD2qKLnHetdKvisFzBD {\r\n  display: none\r\n  \r\n}\r\n\r\nspan._2zZ-KGHbWWqrwGlHWXR90y._2I12Htze2UzJmmfnrgYJOn {\r\n  display: none;\r\n}\r\n\r\nbutton._3hna43Sh0DTnoV7v2NNc2r._2iuoyPiKHN3kfOoeIQalDT._10BQ7pjWbeYP63SAPNS8Ts.HNozj_dKjQZ59ZsfEegz8 {\r\n  display: none;\r\n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-04-27T11:12:31.703-04:00", 
+		"readability": false
+	}, 
+	"www.tldraw.com": {
+		"css": "#TD-MultiplayerMenuIcon {\r\n  display: none;\r\n}\r\n\r\ndiv.c-eMMpka.c-eMMpka-iTKOFX-orientation-vertical {\r\n  position: absolute;\r\n  top: 350px\r\n}\r\n\r\n/* .t-ljGyqI {\r\n  --colors-selected: #6683c7;\r\n  --colors-panel: #252526;\r\n --colors-panelContrast: #323233;\r\n \r\n}\r\n\r\n#home {\r\n --tl-background: #111012;\r\n\r\n} */", 
+		"enabled": true, 
+		"modifiedTime": "2023-01-19T17:01:45.350-05:00", 
+		"readability": false
+	}, 
+	"www.youtube.com": {
+		"css": "yt-icon-button.style-scope.ytd-topbar-menu-button-renderer.style-default {\n  display: none;\n}\n\ndiv.markdown-body {\n  background-color: white;\n}\n\ntextarea.interact-input {\n  background-color: white;\n}", 
+		"enabled": true, 
+		"modifiedTime": "2023-04-17T14:49:13.809-04:00", 
+		"readability": false
+	}
+}
