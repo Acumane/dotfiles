@@ -4,9 +4,10 @@ export CACHE="$HOME/.cache"
 export DOTS="$HOME/dotfiles"
 export PROMPT_EOL_MARK=""
 
-# pnpm
 export PNPM_HOME="/home/bren/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
+
+export PATH=$PATH:/home/bren/.spicetify
 
 HISTFILE=$CACHE/zsh/histfile
 HISTSIZE=10000
