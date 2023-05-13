@@ -3,9 +3,10 @@
 @import "tweaks/hide-tabs-scrollbuttons.css";
 @import "tweaks/prevent-tab-overflow.css";
 @import "tweaks/findbar-on-top.css";
+@import "tweaks/minimal-ext-menu.css";
 
 /* Hide UI elements */
-#reader-mode-button, #pageActionButton,
+#reader-mode-button, #pageActionButton, #new-tab-button,
 #tabbrowser-arrowscrollbox-periphery, #fxa-toolbar-menu-button,
 #identity-permission-box, #stop-reload-button {
 	display: none !important;

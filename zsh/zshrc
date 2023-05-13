@@ -24,7 +24,6 @@ RPROMPT='%F{240}%2~%f'
 
 # —— ALIASES ————————————————————
 alias reload="source $DOTS/zsh/zshrc"
-alias keyd="sudo systemctl restart keyd"
 
 alias ls="ls -CAF --color=auto"
 alias la="la -lAF --color=auto"
