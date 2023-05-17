@@ -1,7 +1,6 @@
-
 @import "firefox-gnome-theme/userChrome.css";
 @import "tweaks/hide-tabs-scrollbuttons.css";
-@import "tweaks/prevent-tab-overflow.css";
+/* @import "tweaks/prevent-tab-overflow.css"; */
 @import "tweaks/findbar-on-top.css";
 @import "tweaks/minimal-ext-menu.css";
 

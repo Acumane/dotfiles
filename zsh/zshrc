@@ -33,6 +33,11 @@ alias rn="mv"
 alias mk="touch"
 alias mkd="mkdir"
 
+#     reboot
+#     shutdown
+alias suspend="systemctl suspend"
+alias hibernate="systemctl hibernate"
+
 alias tar='tar -czvf'
 alias untar='tar -zxvf' 
 alias ping='ping -c 5'
