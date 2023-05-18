@@ -17,18 +17,31 @@ cursor:
   style:
     shape: Beam
     blinking: On
-
-  # Vi mode cursor style
-  #
-  # If the vi mode cursor style is `None` or not specified, it will fall back to
-  # the style of the active value of the normal cursor.
-  #
-  # See `cursor.style` for available options.
-  # vi_mode_style: None
+  vi_mode_style: Block
 
   unfocused_hollow: false
 
-# Live config reload (changes require restart)
+font:
+  normal:
+    family: Hack
+    style: Regular
+
+  bold:
+    family: Hack
+    style: Bold
+
+  italic:
+    family: Hack
+    style: Italic
+
+  bold_italic:
+    family: Hack
+    style: Bold Italic
+
+  size: 12
+
+draw_bold_text_with_bright_colors: true
+
 live_config_reload: true
 
 shell:
@@ -38,12 +51,9 @@ key_bindings:
   - { key: Delete, chars: "\x0c" }
   - { key: N,      mods: Alt,  action: SpawnNewInstance }
   - { key: Z,      mods: Alt,  action: ToggleFullscreen }
-  - { key: Up,     mode: ~Alt, action: ScrollLineUp     }
-  - { key: Down,   mode: ~Alt, action: ScrollLineDown   }
 
   # Vi Mode
-  - { key: Escape,  mode: ~Vi|~Search,  action: ToggleViMode  }
-  - { key: H,       mode: Vi|~Search,   action: ToggleViMode  }
+  - { key: Escape, mode: ~Search, action: ToggleViMode  }
 
   - { key: Up,                 mode: Vi|~Search, action: ScrollLineUp       }
   - { key: Down,               mode: Vi|~Search, action: ScrollLineDown     }
@@ -64,4 +74,4 @@ key_bindings:
 
   # - { key: E,                 mode: Vi|~Search, action: SemanticRightEnd  }
   # - { key: W,                 mode: Vi|~Search, action: SemanticRight     }
-  - { key: B,    mods: Shift,  mode: Vi|~Search, action: SemanticLeft       }
+  - { key: E,    mods: Shift,  mode: Vi|~Search, action: SemanticLeft       }
