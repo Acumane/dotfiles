@@ -46,9 +46,9 @@ alias kernel="uname -r"
 alias ip='curl ifconfig.me'
 alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
 
-alias dl="wget -N -P ~/dl"
-alias dlv="yt-dlp -P ~/dl -f mp4"
-alias dla="yt-dlp -P ~/dl -x --audio-format mp3"
+alias dl="wget -N -P ~/Downloads"
+alias dlv="yt-dlp -P ~/Downloads -f mp4"
+alias dla="yt-dlp -P ~/Downloads -x --audio-format mp3"
 
 alias np="pnpm"
 alias py="python"
