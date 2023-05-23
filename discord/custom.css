@@ -1,0 +1,23 @@
+/* Show servers on hover */
+.wrapper-1_HaEi {
+ width: 12px;
+ transition-duration: .5s;
+}
+
+.wrapper-1_HaEi:hover {
+ width: 72px;
+}
+
+/* Hiding buttons */
+
+[aria-label="Add Friends to DM"],
+[aria-label="Show User Profile"],
+[aria-label="Show User Profile (Unavailable)"],
+
+[aria-label="Hide User Profile"],
+[aria-label="Help"],
+
+[aria-label="Show Member List"]
+{
+    display: none;
+}
