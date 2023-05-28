@@ -10,3 +10,10 @@
 #identity-permission-box, #stop-reload-button {
 	display: none !important;
 }
+
+/* PiP */
+@-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
+	button#seekForward, button#seekBackward  {
+		display: none !important;
+	}
+}
