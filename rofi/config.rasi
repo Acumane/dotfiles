@@ -1,1 +1,15 @@
 @theme "adwaita"
+
+configuration {
+	show-icons: true;
+	steal-focus: true;
+
+	display-drun: "apps";
+	display-filebrowser: "files";
+	
+	filebrowser {
+	/*	directory: "/home";*/
+		directories-first: true;
+		sorting-method: "name";
+	}
+}
