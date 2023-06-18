@@ -1,11 +1,11 @@
 /* Show servers on hover */
 .wrapper-1_HaEi {
- width: 12px;
- transition-duration: .5s;
+    width: 12px;
+    transition-duration: .5s;
 }
 
 .wrapper-1_HaEi:hover {
- width: 72px;
+    width: 72px;
 }
 
 /* Hiding buttons */
@@ -20,4 +20,16 @@
 [aria-label="Show Member List"]
 {
     display: none;
+}
+
+/* Rounded corners */
+.chat-2ZfjoI {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+}
+
+#app-mount .layer-86YKbF ~ .layer-86YKbF > div,
+#app-mount .layer-86YKbF ~ .layer-86YKbF .standardSidebarView-E9Pc3j {
+    border-radius: 10px !important;
+    border: 1px solid #595959;
 }

@@ -40,6 +40,31 @@ font:
 
   size: 12
 
+colors:
+  primary:
+   background: '#1f1f1f'
+   foreground: '#c5c8c6'
+
+  normal:
+   black:   '#2f2f2f'
+   red:     '#c24555'
+   green:   '#b5bd68'
+   yellow:  '#f0c674'
+   blue:    '#81a2be'
+   magenta: '#b294bb'
+   cyan:    '#8abeb7'
+   white:   '#c5c8c6'
+
+  bright:
+   black:   '#555555'
+   red:     '#F6645D'
+   green:   '#5ac6ae'
+   yellow:  '#e7c547'
+   blue:    '#7aa6da'
+   magenta: '#c397d8'
+   cyan:    '#2BC4E2'
+   white:   '#eaeaea'
+
 draw_bold_text_with_bright_colors: true
 
 live_config_reload: true
