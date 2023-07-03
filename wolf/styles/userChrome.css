@@ -3,6 +3,7 @@
 /* @import "tweaks/prevent-tab-overflow.css"; */
 @import "tweaks/findbar-on-top.css";
 @import "tweaks/minimal-ext-menu.css";
+/* @import "tweaks/floating-findbar.css"; */
 
 /* Hide UI elements */
 #reader-mode-button, #pageActionButton, #new-tab-button,
@@ -10,6 +11,11 @@
 #identity-permission-box, #stop-reload-button {
 	display: none !important;
 }
+
+/* PWA: hide the tabs, titlebar, headers, etc. */
+/* #titlebar, #navigator-toolbox {
+	visibility: collapse !important;
+} */
 
 /* PiP */
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {

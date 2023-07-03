@@ -1,2 +1,26 @@
 @import "firefox-gnome-theme/userContent.css";
 
+/* @-moz-document url("about:newtab") {  
+	body {
+		background-color: #242424 !important;
+	}
+} */
+
+:root {
+	--body-bg-color: rgba(238, 238, 239, 1) !important;
+}
+
+.toolbar {
+	display: none !important;
+}
+
+#outerContainer {
+	top: -32px !important;
+	height: 102.6% !important;
+	position: fixed !important;
+}
+
+.textLayer {
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
+}
+

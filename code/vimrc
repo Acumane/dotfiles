@@ -125,7 +125,7 @@ nnoremap u gu
 nnoremap U gU
 " *must now use Ctrl+u/r
 
-map <space> h<space><esc>l
+map <space> a<space><esc>l
 map <backspace>  a<backspace><esc>
 
 "better line appending!
