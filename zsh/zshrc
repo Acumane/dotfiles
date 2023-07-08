@@ -2,6 +2,7 @@
 export HOME="/home/bren"                # explicit (root)
 export CACHE="$HOME/.cache"
 export DOTS="$HOME/dotfiles"
+
 export PROMPT_EOL_MARK=""
 
 export PNPM_HOME="/home/bren/.local/share/pnpm"
@@ -10,7 +11,7 @@ export PATH="$PNPM_HOME:$PATH"
 export PATH=$PATH:/home/bren/.spicetify
 export PATH=$PATH:/home/bren/.local/bin
 
-HISTFILE=$CACHE/zsh/histfile
+HISTFILE=$CACHE/zsh/hist
 HISTSIZE=10000
 SAVEHIST=10000
 
@@ -36,6 +37,7 @@ alias mkd="mkdir"
 
 #     reboot
 #     shutdown
+alias sys="systemctl"
 alias suspend="systemctl suspend"
 alias hibernate="systemctl hibernate"
 
@@ -53,13 +55,14 @@ alias dla="yt-dlp -P ~/Downloads -x --audio-format mp3"
 
 alias np="pnpm"
 alias py="python"
-alias app="sudo dnf"
+alias app="sudo dnf5"
 alias open="nautilus"
 
-alias find='grep --color -i'
-alias search='find'
-alias print="cat"
-alias read="less"
+alias f='grep --color -i'
+alias p="cat"
+much() {
+	du -h -d 1 $1 | grep '[0-9]\+G'
+}
 
 alias ..='cd ..'
 alias ...='cd ../../../'
