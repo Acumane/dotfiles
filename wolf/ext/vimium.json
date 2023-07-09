@@ -1,12 +1,13 @@
 {
 	"name": "Vimium C",
-	"@time": "5/11/2023, 5:13:02 PM",
-	"time": 1683850382098,
+	"@time": "7/8/2023, 10:27:12 PM",
+	"time": 1688869632648,
 	"environment": {
-		"extension": "1.99.99",
+		"extension": "1.99.992",
 		"platform": "linux",
-		"firefox": 112
+		"firefox": 114
 	},
+	"autoDarkMode": 0,
 	"clipSub": "",
 	"exclusionRules": [
 		{
@@ -16,6 +17,10 @@
 		{
 			"passKeys": "",
 			"pattern": "^https?://www\\.tldraw\\.com/"
+		},
+		{
+			"passKeys": "1 2 3 4 0",
+			"pattern": "^https?://"
 		}
 	],
 	"keyLayout": 2,
@@ -129,6 +134,14 @@
 		"  border-radius: 12px 0 0 0;",
 		"  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, .1);",
 		"  transition-delay: 0s;",
+		"}",
+		"",
+		"",
+		".D > .LH {",
+		"  background: #2a2a2a;",
+		"  color: #ccc;",
+		"  border: 1px solid #444;",
+		"  box-shadow: 0px 6px 20px 0px rgba(0, 0, 0, .2);",
 		"}",
 		""
 	],
