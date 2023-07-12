@@ -71,15 +71,14 @@ alias ....='cd ../../../../'
 # https://github.com/olets/zsh-abbr
 # https://github.com/MichaelAquilina/zsh-you-should-use
 
+bindkey '^[[1;5C' forward-word
+bindkey '^[[1;5D' backward-word
+bindkey '^H' backward-kill-word
+bindkey -s '^o' 'nvim $(fzf)\n'
 
-# Basic auto/tab complete:
+# Basic auto/tab complete
 autoload -U compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit -d $CACHE/zsh/zcompdump
 _comp_options+=(globdots)                 # inc. hidden files.
-
-autoload -Uz bracketed-paste-magic
-zle -N bracketed-paste bracketed-paste-magic
-autoload -Uz url-quote-magic
-zle -N self-insert url-quote-magic
