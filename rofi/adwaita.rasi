@@ -1,14 +1,14 @@
  /* Forked from https://github.com/lr-tech/rofi-themes-collection */
 
 * {
-	bg0:    #303030;
-	bg1:    #444444;
+	bg0:    #283035;
+	bg1:    #3d4343;
 	bg2:    #3D3D3D80;
-	bg3:    #23374f;
+	bg3:    #3a444f;
 	hl:     #5e7998;
-	fg0:    #c7c7c7;
+	fg0:    #bbb39e;
 	fg1:    #FFFFFF;
-	fg2:    #969696;
+	fg2:    #979589;
 	fg3:    #66666680;
 
 	font:   "Cantarell Regular 12";
