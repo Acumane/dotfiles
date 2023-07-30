@@ -40,6 +40,7 @@ alias mkd="mkdir"
 alias sys="systemctl"
 alias suspend="systemctl suspend"
 alias hibernate="systemctl hibernate"
+alias bios="systemctl reboot --firmware-setup"
 
 alias tar='tar -czvf'
 alias untar='tar -zxvf' 
