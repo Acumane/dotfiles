@@ -1,7 +1,13 @@
 pid=$(pidof rofi)
+echo $1
 
 if [ -z $pid ]; then
-	rofi -show drun -normal-window &
+	if [ $1 = "run" ]; then
+		rofi -show drun -normal-window &
+	elif [ $1 = "cb" ]; then
+		rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -normal-window &
+	fi
+
 	pid=$(pidof rofi)
 	sleep 0.5
 	while [ -n $(pidof rofi) ]; do
@@ -15,4 +21,3 @@ if [ -z $pid ]; then
 else
 	kill $pid
 fi
-
