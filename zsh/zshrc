@@ -1,85 +1,31 @@
-# —— VARS ———————————————————————
-export HOME="/home/bren"                # explicit (root)
-export CACHE="$HOME/.cache"
+export HOME="/home/bren"              # explicit (root)
 export DOTS="$HOME/dotfiles"
 
-export PROMPT_EOL_MARK=""
+source $DOTS/zsh/var.zsh              # paths & env vars
+source $DOTS/zsh/alias.zsh            # aliases
 
-export PNPM_HOME="/home/bren/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-export PATH=$PATH:/home/bren/.spicetify
-export PATH=$PATH:/home/bren/.local/bin
+# —— OPTS ———————————————————————
 
 HISTFILE=$CACHE/zsh/hist
 HISTSIZE=10000
 SAVEHIST=10000
 
-setopt autocd                           # no cd necessary! 
-stty stop undef                         # Disable freeze terminal on Ctrl+s
-zle_highlight=('paste:none')            # Disable highlight on paste
+setopt autocd                         # no cd necessary! 
+stty stop undef                       # disable freeze on C+s
+zle_highlight=('paste:none')          # no highlight on paste
 
 # —— PROMPT —————————————————————
+
 autoload -U colors && colors
 PROMPT="%n %F{245}›%f "
 RPROMPT='%F{240}%2~%f'
 
-# —— ALIASES ————————————————————
-alias reload="source $DOTS/zsh/zshrc"
-
-alias ls="ls -CAF --color=auto"
-alias la="la -lAF --color=auto"
-alias cp="cp -r"
-alias rm="rm -r"
-alias rn="mv"
-alias mk="touch"
-alias mkd="mkdir"
-
-#     reboot
-#     shutdown
-alias sys="systemctl"
-alias suspend="systemctl suspend"
-alias hibernate="systemctl hibernate"
-alias bios="systemctl reboot --firmware-setup"
-
-alias tar='tar -czvf'
-alias untar='tar -zxvf' 
-alias ping='ping -c 5'
-alias root="sudo -s"
-alias kernel="uname -r"
-alias ip='curl ifconfig.me'
-alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
-
-alias dl="wget -N -P ~/Downloads"
-alias dlv="yt-dlp -P ~/Downloads -f mp4"
-alias dla="yt-dlp -P ~/Downloads -x --audio-format mp3"
-
-alias np="pnpm"
-alias py="python"
-alias app="sudo dnf5"
-alias open="nautilus"
-
-alias f='grep --color -i'
-alias p="cat"
-much() {
-	du -h -d 1 $1 | grep '[0-9]\+G'
-}
-
-alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-
-# https://github.com/olets/zsh-abbr
-# https://github.com/MichaelAquilina/zsh-you-should-use
+# —— KEYS ———————————————————————
 
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 bindkey '^H' backward-kill-word
-bindkey -s '^o' 'nvim $(fzf)\n'
+bindkey -s '^o' 'sudo nvim $(fzf)\n'
 
-# Basic auto/tab complete
-autoload -U compinit
-zstyle ':completion:*' menu select
-zmodload zsh/complist
-compinit -d $CACHE/zsh/zcompdump
-_comp_options+=(globdots)                 # inc. hidden files.
+# —— EXTS ———————————————————————
+
