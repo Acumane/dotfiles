@@ -1,11 +1,9 @@
 from subprocess import run
 from pyperclip import copy
+from keys import GPT_KEY
 import openai
 
-with open('keys') as f:
-  openai.api_key = f.readline()
-
-print(openai.api_key)
+openai.api_key = GPT_KEY
 
 sel = run('xsel', capture_output=True, text=True).stdout
 

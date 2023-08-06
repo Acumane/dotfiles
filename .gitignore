@@ -1,3 +1,4 @@
 code/libadwaita/
 wolf/styles/firefox-gnome-theme/
-scripts/keys
+scripts/keys.py
+__pycache__
