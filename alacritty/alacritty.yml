@@ -1,11 +1,11 @@
 window:
   dimensions:
-   columns: 120
-   lines: 30
+    columns: 120
+    lines: 30
 
   padding:
-   x: 15
-   y: 10
+    x: 15
+    y: 10
 
   decorations: none
 
@@ -42,28 +42,29 @@ font:
 
 colors:
   primary:
-   background: '#293135'
-   foreground: '#c5c8c6'
+    background: '#232a2e'
+    foreground: '#dddad2'
+   
 
   normal:
-   black:   '#2f2f2f'
-   red:     '#c24555'
-   green:   '#b5bd68'
-   yellow:  '#f0c674'
-   blue:    '#81a2be'
-   magenta: '#b294bb'
-   cyan:    '#8abeb7'
-   white:   '#c5c8c6'
+    black:   '#2f2f2f'
+    red:     '#c24555'
+    green:   '#b5bd68'
+    yellow:  '#f0c674'
+    blue:    '#81a2be'
+    magenta: '#b294bb'
+    cyan:    '#8abeb7'
+    white:   '#c5c8c6'
 
   bright:
-   black:   '#555555'
-   red:     '#F6645D'
-   green:   '#5ac6ae'
-   yellow:  '#e7c547'
-   blue:    '#7aa6da'
-   magenta: '#c397d8'
-   cyan:    '#2BC4E2'
-   white:   '#eaeaea'
+    black:   '#555555'
+    red:     '#F6645D'
+    green:   '#5ac6ae'
+    yellow:  '#e7c547'
+    blue:    '#7aa6da'
+    magenta: '#c397d8'
+    cyan:    '#2BC4E2'
+    white:   '#eaeaea'
 
 draw_bold_text_with_bright_colors: true
 

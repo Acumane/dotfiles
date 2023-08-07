@@ -1,22 +1,12 @@
-export HOME="/home/bren"              # explicit (root)
+export HOME="/home/bren"                # explicit (root)
 export DOTS="$HOME/dotfiles"
 
-source $DOTS/zsh/var.zsh              # paths & env vars
-source $DOTS/zsh/alias.zsh            # aliases
-
-# —— OPTS ———————————————————————
-
-HISTFILE=$CACHE/zsh/hist
-HISTSIZE=10000
-SAVEHIST=10000
-
-setopt autocd                         # no cd necessary! 
-stty stop undef                       # disable freeze on C+s
-zle_highlight=('paste:none')          # no highlight on paste
+source $DOTS/zsh/var.zsh                # paths & env vars
+source $DOTS/zsh/alias.zsh              # aliases
+source $HOME/.local/share/zap/zap.zsh   # plugin manager
 
 # —— PROMPT —————————————————————
 
-autoload -U colors && colors
 PROMPT="%n %F{245}›%f "
 RPROMPT='%F{240}%2~%f'
 
@@ -25,7 +15,11 @@ RPROMPT='%F{240}%2~%f'
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
 bindkey '^H' backward-kill-word
-bindkey -s '^o' 'sudo nvim $(fzf)\n'
+bindkey -s '^o' '^usudo nvim $(fzf)\n'
+bindkey -s '^r' '^usource $HOME/.zshrc\n'
 
 # —— EXTS ———————————————————————
 
+plug "Acumane/zsh-options"
+plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-syntax-highlighting"
