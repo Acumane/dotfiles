@@ -1,6 +1,9 @@
 # —— ALIASES ————————————————————
 
 alias reload="source $DOTS/zsh/zshrc"
+alias bundle="antigen bundle"
+alias using="antigen use"
+alias plug="zplug"
 
 alias ls="ls -CAF --color=auto"
 alias la="la -lAF --color=auto"
@@ -34,8 +37,12 @@ alias py="python"
 alias app="sudo dnf5"
 alias open="nautilus"
 
+alias keys="showkey -a"
 alias f='grep --color -i'
-alias p="cat"
+alias p='bat --color "always"'
+alias s='fzf --height 100% --border=none \
+--preview "bat --color 'always' {}"'
+
 much() {
 	du -h -d 1 $1 | grep '[0-9]\+G'
 }

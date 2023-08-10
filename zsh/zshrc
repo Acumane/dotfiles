@@ -1,9 +1,15 @@
 export HOME="/home/bren"                # explicit (root)
 export DOTS="$HOME/dotfiles"
 
-source $DOTS/zsh/var.zsh                # paths & env vars
 source $DOTS/zsh/alias.zsh              # aliases
-source $HOME/.local/share/zap/zap.zsh   # plugin manager
+# source $LOCAL/antigen/antigen.zsh   
+source $HOME/.zplug/init.zsh            # plugin manager
+
+# —— OPTS ———————————————————————
+
+source $DOTS/zsh/var.zsh                # paths & env vars
+export FZF_DEFAULT_OPTS="--height 60% \
+--layout=reverse --border -m --bind 'space:toggle'"
 
 # —— PROMPT —————————————————————
 
@@ -17,9 +23,29 @@ bindkey '^[[1;5D' backward-word
 bindkey '^H' backward-kill-word
 bindkey -s '^o' '^usudo nvim $(fzf)\n'
 bindkey -s '^r' '^usource $HOME/.zshrc\n'
+bindkey '^[h' fzf-history-widget
+bindkey '^[F' fzf-cd-widget
+bindkey '^[f' fzf-file-widget
+
+
 
 # —— EXTS ———————————————————————
 
+# using oh-my-zsh; bundle fzf
+# bundle Acumane/zsh-options
+# bundle zsh-users/zsh-autosuggestions
+# bundle zsh-users/zsh-syntax-highlighting
+# bundle jeffreytse/zsh-vi-mode
+
+# antigen apply
+
+plug "plugins/fzf", from:oh-my-zsh
+plug "plugins/sudo", from:oh-my-zsh
+plug "plugins/dirhistory", from:oh-my-zsh
+plug "Aloxaf/fzf-tab"
 plug "Acumane/zsh-options"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
+# plug "jeffreytse/zsh-vi-mode"
+
+plug load
