@@ -25,17 +25,18 @@ alias untar='tar -zxvf'
 alias ping='ping -c 5'
 alias root="sudo -s"
 alias kernel="uname -r"
-alias ip='curl ifconfig.me'
+alias ip='hostname -I'
 alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
 
 alias dl="wget -N -P ~/Downloads"
 alias dlv="yt-dlp -P ~/Downloads -f mp4"
 alias dla="yt-dlp -P ~/Downloads -x --audio-format mp3"
 
-alias np="pnpm"
+alias pn="pnpm"
 alias py="python"
 alias app="sudo dnf5"
 alias open="nautilus"
+alias code="code-insiders"
 
 alias keys="showkey -a"
 alias f='grep --color -i'
