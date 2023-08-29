@@ -1,5 +1,4 @@
 pid=$(pidof rofi)
-echo $1
 
 if [ -z $pid ]; then
 	if [ $1 = "run" ]; then

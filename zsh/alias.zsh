@@ -18,6 +18,7 @@ alias mkd="mkdir"
 alias sys="systemctl"
 alias suspend="systemctl suspend"
 alias hibernate="systemctl hibernate"
+alias lock="xdg-screensaver lock"
 alias bios="systemctl reboot --firmware-setup"
 
 alias tar='tar -czvf'
@@ -26,6 +27,7 @@ alias ping='ping -c 5'
 alias root="sudo -s"
 alias kernel="uname -r"
 alias ip='hostname -I'
+alias speed='speedtest-cli --simple'
 alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
 
 alias dl="wget -N -P ~/Downloads"
@@ -36,7 +38,6 @@ alias pn="pnpm"
 alias py="python"
 alias app="sudo dnf5"
 alias open="nautilus"
-alias code="code-insiders"
 
 alias keys="showkey -a"
 alias f='grep --color -i'
