@@ -116,13 +116,18 @@
     --header-primary: white;
 	--header-secondary: #7F7C71;
 	--text-muted: #7F7C71;
-	--channels-default: #bbb39e;
+	--channels-default: #bab5a8;
 	
 	/* --interactive-normal: white; */
 	--interactive-hover: #cfcabb;
-	--interactive-active: white;
+	--channel-icon: #cfcabb;;
+	--interactive-active: #fffefa;
 
 	--interactive-muted: var(--text-muted);
+}
+
+.item-2LIpTv {
+	background-color: #bab5a854;
 }
 
 .theme-light {
