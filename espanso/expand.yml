@@ -1,0 +1,5 @@
+matches:
+  - trigger: "--"
+    replace: "—"
+  - trigger: "__"
+    replace: "ㅤ" 
