@@ -3,4 +3,3 @@ if [ $1 = "fetch" ]; then
 elif [ $1 = "pause" ]; then
 	echo '{ "command": ["cycle", "pause"] }' | socat - /tmp/mpvsocket
 fi
-
