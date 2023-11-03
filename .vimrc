@@ -14,6 +14,8 @@ onoremap <Down> <Nop>
 " for visual mode(s):
 vnoremap H A
 
+" map <silent> <C-s> :w<CR>
+" map <silent> <M-q> :wq<CR>
 
 onoremap iq i"
 onoremap ip i)
