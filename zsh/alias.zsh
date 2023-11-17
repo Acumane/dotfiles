@@ -29,6 +29,7 @@ alias kernel="uname -r"
 alias ip='hostname -I'
 alias speed='speedtest-cli --simple'
 alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
+alias clock="darshellclock"
 
 alias dl="wget -N -P ~/Downloads"
 alias dlv="yt-dlp -P ~/Downloads -f mp4"
@@ -38,6 +39,10 @@ alias pn="pnpm"
 alias py="python"
 alias app="sudo dnf5"
 alias open="nautilus"
+alias fm="ranger"
+alias v="neovim"
+alias c="code"
+
 
 alias keys="showkey -a"
 alias f='grep --color -i'

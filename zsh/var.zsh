@@ -4,8 +4,8 @@ export CACHE="$HOME/.cache"
 export CONFIG="$HOME/.config"
 export LOCAL="$HOME/.local/share/"
 
-
 export PROMPT_EOL_MARK=""
+export EDITOR="code"
 
 export PATH=$PATH:"$HOME/.local/bin"
 export PATH=$PATH:"$HOME/.cargo/bin"
