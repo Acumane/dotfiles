@@ -1,0 +1,27 @@
+{
+	"layer": "top",
+	"margin-bottom": -40,
+	"margin-left": 5,
+	"margin-right": 0,
+	"spacing": 0,
+
+	"include": ["~/dotfiles/waybar/modules.json"],
+
+	"modules-left": [
+		"hyprland/workspaces"
+	],
+
+	"modules-center": [
+		"clock"
+	]
+
+	// "modules-right": [ ],
+
+	// "group/today": {
+	//	"orientation": "horizontal",
+	//	"modules": [
+	//		"clock",
+	//		"custom/weather"
+	//	]
+	//}
+}

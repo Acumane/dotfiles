@@ -1,0 +1,15 @@
+{
+	"hyprland/workspaces" : {
+		"on-click": "activate",
+		"format": "{icon}",
+		"format-icons": { "default": "" },
+		"persistent-workspaces": { "*": 3 }
+	},
+
+	"clock": {
+		// "timezone": "America/New_York",
+		"format": "{:%b %d,  %I:%M %p}",
+		"format-alt": "{:%b %d,  %I:%M:%S %p}",
+		"interval": 1
+	}
+}

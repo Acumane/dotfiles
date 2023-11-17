@@ -1,0 +1,60 @@
+@define-color fg #8da8d0;
+@define-color bg #1F1F28;
+@define-color border #666;
+
+ * {
+	font-family: "IBM Plex Sans", FontAwesome, sans-serif;
+	border: none;
+	border-radius: 0px;
+}
+
+window#waybar {
+	background: transparent;
+}
+
+#workspaces {
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px;
+	background: @bg;
+	margin: 5px 0px 20px 0px;
+	padding: 9px 8px;
+	border-radius: 10px;
+	font-size: 5px;
+	border: 1px solid @border;
+}
+
+#workspaces button {
+	min-width: 8px;
+	background-color: #E6E0C2;
+	min-height: 0px;
+	padding: 0px;
+	margin: 1px 5px;
+	border-radius: 3px;
+	transition: all 0.3s ease-in-out;
+	opacity:0.45;
+}
+
+#workspaces button.active {
+	background-color: @fg;
+	border-radius: 10px;
+	min-width: 20px;
+	margin: 0px 6px;
+	opacity:1.0;
+}
+
+#workspaces button:hover:not(.active) {
+	border-radius: 10px;
+	min-width: 20px;
+	opacity:0.6;
+}
+
+#clock {
+	background-color: @bg;
+	box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #E6E0C2;
+	border-radius: 10px;
+	padding: 1px 12px 2.5px 12px;
+	margin: 3px 15px 15px 0px;
+	border: 1px solid @border;   
+}
