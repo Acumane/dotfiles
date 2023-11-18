@@ -12,16 +12,14 @@
 	],
 
 	"modules-center": [
-		"clock"
+		"clock#date",
+		"clock#time"
 	]
 
 	// "modules-right": [ ],
 
-	// "group/today": {
+	//"group/today": {
 	//	"orientation": "horizontal",
-	//	"modules": [
-	//		"clock",
-	//		"custom/weather"
-	//	]
+	//	"modules": [ ]
 	//}
 }

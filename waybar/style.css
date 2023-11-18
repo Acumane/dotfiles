@@ -1,9 +1,10 @@
 @define-color fg #8da8d0;
 @define-color bg #1F1F28;
-@define-color border #666;
+@define-color text #E6E0C2;
+@define-color border #404048;
 
  * {
-	font-family: "IBM Plex Sans", FontAwesome, sans-serif;
+	font-family: "IBM Plex Sans", "Hack", FontAwesome, sans-serif;
 	border: none;
 	border-radius: 0px;
 }
@@ -13,21 +14,21 @@ window#waybar {
 }
 
 #workspaces {
-	box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
 	background: @bg;
 	margin: 5px 0px 20px 0px;
 	padding: 9px 8px;
 	border-radius: 10px;
 	font-size: 5px;
-	border: 1px solid @border;
+	border: 1.5px solid @border;
 }
 
 #workspaces button {
 	min-width: 8px;
-	background-color: #E6E0C2;
+	background-color: @text;
 	min-height: 0px;
 	padding: 0px;
-	margin: 1px 5px;
+	margin: 0.5px 5px;
 	border-radius: 3px;
 	transition: all 0.3s ease-in-out;
 	opacity:0.45;
@@ -43,18 +44,36 @@ window#waybar {
 
 #workspaces button:hover:not(.active) {
 	border-radius: 10px;
-	min-width: 20px;
+	min-width: 15px;
 	opacity:0.6;
 }
-
-#clock {
+.modules-center {
 	background-color: @bg;
-	box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px;
-	font-size: 14px;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
+	font-size: 13px;
 	font-weight: 600;
-	color: #E6E0C2;
+	color: @text;
 	border-radius: 10px;
-	padding: 1px 12px 2.5px 12px;
-	margin: 3px 15px 15px 0px;
-	border: 1px solid @border;   
+	padding: 2px 12px 3px 12px;
+	margin: 3px 15px 18px 0px;
+	border: 1.5px solid @border;   
+}
+
+#clock.time {
+	opacity: 0.8;
+}
+
+tooltip {
+	background-color: transparent;
+}
+
+tooltip label {
+	padding: 12px;
+	margin: 2px 10px 20px 10px;
+	font-size: 14.5px;
+	text-shadow: none;
+	border-radius: 10px;
+	background-color: @bg;
+	border: 1.5px solid @border;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
 }

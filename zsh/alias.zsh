@@ -22,7 +22,7 @@ alias lock="xdg-screensaver lock"
 alias bios="systemctl reboot --firmware-setup"
 
 alias tar='tar -czvf'
-alias untar='tar -zxvf' 
+alias untar='\tar -xvf' 
 alias ping='ping -c 5'
 alias root="sudo -s"
 alias kernel="uname -r"

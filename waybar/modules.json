@@ -6,10 +6,25 @@
 		"persistent-workspaces": { "*": 3 }
 	},
 
-	"clock": {
+	"clock#date": {
+		"format": "{:%b %d,  }",
+		"interval": 60,
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"on-scroll": 1,
+			"format": {
+				"months":    "<span font='IBM Plex Sans Bold 12.5' color='#E6E0C2'>{}</span>",
+				"days":      "<span font='IBM Plex Mono Bold' color='#BEB9A3'>{}</span>",
+				"weekdays":  "<span font='IBM Plex Mono Bold' color='#F1C982'>{}</span>",
+				"today":     "<span font='IBM Plex Mono Bold' color='#9bc5f8'><u>{}</u></span>"
+			}
+		}
+	},
+
+	"clock#time": {
 		// "timezone": "America/New_York",
-		"format": "{:%b %d,  %I:%M %p}",
-		"format-alt": "{:%b %d,  %I:%M:%S %p}",
+		"format": "{:%I:%M %p}",
+		"format-alt": "{:%I:%M:%S %p}",
 		"interval": 1
 	}
 }
