@@ -1,11 +1,14 @@
 @theme "adwaita"
 
 configuration {
-	show-icons: true;
+	show-icons: false;
 	steal-focus: true;
 
-	display-drun: "apps";
+	display-drun: "RUN";
+	display-clipboard: "COPY";
 	display-filebrowser: "files";
+	drun-display-format: "{name}";
+	font: "Akkurat 11";
 	
 	filebrowser {
 	/*	directory: "/home";*/

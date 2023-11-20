@@ -1,20 +1,15 @@
  /* Forked from https://github.com/lr-tech/rofi-themes-collection */
 
 * {
-	bg0:    #283035;
-	bg1:    #3d4343;
-	bg2:    #3D3D3D80;
-	bg3:    #3a444f;
-	hl:     #5e7998;
-	fg0:    #bbb39e;
-	fg1:    #FFFFFF;
-	fg2:    #979589;
-	fg3:    #66666680;
-
-	font:   "Cantarell Regular 12";
+	bg:       #1F1F28f5;
+	box:      #323137f5;
+	trim:     #3B475E;
+	text:     #DDD8BB;
+	title:    #979589;
+	dim:      #66667280;
 
 	background-color:   transparent;
-	text-color:         @fg0;
+	text-color:         @text;
 
 	margin:     0px;
 	padding:    0px;
@@ -23,10 +18,8 @@
 
 window {
 	location:       center;
-	width:          480;
-	border-radius:  12px;
-	
-	background-color:   @bg0;
+	width: 450;
+	background-color:   @bg;
 }
 
 mainbox {
@@ -34,8 +27,8 @@ mainbox {
 }
 
 inputbar {
-	background-color:   @bg1;
-	border-color:       @hl;
+	background-color:   @box;
+	border-color:       @trim;
 	border:             2px;
 	border-radius:      6px;
 
@@ -45,25 +38,19 @@ inputbar {
 }
 
 prompt {
-	text-color:       @fg2;
-	background-color: @fg3;
+	text-color:       @title;
+	background-color: @dim;
 	border-radius:    5px;
+	font: "IBM Plex Mono Semibold 10";
 
-	padding:    0px 6px 4px 6px;
+	padding:    2px 6px 3px 6px;
 	spacing:    8px;
 }
 
 entry {
 	placeholder:        "Search";
-	padding:    1px 0px;
-	placeholder-color:  @fg3;
-}
-
-message {
-	margin:             12px 0 0;
-	border-radius:      6px;
-	border-color:       @bg2;
-	background-color:   @bg2;
+	padding:            2px 0 0 0;
+	placeholder-color:  @dim;
 }
 
 textbox {
@@ -75,7 +62,7 @@ listview {
 
 	margin:     12px 0 0;
 	lines:      8;
-	columns:    1;
+	columns:    2;
 
 	fixed-height: false;
 }
@@ -86,12 +73,8 @@ element {
 	border-radius:  6px;
 }
 
-element normal active {
-	text-color: @bg3;
-}
-
 element selected normal, element selected active {
-	background-color: @bg3;
+	background-color: @box;
 }
 
 element-icon {
@@ -100,5 +83,6 @@ element-icon {
 }
 
 element-text {
+	padding: 0 0 1px 0;
 	text-color: inherit;
 }
