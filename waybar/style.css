@@ -1,5 +1,6 @@
 @define-color fg #8da8d0;
-@define-color bg #1F1F28;
+@define-color bg1 #1F1F28;
+@define-color bg2 #363646;
 @define-color text #E6E0C2;
 @define-color border #404048;
 
@@ -15,7 +16,7 @@ window#waybar {
 
 #workspaces {
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
-	background: @bg;
+	background: @bg1;
 	margin: 5px 0px 20px 0px;
 	padding: 9px 8px;
 	border-radius: 10px;
@@ -47,19 +48,33 @@ window#waybar {
 	min-width: 15px;
 	opacity:0.6;
 }
+
 .modules-center {
-	background-color: @bg;
+	background-color: @bg1;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
 	font-size: 13px;
 	font-weight: 600;
 	color: @text;
 	border-radius: 10px;
-	padding: 2px 12px 3px 12px;
+	/* padding: 2px 12px 3px 12px; */
 	margin: 3px 15px 18px 0px;
 	border: 1.5px solid @border;   
 }
 
+#custom-weather {
+	background-color: @bg2;
+	margin: 2px 10px 2px 2px;
+	padding: 0px 10px 2px 10px;
+	border-radius: 7.5px;
+}
+
+#clock.date {
+	padding: 2px 0 3px 2px;
+
+}
+
 #clock.time {
+	padding: 2px 12px 3px 0;
 	opacity: 0.8;
 }
 
@@ -73,7 +88,7 @@ tooltip label {
 	font-size: 14.5px;
 	text-shadow: none;
 	border-radius: 10px;
-	background-color: @bg;
+	background-color: @bg1;
 	border: 1.5px solid @border;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
 }

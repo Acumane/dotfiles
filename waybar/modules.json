@@ -21,6 +21,14 @@
 		}
 	},
 
+	"custom/weather": {
+		"tooltip": true,
+		"tooltip-format": "<b>{}</b>",
+		"interval": 3600,
+		"exec": "weather.py",
+		"return-type": "json"
+	},
+
 	"clock#time": {
 		// "timezone": "America/New_York",
 		"format": "{:%I:%M %p}",

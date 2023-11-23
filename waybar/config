@@ -12,11 +12,14 @@
 	],
 
 	"modules-center": [
+		"custom/weather",
 		"clock#date",
 		"clock#time"
-	]
+	],
 
-	// "modules-right": [ ],
+	"modules-right": [
+		"hyprland/workspaces"
+	]
 
 	//"group/today": {
 	//	"orientation": "horizontal",
