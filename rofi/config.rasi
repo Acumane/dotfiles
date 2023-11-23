@@ -2,13 +2,16 @@
 
 configuration {
 	show-icons: false;
-	steal-focus: true;
+	/* steal-focus: true; */
 
 	display-drun: "RUN";
 	display-clipboard: "COPY";
 	display-filebrowser: "files";
 	drun-display-format: "{name}";
 	font: "Akkurat 11";
+	eh: 1;
+	dpi: 92;
+	yoffset: -100;
 	
 	filebrowser {
 	/*	directory: "/home";*/

@@ -18,7 +18,7 @@
 
 window {
 	location:       center;
-	width: 450;
+	width: 340;
 	background-color:   @bg;
 }
 
@@ -58,17 +58,19 @@ textbox {
 }
 
 listview {
+	// enabled: false;
+
 	background-color:   transparent;
 
 	margin:     12px 0 0;
-	lines:      8;
+	lines:      4;
 	columns:    2;
 
 	fixed-height: false;
 }
 
 element {
-	padding:        8px 16px;
+	padding:        6px 16px;
 	spacing:        8px;
 	border-radius:  6px;
 }
