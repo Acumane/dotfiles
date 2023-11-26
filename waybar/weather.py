@@ -4,10 +4,10 @@ import json
 import requests
 from datetime import datetime
 
-WEATHER_CODES = {
-    '113': '☀️',
-    '116': '⛅️',
-    '119': '☁️',
+WEATHER_ICONS = {
+    '113': '☀️️',
+    '116': '⛅️️',
+    '119': '️🌥️',
     '122': '☁️',
     '143': '🌫️',
     '176': '🌦️️',
@@ -49,10 +49,21 @@ WEATHER_CODES = {
     '371': '❄️',
     '374': '🌧️️',
     '377': '🌧️️',
-    '386': '⛈️',
-    '389': '🌩️',
+    '386': '🌩️',
+    '389': '⛈️',
     '392': '⛈️',
     '395': '❄️'
+}
+
+MOON_PHASES = {
+    "New Moon": "🌑",
+    "Waxing Crescent": "🌒",
+    "First Quarter": "🌓",
+    "Waxing Gibbous": "🌔",
+    "Full Moon": "🌕",
+    "Waning Gibbous": "🌖",
+    "Last Quarter": "🌗",
+    "Waning Crescent": "🌘",
 }
 
 CHANCE_NAMES = {
@@ -91,25 +102,28 @@ def getChance(prev, cur):
     return ", ".join(chances)
 
 cur = weather['current_condition'][0]
-
-data['text'] = WEATHER_CODES[cur['weatherCode']]+" "+cur['FeelsLikeF']+"°"
-
 day = weather['weather'][0]
 ast = day['astronomy'][0]
+
 now = datetime.now().hour*100 + datetime.now().minute
 sunrise = formatTime(ast['sunrise']); sunset = formatTime(ast['sunset'])
+icon = WEATHER_ICONS[cur['weatherCode']]
+
+if cur['weatherCode'] == "113": # Clear
+    if now > sunset or now < sunrise: icon = MOON_PHASES[ast['moon_phase']]
+data['text'] = icon+" "+cur['FeelsLikeF']+"°"
 
 title ="font='IBM Plex Sans Bold 10.5' color='#E6E0C2'"
 body ="font='IBM Plex Mono Bold 10' color='#BEB9A3'"
 data['tooltip'] = f"<span {title}>{cur['weatherDesc'][0]['value']} {cur['FeelsLikeF']}°</span>\n"
-data['tooltip'] += f"<span {body}>🔺{day['maxtempF']}°    🔻{day['mintempF']}°\n"
+data['tooltip'] += f"<span {body}>🔺{day['maxtempF']}°  🔻{day['mintempF']}°\n"
 wind = cur['windspeedMiles']+'Mph'
 data['tooltip'] += f"  {wind.ljust(len(wind)+1)}💨\n"
 data['tooltip'] += f"  {(cur['humidity']+'%').ljust(len(wind)+1)}💦\n\n</span>"
 data['tooltip'] += f"<span {body}>"
 
 nowH, nowM = divmod(now, 100)
-if sunset > now:
+if sunset > now > sunrise:
     setH, setM = divmod(sunset, 100)
     H = setH - nowH; M = setM - nowM
     data['tooltip'] += f"🌙 in {f"{H}h" if H>0 else ''} {f"{M}m" if M>0 else ''}"

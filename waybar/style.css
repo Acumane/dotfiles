@@ -1,4 +1,5 @@
-@define-color fg #8da8d0;
+@define-color fg1 #8da8d0;
+@define-color fg2 #A4B9D9;
 @define-color bg1 #1F1F28;
 @define-color bg2 #363646;
 @define-color text #E6E0C2;
@@ -17,39 +18,42 @@ window#waybar {
 #workspaces {
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
 	background: @bg1;
-	margin: 5px 0px 20px 0px;
+	margin: 5px 0px 20px 5px;
 	padding: 9px 8px;
 	border-radius: 10px;
-	font-size: 5px;
+	font-size: 3px;
 	border: 1.5px solid @border;
 }
 
 #workspaces button {
-	min-width: 8px;
+	min-width: 5px;
 	background-color: @text;
 	min-height: 0px;
 	padding: 0px;
-	margin: 0.5px 5px;
+	margin: 1px 5px;
 	border-radius: 3px;
-	transition: all 0.3s ease-in-out;
+	border: 1px solid @text;
+	transition: all 0.2s ease-in-out;
 	opacity:0.45;
 }
 
 #workspaces button.active {
-	background-color: @fg;
+	background-color: @fg1;
 	border-radius: 10px;
-	min-width: 20px;
+	min-width: 18px;
 	margin: 0px 6px;
 	opacity:1.0;
+	border: 1px solid @fg2;
 }
 
 #workspaces button:hover:not(.active) {
 	border-radius: 10px;
-	min-width: 15px;
+	min-width: 12px;
 	opacity:0.6;
 }
 
-.modules-center {
+.modules-center,
+.modules-right {
 	background-color: @bg1;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
 	font-size: 13px;
@@ -57,19 +61,19 @@ window#waybar {
 	color: @text;
 	border-radius: 10px;
 	/* padding: 2px 12px 3px 12px; */
-	margin: 3px 15px 18px 0px;
+	margin: 3px 0px 18px 0px;
 	border: 1.5px solid @border;   
 }
 
 #custom-weather {
 	background-color: @bg2;
-	margin: 2px 10px 2px 2px;
-	padding: 0px 10px 2px 10px;
+	margin: 2px 0px 2px 2px;
+	padding: 0px 10px 1px 8px;
 	border-radius: 7.5px;
 }
 
 #clock.date {
-	padding: 2px 0 3px 2px;
+	padding: 2px 0 3px 12px;
 
 }
 
@@ -91,4 +95,20 @@ tooltip label {
 	background-color: @bg1;
 	border: 1.5px solid @border;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
+}
+
+.modules-right{
+	margin: 6px 6px 16px 0px;
+}
+
+#bluetooth {
+	background-color: @bg2;
+	margin: 2px;
+	padding: 0px 8px 1px 8px;
+	border-radius: 7.5px;
+}
+
+#tray {
+	padding: 0px 8px;
+	opacity: 0.75;
 }

@@ -24,7 +24,7 @@
 	"custom/weather": {
 		"tooltip": true,
 		"tooltip-format": "<b>{}</b>",
-		"interval": 3600,
+		"interval": 600,
 		"exec": "weather.py",
 		"return-type": "json"
 	},
@@ -34,5 +34,19 @@
 		"format": "{:%I:%M %p}",
 		"format-alt": "{:%I:%M:%S %p}",
 		"interval": 1
+	},
+
+	"bluetooth": {
+        "format": "",
+        "format-disabled": "",
+        "format-connected": " {num_connections}",
+        "tooltip-format": " {device_alias}",
+        "tooltip-format-connected": "{device_enumerate}",
+        "tooltip-format-enumerate-connected": " {device_alias}"
+    },
+
+	"tray": {
+		"icon-size": 15,
+		"spacing": 4
 	}
 }
