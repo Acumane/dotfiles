@@ -1,0 +1,22 @@
+<div class="center">
+    <div class="crop">
+        <img src="https://ghchart.rshah.org/Acumane" alt="Contributions" style="filter:hue-rotate(25deg)"/>
+    </div>
+</div>
+
+<style>
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75%;
+}
+.crop {
+    overflow: hidden;
+    transform: translate(-15px, -20px) scale(1.1);
+}
+
+.crop img {
+    clip-path: inset(15px 0 0 20px);  /* Top Right Bottom Left */
+}
+</style>

@@ -5,6 +5,18 @@
 @import "tweaks/minimal-ext-menu.css";
 /* @import "tweaks/floating-findbar.css"; */
 
+:root {
+	--gnome-icons-hack-filter: invert(100%) sepia(0.35) hue-rotate(20deg) brightness(1.05) !important;
+	/* --gnome-private-in-content-page-background: white !important; */
+	/* --gnome-window-background: white !important; */
+}
+
+#tabbrowser-tabpanels,
+#tabbrowser-tabpanels[pendingpaint],
+browser {
+	background-color: white !important;
+}
+
 /* Hide UI elements */
 #reader-mode-button, #pageActionButton, #new-tab-button,
 #tabbrowser-arrowscrollbox-periphery, #fxa-toolbar-menu-button,
@@ -16,6 +28,10 @@
 /* #titlebar, #navigator-toolbox {
 	visibility: collapse !important;
 } */
+
+toolbarbutton#alltabs-button {
+	display: none !important;
+}
 
 /* PiP */
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
