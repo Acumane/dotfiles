@@ -1,5 +1,9 @@
 @import "firefox-gnome-theme/userContent.css";
 
+:root {
+	--body-bg-color: rgba(238, 238, 239, 1) !important; /* PDF */
+}
+
 .toolbar {
 	display: none !important;
 }

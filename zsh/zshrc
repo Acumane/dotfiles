@@ -4,12 +4,7 @@ export DOTS="$HOME/dotfiles"
 source $DOTS/zsh/alias.zsh              # aliases
 # source $LOCAL/antigen/antigen.zsh   
 source $HOME/.zplug/init.zsh            # plugin manager
-
-# —— OPTS ———————————————————————
-
 source $DOTS/zsh/var.zsh                # paths & env vars
-export FZF_DEFAULT_OPTS="--height 60% \
---layout=reverse --border -m --bind 'space:toggle'"
 
 # —— PROMPT —————————————————————
 

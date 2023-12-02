@@ -5,12 +5,17 @@
 @import "tweaks/minimal-ext-menu.css";
 /* @import "tweaks/floating-findbar.css"; */
 
+
+/* Icon color fix */
 :root {
 	--gnome-icons-hack-filter: invert(100%) sepia(0.35) hue-rotate(20deg) brightness(1.05) !important;
-	/* --gnome-private-in-content-page-background: white !important; */
-	/* --gnome-window-background: white !important; */
 }
 
+#downloads-button, #downloads-indicator-icon .toolbarbutton-icon {
+	filter: none !important;
+}
+
+/* Default window background */
 #tabbrowser-tabpanels,
 #tabbrowser-tabpanels[pendingpaint],
 browser {
