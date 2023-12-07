@@ -21,3 +21,11 @@ user_pref("firefoxpwa.displayUrlBar", 1);
 user_pref("gfx.webrender.all", false);
 user_pref("media.ffmpeg.vaapi.enabled", true);
 user_pref("media.hardware-video-decoding.force-enabled", true);
+user_pref("extensions.screenshots.disabled", true);
+
+// user_pref("ui.textHighlightBackground", "#EBBEFF");
+user_pref("ui.textHighlightBackground", "#f8CCAF");
+user_pref("ui.textHighlightForeground", "#000");
+user_pref("ui.textSelectAttentionBackground", "#40FFAA");
+user_pref("ui.textSelectAttentionForeground", "#000");
+	

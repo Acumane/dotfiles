@@ -47,6 +47,11 @@
 	top: 45px !important;
 }
 
+/* Declutter terminal panel */
+ul.actions-container[aria-label="Terminal actions"]  {
+	visibility: hidden !important;
+}
+
 /* Title Container */
 .monaco-workbench .part.editor > .content .editor-group-container > .title > .tabs-and-actions-container {
 	display: flex;

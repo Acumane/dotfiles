@@ -1,9 +1,9 @@
 @import "firefox-gnome-theme/userChrome.css";
 @import "tweaks/hide-tabs-scrollbuttons.css";
 /* @import "tweaks/prevent-tab-overflow.css"; */
-@import "tweaks/findbar-on-top.css";
+/* @import "tweaks/findbar-on-top.css"; */
+@import "tweaks/floating-findbar.css";
 @import "tweaks/minimal-ext-menu.css";
-/* @import "tweaks/floating-findbar.css"; */
 
 
 /* Icon color fix */
@@ -40,7 +40,13 @@ toolbarbutton#alltabs-button {
 
 /* PiP */
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
-	button#seekForward, button#seekBackward  {
-		display: none !important;
-	}
+	div.controls-bottom-lower { display: none !important; }
+}
+
+label#userContext-label { /* Container label */
+	display: none;
+}
+
+.identity-icon-circle {
+	height: 12px !important;
 }

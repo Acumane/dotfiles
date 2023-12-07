@@ -1,0 +1,74 @@
+/* Inspired by MrOtherGuy/firefox-csshacks */
+
+findbar {
+	order: -1;
+	margin-bottom: -47px;
+	position: relative;
+	border-top: none !important;
+	padding: 0 !important;
+	transition: transform 100ms ease-out !important;
+	background: none !important;
+	pointer-events: none;
+	z-index: 1;
+	white-space: nowrap;
+}
+
+findbar[hidden]{ transform: translateY(-45px); }
+
+findbar > .findbar-container {
+	background-color: #1F1F28 !important;
+	pointer-events: auto;
+	border-radius: 0 0 9px 9px;
+	margin-inline: 15px !important;
+	overflow-inline: visible !important;
+	border: 1px solid var(--chrome-content-separator-color);
+	border-top: none !important;
+	padding-left: 10px !important;
+}
+
+findbar > .findbar-container:-moz-window-inactive {
+	background-color: var(--gnome-view-background) !important;
+}
+
+html|input.findbar-textbox { width: 12em; }
+
+hbox.findbar-container checkbox.findbar-match-diacritics,
+hbox.findbar-container checkbox.findbar-highlight {
+	display: none;
+}
+
+/* hbox.findbar-container checkbox.tabbable {
+	display:none;
+} */
+
+.checkbox-label { display: none; /* font-size: 0; */ }
+
+/* label.checkbox-label span.accesskey {
+	font-size: initial;
+} */
+
+.found-matches { margin-right: 0 !important; }
+
+.findbar-find-status {
+	display: flex;
+	overflow: hidden;
+	margin-inline-start: 0 !important;
+	text-overflow: ellipsis;
+	flex-grow: 1;
+}
+
+.findbar-find-status[status="notfound"] {
+	margin-inline-start: 12px !important;
+}
+
+.findbar-closebutton {
+	display: none;
+}
+
+/* findbar > .findbar-container > hbox{ margin: 1px 0 } */
+
+findbar::after {
+	content:"";
+	display: flex;
+	flex-grow: 100;
+} 
