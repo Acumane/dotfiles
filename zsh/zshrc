@@ -2,8 +2,7 @@ export HOME="/home/bren"                # explicit (root)
 export DOTS="$HOME/dotfiles"
 
 source $DOTS/zsh/alias.zsh              # aliases
-# source $LOCAL/antigen/antigen.zsh   
-source $HOME/.zplug/init.zsh            # plugin manager
+source $HOME/.zcomet/bin/zcomet.zsh     # plugin manager
 source $DOTS/zsh/var.zsh                # paths & env vars
 
 # —— PROMPT —————————————————————
@@ -11,36 +10,29 @@ source $DOTS/zsh/var.zsh                # paths & env vars
 PROMPT="%n %F{245}›%f "
 RPROMPT='%F{240}%2~%f'
 
-# —— KEYS ———————————————————————
-
-bindkey '^[[1;5C' forward-word
-bindkey '^[[1;5D' backward-word
-bindkey '^H' backward-kill-word
-bindkey -s '^o' '^usudo nvim $(fzf)\n'
-bindkey -s '^r' '^usource $HOME/.zshrc\n'
-bindkey '^[h' fzf-history-widget
-bindkey '^[F' fzf-cd-widget
-bindkey '^[f' fzf-file-widget
-
-
-
 # —— EXTS ———————————————————————
 
-# using oh-my-zsh; bundle fzf
-# bundle Acumane/zsh-options
-# bundle zsh-users/zsh-autosuggestions
-# bundle zsh-users/zsh-syntax-highlighting
-# bundle jeffreytse/zsh-vi-mode
+load ohmyzsh plugins/fzf
+load ohmyzsh plugins/sudo
+load ohmyzsh plugins/dirhistory
 
-# antigen apply
+load Aloxaf/fzf-tab
+load Acumane/zsh-options
+load zsh-users/zsh-syntax-highlighting
+load zsh-users/zsh-autosuggestions
 
-plug "plugins/fzf", from:oh-my-zsh
-plug "plugins/sudo", from:oh-my-zsh
-plug "plugins/dirhistory", from:oh-my-zsh
-plug "Aloxaf/fzf-tab"
-plug "Acumane/zsh-options"
-plug "zsh-users/zsh-autosuggestions"
-plug "zsh-users/zsh-syntax-highlighting"
-# plug "jeffreytse/zsh-vi-mode"
+zcomet compinit
 
-plug load
+# —— KEYS ———————————————————————
+
+bindkey '^[[1;5C' forward-word          # power-navigation
+bindkey '^[[1;5D' backward-word
+bindkey '^[[3;2~' backward-kill-word    # keyd: S-bs -> S-del (compatability)
+bindkey '^[h' hist
+bindkey '^[s' search
+bindkey '^f'  where
+bindkey '^[f' open
+bindkey '^[F' dir
+bindkey '^[[3;3~' kill
+bindkey '^[^?' clear-screen             # clear everything but active
+bindkey -s '^r' '^Ureload^M'
