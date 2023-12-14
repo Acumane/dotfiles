@@ -1,4 +1,10 @@
+# /etc/zshenv: system-wide .zshenv file
+
 # —— VARS ———————————————————————
+
+export HOME="/home/bren"
+export DOTS="$HOME/dotfiles"
+export ZDOTDIR="$HOME/.config/zsh"
 
 export CACHE="$HOME/.cache"
 export CONFIG="$HOME/.config"
@@ -20,12 +26,18 @@ export PATH=$PATH:"$HOME/.spicetify"
 export MODULAR_HOME="$HOME/.modular"
 export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
 
+export BAT_THEME="base16"
+export LS_COLORS="$(vivid generate iceberg-dark)"
+export LS_COLORS="${LS_COLORS}:di=01;37:*.py=01;32:ln=04:*.md=36:ex=0:"
+export FZF_DEFAULT_COMMAND="fd -L --type f"
 export FZF_DEFAULT_OPTS="
---height=20 --info=inline-right --exit-0 --select-1 --color "hl+:-1:reverse"
---preview-window '70%' --layout=reverse --pointer=█ --marker=▍
+--height=20 --info=inline-right --exit-0 --select-1 --color "hl+:-1:reverse" --ansi
+--preview-window='top,40%' --layout=reverse --prompt='› ' --pointer=█ --marker=▍
 --bind 'shift-delete:backward-kill-word'
 --bind 'C:execute-silent(wl-copy "{+}" --trim-newline)'
---bind 'alt-p:change-preview-window(hidden|right)'
+--bind 'alt-p:change-preview-window(hidden|top)'
 --bind 'space:toggle'"
+export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 
+export _ZO_RESOLVE_SYMLINKS=1 
 export HSA_OVERRIDE_GFX_VERSION=10.3.0

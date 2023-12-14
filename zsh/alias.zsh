@@ -1,12 +1,13 @@
 # —— ALIASES ————————————————————
 
-alias reload="source $DOTS/zsh/zshrc"
+alias reload="exec zsh"
 alias bundle="antigen bundle"
 alias using="antigen use"
 alias load="zcomet load"
 
-alias ls="ls -CAF --color=auto"
-alias la="la -lAF --color=auto"
+alias ls="eza -F --icons" 
+alias la="eza -AF --icons"
+alias ld="eza -AFlm -T --level=2 --icons"
 alias cp="cp -r"
 alias rm="rm -r"
 alias rn="mv"
@@ -53,6 +54,10 @@ alias f='rg -i'
 alias F='rg -i -n --context=1'
 alias re='perl -pe'
 alias p='bat --color=always'
+alias pi="kitten icat"
+type() {
+  command file --mime-type "$1" | awk '{print $NF}'
+}
 
 alias ..='cd ..'
 alias ...='cd ../../../'
@@ -70,7 +75,10 @@ zshaddhistory() { whence ${${(z)1}[1]} > /dev/null || return 1 }
 # —— WIDGETS ————————————————————
 
 open() {
-  IFS=$'\n' files=($(fzf -m --query="$BUFFER" --preview 'bat -n --color=always {}' </dev/tty))
+  files=($(fd -L --type=f --color=always | fzf -m --ansi --query="$BUFFER" \
+    --bind='alt-v:reload(fd -LH --type=f --exclude='.git' --max-depth=4 --color=always)' \
+    --preview 'bat -n --color=always {}' ))
+    # --bind='del:execute(rm {})'
   for file in "${files[@]}"; do
     [[ -n "$file" ]] && xdg-open "$file" || return 1
   done
@@ -83,7 +91,7 @@ search() {
   files=($(rga -i --max-count=1 --color=always --line-number --no-heading "$BUFFER" |
     perl -pe 's/([^:]+:[^:]+)(.*)/$1/' | perl -pe 's/\[35m//' |
     fzf --ansi -m --delimiter : \
-        --preview 'bat -n --color=always {1} --highlight-line {2}' --preview-window 'top,40%,+{2}/2'))
+        --preview 'bat -n --color=always {1} --highlight-line {2}' --preview-window '+{2}/2'))
   for file in "${files[@]}"; do
     [[ -n "$file" ]] && xdg-open "$file" || return 1
   done
@@ -113,8 +121,9 @@ where() {
 zle -N where
 
 dir() {
-  dir=$(find -L . -mindepth 1 -path '*/.*' -prune -o -type d -print 2> /dev/null |
-  fzf --query="$BUFFER") && cd "$dir"
+  dir=$(fd -L --type d . | fzf --query="$BUFFER" \
+    --bind='alt-v:reload(fd -LH --type=d --exclude='.git' --max-depth=4)' \
+    --preview 'eza --icons -AF --color=always {}' --preview-window='30%') && g "$dir"
   zle reset-prompt
 }
 zle -N dir

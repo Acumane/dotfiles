@@ -1,36 +1,43 @@
-export HOME="/home/bren"                # explicit (root)
-export DOTS="$HOME/dotfiles"
 
+source $ZDOTDIR/init.zsh                # setopts
 source $DOTS/zsh/alias.zsh              # aliases
-source $HOME/.zcomet/bin/zcomet.zsh     # plugin manager
-source $DOTS/zsh/var.zsh                # paths & env vars
+source $DOTS/zsh/zshenv                 # env vars (resource)
+source $ZDOTDIR/.zcomet/bin/zcomet.zsh  # plugin manager
 
 # —— PROMPT —————————————————————
 
-PROMPT="%n %F{245}›%f "
-RPROMPT='%F{240}%2~%f'
+if [[ $EUID -eq 0 ]]; then PROMPT="%F{203}»%f " # root
+else PROMPT="%F{246}›%f "
+fi
+
+RPROMPT=' %F{240}%2~%f'
+
 
 # —— EXTS ———————————————————————
 
-load ohmyzsh plugins/fzf
 load ohmyzsh plugins/sudo
 load ohmyzsh plugins/dirhistory
 
 load Aloxaf/fzf-tab
-load Acumane/zsh-options
+load zsh-users/zsh-completions
+load RobSis/zsh-completion-generator
+# load marlonrichert/zsh-autocomplete
 load zsh-users/zsh-syntax-highlighting
+# load zdharma-continuum/fast-syntax-highlighting
 load zsh-users/zsh-autosuggestions
 
+eval "$(zoxide init zsh --cmd g)"
 zcomet compinit
 
 # —— KEYS ———————————————————————
 
 bindkey '^[[1;5C' forward-word          # power-navigation
 bindkey '^[[1;5D' backward-word
-bindkey '^[[3;2~' backward-kill-word    # keyd: S-bs -> S-del (compatability)
+bindkey '^[[3;2~' backward-kill-word    # keyd: S-bs -> S-del (compatibility)
+bindkey -s '^[e' '^Ufm^M'
 bindkey '^[h' hist
 bindkey '^[s' search
-bindkey '^f'  where
+bindkey '^[?' where
 bindkey '^[f' open
 bindkey '^[F' dir
 bindkey '^[[3;3~' kill
