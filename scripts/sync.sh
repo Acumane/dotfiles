@@ -3,6 +3,6 @@ do
   dir=$(dirname "$path")
   file=$(basename "$path")
   cd "$dir" || exit
-  python -m spotdl sync "$file" --preload --thread 8 --scan-for-songs --overwrite skip --dont-filter-results 
+  spotdl sync "$file" --preload --thread 8 --scan-for-songs --overwrite skip --dont-filter-results 
   cd .. || exit
 done
