@@ -2,7 +2,9 @@
 
 import json
 import requests
+from os import path
 from datetime import datetime
+from subprocess import getoutput as run
 
 WEATHER_ICONS = {
     '113': '☀️️',
@@ -77,9 +79,19 @@ CHANCE_NAMES = {
     "chanceofwindy": "wind"
 }
 
-data = {}
+data, weather = {}, {}
+CACHE = "/tmp/wttr.json"
 
-weather = requests.get("https://wttr.in/?format=j1").json()
+if path.isfile(CACHE):    
+    modified = datetime.fromtimestamp(path.getmtime(CACHE))
+    now = datetime.today()
+    ago = (now - modified).seconds
+    if ago > 600:
+        weather = requests.get("https://wttr.in/?format=j1").json()
+        with open(CACHE, 'w') as f: json.dump(weather, f, indent = 4)
+    else:
+        # run("notify-send 'Loaded from cache'")
+        with open(CACHE, 'r') as f: weather = json.load(f)
 
 def formatTime(time):
     if time[-1:] == "M":
