@@ -33,7 +33,7 @@ alias ping='ping -c 5'
 alias root="sudo -s"
 alias kernel="uname -r"
 alias ip='hostname -I'
-alias speed='speedtest-cli --simple'
+alias speed='fast -u --single-line'
 alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
 alias clock="darshellclock"
 
@@ -46,12 +46,13 @@ alias py="python"
 alias app="sudo dnf5"
 alias file="nautilus"
 alias fm="ranger"
+alias mon="zfxtop"
 alias v="nvim"
 alias c="code"
 
 alias keys="showkey -a"
 alias f='rg -i'
-alias F='rg -i -n --context=1'
+alias F='rg -i -n --context=2'
 alias re='perl -pe'
 alias p='bat --color=always'
 alias pi="kitten icat"
@@ -75,12 +76,12 @@ zshaddhistory() { whence ${${(z)1}[1]} > /dev/null || return 1 }
 # —— WIDGETS ————————————————————
 
 open() {
-  files=($(fd -L --type=f --color=always | fzf -m --ansi --query="$BUFFER" \
-    --bind='alt-v:reload(fd -LH --type=f --exclude='.git' --max-depth=4 --color=always)' \
-    --preview 'bat -n --color=always {}' ))
-    # --bind='del:execute(rm {})'
+  IFS=$'\n'; setopt LOCAL_OPTIONS NO_MONITOR
+  files=($(fd -0L --type f --color=always | fzf -m --read0 --query="$BUFFER" \
+    --bind='alt-v:reload(fd -0LH --type=f --exclude=.git --max-depth=4 --color=never)' \
+    --preview 'bat -n --color=always {}'))
   for file in "${files[@]}"; do
-    [[ -n "$file" ]] && xdg-open "$file" || return 1
+    xdg-open "$file" >/dev/null 2>&1 & disown
   done
   zle reset-prompt
 }
@@ -88,12 +89,13 @@ zle -N open
 
 search() {
   if [ -z "$BUFFER" ]; then return 1; fi
-  files=($(rga -i --max-count=1 --color=always --line-number --no-heading "$BUFFER" |
-    perl -pe 's/([^:]+:[^:]+)(.*)/$1/' | perl -pe 's/\[35m//' |
-    fzf --ansi -m --delimiter : \
-        --preview 'bat -n --color=always {1} --highlight-line {2}' --preview-window '+{2}/2'))
+  IFS=$'\n'; setopt LOCAL_OPTIONS NO_MONITOR
+  files=($(rga -i --no-messages --max-count=1 --line-number --field-match-separator '\x00' --no-heading "$BUFFER" |
+    perl -pe 's/(.+)\x00(\d+)\x00(.*)/`echo "$1" | lscolors | tr -d "\n"` . ":" . $2/e' |
+    fzf -m --delimiter : --preview 'bat -n --color=always {1} --highlight-line {2}' --preview-window '+{2}/2'))
   for file in "${files[@]}"; do
-    [[ -n "$file" ]] && xdg-open "$file" || return 1
+    name=$(echo "$file" | perl -pe 's/(.+):\d+$/$1/')
+    xdg-open "$name" >/dev/null 2>&1 & disown
   done
   zle reset-prompt
 }
@@ -123,7 +125,7 @@ zle -N where
 dir() {
   dir=$(fd -L --type d . | fzf --query="$BUFFER" \
     --bind='alt-v:reload(fd -LH --type=d --exclude='.git' --max-depth=4)' \
-    --preview 'eza --icons -AF --color=always {}' --preview-window='30%') && g "$dir"
+    --preview 'eza --icons -AF --color=always {}' --preview-window='30%') && cd "$dir"
   zle reset-prompt
 }
 zle -N dir
