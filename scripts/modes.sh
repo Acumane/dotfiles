@@ -19,7 +19,7 @@ if [[ "$GAME" = 1 ]]; then
 
     [[ "$1" == "-k" ]] && notify-send "Keys switched to game mode" && exit
 
-    liquidctl --match hydro set logo color fixed ff0000
+    liquidctl --match h80i set logo color fixed ff0000 --alert-threshold 75
     openrgb -p game.orp
     notify-send "Switched to game mode"
 elif [[ "$GAME" = 0 ]]; then
@@ -33,7 +33,7 @@ elif [[ "$GAME" = 0 ]]; then
     hyprctl reload
     [[ "$1" == "-k" ]] && notify-send "Keys switched to main mode" && exit
 
-    liquidctl --match hydro set logo color fixed 75a6ff
+    liquidctl --match h80i set logo color fixed 75a6ff --alert-threshold 60
     openrgb -p main.orp
     notify-send "Switched to main mode"
 fi

@@ -8,32 +8,31 @@ Window swapper:
 """
 from subprocess import getoutput as run
 from sys import argv as args
-import json
-import re
+from json import loads as load
+from re import search
 
-windows = json.loads(run("hyprctl clients -j"))
-active = json.loads(run("hyprctl activewindow -j"))
-workspace = json.loads(run("hyprctl activeworkspace -j"))
+windows = load(run("hyprctl clients -j"))
+active = load(run("hyprctl activewindow -j"))
+workspace = load(run("hyprctl activeworkspace -j"))
 nWin = workspace["windows"] - (len(active["grouped"])-1 if active["grouped"] else 0)
 if nWin == 0: exit()
 
-shift = True if re.search("S-", args[1]) else False
-dir = re.search(r"(?:^|[SMAC]-)([uldr])$", args[1])
+shift = True if search("S-", args[1]) else False
+dir = search(r"(?:^|[SMAC]-)([uldr])$", args[1])
 dir = dir.group(1) if dir else ""
 
-# print(active["address"], active["at"])
 if dir == 'u' or dir == 'd': run(f"hyprctl dispatch swapwindow {dir}"); exit()
 for w in windows:
     if shift or nWin == 1: break
     if w["address"] in active["grouped"] or w["pid"] == -1 \
-    or w["workspace"]["id"] != active["workspace"]["id"]: continue
-    # print(w["address"], w["at"])
+    or w["workspace"]["id"] != active["workspace"]["id"] \
+    or w["floating"] == 1: continue
 
     if dir == 'l' and active["at"][0] > w["at"][0] \
     or dir == 'r' and active["at"][0] < w["at"][0]: 
         run(f"hyprctl dispatch swapwindow {dir}"); exit()
 
-silent = "" # silent = "silent" if nWin > 1 else ""
+silent = "silent" if nWin > 1 else ""
 run(f"hyprctl dispatch denywindowfromgroup on")
 if dir == 'l' and active["workspace"]["id"] > 1:
     run(f"hyprctl dispatch movetoworkspace{silent} -1")
