@@ -1,7 +1,6 @@
 @import "firefox-gnome-theme/userChrome.css";
 @import "tweaks/hide-tabs-scrollbuttons.css";
 /* @import "tweaks/prevent-tab-overflow.css"; */
-/* @import "tweaks/findbar-on-top.css"; */
 @import "tweaks/floating-findbar.css";
 @import "tweaks/minimal-ext-menu.css";
 
@@ -33,6 +32,12 @@ browser {
 /* #titlebar, #navigator-toolbox {
 	visibility: collapse !important;
 } */
+
+/* Hardcode unfocused colors (doesn't inherit theme) */
+:root:-moz-window-inactive {
+	--gnome-tabbar-tab-active-background: #3A3A46 !important; 
+	--gnome-headerbar-background: #2A2A37 !important;
+}
 
 toolbarbutton#alltabs-button {
 	display: none !important;

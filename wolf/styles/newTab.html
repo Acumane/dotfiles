@@ -1,7 +1,5 @@
 <div class="center">
-    <div class="crop">
-        <img src="https://ghchart.rshah.org/Acumane" alt="Contributions" style="filter:hue-rotate(25deg)"/>
-    </div>
+    <img src="https://ghchart.rshah.org/Acumane" alt="Acumane"/>
 </div>
 
 <style>
@@ -11,12 +9,12 @@
     justify-content: center;
     height: 75%;
 }
-.crop {
-    overflow: hidden;
-    transform: translate(-15px, -20px) scale(1.1);
-}
 
-.crop img {
-    clip-path: inset(15px 0 0 20px);  /* Top Right Bottom Left */
+img {
+    transform: translate(-15px, -20px) scale(1.1);
+    clip-path: inset(15px 0 0 20px);
+    filter: sepia(0.4) hue-rotate(35deg);
+    /* filter:  invert(90%) sepia(1) hue-rotate(-220deg); */
+
 }
 </style>

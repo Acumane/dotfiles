@@ -1,6 +1,7 @@
 {
 	"layer": "top",
-	"margin-bottom": -40,
+	// "passthrough": true,
+	"margin-bottom": -36,
 	"spacing": 0,
 
 	"include": ["~/dotfiles/waybar/modules.json"],
