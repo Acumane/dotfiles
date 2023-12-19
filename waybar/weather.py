@@ -79,19 +79,16 @@ CHANCE_NAMES = {
     "chanceofwindy": "wind"
 }
 
-data, weather = {}, {}
 CACHE = "/tmp/wttr.json"
 
 if path.isfile(CACHE):    
     modified = datetime.fromtimestamp(path.getmtime(CACHE))
-    now = datetime.today()
-    ago = (now - modified).seconds
-    if ago > 600:
-        weather = requests.get("https://wttr.in/?format=j1").json()
-        with open(CACHE, 'w') as f: json.dump(weather, f, indent = 4)
-    else:
-        # run("notify-send 'Loaded from cache'")
-        with open(CACHE, 'r') as f: weather = json.load(f)
+    ago = (datetime.today() - modified).seconds
+    if ago < 600:
+        print(open(CACHE, "r").read()); exit()
+
+weather = requests.get("https://wttr.in/?format=j1").json()
+data = {}
 
 def formatTime(time):
     if time[-1:] == "M":
@@ -161,5 +158,5 @@ for hour in day['hourly']:
 
 data['tooltip'] += f"</span>"
 
-
+with open(CACHE, 'w') as f: json.dump(data, f)
 print(json.dumps(data))
