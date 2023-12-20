@@ -23,7 +23,7 @@ dir = dir.group(1) if dir else ""
 
 if dir == 'u' or dir == 'd': run(f"hyprctl dispatch swapwindow {dir}"); exit()
 for w in windows:
-    if shift or nWin == 1: break
+    if shift or nWin == 1 or active["floating"]: break
     if w["address"] in active["grouped"] or w["pid"] == -1 \
     or w["workspace"]["id"] != active["workspace"]["id"] \
     or w["floating"] == 1: continue
@@ -32,7 +32,8 @@ for w in windows:
     or dir == 'r' and active["at"][0] < w["at"][0]: 
         run(f"hyprctl dispatch swapwindow {dir}"); exit()
 
-silent = "silent" if nWin > 1 else ""
+# silent = "silent" if nWin > 1 else ""
+silent = ""
 run(f"hyprctl dispatch denywindowfromgroup on")
 if dir == 'l' and active["workspace"]["id"] > 1:
     run(f"hyprctl dispatch movetoworkspace{silent} -1")

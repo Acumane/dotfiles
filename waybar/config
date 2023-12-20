@@ -16,8 +16,8 @@
 		"clock#time"
 	],
 
-	"modules-right": [
-		"tray",
-		"bluetooth"
-	]
+	// "modules-right": [
+	// 	"tray",
+	// 	"bluetooth"
+	// ]
 }

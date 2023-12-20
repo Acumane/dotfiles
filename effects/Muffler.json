@@ -53,7 +53,7 @@
             "mode": "RLC (BT)",
             "output-gain": 2.0,
             "quality": 0.0,
-            "slope": "x3",
+            "slope": "x2",
             "type": "Low-pass",
             "width": 4.0
         },

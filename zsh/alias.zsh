@@ -77,8 +77,8 @@ zshaddhistory() { whence ${${(z)1}[1]} > /dev/null || return 1 }
 
 open() {
   IFS=$'\n'; setopt LOCAL_OPTIONS NO_MONITOR
-  files=($(fd -0L --type f --color=always | fzf -m --read0 --query="$BUFFER" \
-    --bind='alt-v:reload(fd -0LH --type=f --exclude=.git --max-depth=4 --color=never)' \
+  files=($(fd -0LI --type f --color=always | fzf -m --read0 --query="$BUFFER" \
+    --bind='alt-v:reload(fd -0LHI --type=f --exclude=.git --max-depth=4 --color=always)' \
     --preview 'bat -n --color=always {}'))
   for file in "${files[@]}"; do
     xdg-open "$file" >/dev/null 2>&1 & disown
@@ -123,8 +123,8 @@ where() {
 zle -N where
 
 dir() {
-  dir=$(fd -L --type d . | fzf --query="$BUFFER" \
-    --bind='alt-v:reload(fd -LH --type=d --exclude='.git' --max-depth=4)' \
+  dir=$(fd -LI --type d . | fzf --query="$BUFFER" \
+    --bind='alt-v:reload(fd -LHI --type=d --exclude='.git' --max-depth=4)' \
     --preview 'eza --icons -AF --color=always {}' --preview-window='30%') && cd "$dir"
   zle reset-prompt
 }
