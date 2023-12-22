@@ -40,9 +40,9 @@ bindkey -s '^[e' '^Ufm^M'
 bindkey '^[h' hist
 bindkey '^[s' search
 bindkey '^[?' where
-bindkey '^[f' open
-bindkey '^[F' dir
-bindkey '^[[3;3~' kill
+bindkey '^[f' opener
+bindkey '^[F' dirs
+bindkey '^[[3;3~' killer
 bindkey -s '^[`' '^Umon^M'
 bindkey '^[^M' completion
 bindkey '^[^?' clear-screen             # clear everything but active

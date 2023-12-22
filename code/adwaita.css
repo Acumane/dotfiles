@@ -43,12 +43,18 @@
 	font-family: Akkurat, Cantarell, Ubuntu, sans-serif;
 }
 
+/* Offset issues */
 .notebookOverlay.notebook-editor.notebook-editor-editable.cell-toolbar-click {
 	top: 45px !important;
 }
+div.sticky-compact {
+	padding-left: 4px !important;
+	transition: padding-left 0s !important;
+}
 
-/* Declutter terminal panel */
-ul.actions-container[aria-label="Terminal actions"]  {
+/* Declutter panel options */
+ul.actions-container[aria-label="Terminal actions"],
+div.custom-view-tree-node-item-resourceLabel div.actions {
 	visibility: hidden !important;
 }
 

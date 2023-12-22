@@ -7,7 +7,7 @@ alias load="zcomet load"
 
 alias ls="eza -F --icons" 
 alias la="eza -AF --icons"
-alias ld="eza -AFlm -T --level=2 --icons"
+alias ld="eza -AFlm -T --level=1 --icons"
 alias cp="cp -r"
 alias rm="rm -r"
 alias rn="mv"
@@ -19,7 +19,8 @@ alias mkd="mkdir"
 alias sys="systemctl"
 alias suspend="systemctl suspend"
 alias hibernate="systemctl hibernate"
-alias lock="xdg-screensaver lock"
+alias logout="hyprctl dispatch exit"
+alias lock="$DOTS/scripts/idle.sh $MON -f"
 alias bios="systemctl reboot --firmware-setup"
 
 
@@ -31,8 +32,19 @@ zip() {
 #     unzip
 alias ping='ping -c 5'
 alias root="sudo -s"
-alias kernel="uname -r"
-alias ip='hostname -I'
+alias kernel=" uname -r"
+alias user="echo $USER"
+alias net="nmcli"
+ip() { # 
+  case "${(L)1}" in
+    "public"  | "-P") curl "http://ifconfig.me" ;;
+    "private"  | "-p") hostname -I ;;
+    "host" | "-h") hostname ;;
+    "mac"  | "-m") ifconfig | grep ether | awk '{print $2}' ;;
+    *) hostname -I
+  esac
+}
+
 alias speed='fast -u --single-line'
 alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
 alias clock="darshellclock"
@@ -75,7 +87,7 @@ zshaddhistory() { whence ${${(z)1}[1]} > /dev/null || return 1 }
 
 # —— WIDGETS ————————————————————
 
-open() {
+opener() {
   IFS=$'\n'; setopt LOCAL_OPTIONS NO_MONITOR
   files=($(fd -0LI --type f --color=always | fzf -m --read0 --query="$BUFFER" \
     --bind='alt-v:reload(fd -0LHI --type=f --exclude=.git --max-depth=4 --color=always)' \
@@ -85,7 +97,7 @@ open() {
   done
   zle reset-prompt
 }
-zle -N open
+zle -N opener
 
 search() {
   if [ -z "$BUFFER" ]; then return 1; fi
@@ -101,14 +113,14 @@ search() {
 }
 zle -N search
 
-kill() {
+killer() {
   pids=$(ps -u ${UID:-$(id -u)} -o pid,comm,cmd \
   | fzf -m --query="$BUFFER" --header-lines=1 | awk '{print $1}')
 
   if [ -n "$pids" ]; then echo $pids | xargs -r kill -${1:-9}; fi
   zle reset-prompt
 }
-zle -N kill
+zle -N killer
 
 hist() {
   BUFFER=$(history 1 | cut -f4- -d' ' | fzf +s --tac --query="$BUFFER")
@@ -122,10 +134,10 @@ where() {
 }
 zle -N where
 
-dir() {
+dirs() {
   dir=$(fd -LI --type d . | fzf --query="$BUFFER" \
     --bind='alt-v:reload(fd -LHI --type=d --exclude='.git' --max-depth=4)' \
     --preview 'eza --icons -AF --color=always {}' --preview-window='30%') && cd "$dir"
   zle reset-prompt
 }
-zle -N dir
+zle -N dirs

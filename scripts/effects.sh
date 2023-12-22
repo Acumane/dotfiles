@@ -4,7 +4,7 @@ STORE="/tmp/effects"
 load() {
     easyeffects -l $1
     echo $1 > $STORE
-    play "/home/bren/audio/sounds/mode.wav" &
+    play "$HOME/audio/sounds/mode.wav" &
     notify-send "Audio profile switched to ${(L)1}"
 }
 

@@ -13,6 +13,7 @@ export LOCAL="$HOME/.local/share/"
 export WORDCHARS=""
 export ZSHZ_OWNER="bren"
 export PROMPT_EOL_MARK=""
+export MON="dev:/dev/i2c-11"
 export EDITOR="code"
 
 export PATH=$PATH:"$HOME/.local/bin"

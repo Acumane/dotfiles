@@ -1,10 +1,15 @@
 SWAP=("capslock = overload(control, esc)" "capslock = C-")
 GAME=$(hyprctl getoption animations:enabled | awk 'NR==2{print $2}')
-KEYD="/home/bren/dotfiles/keyd/global.conf"
+KEYD="$HOME/dotfiles/keyd/global.conf"
 # -k          keys-only mode
 # -k reload   reload keys only (keyd)
 
-[ "$2" == "reload" ] && cp "$KEYD" /etc/keyd/default.conf && keyd reload && notify-send "keyd reloaded" && exit
+if [ "$2" == "reload" ]; then
+    cp "$KEYD" /etc/keyd/default.conf && keyd reload
+    play "$HOME/audio/sounds/tone.flac" &
+    notify-send "keyd reloaded"
+    exit
+fi
 
 if [[ "$GAME" = 1 ]]; then
     # ratbagctl "G900" profile active set 1
