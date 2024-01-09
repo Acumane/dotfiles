@@ -6,7 +6,7 @@ alias using="antigen use"
 alias load="zcomet load"
 
 alias ls="eza -F --icons" 
-alias la="eza -AF --icons"
+alias la="eza -AF --icons -s modified"
 alias ld="eza -AFlm -T --level=1 --icons"
 alias cp="cp -r"
 alias rm="rm -r"
@@ -48,6 +48,7 @@ ip() { #
 alias speed='fast -u --single-line'
 alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
 alias clock="darshellclock"
+alias batt="acpi -b | grep '0:' | cut -d' ' -f 3-"
 
 alias dl="wget -N -P ~/Downloads"
 alias dlv="yt-dlp -P ~/Downloads -f mp4"
@@ -66,7 +67,7 @@ alias keys="showkey -a"
 alias f='rg -i'
 alias F='rg -i -n --context=2'
 alias re='perl -pe'
-alias p='bat --color=always'
+alias p='bat --style=numbers,changes,grid --color=always --tabs=2'
 alias pi="kitten icat"
 type() {
   command file --mime-type "$1" | awk '{print $NF}'
