@@ -10,8 +10,9 @@ configuration {
 	drun-display-format: "{name}";
 	font: "Akkurat 11";
 	eh: 1;
-	dpi: 92;
-	yoffset: -100;
+	/* dpi: 92; */
+	/* yoffset: -100; */
+	xoffset: 650;
 	
 	filebrowser {
 	/*	directory: "/home";*/
