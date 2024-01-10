@@ -8,4 +8,4 @@ do
   spotdl sync "$file" --preload --thread 8 --scan-for-songs --overwrite skip --dont-filter-results 
   cd .. || exit
 done
-notify-send "Spotify" "Local sync complete"
+notify-send -u low "Spotify" "Local sync complete"

@@ -1,0 +1,3 @@
+#! /bin/bash
+
+play $HOME/audio/sounds/tone.flac &> /dev/null

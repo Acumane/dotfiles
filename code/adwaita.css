@@ -43,6 +43,11 @@
 	font-family: Akkurat, Cantarell, Ubuntu, sans-serif;
 }
 
+/* Hide "Custom CSS" icon in status bar */
+div#be5invis\.vscode-custom-css {
+	visibility: hidden !important;
+}
+
 /* Offset issues */
 .notebookOverlay.notebook-editor.notebook-editor-editable.cell-toolbar-click {
 	top: 45px !important;

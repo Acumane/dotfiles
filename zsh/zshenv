@@ -15,6 +15,7 @@ export ZSHZ_OWNER="bren"
 export PROMPT_EOL_MARK=""
 export MON="dev:/dev/i2c-11"
 export EDITOR="code"
+export SUDO_PROMPT="? "
 
 export PATH=$PATH:"$HOME/.local/bin"
 export PATH=$PATH:"$HOME/.cargo/bin"

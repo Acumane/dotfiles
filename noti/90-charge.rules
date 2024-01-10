@@ -1,0 +1,5 @@
+SUBSYSTEM=="power_supply", ACTION=="change", KERNEL=="ADP1", \
+ENV{POWER_SUPPLY_ONLINE}=="1", ENV{POWER}="on", \
+IMPORT{program}="/usr/bin/xpub", \
+RUN+="/bin/su $env{XUSER} -c 'notify-send \
+-u low -i battery-good-charging-symbolic \"Charging\" \"Fully charged in ?\"'"

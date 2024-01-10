@@ -3,7 +3,7 @@ source $ZDOTDIR/init.zsh                # setopts
 source $DOTS/zsh/alias.zsh              # aliases
 source $DOTS/zsh/zshenv                 # env vars (resource)
 source $ZDOTDIR/.zcomet/bin/zcomet.zsh  # plugin manager
-source $ZDOTDIR/codex.zsh               # Codex
+# source $ZDOTDIR/codex.zsh               # Codex
 
 # —— PROMPT —————————————————————
 
@@ -44,6 +44,6 @@ bindkey '^[f' opener
 bindkey '^[F' dirs
 bindkey '^[[3;3~' killer
 bindkey -s '^[`' '^Umon^M'
-bindkey '^[^M' completion
+# bindkey '^[^M' completion
 bindkey '^[^?' clear-screen             # clear everything but active
 bindkey -s '^r' '^Ureload^M'

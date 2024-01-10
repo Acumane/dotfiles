@@ -25,17 +25,15 @@ alias bios="systemctl reboot --firmware-setup"
 
 
 alias tar='tar -czvf'
-alias untar='\tar -xvf' 
-zip() {
-  command zip -r "$1.zip" "$1"/
-}
+untar() { \tar -xvf "$1" --one-top-level="$2"; }
+zip() { command zip -r "$1.zip" "$1"/; }
 #     unzip
 alias ping='ping -c 5'
 alias root="sudo -s"
 alias kernel=" uname -r"
 alias user="echo $USER"
 alias net="nmcli"
-ip() { # 
+ip() {
   case "${(L)1}" in
     "public"  | "-P") curl "http://ifconfig.me" ;;
     "private"  | "-p") hostname -I ;;
@@ -46,13 +44,13 @@ ip() { #
 }
 
 alias speed='fast -u --single-line'
-alias weather="curl 'wttr.in/Troy,⠀NY?0Fqu'"
 alias clock="darshellclock"
 alias batt="acpi -b | grep '0:' | cut -d' ' -f 3-"
+alias udev="udevadm"
 
-alias dl="wget -N -P ~/Downloads"
-alias dlv="yt-dlp -P ~/Downloads -f mp4"
-alias dla="yt-dlp -P ~/Downloads -x --audio-format mp3"
+alias dl="wget -N -P ~/dl"
+alias dlv="yt-dlp -P ~/dl -f bv"
+alias dla="yt-dlp -P ~/dl -x -f ba"
 
 alias pn="pnpm"
 alias py="python"
@@ -64,18 +62,17 @@ alias v="nvim"
 alias c="code"
 
 alias keys="showkey -a"
-alias f='rg -i'
-alias F='rg -i -n --context=2'
+alias f='rg -iP'
+alias F="grep --color=always --group-separator=$'\n———\n' -C3 -iE"
+# F() {grep --color=always --group-separator=$'\n———\n' -C3 -iE -- "$1" "${@:2}" | less -R; }
+# ighlight() { grep --color -E -- "$1|\$" "${@:2}"; }
 alias re='perl -pe'
 alias p='bat --style=numbers,changes,grid --color=always --tabs=2'
+alias pg='less -R'
 alias pi="kitten icat"
 type() {
   command file --mime-type "$1" | awk '{print $NF}'
 }
-
-alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
 
 alias wc='wc --words'
 alias lc='\wc --lines'
@@ -85,6 +82,26 @@ much() {
 
 # Validate commands* before appending to HISTFILE
 zshaddhistory() { whence ${${(z)1}[1]} > /dev/null || return 1 }
+
+# —— SHORTCUTS ——————————————————
+
+#     ..
+alias ...='cd ../../'
+alias ....='cd ../../../'
+
+alias -g dots/="$DOTS/"
+alias -g dl/="$HOME/dl/"
+alias -g conf/="$HOME/.config/"
+alias -g bin/="/bin/"
+alias -g ubin/="/usr/bin/"
+alias -g lbin/="$HOME/.local/bin/"
+# alias -g ushare/="/usr/share/"
+# alias -g lshare/="$HOME/.local/share/"
+alias -g icons/="/usr/share/icons/"
+alias -g apps/="/usr/share/applications/"
+alias -g udev/="/etc/udev/rules.d/"
+alias -g sys/="/etc/systemd/system"
+alias -g usys/="/etc/systemd/user"
 
 # —— WIDGETS ————————————————————
 
