@@ -1,6 +1,5 @@
-BAR="/home/bren/dotfiles/waybar"
 if ! pgrep -x rofi; then
-    waybar -c "$BAR/config" -s "$BAR/style.css" &
+    pkill -USR1 waybar # show
     case $1 in
         "run") rofi -show drun -normal-window -show-icons & ;;
         "copy") cliphist list | rofi -normal-window -dmenu -display-columns 2 -p "COPY" -theme-str "#listview{lines:6;columns:1;}" | cliphist decode | wl-copy & ;;
@@ -15,4 +14,4 @@ while pgrep -x rofi; do
     sleep 0.2s
 done
 
-pkill waybar
+pkill -USR1 waybar # hide

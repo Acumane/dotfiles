@@ -6,9 +6,9 @@
   notification_limit = 3
   indicate_hidden = yes
 
-  padding = 8
-  horizontal_padding = 10
-  text_icon_padding = 10
+  padding = 10
+  horizontal_padding = 12
+  text_icon_padding = 12
   gap_size = 10
 
   frame_width = 2
