@@ -1,4 +1,9 @@
 #!/bin/bash
+if [ -z "$1" ]; then
+	bluetoothctl devices Connected | rg --color=never -o Buds
+	exit
+fi
+
 ADDR=$(bluetoothctl devices Connected | grep $1 | cut -d ' ' -f 2)
 if [ -z "$ADDR" ]; then
 	ADDR=$(bluetoothctl devices | grep $1 | cut -d ' ' -f 2)
