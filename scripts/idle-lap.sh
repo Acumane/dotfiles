@@ -9,4 +9,11 @@ if [ "$2" = "-f" ]; then
     swaylock --conf="$DOTS/sway/lock.conf" --grace=0 &
     sleep .5s && brillo -O && brillo -S 0% -u 1000000 && blight set 0 &
     swayidle -w timeout 1 '' resume "brillo -I -u 150000 && kill \$(pgrep -n swayidle)"
+    exit
 fi
+
+# Passive: fade (50s), lock (1m30s), backlight off (1m33s), suspend (2m30s)
+swayidle timeout 50 "brillo -O && brillo -S 0% -u 3000000" resume "pkill brillo; brillo -I -u 150000" \
+timeout 90 "swaylock --conf='$DOTS/sway/lock.conf' & ddccontrol -r 0xd6 -w 5 $1" \
+timeout 93 "blight set 0" resume "brillo -I -u 150000" \
+timeout 150 "systemctl suspend" after-resume "brillo -I -u 150000"

@@ -1,0 +1,16 @@
+plugin:
+  executors:
+    sendkey_executor:
+      device_name: 'keyd virtual keyboard'
+swipe:
+  3:
+    up:
+      update:
+        # sendkey: 'BRIGHTNESSUP'
+        # $DOTS/scripts/light.sh
+        command: 'light +3'
+    down:
+      update:
+        # sendkey: 'BRIGHTNESSDOWN'
+        command: 'light -3'
+

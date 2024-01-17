@@ -12,16 +12,16 @@ alias cp="cp -r"
 alias rm="rm -r"
 alias rn="mv"
 alias mk="touch"
-alias mkd="mkdir"
+alias mkd="mkdir -p"
 
-#     reboot
-#     shutdown
+alias reboot="sudo reboot"
+alias shutdown="sudo shutdown now"
 alias sys="systemctl"
 alias suspend="systemctl suspend"
 alias hibernate="systemctl hibernate"
 alias logout="hyprctl dispatch exit"
-alias lock="$DOTS/scripts/idle.sh $MON -f"
-alias bios="systemctl reboot --firmware-setup"
+alias lock="$DOTS/scripts/idle-lap.sh $MON -f"
+alias bios="sudo systemctl reboot --firmware-setup"
 
 
 alias tar='tar -czvf'
@@ -45,7 +45,7 @@ ip() {
 
 alias speed='fast -u --single-line'
 alias clock="darshellclock"
-alias batt="acpi -b | grep '0:' | cut -d' ' -f 3-"
+alias batt="acpi -b | grep '1:' | cut -d' ' -f 3-"
 alias wifi="nmcli dev wifi"
 alias udev="udevadm"
 

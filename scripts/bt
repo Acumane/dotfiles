@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ -z "$1" ]; then
-	bluetoothctl devices Connected | rg --color=never -o Buds
+	bluetoothctl devices Connected | cut -d' ' -f 3-
 	exit
 fi
 

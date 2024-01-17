@@ -1,12 +1,13 @@
 #!/bin/zsh
 
 # Normalize steps +/-(2-22)
+SIZE="${1[2,-1]}"
 CUR=$(brillo -G)
-STEP=$((.2*$CUR+2))
+STEP=$((.05*$SIZE*$CUR+2))
 
 case $1 in
-    "inc" | "up"   | "++")
+    "+"*)
         brillo -A ${STEP%.*} -u 100000 ;;
-    "dec" | "down" | "--")
+    "-"*)
         brillo -U ${STEP%.*} -u 100000
 esac
