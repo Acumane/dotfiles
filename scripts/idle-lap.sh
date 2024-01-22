@@ -8,7 +8,7 @@ if [ "$2" = "-f" ]; then
     ddccontrol -r 0xd6 -w 5 $1 &
     swaylock --conf="$DOTS/sway/lock.conf" --grace=0 &
     sleep .5s && brillo -O && brillo -S 0% -u 1000000 && blight set 0 &
-    swayidle -w timeout 1 '' resume "brillo -I -u 150000 && kill \$(pgrep -n swayidle)"
+    swayidle -w timeout 1 '' resume "brillo -I -u 100000 && kill \$(pgrep -n swayidle)"
     exit
 fi
 

@@ -4,6 +4,7 @@ alias reload="exec zsh"
 alias bundle="antigen bundle"
 alias using="antigen use"
 alias load="zcomet load"
+alias sudo='sudo ' # fix alias w/ sudo
 
 alias ls="eza -F --icons" 
 alias la="eza -AF --icons -s modified"
@@ -57,6 +58,7 @@ alias pn="pnpm"
 alias py="python"
 alias app="sudo dnf5"
 alias copr="sudo dnf copr"
+ver() { dnf list "$1" | grep "$1" | tr -s ' ' | cut -d' ' -f 2; }
 alias files="nautilus"
 alias handle="handlr"
 alias open="handlr open"
@@ -72,8 +74,8 @@ alias F="grep --color=always --group-separator=$'\n———\n' -C3 -iE"
 # ighlight() { grep --color -E -- "$1|\$" "${@:2}"; }
 alias re='perl -pe'
 alias p='bat --style=numbers,changes,grid --color=always --tabs=2'
-alias pg='less -R'
 alias pi="kitten icat"
+alias pg='less -R'
 type() {
   command file --mime-type "$1" | awk '{print $NF}'
 }
@@ -102,10 +104,12 @@ alias -g lbin/="$HOME/.local/bin/"
 alias -g ushare/="/usr/share/"
 alias -g lshare/="$HOME/.local/share/"
 alias -g icons/="/usr/share/icons/"
-alias -g apps/="/usr/share/applications/"
+alias -g desk/="/usr/share/applications/"
 alias -g udev/="/etc/udev/rules.d/"
-alias -g sys/="/etc/systemd/system"
-alias -g usys/="/etc/systemd/user"
+alias -g sys/="/etc/systemd/system/"
+alias -g usys/="/etc/systemd/user/"
+alias -g flat/="/var/lib/flatpak/app/"
+alias -g uflat/="$HOME/.var/app/"
 
 # —— WIDGETS ————————————————————
 
