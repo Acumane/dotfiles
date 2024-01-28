@@ -1,5 +1,7 @@
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("ui.key.menuAccessKeyFocuses", false);
+// user_pref("permissions.default.shortcuts", 2);
+user_pref("findbar.highlightAll", true);
 
 user_pref("svg.context-properties.content.enabled", true);
 user_pref("browser.theme.dark-private-windows", false);
@@ -19,7 +21,7 @@ user_pref("gnomeTheme.bookmarksToolbarUnderTabs", true);
 user_pref("firefoxpwa.enableHidingIconBar", true);
 user_pref("firefoxpwa.displayUrlBar", 1);
 
-user_pref("gfx.webrender.all", false);
+user_pref("gfx.webrender.all", true);
 user_pref("media.ffmpeg.vaapi.enabled", true);
 user_pref("media.hardware-video-decoding.force-enabled", true);
 user_pref("extensions.screenshots.disabled", true);

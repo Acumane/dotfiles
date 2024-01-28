@@ -14,6 +14,9 @@ alias rm="rm -r"
 alias rn="mv"
 alias mk="touch"
 alias mkd="mkdir -p"
+alias ch="entr -p"
+alias first="head -n" 
+alias last="tail -n"
 
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
@@ -76,6 +79,7 @@ alias re='perl -pe'
 alias p='bat --style=numbers,changes,grid --color=always --tabs=2'
 alias pi="kitten icat"
 alias pg='less -R'
+alias pd="pwd"
 type() {
   command file --mime-type "$1" | awk '{print $NF}'
 }

@@ -3,7 +3,7 @@ if ! pgrep -x rofi; then
     case $1 in
         "run") rofi -show drun -normal-window -show-icons & ;;
         "copy") cliphist list | rofi -normal-window -dmenu -display-columns 2 -p "COPY" -theme-str "#listview{lines:6;columns:1;}" | cliphist decode | wl-copy & ;;
-        "cmd") rofi -normal-window -dmenu -p "CMD" -theme-str "#listview{enabled:false;} #window{width:450px;}" &
+        "cmd") zsh -c "$(rofi -normal-window -dmenu -p "CMD" -theme-str '#listview{enabled:false;} #entry{font:"JetBrains Mono 10";} #window{width:450px;}' &)"
     esac
 
 else exit

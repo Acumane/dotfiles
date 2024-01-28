@@ -15,14 +15,14 @@ img {
 h1,
 h2,
 h3,h4 {
-	font-family: "IBM Plex Sans";
+	font-family: "Akkurat";
 	font-weight: 700;
 	/* margin-top: 20px; */
 	margin-bottom: 5px;
 }
 
 h1 {
-	font-family: "Space Grotesk";
+	/* font-family: "Akkurat"; */
 	font-size: xx-large;
 	text-align: center;
 }
