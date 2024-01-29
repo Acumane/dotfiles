@@ -1,0 +1,2 @@
+@hourly play -v 0.6 $HOME/audio/sounds/hour.flac
+30 * * * * play -v 0.4 $HOME/audio/sounds/thirty.flac

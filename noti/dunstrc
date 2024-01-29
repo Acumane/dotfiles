@@ -12,8 +12,7 @@
   gap_size = 10
 
   frame_width = 2
-  # frame_color = "#A8A48D"
-  frame_color = "#f7c3a1"
+  frame_color = "#F7C3A1"
   corner_radius = 8
 
   font = Akkurat 10
@@ -35,7 +34,7 @@
   background = "#2A2A37"
   foreground = "#E6E0C2"
   frame_color = "#404048"
-  script = normal.sound
+  script = low.sound
   timeout = 5
 
 [urgency_normal]
@@ -43,6 +42,7 @@
   timeout = 10
 
 [urgency_critical]
+  frame_color = "#FF7800"
   timeout = 0
   default_icon = software-update-urgent-symbolic
   script = critical.sound
