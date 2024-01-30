@@ -4,9 +4,9 @@ if [ -z "$1" ]; then
 	exit
 fi
 
-ADDR=$(bluetoothctl devices Connected | grep $1 | cut -d ' ' -f 2)
+ADDR=$(bluetoothctl devices Connected | grep -i $1 | cut -d ' ' -f 2)
 if [ -z "$ADDR" ]; then
-	ADDR=$(bluetoothctl devices | grep $1 | cut -d ' ' -f 2)
+	ADDR=$(bluetoothctl devices | grep -i $1 | cut -d ' ' -f 2)
 	bluetoothctl connect $ADDR
 else
 	bluetoothctl disconnect $ADDR

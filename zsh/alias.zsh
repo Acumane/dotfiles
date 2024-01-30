@@ -14,7 +14,7 @@ alias rm="rm -r"
 alias rn="mv"
 alias mk="touch"
 alias mkd="mkdir -p"
-alias ch="entr -p"
+alias ch="entr -pc"
 alias first="head -n" 
 alias last="tail -n"
 
