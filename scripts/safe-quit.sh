@@ -8,7 +8,7 @@ hide() {
   name=$($win | jq -r '.class')
   id="$name $addr"
   [ "$name" = "Rofi" ] && { $do closewindow address:$addr; exit; }
-  $do moveoutofgroup && $do movetoworkspacesilent special,address:$addr
+  $do moveoutofgroup && $do movetoworkspacesilent special:limbo,address:$addr
   echo "$id" >> $limbo
   sleep 3
   grep -q "$id" $limbo || exit
