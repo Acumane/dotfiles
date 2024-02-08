@@ -2,7 +2,7 @@ set nocompatible
 set shortmess=I
 set number relativenumber
 set clipboard=unnamedplus
-set fillchars=eob:\
+set fillchars=eob:\ 
 set smartindent
 set autoindent
 set shiftwidth=4
@@ -11,9 +11,10 @@ set expandtab
 lua require("init")
 
 " Improved arrow navigation and commands
-map i <Up>
+nmap i gk
+vmap i gk
 map j <Left>
-map k <Down>
+map k gj
 
 " (i)nsert -> (h)ere OR (i)nner
 noremap h i
@@ -26,27 +27,39 @@ autocmd InsertEnter * norm! zz
 " enter normal mode in the same place!
 autocmd InsertLeave * execute "normal! `^"
 vnoremap H A
+vnoremap hh <Esc>i
+vnoremap hi <Esc>i
 
 let surround =
-\ ['`', "'", '"', '(', ')', '[', ']', '{', '}', '<', '>', '*', '_', '$']
+\ ['`', '"', '(', ')', '[', ']', '{', '}', '<', '>', '*', '_', '$']
 
 for ch in surround
   " autowrapping word in normal mode
-  execute 'nnoremap <silent><nowait> '.ch.' :<C-u>exec "norm vhwS'.ch.'"<CR>'
+  execute "nnoremap <silent><nowait>" ch ":<C-u>exec 'norm vhwS".ch."'<CR>"
   " autowrapping selection in visual mode
-  execute 'vnoremap <silent><nowait> '.ch.' :<C-u>exec "norm gvS'.ch.'"<CR>'
+  execute "vnoremap <silent><nowait>" ch ":<C-u>exec 'norm gvS".ch."'<CR>"
   " delete given pair (d*)
-  execute 'nmap d'.ch.' ds'.ch
+  execute "nmap d".ch "ds".ch
 endfor
-nnoremap <silent> " :<C-u>exec 'norm vhwS"'<CR>
-vnoremap <silent> " :<C-u>exec 'norm gvS"'<CR>
-nmap d" ds"
+" TODO: mark conflict
+nnoremap <silent> '' :<C-u>exec "norm vhwS'"<CR>
+vnoremap <silent> '' :<C-u>exec "norm gvS'"<CR>
+nmap d' ds'
 
 " cycle case/CASE
-noremap  ~ ~gv
-nnoremap u gu
-nnoremap U gU
+vnoremap  ~ ~gv
+nnoremap  ~ ~h
+map tk tn
+"   t* (to case) - WIP
+noremap tt :lua require('textcase')
+\ .current_word('to_phrase_case')<CR>
 " *use Ctrl+u/r
+
+nnoremap = <C-a> 
+nnoremap + <C-a> 
+" nnoremap a <C-a> 
+nnoremap - <C-x> 
+" nnoremap s <C-x> 
 
 map <space> h<space><esc>
 " map <enter> h<enter><esc>
@@ -61,7 +74,7 @@ nnoremap o %
 nnoremap O %
 
 " A = aa (NOT aL), where a is r,c,x,d
-" renaming change->replace:
+" renaming change -> replace:
 noremap  r  "_c
 nnoremap R  "_cc
 nnoremap rr "_cc
@@ -86,30 +99,29 @@ nnoremap dd "_dd
 
 " expected Ctrl+A function:
 noremap <C-a> gg^vG$h
-
 inoremap <C-a> <Esc>gg^vG$h
 
 " Power delete (kitty)
 nmap <S-Del> dvb
 imap <S-Del> <C-w>
 
-vnoremap <C-c> y
-vnoremap <C-x> d
-noremap  <C-p> p
-noremap  <C-u> u
-"        <C-r> r
+vmap <C-c> y
+vmap <C-x> d
+map  <C-p> p
+map  <C-u> u
+"    <C-r>
 
 " Unmapping awkward power nav keys
 " map $ <Nop>
 map ^ <Nop>
 
 " New text objects
-let text_obj = [ '*', '_', '$']
-for ch in text_obj
-  execute 'omap i'.ch.' :<C-u>norm! T'.ch.'vt'.ch.'<CR>'
-  execute 'vmap h'.ch.' T'.ch.'ot'.ch
-  execute 'omap a'.ch.' :<C-u>norm! F'.ch.'vf'.ch.'<CR>'
-  execute 'vmap a'.ch.' F'.ch.'of'.ch
+let new_obj = [ '*', '_', '$']
+for ch in new_obj
+  execute 'omap i'.ch ':<C-u>norm! T'.ch.'vt'.ch.'<CR>'
+  execute 'vmap h'.ch 'T'.ch.'ot'.ch
+  execute 'omap a'.ch ':<C-u>norm! F'.ch.'vf'.ch.'<CR>'
+  execute 'vmap a'.ch 'F'.ch.'of'.ch
 endfor
 
 " mnemonic text objects
@@ -117,32 +129,36 @@ let pairs = {
 \ 'p': ')', 'b': ']', 'B': '}', 'q': '"', 't': '>', 'u': '_', 'e': '*', 'm': '$'
 \ }
 for [l, r] in items(pairs)
-  execute 'omap i'.l.' i'.r
-  execute 'vmap h'.l.' h'.r
-  execute 'omap a'.l.' a'.r
-  execute 'vmap a'.l.' a'.r
-  execute 'nmap d'.l.' ds'.r
-  execute 'nmap rs'.l.' css'.r
+  execute 'omap i'.l 'i'.r
+  execute 'omap h'.l 'i'.r
+  execute 'vmap h'.l 'i'.r
+  execute 'omap a'.l 'a'.r
+  execute 'vmap a'.l 'a'.r
+  execute 'nmap rs'.l 'css'.r
+  execute 'nmap d'.l 'ds'.r
 endfor
-nmap rs css
-" nmap ds dss
+onoremap hP ip
+vnoremap hP ip
+onoremap aP ap
+vnoremap aP ap
 
-" mnemonic pair replace
-let re_pairs = {
-\ 'pq': ')"', 'pb': ')]', 'qp': ')"', 'qb': ']"', 'bq': ']"', 'bp': '])'
-\ }
-for [l, r] in items(re_pairs)
-  execute 'nmap r'.l.' cs'.r
+" pair replace
+let obj = ['t', 'p', 'b', 'B', 'u', 'e', 'm', 'q', 's', 
+\ '>', ')', ']', '}', '_', '*', '$', '"', "'", '`']
+for a in obj
+  for b in obj
+    exec 'nmap r'.a.b 'cs'.a.b
+  endfor
 endfor
 
 function! Word(m, ...)
   let v = get(a:, 1, "")
   exec "norm! ".v.a:m
   while strpart(getline('.'), col('.') - 1, 1) !~ '\w'
-      if col('.') >= col('$') - 1 || getline('.') == ''
-        return
-      endif
-      exec "norm! ".v.a:m
+    if col('.') >= col('$') - 1 || getline('.') == ''
+      return
+    endif
+    exec "norm! ".v.a:m
   endwhile
 endfunction
 
@@ -152,20 +168,26 @@ for [l, r] in items({'w': 'w', 'e': 'e', 'W': 'b', 'E': 'ge'})
   exec "vnoremap <silent>" l ":call Word('".r."', 'gv')<CR>"
 endfor
 
-noremap  t    H
+nnoremap t    H
 nnoremap b    L
+"        M
 noremap  T    gg
 map      B    GL
 
-" 'Go to', ex. 5gt
-noremap gt    gg
+" \s, wrap compatible
+nnoremap I :call
+\ search('^\s*$', 'bW')<CR>
+nnoremap K :call 
+\ search('^\s*$', 'W')<CR>
+noremap  J    g0
+noremap  L    g$
 
-noremap  I     {
-noremap  I     {
-noremap  K     }
-noremap  J     ^
-nnoremap L     $
-vnoremap L     $h
+" 'Go', ex. 5g
+nnoremap '    m
+nnoremap g'   `
+nnoremap <nowait><expr> g v:count ? 'G' : 'g'
+" TODO: m -> multi
+
 " better newline!
 noremap n o
 noremap N O

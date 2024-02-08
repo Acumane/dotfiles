@@ -3,6 +3,13 @@ vim.opt.rtp:prepend(lazy_path)
 
 require("lazy").setup({
   "kylechui/nvim-surround",
+  "johmsalas/text-case.nvim",
+  -- "justinmk/vim-ipmotion"
+})
+
+require("textcase").setup({
+  default_keymappings_enabled = true,
+  prefix = "t",
 })
 
 require("nvim-surround").setup({
