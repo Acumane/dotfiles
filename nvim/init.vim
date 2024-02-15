@@ -19,8 +19,7 @@ map k gj
 " (i)nsert -> (h)ere OR (i)nner
 noremap h i
 nnoremap H a
-" remove annoying up/down motions, use i as (i)nner motion
-onoremap <Up> i
+" remove annoying dir motion, use i still (i)nner
 onoremap <Down> <Nop>
 " center screen on insert
 autocmd InsertEnter * norm! zz
@@ -29,6 +28,7 @@ autocmd InsertLeave * execute "normal! `^"
 vnoremap H A
 vnoremap hh <Esc>i
 vnoremap hi <Esc>i
+" v -> s
 
 let surround =
 \ ['`', '"', '(', ')', '[', ']', '{', '}', '<', '>', '*', '_', '$']
@@ -83,8 +83,8 @@ nnoremap C  yy
 nnoremap cc yy
 " r(eplace) l(etter):
 nnoremap rl r
-nmap rj <Nop>
-" old del->cut:
+nmap rj <Nop> 
+" old del -> cut:
 noremap  x  d
 nnoremap X  dd
 nnoremap xx dd
@@ -97,23 +97,23 @@ noremap  d  "_d
 nnoremap D  "_dd
 nnoremap dd "_dd
 
-" expected Ctrl+A function:
-noremap <C-a> gg^vG$h
+" expected Ctrl functions:
+nnoremap <C-a> gg^vG$h
+vnoremap <C-a> gg^oG$h
 inoremap <C-a> <Esc>gg^vG$h
+tnoremap <Esc> <C-\><C-n>
 
 " Power delete (kitty)
 nmap <S-Del> dvb
-imap <S-Del> <C-w>
+if !exists('g:vscode')
+  imap <S-Del> <C-w>
+endif
 
 vmap <C-c> y
-vmap <C-x> d
+vmap <C-x> x
 map  <C-p> p
 map  <C-u> u
 "    <C-r>
-
-" Unmapping awkward power nav keys
-" map $ <Nop>
-map ^ <Nop>
 
 " New text objects
 let new_obj = [ '*', '_', '$']
@@ -155,7 +155,7 @@ function! Word(m, ...)
   let v = get(a:, 1, "")
   exec "norm! ".v.a:m
   while strpart(getline('.'), col('.') - 1, 1) !~ '\w'
-    if col('.') >= col('$') - 1 || getline('.') == ''
+    if getline('.') == ''
       return
     endif
     exec "norm! ".v.a:m
@@ -175,10 +175,8 @@ noremap  T    gg
 map      B    GL
 
 " \s, wrap compatible
-nnoremap I :call
-\ search('^\s*$', 'bW')<CR>
-nnoremap K :call 
-\ search('^\s*$', 'W')<CR>
+noremap  I    {
+noremap  K    }
 noremap  J    g0
 noremap  L    g$
 
@@ -193,8 +191,6 @@ noremap n o
 noremap N O
 
 " Tab in normal mode
-map >> <Nop>
-map << <Nop>
 nnoremap <Tab>   >>
 nnoremap <S-Tab> <<
 vnoremap <Tab>   >><Esc>gv

@@ -2,6 +2,7 @@
 
 configuration {
 	show-icons: false;
+	hover-select: true;
 	/* steal-focus: true; */
 
 	display-drun: "RUN";

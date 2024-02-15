@@ -4,6 +4,11 @@ if [ -z "$1" ]; then
 	exit
 fi
 
+if [ "$1" = "%" ]; then   # scuffed
+	bluetoothctl info | grep Battery | awk -F'[()]' '{print $2"%"}'
+	exit
+fi
+
 ADDR=$(bluetoothctl devices Connected | grep -i $1 | cut -d ' ' -f 2)
 if [ -z "$ADDR" ]; then
 	ADDR=$(bluetoothctl devices | grep -i $1 | cut -d ' ' -f 2)

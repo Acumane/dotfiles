@@ -12,11 +12,14 @@ alias ld="eza -AFlm -T --level=1 --icons"
 alias cp="cp -r"
 alias rm="rm -r"
 alias rn="mv"
-alias mk="touch"
+mk() {
+  if [[ "${1: -1}" == "/" ]]; then mkdir -p "${1:0:-1}"
+  else touch "$1"; fi
+}
 alias mkd="mkdir -p"
 alias ch="entr -pc"
-alias first="head -n" 
-alias last="tail -n"
+alias first="head" 
+alias last="tail"
 
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
@@ -49,7 +52,7 @@ ip() {
 
 alias speed='fast -u --single-line'
 alias clock="darshellclock"
-alias batt="acpi -b | grep '1:' | cut -d' ' -f 3-"
+alias batt="acpi -b | grep -v 'rate' | cut -d' ' -f 3-"
 alias wifi="nmcli dev wifi"
 alias udev="udevadm"
 
