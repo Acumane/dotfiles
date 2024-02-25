@@ -9,7 +9,7 @@ user_pref("devtools.debugger.prompt-connection", false);
 user_pref("devtools.debugger.remote-enabled", true);
 user_pref("full-screen-api.warning.timeout", 0);
 user_pref("mousewheel.default.delta_multiplier_y", 30); // laptop
-user_pref("mousewheel.min_line_scroll_amount", 60);     // laptop
+user_pref("mousewheel.min_line_scroll_amount", 75);     // laptop
 // user_pref("mousewheel.default.delta_multiplier_y", 140);
 
 user_pref("browser.uidensity", 0); // normal UI density
