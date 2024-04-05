@@ -117,6 +117,7 @@ alias -g sys/="/etc/systemd/system/"
 alias -g usys/="/etc/systemd/user/"
 alias -g flat/="/var/lib/flatpak/app/"
 alias -g uflat/="$HOME/.var/app/"
+alias -g usb/="/run/media/$USER/"
 
 # —— WIDGETS ————————————————————
 

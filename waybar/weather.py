@@ -87,7 +87,8 @@ if path.isfile(CACHE):
     if ago < 600:
         print(open(CACHE, "r").read()); exit()
 
-weather = requests.get("https://wttr.in/?format=j1").json()
+CITY = "Berkeley"
+weather = requests.get(f"https://wttr.in/{CITY}?format=j1").json()
 data = {}
 
 def formatTime(time):
@@ -127,8 +128,8 @@ body ="font='IBM Plex Mono Bold 10' color='#BEB9A3'"
 data['tooltip'] = f"<span {title}>{cur['weatherDesc'][0]['value']} {cur['FeelsLikeF']}°</span>\n"
 data['tooltip'] += f"<span {body}>🔺{day['maxtempF']}°  🔻{day['mintempF']}°\n"
 wind = cur['windspeedMiles']+'Mph'
-data['tooltip'] += f"  {wind.ljust(len(wind)+1)}💨\n"
-data['tooltip'] += f"  {(cur['humidity']+'%').ljust(len(wind)+1)}💦\n\n</span>"
+data['tooltip'] += f"  {wind.ljust(len(wind)+1)}💨\n\n</span>"
+# data['tooltip'] += f"  {(cur['humidity']+'%').ljust(len(wind)+1)}💦\n\n</span>"
 data['tooltip'] += f"<span {body}>"
 
 nowH, nowM = divmod(now, 100)

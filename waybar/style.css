@@ -15,8 +15,8 @@ window#waybar {
 	background: transparent;
 }
 
-.modules-center,
-.modules-right {
+/* .modules-right,  */
+.modules-center {
 	background-color: @bg1;
 	box-shadow: rgba(10, 0, 20, 0.3) 0px 2px 5px, rgba(10, 0, 20, 0.15) 0px 2px 8px;
 	font-size: 13px;
@@ -27,9 +27,9 @@ window#waybar {
 	border: 1.5px solid @border;
 }
 
-.modules-right{
+/* .modules-right{
 	margin: 5px 5px 12px 0px;
-}
+} */
 
 #workspaces {
 	box-shadow: rgba(10, 0, 20, 0.3) 0px 2px 5px, rgba(10, 0, 20, 0.15) 0px 2px 8px;

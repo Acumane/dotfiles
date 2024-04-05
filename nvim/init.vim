@@ -131,7 +131,7 @@ let pairs = {
 for [l, r] in items(pairs)
   execute 'omap i'.l 'i'.r
   execute 'omap h'.l 'i'.r
-  execute 'vmap h'.l 'i'.r
+  execute 'vnoremap h'.l 'i'.r
   execute 'omap a'.l 'a'.r
   execute 'vmap a'.l 'a'.r
   execute 'nmap rs'.l 'css'.r
