@@ -59,6 +59,8 @@ alias udev="udevadm"
 alias dl="wget -N -P ~/dl"
 alias dlv="yt-dlp -P ~/dl -f bv"
 alias dla="yt-dlp -P ~/dl -x -f ba"
+alias push="tailscale file cp"
+alias pull="sudo tailscale file get"
 
 alias pn="pnpm"
 alias py="python"
