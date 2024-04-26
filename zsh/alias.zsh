@@ -43,7 +43,7 @@ alias net="nmcli"
 ip() {
   case "${(L)1}" in
     "public"  | "-P") curl "http://ifconfig.me" ;;
-    "private"  | "-p") hostname -I ;;
+    "private" | "-p") hostname -I ;;
     "host" | "-h") hostname ;;
     "mac"  | "-m") ifconfig | grep ether | awk '{print $2}' ;;
     *) hostname -I
@@ -56,9 +56,13 @@ alias batt="acpi -b | grep -v 'rate' | cut -d' ' -f 3-"
 alias wifi="nmcli dev wifi"
 alias udev="udevadm"
 
-alias dl="wget -N -P ~/dl"
-alias dlv="yt-dlp -P ~/dl -f bv"
-alias dla="yt-dlp -P ~/dl -x -f ba"
+dl() {
+  case "${(L)1}" in
+    "video" | "-v") yt-dlp -P ~/dl -N 4 $2;;
+    "audio" | "-a") yt-dlp -P ~/dl -x -N 4 $2;;
+    *) wget -N -P ~/dl $1
+  esac
+}
 alias push="tailscale file cp"
 alias pull="sudo tailscale file get"
 
