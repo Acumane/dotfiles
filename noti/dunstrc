@@ -35,7 +35,7 @@
   foreground = "#E6E0C2"
   frame_color = "#404048"
   script = low.sound
-  timeout = 5
+  timeout = 3
 
 [urgency_normal]
   script = normal.sound

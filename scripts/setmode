@@ -1,0 +1,15 @@
+#!/bin/bash
+STORE="/tmp/mode"
+
+mode() {
+	hyprctl dispatch scroller:setmode $1
+    echo $1 > $STORE
+    notify-send -u low "Switched to $1 mode"
+}
+
+STATE=$(cat $STORE)
+
+if [[ ! -f $STORE || $STATE = "row" ]]; then
+     mode "col"
+else mode "row"
+fi

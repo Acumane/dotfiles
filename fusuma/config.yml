@@ -5,6 +5,16 @@ plugin:
 swipe:
   3:
     up:
+      command: 'hyprctl dispatch scroller:movefocus d'
+    down:
+      command: 'hyprctl dispatch scroller:movefocus u'
+    left:
+      command: 'hyprctl dispatch scroller:movefocus r'
+    right:
+      command: 'hyprctl dispatch scroller:movefocus l'
+
+  4:
+    up:
       update:
         # sendkey: 'BRIGHTNESSUP'
         # $DOTS/scripts/light.sh
@@ -13,4 +23,3 @@ swipe:
       update:
         # sendkey: 'BRIGHTNESSDOWN'
         command: 'light -3'
-
