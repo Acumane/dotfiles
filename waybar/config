@@ -6,18 +6,10 @@
 
 	"include": ["~/dotfiles/waybar/modules.json"],
 
-	"modules-left": [
-		"hyprland/workspaces"
-	],
-
 	"modules-center": [
-		"custom/weather",
+		"hyprland/workspaces",
 		"clock#date",
-		"clock#time"
-	],
-
-	// "modules-right": [
-	// 	"tray",
-	// 	"bluetooth"
-	// ]
+		"clock#time",
+		"custom/weather"
+	]
 }

@@ -1,11 +1,12 @@
 @define-color fg1 #8da8d0;
 @define-color fg2 #A4B9D9;
 @define-color bg1 #1F1F28;
-@define-color bg2 #363646;
+@define-color bg2 #2A2A37;
 @define-color text #E6E0C2;
-@define-color border #404048;
+@define-color dim #979589;
+@define-color border #3F3F55;
 
- * {
+* {
 	font-family: "IBM Plex Sans", "Hack", FontAwesome, sans-serif;
 	border: none;
 	border-radius: 0px;
@@ -15,7 +16,6 @@ window#waybar {
 	background: transparent;
 }
 
-/* .modules-right,  */
 .modules-center {
 	background-color: @bg1;
 	box-shadow: rgba(10, 0, 20, 0.3) 0px 2px 5px, rgba(10, 0, 20, 0.15) 0px 2px 8px;
@@ -23,22 +23,19 @@ window#waybar {
 	font-weight: 600;
 	color: @text;
 	border-radius: 10px;
-	margin: 3px 0px 14px 0px;
+	margin: 3px 0px 14px 2px;
 	border: 1.5px solid @border;
 }
 
-/* .modules-right{
-	margin: 5px 5px 12px 0px;
-} */
-
 #workspaces {
-	box-shadow: rgba(10, 0, 20, 0.3) 0px 2px 5px, rgba(10, 0, 20, 0.15) 0px 2px 8px;
+	box-shadow: rgba(10, 0, 20, 0.3) 0px 1px 3px, rgba(10, 0, 20, 0.15) 0px 1px 6px;
+
 	background: @bg1;
-	margin: 5px 0px 16px 5px;
+	background-color: @bg2;
+	margin: 5px 24px 6px 5px;
 	padding: 9px 8px;
-	border-radius: 10px;
+	border-radius: 6px;
 	font-size: 3px;
-	border: 1.5px solid @border;
 }
 
 #workspaces button {
@@ -69,10 +66,11 @@ window#waybar {
 }
 
 #custom-weather {
+	box-shadow: rgba(10, 0, 20, 0.3) 0px 1px 3px, rgba(10, 0, 20, 0.15) 0px 1px 6px;
 	background-color: @bg2;
-	margin: 2px 0px 2px 2px;
+	margin: 5px 5px 6px 8px;
 	padding: 0px 10px 1px 8px;
-	border-radius: 7.5px;
+	border-radius: 6px;
 }
 
 #clock.date {
@@ -81,7 +79,8 @@ window#waybar {
 }
 
 #clock.time {
-	padding: 2px 12px 3px 0;
+	color: @dim;
+	padding: 2px 10px 3px 0;
 	opacity: 0.8;
 }
 
@@ -98,16 +97,4 @@ tooltip label {
 	background-color: @bg1;
 	border: 1.5px solid @border;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
-}
-
-#bluetooth {
-	background-color: @bg2;
-	margin: 2px;
-	padding: 0px 8px 1px 8px;
-	border-radius: 7.5px;
-}
-
-#tray {
-	padding: 0px 8px;
-	opacity: 0.75;
 }

@@ -1,8 +1,8 @@
 /* Forked from https://github.com/lr-tech/rofi-themes-collection */
 
 * {
-	bg:       #1F1F28E6;
-	box:      #393840E6;
+	bg:       #1F1F28;
+	box:      #36364680;
 	text:     #DDD8BB;
 	title:    #979589;
 	dim:      #66667280;
@@ -17,7 +17,7 @@
 
 window {
 	location:       center;
-	width: 340;
+	width: 325;
 	background-color:   @bg;
 }
 

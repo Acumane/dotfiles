@@ -12,8 +12,8 @@ configuration {
 	font: "Akkurat 11";
 	eh: 1;
 	/* dpi: 92; */
-	/* yoffset: -100; */
-	xoffset: 650;
+	yoffset: 20;
+	/* xoffset: 750; */
 	
 	filebrowser {
 	/*	directory: "/home";*/
