@@ -23,7 +23,7 @@ window#waybar {
 	font-weight: 600;
 	color: @text;
 	border-radius: 10px;
-	margin: 3px 0px 14px 2px;
+	margin: 400px 0px 14px 2px;
 	border: 1.5px solid @border;
 }
 
@@ -90,7 +90,7 @@ tooltip {
 
 tooltip label {
 	padding: 12px;
-	margin: 2px 10px 20px 10px;
+	margin: -25px 10px 20px 60px;
 	font-size: 14.5px;
 	text-shadow: none;
 	border-radius: 10px;

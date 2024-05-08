@@ -1,19 +1,22 @@
-hyprctl dispatch togglespecialworkspace 
-ws=$(hyprctl monitors -j | jq -re '.[] | select(.focused == true) | .specialWorkspace.name')
-c=$(hyprctl monitors -j | jq '.[] | select(.focused == true) | .width / 2 - 162')
+x0=$(hyprctl monitors -j | jq '.[] | select(.focused == true) | .x')
+y=$(hyprctl monitors -j  | jq '.[] | select(.focused == true) | .y + 450')
+c=$(hyprctl monitors -j  | jq ".[] | select(.focused == true) | .width / 2 + $x0")
 
-if [ $ws == "special" ]; then
-    pkill -USR1 waybar # show
-    hyprctl dispatch "movewindowpixel exact $c 80,Amberol"
-
+if ! pgrep -x rofi; then
+    w=""
     case $1 in
-        "run") rofi -show drun -normal-window -show-icons & ;;
-        "copy") cliphist list | rofi -normal-window -dmenu -display-columns 2 -p "COPY" -yoffset 50 -theme-str "#listview{lines:6;columns:1;} #window{width:375px;}"  | cliphist decode | wl-copy & ;;
-        "cmd") zsh -c "$(rofi -normal-window -dmenu -p "CMD" -yoffset -50 -theme-str '#listview{enabled:false;} #entry{font:"JetBrains Mono 10";} #window{width:450px;}' &)"
+        "run")  rofi -show drun -normal-window -show-icons & w="325";;
+        "copy") w="375" && cliphist list | rofi -normal-window -dmenu -display-columns 2 -p "COPY" -theme-str "#listview{lines:6;columns:1;} #window{width:${w}px;}"\
+                | cliphist decode | wl-copy & w="375";;
+        "cmd")  zsh -c "$(rofi -normal-window -dmenu -p "CMD" -theme-str '#listview{enabled:false;} #entry{font:"JetBrains Mono 10";} #window{width:450px;}' &)" & w="450"
     esac
-    hyprctl dispatch "focuswindow Rofi"
+    sleep 0.1s
+    pkill -USR1 waybar # show
+    hyprctl dispatch "movewindowpixel exact $((c - (w/2))) $y,Rofi"
 
-else 
-    pkill rofi
+    pID=$!
+    wait $pID
     pkill -USR1 waybar # hide
+else
+    exit
 fi
