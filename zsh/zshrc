@@ -48,4 +48,3 @@ bindkey '^[[3;3~' killer
 bindkey -s '^[`' '^Umon^M'
 # bindkey '^[^M' completion
 bindkey '^[^?' clear-screen             # clear everything but active
-bindkey -s '^r' '^Ureload^M'

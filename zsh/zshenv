@@ -18,6 +18,7 @@ export SUDO_PROMPT="Password: "
 
 export PATH=$PATH:"$HOME/.local/bin"
 export PATH=$PATH:"$HOME/.cargo/bin"
+export PATH=$PATH:$(go env GOPATH)/bin
 
 export MODULAR_HOME="$HOME/.modular"
 export PNPM_HOME="$HOME/.local/share/pnpm"

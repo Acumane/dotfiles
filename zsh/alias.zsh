@@ -17,7 +17,7 @@ mk() {
   else touch "$1"; fi
 }
 alias mkd="mkdir -p"
-alias ch="entr -pc"
+alias chg="entr -pc"
 alias first="head" 
 alias last="tail"
 
