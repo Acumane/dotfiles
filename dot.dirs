@@ -1,0 +1,5 @@
+# !! always tries to hardlink
+# -> falls back to copying and ~> to symlinking
+# global.conf   ->   /etc/keyd/test.conf
+# app.conf      ->  /home/bren/.config/keyd/app.conf
+hyprland.conf ->  ~/.config/hypr/hyprland.conf
