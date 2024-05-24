@@ -4,7 +4,7 @@
 @define-color bg2 #2A2A37;
 @define-color text #E6E0C2;
 @define-color dim #979589;
-@define-color border #3F3F55;
+@define-color border #3F3F50;
 
 * {
 	font-family: "IBM Plex Sans", "Hack", FontAwesome, sans-serif;
@@ -24,7 +24,7 @@ window#waybar {
 	color: @text;
 	border-radius: 10px;
 	margin: 400px 0px 14px 2px;
-	border: 1.5px solid @border;
+	border: 1px solid @border;
 }
 
 #workspaces {
@@ -90,11 +90,11 @@ tooltip {
 
 tooltip label {
 	padding: 12px;
-	margin: -25px 10px 20px 60px;
+	margin-top: -4px;
 	font-size: 14.5px;
 	text-shadow: none;
 	border-radius: 10px;
 	background-color: @bg1;
-	border: 1.5px solid @border;
+	border: 1px solid @border;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
 }

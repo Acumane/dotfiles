@@ -5,12 +5,18 @@ alias bundle="antigen bundle"
 alias using="antigen use"
 alias load="zcomet load"
 alias sudo='sudo ' # fix alias w/ sudo
+alias dots='dotfiles'
 
 alias ls="eza -F --icons" 
 alias la="eza -AF --icons -s modified"
 alias ld="eza -AFlm -T --level=1 --icons"
 alias cp="cp -r"
-alias rm="rm -r"
+alias del="rm -r"
+alias rm="trash-put"
+alias trash="trash-list"
+alias urm="trash-restore"
+alias restore="trash-restore"
+alias dump="trash-empty -f"
 alias rn="mv"
 mk() {
   if [[ "${1: -1}" == "/" ]]; then mkdir -p "${1:0:-1}"
@@ -124,6 +130,7 @@ alias -g usys/="/etc/systemd/user/"
 alias -g flat/="/var/lib/flatpak/app/"
 alias -g uflat/="$HOME/.var/app/"
 alias -g usb/="/run/media/$USER/"
+alias -g trash/="$HOME/.local/share/Trash/files"
 
 # —— WIDGETS ————————————————————
 
@@ -133,7 +140,7 @@ opener() {
     --bind='alt-v:reload(fd -0LHI --type=f --exclude=.git --max-depth=4 --color=always)' \
     --preview 'bat -n --color=always {}'))
   for file in "${files[@]}"; do
-    xdg-open "$file" >/dev/null 2>&1 & disown
+    xdg-open "$file" & disown &> /dev/null
   done
   zle reset-prompt
 }
@@ -147,7 +154,7 @@ search() {
     fzf -m --delimiter : --preview 'bat -n --color=always {1} --highlight-line {2}' --preview-window '+{2}/2'))
   for file in "${files[@]}"; do
     name=$(echo "$file" | perl -pe 's/(.+):\d+$/$1/')
-    xdg-open "$name" >/dev/null 2>&1 & disown
+    xdg-open "$name" & disown &> /dev/null
   done
   zle reset-prompt
 }
@@ -181,3 +188,6 @@ dirs() {
   zle reset-prompt
 }
 zle -N dirs
+
+explore() { files . &> /dev/null & disown; zle reset-prompt; }
+zle -N explore

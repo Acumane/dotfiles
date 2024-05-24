@@ -1,9 +1,8 @@
 
 source $ZDOTDIR/init.zsh                # setopts
 source $DOTS/zsh/alias.zsh              # aliases
-source $DOTS/zsh/zshenv                 # env vars (resource)
+source $DOTS/zsh/zshenv                 # env vars (re-source)
 source $ZDOTDIR/.zcomet/bin/zcomet.zsh  # plugin manager
-# source $ZDOTDIR/codex.zsh             # Codex
 
 [ -z "$DISPLAY" ] && exec Hyprland
 
@@ -22,7 +21,6 @@ load ohmyzsh plugins/sudo
 load ohmyzsh plugins/dirhistory
 
 load Aloxaf/fzf-tab
-# load tom-doerr/zsh_codex
 load zsh-users/zsh-completions
 load RobSis/zsh-completion-generator
 # load marlonrichert/zsh-autocomplete
@@ -45,6 +43,6 @@ bindkey '^[?' where
 bindkey '^[f' opener
 bindkey '^[F' dirs
 bindkey '^[[3;3~' killer
-bindkey -s '^[`' '^Umon^M'
+bindkey '^e' explore
 # bindkey '^[^M' completion
 bindkey '^[^?' clear-screen             # clear everything but active

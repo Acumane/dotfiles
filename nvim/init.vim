@@ -163,10 +163,14 @@ function! Word(m, ...)
 endfunction
 
 " better word nav
-for [l, r] in items({'w': 'w', 'e': 'e', 'W': 'b', 'E': 'ge'})
-  exec "nnoremap <silent>" l ":call Word('".r."')<CR>"
-  exec "vnoremap <silent>" l ":call Word('".r."', 'gv')<CR>"
-endfor
+" for [l, r] in items({'w': 'w', 'e': 'e', 'W': 'b', 'E': 'ge'})
+  " exec "nnoremap <silent>" l ":call Word('".r."')<CR>"
+  " exec "vnoremap <silent>" l ":call Word('".r."', 'gv')<CR>"
+" endfor
+"       w
+noremap W     b
+"       e
+noremap E     ge
 
 nnoremap t    H
 nnoremap b    L
@@ -178,7 +182,7 @@ map      B    GL
 noremap  I    {
 noremap  K    }
 noremap  J    g0
-noremap  L    g$
+noremap  L    g_
 
 " 'Go', ex. 5g
 nnoremap '    m
