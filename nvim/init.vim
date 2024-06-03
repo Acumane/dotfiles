@@ -7,6 +7,17 @@ set smartindent
 set autoindent
 set shiftwidth=4
 set expandtab
+set smartcase
+set cmdheight=0
+set laststatus=0
+
+if exists(':terminal')
+  " issues #3681, #23645; my day is ruined
+  au!
+  au TermOpen * setlocal nonumber norelativenumber
+  au TermOpen * setlocal modifiable
+  au TermOpen * startinsert
+endif
 
 lua require("init")
 
@@ -22,24 +33,24 @@ nnoremap H a
 " remove annoying dir motion, use i still (i)nner
 onoremap <Down> <Nop>
 " center screen on insert
-autocmd InsertEnter * norm! zz
+au InsertEnter * norm! zz
 " enter normal mode in the same place!
-autocmd InsertLeave * execute "normal! `^"
+au InsertLeave * exec "normal! `^"
 vnoremap H A
 vnoremap hh <Esc>i
 vnoremap hi <Esc>i
-" v -> s
+map s v
 
 let surround =
 \ ['`', '"', '(', ')', '[', ']', '{', '}', '<', '>', '*', '_', '$']
 
 for ch in surround
   " autowrapping word in normal mode
-  execute "nnoremap <silent><nowait>" ch ":<C-u>exec 'norm vhwS".ch."'<CR>"
+  exec "nnoremap <silent><nowait>" ch ":<C-u>exec 'norm vhwS".ch."'<CR>"
   " autowrapping selection in visual mode
-  execute "vnoremap <silent><nowait>" ch ":<C-u>exec 'norm gvS".ch."'<CR>"
+  exec "vnoremap <silent><nowait>" ch ":<C-u>exec 'norm gvS".ch."'<CR>"
   " delete given pair (d*)
-  execute "nmap d".ch "ds".ch
+  exec "nmap d".ch "ds".ch
 endfor
 " TODO: mark conflict
 nnoremap <silent> '' :<C-u>exec "norm vhwS'"<CR>
@@ -62,7 +73,6 @@ nnoremap - <C-x>
 " nnoremap s <C-x> 
 
 map <space> h<space><esc>
-" map <enter> h<enter><esc>
 map <backspace> h<backspace><esc>
 
 " better line appending!
@@ -118,10 +128,10 @@ map  <C-u> u
 " New text objects
 let new_obj = [ '*', '_', '$']
 for ch in new_obj
-  execute 'omap i'.ch ':<C-u>norm! T'.ch.'vt'.ch.'<CR>'
-  execute 'vmap h'.ch 'T'.ch.'ot'.ch
-  execute 'omap a'.ch ':<C-u>norm! F'.ch.'vf'.ch.'<CR>'
-  execute 'vmap a'.ch 'F'.ch.'of'.ch
+  exec 'omap i'.ch ':<C-u>norm! T'.ch.'vt'.ch.'<CR>'
+  exec 'vmap h'.ch 'T'.ch.'ot'.ch
+  exec 'omap a'.ch ':<C-u>norm! F'.ch.'vf'.ch.'<CR>'
+  exec 'vmap a'.ch 'F'.ch.'of'.ch
 endfor
 
 " mnemonic text objects
@@ -129,13 +139,13 @@ let pairs = {
 \ 'p': ')', 'b': ']', 'B': '}', 'q': '"', 't': '>', 'u': '_', 'e': '*', 'm': '$'
 \ }
 for [l, r] in items(pairs)
-  execute 'omap i'.l 'i'.r
-  execute 'omap h'.l 'i'.r
-  execute 'vnoremap h'.l 'i'.r
-  execute 'omap a'.l 'a'.r
-  execute 'vmap a'.l 'a'.r
-  execute 'nmap rs'.l 'css'.r
-  execute 'nmap d'.l 'ds'.r
+  exec 'omap i'.l 'i'.r
+  exec 'omap h'.l 'i'.r
+  exec 'vnoremap h'.l 'i'.r
+  exec 'omap a'.l 'a'.r
+  exec 'vmap a'.l 'a'.r
+  exec 'nmap rs'.l 'css'.r
+  exec 'nmap d'.l 'ds'.r
 endfor
 onoremap hP ip
 vnoremap hP ip
@@ -183,6 +193,14 @@ noremap  I    {
 noremap  K    }
 noremap  J    g0
 noremap  L    g_
+
+" commands (WIP)
+noremap / :
+nnoremap f /
+vnoremap f <Esc>*
+noremap <enter> n
+noremap <S-enter> N
+noremap <silent> <Esc><Esc> :<C-u>nohl<CR>
 
 " 'Go', ex. 5g
 nnoremap '    m
