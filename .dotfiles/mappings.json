@@ -14,6 +14,7 @@
   "noti/crontab": "/var/spool/cron/bren",
   "nvim/init.vim": "~/.config/nvim/init.vim",
   "nvim/init.lua": "~/.config/nvim/lua/init.lua",
+  "nvim/kana.lua": "~/.config/nvim/lua/kana.lua",
   "ranger/": "~/.config/ranger/",
   "rofi/": "~/.config/rofi/",
   "sway/lock.conf": "~/.config/sway/lock.conf",
