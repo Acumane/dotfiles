@@ -30,6 +30,7 @@ export LS_COLORS="$(vivid generate iceberg-dark)"
 export LS_COLORS="${LS_COLORS}:di=0;37:*.py=01;32:ln=04:*.md=36:ex=0:"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export MANROFFOPT="-c"
+export TIMEFMT=$'\n%*Es'
 export FZF_DEFAULT_COMMAND="fd -L --type f"
 export FZF_DEFAULT_OPTS="
 --height=20 --info=inline-right --exit-0 --select-1 --color "hl+:-1:reverse" --ansi

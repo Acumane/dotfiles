@@ -17,7 +17,7 @@ RPROMPT=' %F{240}%2~%f'
 
 # —— EXTS ———————————————————————
 
-load ohmyzsh plugins/sudo
+# load ohmyzsh plugins/sudo
 load ohmyzsh plugins/dirhistory
 
 load Aloxaf/fzf-tab
@@ -36,13 +36,13 @@ zcomet compinit
 bindkey '^[[1;5C' forward-word          # power-navigation
 bindkey '^[[1;5D' backward-word
 bindkey '^[[3;2~' backward-kill-word    # keyd: S-bs -> S-del (compatibility)
-bindkey -s '^[e' '^Ufm^M'
+bindkey '^[^?' clear-screen             # clear everything but active
 bindkey '^[h' hist
 bindkey '^[s' search
 bindkey '^[?' where
 bindkey '^[f' opener
 bindkey '^[F' dirs
 bindkey '^[[3;3~' killer
-bindkey '^e' explore
-# bindkey '^[^M' completion
-bindkey '^[^?' clear-screen             # clear everything but active
+bindkey '^e' files
+bindkey '^[v' v
+bindkey '^[t' t
