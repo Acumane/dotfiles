@@ -21,3 +21,7 @@ event_monitorremoved() {
 	sudo modprobe intel_ish_ipc
 	pkill -USR1 waybar
 }
+
+event_activewindow() {
+	pgrep "dim.sh" && : || zsh $DOTS/scripts/dim.sh
+}

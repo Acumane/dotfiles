@@ -11,7 +11,7 @@ alias ls="eza -F --icons"
 alias la="eza -AF --icons -s modified"
 alias ld="eza -AFlm -T --level=1 --icons"
 alias cp="cp -r"
-alias del="rm -r"
+alias del="\rm -r"
 alias rm="trash-put"
 alias trash="trash-list"
 alias restore="trash-restore"
@@ -33,8 +33,13 @@ alias suspend="systemctl suspend"
 alias hibernate="systemctl hibernate"
 alias logout="hyprctl dispatch exit"
 alias lock="$DOTS/scripts/idle-lap.sh $MON -f"
-alias bios="sudo systemctl reboot --firmware-setup"
-
+bios() {
+  case "${(L)1}" in
+    "-v") sudo dmidecode -q -t bios | grep -E "Version|Revision" | \
+          tr -d "\t";;
+    *) sudo systemctl reboot --firmware-setup
+  esac
+}
 
 alias tar='tar -czvf'
 untar() { \tar -xvf "$1" --one-top-level="$2"; }
@@ -44,6 +49,8 @@ alias calc="bc"
 alias ping='ping -c 5'
 alias root="sudo -s"
 alias kernel=" uname -r"
+alias about="sudo dmidecode -q -t System | grep -E 'Name|Serial' \
+| tr -d '\t'"
 alias user="echo $USER"
 alias net="nmcli"
 ip() {
@@ -87,13 +94,11 @@ v() { nvim 2> /dev/null; }
 t() { nvim -c ':terminal' 2> /dev/null; }
 zle -N v; zle -N t; zle -N fm
 
-
 alias keys="showkey -a"
-alias f='rg -iP'
-alias F="grep --color=always --group-separator=$'\n———\n' -C3 -iE"
+alias f="rg $RG_COLORS -iP"
+alias F="grep --color=auto --group-separator=$'\n———\n' -C3 -iP"
 alias fp="pgrep"
-# F() {grep --color=always --group-separator=$'\n———\n' -C3 -iE -- "$1" "${@:2}" | less -R; }
-# hl() { grep --color -E -- "$1|\$" "${@:2}"; }
+hl() { grep --color -E -- "$1|\$" "${@:2}"; }
 alias re='perl -pe'
 alias p='bat --style=numbers,changes,grid --color=always --tabs=2'
 alias pi="kitten icat"
