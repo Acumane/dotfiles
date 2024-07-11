@@ -1,3 +1,14 @@
 [user]
   name = Bren
-  email = 94324138+Acumane@users.noreply.github.com
+  email = ***
+
+[alias]
+  tags = tag -l
+  clone = clone --recursive
+  stats = shortlog --summary
+  commits = log --abbrev-commit --date=relative --pretty=oneline
+  hist = log --pretty=format:'%C(yellow)%h  %Cblue%ad%Creset - %s%Cgreen  <%cn> %Cred%d' --decorate --date=short -n 25 --name-status
+  branches = branch -a --sort=-committerdate --format="%(refname:short)"
+
+[filter "redact"]
+  clean = sed "s/.*#\\ REDACT//"
