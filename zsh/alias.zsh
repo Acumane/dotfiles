@@ -23,8 +23,8 @@ mk() {
 }
 alias mkd="mkdir -p"
 alias chg="entr -pc"
-alias first="head" 
-alias last="tail"
+alias first="head -n 1" 
+alias last="tail -n 1"
 
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
@@ -35,46 +35,56 @@ alias logout="hyprctl dispatch exit"
 alias lock="$DOTS/scripts/idle-lap.sh $MON -f"
 bios() {
   case "${(L)1}" in
-    "-v") sudo dmidecode -q -t bios | grep -E "Version|Revision" | \
+    -v) sudo dmidecode -q -t bios | grep -E "Version|Revision" | \
           tr -d "\t";;
     *) sudo systemctl reboot --firmware-setup
   esac
 }
 
-alias tar='tar -czvf'
+alias tar="tar -czvf"
 untar() { \tar -xvf "$1" --one-top-level="$2"; }
 zip() { command zip -r "$1.zip" "$1"/; }
 # unzip
 alias calc="bc"
-alias ping='ping -c 5'
+alias ping="grc ping -c 5"
 alias root="sudo -s"
 alias kernel=" uname -r"
 alias about="sudo dmidecode -q -t System | grep -E 'Name|Serial' \
 | tr -d '\t'"
+alias hw="hwinfo --short"
 alias user="echo $USER"
 alias net="nmcli"
+alias name="hostname"
+alias mac="ifconfig | grep ether | awk '{print \$2}'"
 ip() {
-  case "${(L)1}" in
-    "public"  | "-P") curl "http://ifconfig.me" ;;
-    "private" | "-p") hostname -I ;;
-    "host" | "-h") hostname ;;
-    "mac"  | "-m") ifconfig | grep ether | awk '{print $2}' ;;
-    *) hostname -I
+  case "$1" in
+    public  | -P) curl "http://ifconfig.me" ;;
+    private | -p) hostname -I ;;
   esac
 }
 
-alias speed='fast -u --single-line'
+alias speed="fast -u --single-line"
 alias clock="darshellclock"
+tz() {
+    TZ=$(timedatectl list-timezones | grep -i "$1" | head -n 1)
+    [ -n "$TZ" ] && timedatectl set-timezone "$TZ"
+    date
+}
 vault() { setopt LOCAL_OPTIONS NO_MONITOR
 flatpak run io.github.mpobaschnig.Vaults -o .enc/"$1" &> /dev/null; }
 alias batt="acpi -b | grep -v 'rate' | cut -d' ' -f 3-"
 alias wifi="nmcli dev wifi"
 alias udev="udevadm"
+mic() {
+  pactl load-module module-loopback 1> /dev/null
+  trap "pactl unload-module module-loopback" EXIT INT TERM
+  sleep infinity
+}
 
 dl() {
   case "${(L)1}" in
-    "video" | "-v") yt-dlp -P ~/dl -N 4 $2;;
-    "audio" | "-a") yt-dlp -P ~/dl -x -N 4 $2;;
+    video | -v) yt-dlp -P ~/dl -N 4 $2;;
+    audio | -a) yt-dlp -P ~/dl -x -N 4 $2;;
     *) wget -N -P ~/dl $1
   esac
 }
@@ -86,6 +96,7 @@ alias py="python"
 alias app="sudo dnf5"
 alias copr="sudo dnf copr"
 ver() { dnf list "$1" | grep "$1" | tr -s ' ' | cut -d' ' -f 2; }
+activate() { source "$1/bin/activate"; }
 alias open="handlr open"
 alias handle="handlr"
 alias c="code"
@@ -99,17 +110,17 @@ alias f="rg $RG_COLORS -iP"
 alias F="grep --color=auto --group-separator=$'\n———\n' -C3 -iP"
 alias fp="pgrep"
 hl() { grep --color -E -- "$1|\$" "${@:2}"; }
-alias re='perl -pe'
-alias p='bat --style=numbers,changes,grid --color=always --tabs=2'
+alias re="perl -pe"
+alias p="bat --style=numbers,changes,grid --color=always --tabs=2"
 alias pi="kitten icat"
-alias pg='less -R'
+alias pg="less -R"
 alias pd="pwd"
 type() {
   command file --mime-type "$1" | awk '{print $NF}'
 }
 
-alias wc='wc --words'
-alias lc='\wc --lines'
+alias wc="wc --words"
+alias lc="\wc --lines"
 much() {
   du -h -d 1 $1 2>/dev/null | grep '[0-9]\+G'
 }
@@ -120,8 +131,8 @@ zshaddhistory() { whence ${${(z)1}[1]} > /dev/null || return 1 }
 # —— SHORTCUTS ——————————————————
 
 #     ..
-alias ...='cd ../../'
-alias ....='cd ../../../'
+alias ...="cd ../../"
+alias ....="cd ../../../"
 
 alias -g dots/="$DOTS/"
 alias -g dl/="$HOME/dl/"
