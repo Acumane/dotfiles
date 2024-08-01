@@ -1,0 +1,21 @@
+# Kana + smaller UI
+
+window#osd {
+    border: 1px solid alpha(#3F3F50, 0.8);
+    background: alpha(#1F1F28, 0.8);
+}
+
+window#osd #container {
+    margin: 18px 22px;
+}
+
+window#osd image {
+    -gtk-icon-transform: scale(0.6);
+    margin: -12px;
+    margin-right: -4px;
+}
+
+window#osd progressbar {
+    min-height: 4px;
+    /* min-width: 100px; */
+}

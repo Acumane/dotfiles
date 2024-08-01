@@ -19,6 +19,7 @@
   "rofi/": "~/.config/rofi/",
   "sway/lock.conf": "~/.config/sway/lock.conf",
   "sway/img.conf": "~/.config/swayimg/config",
+  "sway/osd.css": "~/.config/sway/osd.css",
   "waybar/": "~/.config/waybar/",
   "zsh/zshenv": "/etc/zshenv",
   "zsh/zshrc": "~/.config/zsh/.zshrc",
