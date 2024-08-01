@@ -7,9 +7,9 @@ alias load="zcomet load"
 alias sudo='sudo ' # fix alias w/ sudo
 alias dots='dotfiles'
 
-alias ls="eza -F --icons" 
-alias la="eza -AF --icons -s modified"
-alias ld="eza -AFlm -T --level=1 --icons"
+alias l="eza --icons -F "; alias ls="l"
+alias la="eza --icons -AF -s modified"
+alias ld="eza --icons -AFlm -T --level=1 --time-style=relative"
 alias cp="cp -r"
 alias del="\rm -r"
 alias rm="trash-put"
@@ -48,13 +48,15 @@ zip() { command zip -r "$1.zip" "$1"/; }
 alias calc="bc"
 alias ping="grc ping -c 5"
 alias root="sudo -s"
-alias kernel=" uname -r"
-alias about="sudo dmidecode -q -t System | grep -E 'Name|Serial' \
-| tr -d '\t'"
+alias kernel="uname -r"
+alias about="hostnamectl | grep -E '(Operating|Model|Kernel)' | sed 's/^ *//' \
+&& sudo dmidecode -q -t System | grep 'Serial' | tr -d '\t'"
 alias hw="hwinfo --short"
 alias user="echo $USER"
 alias net="nmcli"
 alias name="hostname"
+alias ports='grc netstat -tulanp'
+alias sockets='grc netstat -xlanp'
 alias mac="ifconfig | grep ether | awk '{print \$2}'"
 ip() {
   case "$1" in
@@ -63,6 +65,8 @@ ip() {
   esac
 }
 
+spin() { cur=$(pwd); 
+cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
 alias speed="fast -u --single-line"
 alias clock="darshellclock"
 tz() {
@@ -72,7 +76,9 @@ tz() {
 }
 vault() { setopt LOCAL_OPTIONS NO_MONITOR
 flatpak run io.github.mpobaschnig.Vaults -o .enc/"$1" &> /dev/null; }
+# vault() { gocryptfs -allow_other -q -i 30m -- "$HOME/.enc/$1" "$HOME/$1"; }
 alias batt="acpi -b | grep -v 'rate' | cut -d' ' -f 3-"
+alias vpn="?"
 alias wifi="nmcli dev wifi"
 alias udev="udevadm"
 mic() {
@@ -115,15 +121,15 @@ alias p="bat --style=numbers,changes,grid --color=always --tabs=2"
 alias pi="kitten icat"
 alias pg="less -R"
 alias pd="pwd"
-type() {
-  command file --mime-type "$1" | awk '{print $NF}'
-}
 
 alias wc="wc --words"
 alias lc="\wc --lines"
-much() {
-  du -h -d 1 $1 2>/dev/null | grep '[0-9]\+G'
-}
+type() { file --mime-type "$1" | awk '{print $NF}'; }
+alias info="eza --icons -AFlOXm -T --level=0 --git --smart-group --time-style=relative"
+alias space="grc lsblk -fne7 -o NAME,LABEL,SIZE,FSUSE%,MOUNTPOINTS"
+much() { du -h -d 1 $1 2>/dev/null | grep --color=none '[0-9]\+G'; }
+alias i="info"; alias t="type"
+
 
 # Validate commands* before appending to HISTFILE
 zshaddhistory() { whence ${${(z)1}[1]} > /dev/null || return 1 }

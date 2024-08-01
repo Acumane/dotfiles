@@ -11,4 +11,4 @@
   branches = branch -a --sort=-committerdate --format="%(refname:short)"
 
 [filter "redact"]
-  clean = sed "s/.*#\\ REDACT//"
+  clean = sed "s/.*#\\ REDACT\\ //"
