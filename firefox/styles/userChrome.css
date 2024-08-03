@@ -1,5 +1,4 @@
 @import "firefox-gnome-theme/userChrome.css";
-@import "tweaks/hide-tabs-scrollbuttons.css";
 /* @import "tweaks/prevent-tab-overflow.css"; */
 @import "tweaks/floating-findbar.css";
 @import "tweaks/minimal-ext-menu.css";
@@ -15,10 +14,9 @@
 }
 
 /* Default window background */
-#tabbrowser-tabpanels,
-#tabbrowser-tabpanels[pendingpaint],
-browser {
-	background-color: white !important;
+browser,
+#tabbrowser-tabpanels {
+	background-color: #1E1E27 !important;
 }
 
 /* Hide UI elements */
@@ -52,6 +50,10 @@ label#userContext-label { /* Container label */
 	display: none;
 }
 
+/* Container add-on */
 .identity-icon-circle {
 	height: 12px !important;
+}
+hbox.urlbar-addon-page-action {
+	display: none;
 }

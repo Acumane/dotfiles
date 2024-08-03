@@ -10,11 +10,13 @@
     height: 75%;
 }
 
-img {
+img[src*="ghchart"] {
     transform: translate(-15px, -20px) scale(1.1);
     clip-path: inset(15px 0 0 20px);
     filter: sepia(0.4) hue-rotate(35deg);
-    /* filter:  invert(90%) sepia(1) hue-rotate(-220deg); */
+}
 
+[data-darkreader-mode="dynamic"] img[src*="ghchart"] {
+    filter:  invert(90%) sepia(1) hue-rotate(-220deg);
 }
 </style>
