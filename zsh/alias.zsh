@@ -22,15 +22,16 @@ mk() {
   || touch "$1"
 }
 alias mkd="mkdir -p"
-alias chg="entr -pc"
+alias watch="entr -pc"
 alias first="head -n 1" 
 alias last="tail -n 1"
 
+alias sys="systemctl"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
-alias sys="systemctl"
 alias suspend="systemctl suspend"
-alias hibernate="systemctl hibernate"
+alias hibernate="$DOTS/scripts/idle-lap.sh $MON -i && /bin/systemctl hibernate"
+alias off="hibernate"; alias hiber="hibernate"
 alias logout="hyprctl dispatch exit"
 alias lock="$DOTS/scripts/idle-lap.sh $MON -f"
 bios() {
@@ -65,7 +66,7 @@ ip() {
   esac
 }
 
-spin() { cur=$(pwd); 
+spin() { cur=$(pwd);
 cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
 alias speed="fast -u --single-line"
 alias clock="darshellclock"
@@ -79,7 +80,14 @@ flatpak run io.github.mpobaschnig.Vaults -o .enc/"$1" &> /dev/null; }
 # vault() { gocryptfs -allow_other -q -i 30m -- "$HOME/.enc/$1" "$HOME/$1"; }
 alias batt="acpi -b | grep -v 'rate' | cut -d' ' -f 3-"
 alias vpn="?"
-alias wifi="nmcli dev wifi"
+wifi() {
+  case "${(L)1}" in
+    pass)
+      ssid=$(nmcli -t -f NAME connection show --active | head -n 1)
+      nmcli -s -g 802-11-wireless-security.psk connection show "${2:-$ssid}";;
+    *) nmcli dev wifi ${@:1}
+  esac
+}
 alias udev="udevadm"
 mic() {
   pactl load-module module-loopback 1> /dev/null
@@ -122,8 +130,8 @@ alias pi="kitten icat"
 alias pg="less -R"
 alias pd="pwd"
 
-alias wc="wc --words"
-alias lc="\wc --lines"
+lc() { awk 'END {print NR, "lines"}' "$@"; }
+wc() { awk '{w += NF} END {print w, "words"}' "$@"; }
 type() { file --mime-type "$1" | awk '{print $NF}'; }
 alias info="eza --icons -AFlOXm -T --level=0 --git --smart-group --time-style=relative"
 alias space="grc lsblk -fne7 -o NAME,LABEL,SIZE,FSUSE%,MOUNTPOINTS"

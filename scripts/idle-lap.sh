@@ -12,6 +12,9 @@ if [ "$2" = "-f" ]; then
     exit
 fi
 
+# Immediate (-i): lockscreen only
+[ "$2" = "-i" ] && { swaylock --conf="$DOTS/sway/lock.conf" --grace=0 & exit; }
+
 # Passive (battery): fade (50s), lock (1m30s), backlight off (1m33s), suspend (2m30s)
 swayidle \
 timeout 50 "(acpi -a | grep -q off) && (brillo -O; brillo -S 0% -u 3000000)" resume "pkill brillo; brillo -I -u 150000" \
