@@ -85,6 +85,7 @@ wifi() {
     pass)
       ssid=$(nmcli -t -f NAME connection show --active | head -n 1)
       nmcli -s -g 802-11-wireless-security.psk connection show "${2:-$ssid}";;
+    speed) fast -u --single-line;;
     *) nmcli dev wifi ${@:1}
   esac
 }
@@ -115,9 +116,10 @@ alias open="handlr open"
 alias handle="handlr"
 alias c="code"
 alias fm="ranger"
-v() { nvim 2> /dev/null; }
+alias v="nvim"
+_v() { nvim 2> /dev/null; }
 t() { nvim -c ':terminal' 2> /dev/null; }
-zle -N v; zle -N t; zle -N fm
+zle -N _v; zle -N t; zle -N fm
 
 alias keys="showkey -a"
 alias f="rg $RG_COLORS -iP"
@@ -151,6 +153,7 @@ alias ....="cd ../../../"
 alias -g dots/="$DOTS/"
 alias -g dl/="$HOME/dl/"
 alias -g conf/="$HOME/.config/"
+alias -g repos/="/etc/yum.repos.d/"
 alias -g bin/="/bin/"
 alias -g ubin/="/usr/bin/"
 alias -g lbin/="$HOME/.local/bin/"

@@ -1,6 +1,6 @@
 # /etc/zshenv: system-wide .zshenv file
 
-# —— VARS ———————————————————————
+# —— PATHS ——————————————————————
 
 export HOME="/home/bren"
 export DOTS="$HOME/dotfiles"
@@ -10,20 +10,27 @@ export DOTFILES_REPO_PATH="$DOTS"
 export CACHE="$HOME/.cache"
 export CONFIG="$HOME/.config"
 
+export MODULAR_HOME="$HOME/.modular"
+export PNPM_HOME="$HOME/.local/share/pnpm"
+
+typeset -U PATH path
+path+=(
+    "$HOME/.local/bin"
+    "$HOME/.cargo/bin"
+    "$(go env GOPATH)/bin"
+    "$MODULAR_HOME"
+    "$PNPM_HOME"
+)
+export PATH
+
+# —— VARS ———————————————————————
+
 export WORDCHARS=""
 export ZSHZ_OWNER="bren"
 export PROMPT_EOL_MARK=""
 export MON="dev:/dev/i2c-12"
 export EDITOR="nvim"
 export SUDO_PROMPT="Password: "
-
-export PATH=$PATH:"$HOME/.local/bin"
-export PATH=$PATH:"$HOME/.cargo/bin"
-export PATH=$PATH:$(go env GOPATH)/bin
-
-export MODULAR_HOME="$HOME/.modular"
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
 
 export BAT_THEME="base16"
 export GREP_COLORS="ms=1;30;43"

@@ -44,5 +44,5 @@ bindkey '^[f' opener
 bindkey '^[F' dirs
 bindkey '^[[3;3~' killer
 bindkey '^e' files
-bindkey '^[v' v
+bindkey '^[v' _v
 bindkey '^[t' t
