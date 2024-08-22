@@ -4,6 +4,7 @@
 
 export HOME="/home/bren"
 export DOTS="$HOME/dotfiles"
+export SCRIPTS="$DOTS/scripts"
 export ZDOTDIR="$HOME/.config/zsh"
 export DOTFILES_REPO_PATH="$DOTS"
 
