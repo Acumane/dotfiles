@@ -7,6 +7,7 @@
 /* Icon color fix */
 :root {
 	--gnome-icons-hack-filter: invert(100%) sepia(0.35) hue-rotate(20deg) brightness(1.05) !important;
+	--gnome-window-color: var(--gnome-toolbar-color) !important; /* revert v121.1 */
 }
 
 #downloads-button, #downloads-indicator-icon .toolbarbutton-icon {

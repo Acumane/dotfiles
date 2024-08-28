@@ -4,39 +4,15 @@
  *--------------------------------------------------------------------------------------------*/
 
 /*
-	################################### z-index explainer ###################################
-
-	Tabs have various levels of z-index depending on state, typically:
-	- scrollbar should be above all
-	- sticky (compact, shrink) tabs need to be above non-sticky tabs for scroll under effect
-	including non-sticky tabs-top borders, otherwise these borders would not scroll under
-	(https://github.com/microsoft/vscode/issues/111641)
-	- bottom-border needs to be above tabs bottom border to win but also support sticky tabs
-	(https://github.com/microsoft/vscode/issues/99084) <- this currently cannot be done and
-	is still broken. putting sticky-tabs above tabs bottom border would not render this
-	border at all for sticky tabs.
-
-	On top of that there is 3 borders with a z-index for a general border below or above tabs
-	- tabs bottom border
-	- editor title bottom border (when breadcrumbs are disabled, this border will appear
-	same as tabs bottom border)
-	- editor group border
-
-	Finally, we show a drop overlay that should always be on top of everything.
-
-	The following tabls shows the current stacking order:
-
-	[z-index] 	[kind]
-			12  drag and drop overlay
-			11 	scrollbar
-			10	active-tab border-bottom
-			9	tabs, title border bottom
-			8	sticky-tab
-			6  	active/dirty-tab border top
-			5   editor group border / editor group header border
-			0   tab
-
-	##########################################################################################
+	z-index:
+	12	drag and drop overlay
+	11	scrollbar
+	10	active-tab border-bottom
+	9	tabs, title border bottom
+	8	sticky-tab
+	6	active/dirty-tab border top
+	5	editor group border / editor group header border
+	0	tab
 */
 
 .linux {
@@ -58,10 +34,9 @@ div.sticky-compact {
 }
 
 /* Declutter panel options */
-ul.actions-container[aria-label="Terminal actions"],
-div.custom-view-tree-node-item-resourceLabel div.actions {
+ul.actions-container[aria-label="Terminal actions"] {
 	visibility: hidden !important;
-}
+} /* div.custom-view-tree-node-item-resourceLabel div.actions */
 
 /* Title Container */
 .monaco-workbench .part.editor > .content .editor-group-container > .title > .tabs-and-actions-container {
