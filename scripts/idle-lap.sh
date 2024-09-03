@@ -18,10 +18,10 @@ fi
 # Passive (battery): fade (50s), lock (1m30s), backlight off (1m33s), suspend (2m30s)
 swayidle \
 timeout 50 "(acpi -a | grep -q off) && (brillo -O; brillo -S 0% -u 3000000)" resume "pkill brillo; brillo -I -u 150000" \
-timeout 90 "(acpi -a | grep -q off) && (swaylock --conf='$DOTS/sway/lock.conf' & ddccontrol -r 0xd6 -w 5 $1)" \
+timeout 90 "(acpi -a | grep -q off) && (swaylock --conf='$DOTS/sway/lock.conf' --grace-no-mouse & ddccontrol -r 0xd6 -w 5 $1)" \
 timeout 93 "(acpi -a | grep -q off) && blight set 0" resume "brillo -I -u 150000" \
 timeout 150 "(acpi -a | grep -q off) && systemctl suspend" after-resume "brillo -I -u 150000" \
 timeout 170 "(acpi -a | grep -q on) && (brillo -O; brillo -S 0% -u 3000000)" resume "pkill brillo; brillo -I -u 150000" \
-timeout 210 "(acpi -a | grep -q on) && (swaylock --conf='$DOTS/sway/lock.conf' & ddccontrol -r 0xd6 -w 5 $1)" \
+timeout 210 "(acpi -a | grep -q on) && (swaylock --conf='$DOTS/sway/lock.conf' --grace-no-mouse & ddccontrol -r 0xd6 -w 5 $1)" \
 timeout 213 "(acpi -a | grep -q on) && blight set 0" resume "brillo -I -u 150000" \
 # Passive (charging): fade (2m50s), lock (3m30s), backlight off (3m33s)

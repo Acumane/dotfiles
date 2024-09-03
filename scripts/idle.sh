@@ -10,7 +10,7 @@ if [ "$2" = "-f" ]; then
 fi
 
 wayidle -t 60 ddccontrol -r 0xd6 -w 4 $1 & iPID=$!
-swaylock --conf="$DOTS/sway/lock.conf"
+swaylock --conf="$DOTS/sway/lock.conf" --grace-no-mouse
 if [[ $? -eq 0 || $? -eq 2 ]]; then
     kill $iPID
 fi

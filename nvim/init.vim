@@ -116,6 +116,7 @@ tnoremap <Esc> <C-\><C-n>
 " Power delete (kitty)
 nmap <S-Del> dvb
 if !exists('g:vscode')
+  colorscheme kanagawa
   imap <S-Del> <C-w>
 endif
 
