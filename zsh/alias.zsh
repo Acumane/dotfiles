@@ -4,12 +4,12 @@ alias reload="exec zsh"
 alias bundle="antigen bundle"
 alias using="antigen use"
 alias load="zcomet load"
-alias sudo='sudo ' # fix alias w/ sudo
-alias dots='dotfiles'
+alias sudo="\sudo -E env PATH=$PATH "
+alias dots="dotfiles"
 
 alias l="eza --icons -F "; alias ls="l"
 alias la="eza --icons -AF -s modified"
-alias ld="eza --icons -AFlm -T --level=1 --time-style=relative"
+alias ld="eza --icons -AF -lm -T --level=1 --time-style=relative"
 alias cp="cp -r"
 alias del="\rm -r"
 alias rm="trash-put"
@@ -48,13 +48,12 @@ zip() { command zip -r "$1.zip" "$1"/; }
 # unzip
 alias calc="bc"
 alias ping="grc ping -c 5"
-alias root="sudo -s"
+alias root="\sudo -s"
 alias kernel="uname -r"
 alias about="hostnamectl | grep -E '(Operating|Model|Kernel)' | sed 's/^ *//' \
 && sudo dmidecode -q -t System | grep 'Serial' | tr -d '\t'"
 alias hw="hwinfo --short"
 alias user="echo $USER"
-alias net="nmcli"
 alias name="hostname"
 alias ports='grc netstat -tulanp'
 alias sockets='grc netstat -xlanp'
@@ -79,13 +78,14 @@ vault() { setopt LOCAL_OPTIONS NO_MONITOR
 flatpak run io.github.mpobaschnig.Vaults -o .enc/"$1" &> /dev/null; }
 # vault() { gocryptfs -allow_other -q -i 30m -- "$HOME/.enc/$1" "$HOME/$1"; }
 alias batt="acpi -b | grep -v 'rate' | cut -d' ' -f 3-"
-alias vpn="?"
-wifi() {
+alias vpn="***"
+net() {
   case "${(L)1}" in
     pass)
       ssid=$(nmcli -t -f NAME connection show --active | head -n 1)
       nmcli -s -g 802-11-wireless-security.psk connection show "${2:-$ssid}";;
     speed) fast -u --single-line;;
+    type) nmcli -t -f TYPE,STATE device status | grep ":connected$" | head -n 1 | cut -d':' -f1;;
     *) nmcli dev wifi ${@:1}
   esac
 }
@@ -108,9 +108,15 @@ alias pull="sudo tailscale file get"
 
 alias pn="pnpm"
 alias py="python"
-alias app="sudo dnf5"
+app() {
+  case $1 in
+    repo) shift; sudo dnf config-manager setopt $1.${2#--};;
+    cleanup) sudo dnf autoremove;;
+    *) sudo dnf --forcearch=x86_64 "$@";;
+  esac
+}
 alias copr="sudo dnf copr"
-ver() { dnf list "$1" | grep "$1" | tr -s ' ' | cut -d' ' -f 2; }
+ver() { dnf list "$1" --installed | grep "$1" | tr -s ' ' | cut -d' ' -f 2; }
 activate() { source "$1/bin/activate"; }
 alias open="handlr open"
 alias handle="handlr"
@@ -153,7 +159,7 @@ alias ....="cd ../../../"
 alias -g dots/="$DOTS/"
 alias -g dl/="$HOME/dl/"
 alias -g conf/="$HOME/.config/"
-alias -g repos/="/etc/yum.repos.d/"
+alias -g dnf/="/etc/yum.repos.d/"
 alias -g bin/="/bin/"
 alias -g ubin/="/usr/bin/"
 alias -g lbin/="$HOME/.local/bin/"

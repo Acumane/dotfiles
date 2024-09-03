@@ -4,7 +4,6 @@ import json
 import requests
 from os import path
 from datetime import datetime
-from subprocess import getoutput as run
 
 WEATHER_ICONS = {
     '113': '☀️️',
@@ -87,7 +86,7 @@ if path.isfile(CACHE):
     if ago < 600:
         print(open(CACHE, "r").read()); exit()
 
-CITY = "Berkeley"
+CITY = "***"
 weather = requests.get(f"https://wttr.in/{CITY}?format=j1").json()
 data = {}
 

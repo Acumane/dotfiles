@@ -22,7 +22,7 @@ undo() {
 
   wsID=$(hyprctl activeworkspace -j | jq '.id')
   $do movetoworkspacesilent $wsID,address:$(cut -d' ' -f2 <<< "$id")
-  notify-send -u low "$(cut -d' ' -f1 <<< "$id") restored"
+  notify-send -u low -i - "$(cut -d' ' -f1 <<< "$id") restored"
 }
 
 ([ "$1" == "-u" ] && undo) || hide

@@ -6,7 +6,7 @@ KEYD="$HOME/dotfiles/keyd/global.conf"
 
 if [ "$2" == "reload" ]; then
     cp "$KEYD" /etc/keyd/default.conf && keyd reload
-    notify-send -u low "keyd reloaded"
+    notify-send -u low -i - "keyd reloaded"
     exit
 fi
 
@@ -21,11 +21,11 @@ if [[ "$GAME" = 1 ]]; then
         keyword animations:enabled 0;\
         keyword decoration:blur:enabled 0"
 
-    [[ "$1" == "-k" ]] && notify-send "Keys switched to game mode" && exit
+    [[ "$1" == "-k" ]] && notify-send -i - "Keys switched to game mode" && exit
 
     liquidctl --match h80i set logo color fixed ff0000 --alert-threshold 75
     openrgb -p game.orp
-    notify-send -u low "Switched to game mode"
+    notify-send -u low -i - "Switched to game mode"
 elif [[ "$GAME" = 0 ]]; then
     # ratbagctl "G900" profile active set 0
     sed -i "s/${SWAP[1]}/${SWAP[0]}/" $KEYD
@@ -35,9 +35,9 @@ elif [[ "$GAME" = 0 ]]; then
     cp $KEYD /etc/keyd/default.conf && keyd reload
 
     hyprctl reload
-    [[ "$1" == "-k" ]] && notify-send -u low "Keys switched to main mode" && exit
+    [[ "$1" == "-k" ]] && notify-send -u low -i - "Keys switched to main mode" && exit
 
     liquidctl --match h80i set logo color fixed 75a6ff --alert-threshold 60
     openrgb -p main.orp
-    notify-send -u low "Switched to main mode"
+    notify-send -u low -i - "Switched to main mode"
 fi
