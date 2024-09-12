@@ -30,10 +30,10 @@ alias sys="systemctl"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias suspend="systemctl suspend"
-alias hibernate="$DOTS/scripts/idle-lap.sh $MON -i && /bin/systemctl hibernate"
+alias hibernate="$DOTS/scripts/idle-lap.sh -i && /bin/systemctl hibernate"
 alias off="hibernate"; alias hiber="hibernate"
 alias logout="hyprctl dispatch exit"
-alias lock="$DOTS/scripts/idle-lap.sh $MON -f"
+alias lock="$DOTS/scripts/idle-lap.sh -f"
 bios() {
   case "${(L)1}" in
     -v) sudo dmidecode -q -t bios | grep -E "Version|Revision" | \
@@ -54,7 +54,7 @@ alias about="hostnamectl | grep -E '(Operating|Model|Kernel)' | sed 's/^ *//' \
 && sudo dmidecode -q -t System | grep 'Serial' | tr -d '\t'"
 alias hw="hwinfo --short"
 alias user="echo $USER"
-alias name="hostname"
+alias name="echo $(hostname)/$(echo $USER)"
 alias ports='grc netstat -tulanp'
 alias sockets='grc netstat -xlanp'
 alias mac="ifconfig | grep ether | awk '{print \$2}'"
@@ -70,10 +70,14 @@ cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
 alias speed="fast -u --single-line"
 alias clock="darshellclock"
 tz() {
-    TZ=$(timedatectl list-timezones | grep -i "$1" | head -n 1)
-    [ -n "$TZ" ] && timedatectl set-timezone "$TZ"
-    date
+  local TZ
+  if [ -z "$1" ]
+  then TZ=$(curl -s http://ip-api.com/json | jq -r '.timezone')
+  else TZ=$(timedatectl list-timezones | grep -i "$1" | head -n 1); fi
+  [ -n "$TZ" ] && timedatectl set-timezone "$TZ"
+  date
 }
+alias loc="curl -s http://ip-api.com/json | jq -r '.city + \", \" + .region + \" \" + .zip'"
 vault() { setopt LOCAL_OPTIONS NO_MONITOR
 flatpak run io.github.mpobaschnig.Vaults -o .enc/"$1" &> /dev/null; }
 # vault() { gocryptfs -allow_other -q -i 30m -- "$HOME/.enc/$1" "$HOME/$1"; }
@@ -110,7 +114,11 @@ alias pn="pnpm"
 alias py="python"
 app() {
   case $1 in
-    repo) shift; sudo dnf config-manager setopt $1.${2#--};;
+    repo) shift
+    case $1 in
+      add) dnf config-manager addrepo --from-repofile="$2";;
+      *) dnf config-manager setopt $1.${2#--};;
+    esac;;
     cleanup) sudo dnf autoremove;;
     *) sudo dnf --forcearch=x86_64 "$@";;
   esac
