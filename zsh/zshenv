@@ -18,6 +18,8 @@ typeset -U PATH path
 path+=(
     "$HOME/.local/bin"
     "$HOME/.cargo/bin"
+    "$HOME/.cabal/bin"
+    "$HOME/.ghcup/bin"
     "$(go env GOPATH)/bin"
     "$MODULAR_HOME"
     "$PNPM_HOME"
@@ -25,6 +27,8 @@ path+=(
 export PATH
 
 # —— VARS ———————————————————————
+
+source $DOTS/.env
 
 export WORDCHARS=""
 export ZSHZ_OWNER="bren"

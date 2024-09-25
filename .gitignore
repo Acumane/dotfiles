@@ -2,3 +2,4 @@ code/libadwaita/
 wolf/styles/firefox-gnome-theme/
 scripts/keys.py
 __pycache__
+.env
