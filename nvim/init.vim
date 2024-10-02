@@ -46,25 +46,27 @@ let surround =
 
 for ch in surround
   " autowrapping word in normal mode
-  exec "nnoremap <silent><nowait>" ch ":<C-u>exec 'norm vhwS".ch."'<CR>"
+  exec "nnoremap <nowait>" ch "<Cmd>norm vhwS".ch."<CR>"
   " autowrapping selection in visual mode
-  exec "vnoremap <silent><nowait>" ch ":<C-u>exec 'norm gvS".ch."'<CR>"
+  exec "vnoremap <nowait>" ch ":<C-u>exec 'norm gvS".ch."'<CR>"
   " delete given pair (d*)
   exec "nmap d".ch "ds".ch
 endfor
 " TODO: mark conflict
-nnoremap <silent> '' :<C-u>exec "norm vhwS'"<CR>
-vnoremap <silent> '' :<C-u>exec "norm gvS'"<CR>
+nnoremap ' <Cmd>norm vhwS'<CR>
+vnoremap ' :<C-u>exec "norm gvS'"<CR>
 nmap d' ds'
 
 " cycle case/CASE
 vnoremap  ~ ~gv
+vnoremap  u ~gv
 nnoremap  ~ ~h
+nnoremap  u ~h
+
 map tk tn
 "   t* (to case) - WIP
 noremap tt :lua require('textcase')
 \ .current_word('to_phrase_case')<CR>
-" *use Ctrl+u/r
 
 nnoremap = <C-a> 
 nnoremap + <C-a> 
@@ -113,17 +115,20 @@ vnoremap <C-a> gg^oG$h
 inoremap <C-a> <Esc>gg^vG$h
 tnoremap <Esc> <C-\><C-n>
 
-" Power delete (kitty)
-nmap <S-Del> dvb
 if !exists('g:vscode')
+  " Power delete (kitty)
+  nmap <S-Del> dvb
   colorscheme kanagawa
   imap <S-Del> <C-w>
+else
+  set cmdheight=1
 endif
 
 vmap <C-c> y
 vmap <C-x> x
 map  <C-p> p
 map  <C-u> u
+" map u <Nop>
 "    <C-r>
 
 " New text objects
@@ -175,25 +180,25 @@ endfunction
 
 " better word nav
 " for [l, r] in items({'w': 'w', 'e': 'e', 'W': 'b', 'E': 'ge'})
-  " exec "nnoremap <silent>" l ":call Word('".r."')<CR>"
-  " exec "vnoremap <silent>" l ":call Word('".r."', 'gv')<CR>"
+  " exec "nnoremap" l ":call Word('".r."')<CR>"
+  " exec "vnoremap" l ":call Word('".r."', 'gv')<CR>"
 " endfor
 "       w
 noremap W     b
 "       e
 noremap E     ge
 
-nnoremap t    H
-nnoremap b    L
+" nnoremap t    H
+" nnoremap b    L
 "        M
 noremap  T    gg
 map      B    GL
 
-" \s, wrap compatible
 noremap  I    {
 noremap  K    }
 noremap  J    g0
-noremap  L    g_
+nnoremap L    $
+vnoremap L    g_
 
 " commands (WIP)
 noremap / :
@@ -201,13 +206,11 @@ nnoremap f /
 vnoremap f <Esc>*
 noremap <enter> n
 noremap <S-enter> N
-noremap <silent> <Esc><Esc> :<C-u>nohl<CR>
+nnoremap <Esc> <Cmd>nohl<CR>
 
-" 'Go', ex. 5g
-nnoremap '    m
-nnoremap g'   `
+nnoremap ; `
+" <#>GG -> <#>g
 nnoremap <nowait><expr> g v:count ? 'G' : 'g'
-" TODO: m -> multi
 
 " better newline!
 noremap n o
