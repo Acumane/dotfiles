@@ -1,6 +1,5 @@
 {
-	"layer": "top",
-	// "passthrough": true,
+	"layer": "overlay",
 	"margin-bottom": -500,
 	"spacing": 0,
 

@@ -27,5 +27,4 @@
   "zsh/alias.zsh": "~/.config/zsh/alias.zsh",
   "user.dirs": "~/.config/user-dirs.dirs",
   ".gitconfig": "~/.gitconfig"
-
 }

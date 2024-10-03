@@ -2,7 +2,7 @@
 STORE="/tmp/mode"
 
 mode() {
-	hyprctl dispatch scroller:setmode $1
+    hyprctl dispatch scroller:setmode $1
     echo $1 > $STORE
     notify-send -u low -i - "Switched to $1 mode"
 }
