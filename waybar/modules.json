@@ -22,7 +22,7 @@
 	},
 
 	"custom/weather": {
-		"tooltip": true,
+		"tooltip": false,
 		"tooltip-format": "<b>{}</b>",
 		"interval": 600,
 		"exec": "weather.py",
@@ -31,6 +31,7 @@
 
 	"clock#time": {
 		// "timezone": "America/New_York",
+		"tooltip": false,
 		"format": "{:%I:%M %p}",
 		"format-alt": "{:%I:%M:%S %p}",
 		"interval": 1

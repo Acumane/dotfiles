@@ -2,7 +2,8 @@
 
 * {
 	bg:       #1F1F28;
-	box:      #36364680;
+	fg:       #363646;
+	box:      #2A2A37;	
 	text:     #DDD8BB;
 	title:    #979589;
 	dim:      #66667280;
@@ -45,9 +46,7 @@ prompt {
 }
 
 entry {
-	placeholder:        "Search";
 	padding:            2px 0 0 0;
-	placeholder-color:  @dim;
 }
 
 textbox {
@@ -73,7 +72,7 @@ element {
 }
 
 element selected normal, element selected active {
-	background-color: @box;
+	background-color: @fg;
 }
 
 element-icon {
