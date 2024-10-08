@@ -33,7 +33,6 @@ source $DOTS/.env
 export WORDCHARS=""
 export ZSHZ_OWNER="bren"
 export PROMPT_EOL_MARK=""
-export MON="dev:/dev/i2c-12"
 export EDITOR="nvim"
 export SUDO_PROMPT="Password: "
 

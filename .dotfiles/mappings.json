@@ -14,7 +14,7 @@
   "noti/crontab": "/var/spool/cron/bren",
   "nvim/init.vim": "~/.config/nvim/init.vim",
   "nvim/init.lua": "~/.config/nvim/lua/init.lua",
-  "nvim/kana.lua": "~/.config/nvim/lua/kana.lua",
+  "nvim/status.lua": "~/.config/nvim/lua/status.lua",
   "ranger/": "~/.config/ranger/",
   "rofi/": "~/.config/rofi/",
   "sway/lock.conf": "~/.config/sway/lock.conf",
@@ -25,6 +25,5 @@
   "zsh/zshrc": "~/.config/zsh/.zshrc",
   "zsh/init.zsh": "~/.config/zsh/init.zsh",
   "zsh/alias.zsh": "~/.config/zsh/alias.zsh",
-  "user.dirs": "~/.config/user-dirs.dirs",
-  ".gitconfig": "~/.gitconfig"
+  "user.dirs": "~/.config/user-dirs.dirs"
 }
