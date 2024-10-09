@@ -1,0 +1,13 @@
+#!/bin/bash
+
+perc=$(acpi -b | grep -v 'rate' | cut -d' ' -f 3-) # internal
+# echo -e "$(hostname):\t\t${perc:-N/A}"
+[ -z "$perc" ] || echo -e "$perc\n"
+
+bluetoothctl devices | while read -r _ mac name; do
+    path=$(upower -e | grep -i "${mac//:/_}")
+    if [ -n "$path" ]; then
+        perc=$(upower -i "$path" | awk '/percentage:/ {print $2}')
+        echo -e "$name: $perc"
+    fi
+done

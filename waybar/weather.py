@@ -2,7 +2,7 @@
 
 import json
 import requests
-from os import path, getenv
+from os import path
 from datetime import datetime
 
 WEATHER_ICONS = {
@@ -86,8 +86,10 @@ if path.isfile(CACHE):
     if ago < 600:
         print(open(CACHE, "r").read()); exit()
 
-CITY = getenv("CITY")
-weather = requests.get(f"https://wttr.in/{CITY}?format=j1").json()
+response = requests.get("http://ip-api.com/json")
+loc = response.json()
+city = f"{loc["city"]},{loc["region"]}"
+weather = requests.get(f"https://wttr.in/{city}?format=j1").json()
 data = {}
 
 def formatTime(time):

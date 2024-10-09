@@ -81,7 +81,6 @@ alias loc="curl -s http://ip-api.com/json | jq -r '.city + \", \" + .region + \"
 vault() { setopt LOCAL_OPTIONS NO_MONITOR
 flatpak run io.github.mpobaschnig.Vaults -o .enc/"$1" &> /dev/null; }
 # vault() { gocryptfs -allow_other -q -i 30m -- "$HOME/.enc/$1" "$HOME/$1"; }
-alias batt="acpi -b | grep -v 'rate' | cut -d' ' -f 3-"
 alias vpn="mullvad"
 net() {
   case "${(L)1}" in
