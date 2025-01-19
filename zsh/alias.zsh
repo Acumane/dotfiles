@@ -67,8 +67,14 @@ ip() {
   esac
 }
 
+vm() { cur=$(pwd);
+cd "$HOME/VMs" && quickemu --vm $1.conf ${@:2} && cd "$cur"; }
 spin() { cur=$(pwd);
 cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
+key() {
+case $1 in
+    reload) sudo cp $DOTS/keyd/global.conf /etc/keyd/default.conf;;
+    *) keyd "$@";; esac; }
 alias clock="while true; do clear; date '+%b %-d, %-I:%M:%S %p'; sleep 1; done"
 alias weather="curl -s 'wttr.in/?format=%c+%f' | sed 's/+//g'"
 tz() {

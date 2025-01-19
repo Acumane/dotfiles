@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Run hyprctl dispatch as root w/o env vars
+HIS=$(ls "/run/user/$(id -u)/hypr" | head -n 1)
+HYPRLAND_INSTANCE_SIGNATURE=$HIS hyprctl dispatch "$@"
