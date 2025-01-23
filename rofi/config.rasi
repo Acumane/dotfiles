@@ -5,9 +5,7 @@ configuration {
   hover-select: true;
   /* steal-focus: true; */
 
-  display-drun: "RUN";
-  display-clipboard: "COPY";
-  display-filebrowser: "files";
+  display-drun: "";
   drun-display-format: "{name}";
   font: "Akkurat 11";
   eh: 1;
