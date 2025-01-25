@@ -12,10 +12,30 @@ div#be5invis\.vscode-custom-css {
 	visibility: hidden !important;
 }
 
+/* Declutter panel options */
+.title.has-composite-bar>.title-actions .monaco-action-bar .actions-container {
+	visibility: hidden !important;
+}
+
 /* Remove tab "x" button */
-a.action-label.codicon.codicon-close {
+a.action-label.codicon.codicon-close,
+.title.has-composite-bar>.global-actions .monaco-action-bar .action-item:nth-child(2) {
 	display: none !important;
 }
+
 .tabs-container>.tab>.tab-actions {
 	width: 14px !important;
+}
+
+/* Remove obvious titles */
+.sidebar>.title>.title-label h2 {
+	visibility: hidden !important;
+}
+
+.part.statusbar.status-border-top:after {
+	height: 0.5px !important;
+}
+
+div.monaco-inputbox, li.action-item, a.monaco-button {
+	border-radius: 4px !important;
 }

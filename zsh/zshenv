@@ -58,7 +58,7 @@ export FZF_DEFAULT_OPTS="
 --bind 'alt-p:change-preview-window(hidden|top)'
 --bind 'space:toggle'"
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
-export XCURSOR_SIZE=20 XCURSOR_THEME=Bibata-Modern-Classic
+export XCURSOR_SIZE=20 XCURSOR_THEME=Bibata-Kana
 
 export _ZO_RESOLVE_SYMLINKS=1 
 export HSA_OVERRIDE_GFX_VERSION=10.3.0

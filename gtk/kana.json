@@ -25,7 +25,7 @@
         "headerbar_border_color": "rgba(0, 0, 0, 0.1)",
         "headerbar_backdrop_color": "#1F1F28",
         "headerbar_shade_color": "rgba(0, 0, 0, 0.1)",
-        "card_bg_color": "#363646",
+        "card_bg_color": "#24242e",
         "card_fg_color": "#DCD7BA",
         "card_shade_color": "rgba(0, 0, 0, 0.1)",
         "dialog_bg_color": "#2A2A37",
@@ -34,10 +34,10 @@
         "popover_fg_color": "#DCD7BA",
         "shade_color": "rgba(0, 0, 0, 0.3)",
         "scrollbar_outline_color": "#3D3846",
-        "sidebar_bg_color": "@window_bg_color",
+        "sidebar_bg_color": "#1C1C25",
         "sidebar_fg_color": "@window_fg_color",
-        "sidebar_border_color": "@window_bg_color",
-        "sidebar_backdrop_color": "@window_bg_color"
+        "sidebar_border_color": "#36364699",
+        "sidebar_backdrop_color": "#1C1C25"
     },
     "palette": {
         "blue_": {
