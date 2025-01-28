@@ -35,7 +35,3 @@ a.action-label.codicon.codicon-close,
 .part.statusbar.status-border-top:after {
 	height: 0.5px !important;
 }
-
-div.monaco-inputbox, li.action-item, a.monaco-button {
-	border-radius: 4px !important;
-}

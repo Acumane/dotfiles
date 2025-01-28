@@ -1,5 +1,6 @@
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("browser.urlbar.update2.engineAliasRefresh", true);
+user_pref("browser.urlbar.ctrlCanonizesURLs", false);
 user_pref("ui.key.menuAccessKeyFocuses", false);
 // user_pref("permissions.default.shortcuts", 2);
 user_pref("findbar.highlightAll", true);
