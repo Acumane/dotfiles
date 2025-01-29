@@ -1,12 +1,15 @@
 {
-	"layer": "overlay",
-	"margin-bottom": -500,
+	"layer": "bottom",
+	"exclusive": false,
 	"spacing": 0,
 
 	"include": ["~/dotfiles/waybar/modules.json"],
 
 	"modules-center": [
-		"hyprland/workspaces",
+		"hyprland/workspaces"
+	],
+
+	"modules-right": [
 		"clock#date",
 		"clock#time",
 		"custom/weather"

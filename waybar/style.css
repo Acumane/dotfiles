@@ -1,10 +1,9 @@
-@define-color fg1 #8da8d0;
-@define-color fg2 #A4B9D9;
-@define-color bg1 #1F1F28;
-@define-color bg2 #2A2A37;
+@define-color fg1  #8DA8D0;
+@define-color fg2  #A4B9D9;
+@define-color bg   #12121B;
 @define-color text #E6E0C2;
-@define-color dim #979589;
-@define-color border #3F3F50;
+@define-color dim  #9F9B8B;
+@define-color trim #1E1E2A;
 
 * {
 	font-family: "IBM Plex Sans", "Hack", FontAwesome, sans-serif;
@@ -16,38 +15,35 @@ window#waybar {
 	background: transparent;
 }
 
-.modules-center {
-	background-color: @bg1;
-	box-shadow: rgba(10, 0, 20, 0.3) 0px 2px 5px, rgba(10, 0, 20, 0.15) 0px 2px 8px;
+.modules-center,
+.modules-right {
 	font-size: 13px;
 	font-weight: 600;
 	color: @text;
 	border-radius: 10px;
-	margin: 400px 0px 14px 2px;
-	border: 1px solid @border;
+	margin: 10px 16px;
 }
 
 #workspaces {
-	box-shadow: rgba(10, 0, 20, 0.3) 0px 1px 3px, rgba(10, 0, 20, 0.15) 0px 1px 6px;
-
-	background: @bg1;
-	background-color: @bg2;
-	margin: 5px 24px 6px 5px;
-	padding: 9px 8px;
-	border-radius: 6px;
+	background-color: @bg;
+	border: 1px solid @trim;
+	margin: 5px 100px 6px 5px;
+	padding: 10px 8px;
+	border-radius: 10px;
 	font-size: 3px;
+	margin-right: 5px;
 }
 
 #workspaces button {
 	min-width: 5px;
-	background-color: @text;
+	background-color: @dim;
 	min-height: 0px;
 	padding: 0px;
 	margin: 1px 5px;
 	border-radius: 3px;
-	border: 1px solid @text;
+	border: 1px solid @dim;
 	transition: all 0.2s ease-in-out;
-	opacity:0.45;
+	opacity: 0.45;
 }
 
 #workspaces button.active {
@@ -55,7 +51,7 @@ window#waybar {
 	border-radius: 10px;
 	min-width: 18px;
 	margin: 0px 6px;
-	opacity:1.0;
+	opacity: 1.0;
 	border: 1px solid @fg2;
 }
 
@@ -66,21 +62,20 @@ window#waybar {
 }
 
 #custom-weather {
-	box-shadow: rgba(10, 0, 20, 0.3) 0px 1px 3px, rgba(10, 0, 20, 0.15) 0px 1px 6px;
-	background-color: @bg2;
+	background-color: @bg;
+	border: 1px solid @trim;
 	margin: 5px 5px 6px 8px;
-	padding: 0px 10px 1px 8px;
-	border-radius: 6px;
+	padding: 1px 10px 2px 12px;
+	border-radius: 10px;
 }
 
 #clock.date {
 	padding: 2px 0 3px 12px;
-
 }
 
 #clock.time {
 	color: @dim;
-	padding: 2px 10px 3px 0;
+	padding: 2px 12px 3px 0;
 	opacity: 0.8;
 }
 
@@ -95,6 +90,6 @@ tooltip label {
 	text-shadow: none;
 	border-radius: 10px;
 	background-color: @bg1;
-	border: 1px solid @border;
+	border: 1px solid @trim;
 	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 4px, rgba(0, 0, 0, 0.15) 0px 4px 8px;
 }
