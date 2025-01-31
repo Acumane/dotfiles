@@ -1,5 +1,5 @@
 set nocompatible
-set shortmess=I
+set shortmess=IA
 set number relativenumber
 set clipboard=unnamedplus
 set fillchars=eob:\ 
@@ -8,7 +8,7 @@ set autoindent
 set shiftwidth=4
 set expandtab
 set smartcase
-set cmdheight=0
+set cmdheight=2
 set laststatus=0
 
 if exists(':terminal')
@@ -120,6 +120,8 @@ if !exists('g:vscode')
   nmap <S-Del> dvb
   colorscheme kanagawa
   imap <S-Del> <C-w>
+  nnoremap q :q<CR>
+  set cmdheight=0
 else
   set cmdheight=1
 endif

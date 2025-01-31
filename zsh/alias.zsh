@@ -54,6 +54,7 @@ alias root="\sudo -s"
 alias kernel="uname -r"
 alias about="hostnamectl | grep -E '(Operating|Model|Kernel)' | sed 's/^ *//' \
 && sudo dmidecode -q -t System | grep 'Serial' | tr -d '\t'"
+alias uptime="uptime -p"
 alias hw="hwinfo --short"
 alias user="echo $USER"
 alias name="echo $(hostname)/$(echo $USER)"
@@ -76,7 +77,6 @@ case $1 in
     reload) sudo cp $DOTS/keyd/global.conf /etc/keyd/default.conf;;
     *) keyd "$@";; esac; }
 alias clock="while true; do clear; date '+%b %-d, %-I:%M:%S %p'; sleep 1; done"
-alias weather="curl -s 'wttr.in/?format=%c+%f' | sed 's/+//g'"
 tz() {
   local TZ
   if [ -z "$1" ]
@@ -87,7 +87,8 @@ tz() {
 }
 alias loc="curl -s http://ip-api.com/json | jq -r '.city + \", \" + .region + \" \" + .zip'"
 vault() { setopt LOCAL_OPTIONS NO_MONITOR
-flatpak run io.github.mpobaschnig.Vaults -o .enc/"$1" &> /dev/null; }
+  output=$(flatpak run io.github.mpobaschnig.Vaults -o "$1" 2>&1)
+  [[ $output == *"Opened vault successfully"* ]] && nautilus ~/"$1" 2>/dev/null; }
 # vault() { gocryptfs -allow_other -q -i 30m -- "$HOME/.enc/$1" "$HOME/$1"; }
 alias vpn="mullvad"
 net() {
@@ -151,14 +152,17 @@ alias h="runghc"
 alias hi="ghci"
 
 alias keys="showkey -a"
+alias fonts="fc-list : family"
 alias f="rg $RG_COLORS -iP"
 alias F="grep --color=auto --group-separator=$'\n———\n' -C3 -iP"
 alias fp="pgrep"
 hl() { grep --color -E -- "$1|\$" "${@:2}"; }
 alias re="perl -pe"
-alias p="bat --style=numbers,changes,grid --color=always --tabs=2"
-alias pi="kitten icat"
-alias pg="less -R"
+p() {
+  if file --mime-type "$1" | grep -q "image/"; then  "$1"
+  else bat --style=numbers,changes --color=always --tabs=2 "$1"; fi
+}
+alias pg="nvim -R -c 'set nomodifiable' -"
 alias pd="pwd"
 
 lc() { awk 'END {print NR, "lines"}' "$@"; }
@@ -169,9 +173,10 @@ alias space="grc lsblk -fne7 -o NAME,LABEL,SIZE,FSUSE%,MOUNTPOINTS"
 much() { du -h -d 1 $1 2>/dev/null | grep --color=none '[0-9]\+G'; }
 alias i="info"; alias t="type"
 
-
-# Validate commands* before appending to HISTFILE
-zshaddhistory() { whence ${${(z)1}[1]} > /dev/null || return 1 }
+zshaddhistory() { # Validate commands* before appending to HISTFILE
+  [[ $1 =~ "(https?)://[^ ]+" ]] && return 1
+  whence ${${(z)1}[1]} > /dev/null || return 1
+}
 
 # —— SHORTCUTS ——————————————————
 
