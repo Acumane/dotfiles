@@ -47,8 +47,6 @@ export RG_COLORS="--colors 'match:bg:yellow' --colors 'match:fg:black'"
 export LS_COLORS="$(vivid generate iceberg-dark)"
 export LS_COLORS="${LS_COLORS}:di=0;37:*.py=01;32:ln=04:*.md=36:ex=0:"
 export MANPAGER="nvim -c 'let g:no_man_maps = 1' -c 'Man!' -"
-export PAGER="nvim -R -c 'set nomodifiable' -"
-export BAT_PAGER=""
 export MANROFFOPT="-c"
 export TIMEFMT=$'\n%*Es'
 export FZF_DEFAULT_COMMAND="fd -L --type f"
