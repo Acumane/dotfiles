@@ -35,3 +35,11 @@ a.action-label.codicon.codicon-close,
 .part.statusbar.status-border-top:after {
 	height: 0.5px !important;
 }
+
+.letterpress {
+	transform: scale(0.8);
+}
+
+.monaco-workbench.vs-dark .letterpress {
+	opacity: 0.2;
+}
