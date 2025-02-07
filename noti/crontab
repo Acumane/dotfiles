@@ -10,6 +10,7 @@ SHELL=/bin/bash
 # *  *  *  *  *     user    command
   30 *  *  *  *     bren    play -v 0.4 $HOME/audio/sounds/thirty.flac
   5  *  *  *  *     bren    liquidctl --match h80i set logo color blackout
+  30 *  *  *  *     bren    rm -f /tmp/weather && weather
 
   @hourly           bren    play -v 0.6 $HOME/audio/sounds/hour.flac
-  @daily            bren    trash-empty 30
+  @daily            bren    trash-empty --all-users -f 30
