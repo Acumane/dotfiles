@@ -1,9 +1,16 @@
 #!/bin/bash
 
-for _ in {1..32}; do
+read -r addr class floats w h <<< \
+    "$(echo "$1" | jq -r '[.address, .class, .floating, .size[0], .size[1]] | @tsv')"
+
+if [[ "$class" =~ (Nautilus)$ && "$floats" = "true" ]]; then
+    # decrypt auth window (no title); Nautilus CSD corner fix
+    [[ $w -eq 662 && $h -eq 305 ]] && hyprctl "dispatch setprop address:$addr rounding 10"
+fi
+
+if [[ "$class" =~ (firefox)$ ]]; then for _ in {1..32}; do
     sleep 0.08
 
-    addr=$(echo "$1" | jq -r '.address')
     title=$(hyprctl clients -j | jq -r ".[] | select(.address == \"$addr\") | .title")
 
     if [[ "$title" =~ ^(Extension|Sign [Ii]n) ]]; then
@@ -16,4 +23,4 @@ for _ in {1..32}; do
         hyprctl dispatch movecursor "$pos"
         exit 0
     fi
-done
+done; fi
