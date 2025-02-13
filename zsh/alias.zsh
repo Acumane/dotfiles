@@ -10,13 +10,18 @@ alias dots="dotfiles"
 alias l="eza --icons -F "; alias ls="l"
 alias la="eza --icons -AF -s modified"
 alias ld="eza --icons -AF -lm -T --level=1 --time-style=relative"
-alias bu="rsync -avu"
+alias bu="rsync -avuP"
 alias cp="cp -r"
-alias del="\rm -r"
+alias del="\rm -rf"
+wipe() {
+  local src=$([[ "$2" =~ ^(-r|--random)$ ]] && echo urandom)
+  sudo dd if=/dev/${src:-zero} of=$1 bs=1M status=progress; }
+alias shred="shred -u" # OR scrub
 alias rm="trash-put"
+alias toss="trash-put"
 alias trash="trash-list"
 alias restore="trash-restore"
-alias dump="trash-empty -f"
+alias dump="trash-empty --all-users -f"
 alias rn="mv"
 mk() {
   [[ "${1: -1}" == "/" ]] && mkdir -p "${1:0:-1}" \
@@ -51,6 +56,7 @@ zip() { command zip -r "$1.zip" "$1"/; }
 alias calc="bc"
 alias ping="grc ping -c 5"
 alias root="\sudo -s"
+alias auth="pkexec"
 alias kernel="uname -r"
 alias about="hostnamectl | grep -E '(Operating|Model|Kernel)' | sed 's/^ *//' \
 && sudo dmidecode -q -t System | grep 'Serial' | tr -d '\t'"
@@ -68,15 +74,19 @@ ip() {
   esac
 }
 
+alias phone="scrcpy"
 vm() { cur=$(pwd);
 cd "$HOME/VMs" && quickemu --vm $1.conf ${@:2} && cd "$cur"; }
 spin() { cur=$(pwd);
 cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
 key() {
 case $1 in
-    reload) sudo cp $DOTS/keyd/global.conf /etc/keyd/default.conf;;
-    *) keyd "$@";; esac; }
+  reload) sudo cp $DOTS/keyd/global.conf /etc/keyd/default.conf && keyd reload;;
+  *) keyd "$@";; esac; }
 alias clock="while true; do clear; date '+%b %-d, %-I:%M:%S %p'; sleep 1; done"
+alias quote="curl -s 'https://zenquotes.io/api/random' | jq -r '.[0].q'"
+# alias quote="curl -s 'https://api.realinspire.tech/v1/quotes/random' | jq -r '.[0].content'"
+
 tz() {
   local TZ
   if [ -z "$1" ]
@@ -141,8 +151,8 @@ alias c="code"
 alias v="nvim"
 @() {
 case $1 in
-    past) shift; jj obslog "$@";;
-    *) jj "$@";; esac; }
+  past) shift; jj obslog "$@";;
+  *) jj "$@";; esac; }
 _v() { nvim 2> /dev/null; }
 fm() { exec &> /dev/null
   kitty sh -c "yazi"; }
@@ -159,7 +169,7 @@ alias fp="pgrep"
 hl() { grep --color -E -- "$1|\$" "${@:2}"; }
 alias re="perl -pe"
 p() {
-  if file --mime-type "$1" | grep -q "image/"; then  "$1"
+  if file --mime-type "$1" | grep -q "image/"; then kitten icat "$1"
   else bat --style=numbers,changes --color=always --tabs=2 "$1"; fi
 }
 alias pg="nvim -R -c 'set nomodifiable' -"
@@ -171,6 +181,7 @@ type() { file --mime-type "$1" | awk '{print $NF}'; }
 alias info="eza --icons -AF -lOXm -T --level=0 --git --smart-group --time-style=relative"
 alias space="grc lsblk -fne7 -o NAME,LABEL,SIZE,FSUSE%,MOUNTPOINTS"
 much() { du -h -d 1 $1 2>/dev/null | grep --color=none '[0-9]\+G'; }
+alias recover="foremost" # OR scalpel, photorec
 alias i="info"; alias t="type"
 
 zshaddhistory() { # Validate commands* before appending to HISTFILE
@@ -202,6 +213,10 @@ alias -g flat/="/var/lib/flatpak/app/"
 alias -g uflat/="$HOME/.var/app/"
 alias -g usb/="/run/media/$USER/"
 alias -g trash/="$HOME/.local/share/Trash/files"
+
+alias -s {mp4,mkv,webm,avi,mov}="mpv &> /dev/null"
+alias -s {mp3,m4a,flac,wav,ogg,opus}="play -q"
+alias -s {png,jpg,jpeg,gif,webp}="swayimg"
 
 # —— WIDGETS ————————————————————
 
@@ -242,7 +257,7 @@ killer() {
 zle -N killer
 
 hist() {
-  BUFFER=$(history 1 | cut -f4- -d' ' | fzf +s --tac --query="$BUFFER")
+  BUFFER=$(history 1 | cut -f4- -d' ' | fzf +s --tac --exact --query="$BUFFER")
   zle reset-prompt; CURSOR=${#BUFFER}
 }
 zle -N hist
