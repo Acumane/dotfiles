@@ -1,0 +1,23 @@
+# man snapper-configs
+
+SUBVOLUME="/"
+
+# size constraints
+SPACE_LIMIT="0.2"
+FREE_LIMIT="0.1"
+
+TIMELINE_CREATE="yes"
+
+NUMBER_CLEANUP="yes"
+TIMELINE_CLEANUP="yes"
+
+# limits for timeline cleanup
+TIMELINE_LIMIT_HOURLY="5"
+TIMELINE_LIMIT_DAILY="3"
+TIMELINE_LIMIT_WEEKLY="1"
+TIMELINE_LIMIT_MONTHLY="0"
+TIMELINE_LIMIT_QUARTERLY="0"
+TIMELINE_LIMIT_YEARLY="0"
+
+# cleanup empty pre-post-pairs
+EMPTY_PRE_POST_CLEANUP="yes"

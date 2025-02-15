@@ -184,6 +184,21 @@ much() { du -h -d 1 $1 2>/dev/null | grep --color=none '[0-9]\+G'; }
 alias recover="foremost" # OR scalpel, photorec
 alias i="info"; alias t="type"
 
+snap() {
+  case "$1" in
+    list) sudo snapper --csvout list --disable-used-space --all-configs -t all \
+      --columns subvolume,number,pre-number,date,description | column -t -s, | grcat conf.snapper | less -FSXKR ;;
+    create)
+      if [ "$2" = "--around" ]; then sudo snapper create --command "${@:3}"
+      else sudo snapper create "$@"
+      fi ;;
+    undo) sudo snapper undochange "${@:2}" ;;
+    *) sudo snapper "$@" ;;
+  esac
+}
+alias snaps="snap list"
+alias s="snap"
+
 zshaddhistory() { # Validate commands* before appending to HISTFILE
   [[ $1 =~ "(https?)://[^ ]+" ]] && return 1
   whence ${${(z)1}[1]} > /dev/null || return 1
