@@ -48,3 +48,15 @@ bindkey '^[e' files
 bindkey '^[E' fm
 bindkey '^[v' _v
 bindkey '^[t' t
+
+# —— COMPLETIONS ————————————————
+
+compdef snap=snapper
+# compdef @=jj
+# compdef vm=quickemu
+compdef spin=docker
+# compdef key=keyd
+compdef tz=timedatectl
+compdef net=nmcli
+compdef hl=grep
+compdef app=dnf

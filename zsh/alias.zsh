@@ -7,6 +7,7 @@ alias load="zcomet load"
 alias sudo="\sudo -E env PATH=$PATH "
 alias dots="dotfiles"
 
+alias color="grc -es"
 alias l="eza --icons -F "; alias ls="l"
 alias la="eza --icons -AF -s modified"
 alias ld="eza --icons -AF -lm -T --level=1 --time-style=relative"
@@ -172,7 +173,7 @@ p() {
   if file --mime-type "$1" | grep -q "image/"; then kitten icat "$1"
   else bat --style=numbers,changes --color=always --tabs=2 "$1"; fi
 }
-alias pg="nvim -R -c 'set nomodifiable' -"
+alias pg="less -FSXKR"
 alias pd="pwd"
 
 lc() { awk 'END {print NR, "lines"}' "$@"; }
@@ -183,6 +184,11 @@ alias space="grc lsblk -fne7 -o NAME,LABEL,SIZE,FSUSE%,MOUNTPOINTS"
 much() { du -h -d 1 $1 2>/dev/null | grep --color=none '[0-9]\+G'; }
 alias recover="foremost" # OR scalpel, photorec
 alias i="info"; alias t="type"
+
+csv() {
+  grc column -t -s, "$@" | less -FSXK
+}
+alias table="csv"
 
 snap() {
   case "$1" in
@@ -263,7 +269,7 @@ search() {
 zle -N search
 
 killer() {
-  pids=$(ps -u ${UID:-$(id -u)} -o pid,comm,cmd \
+  pids=$(ps -u ${UID:-$(id -u)} -o pid,comm,cmd | grcat conf.ps \
   | fzf -m --query="$BUFFER" --header-lines=1 | awk '{print $1}')
 
   if [ -n "$pids" ]; then echo $pids | xargs -r kill -${1:-9}; fi
@@ -272,7 +278,7 @@ killer() {
 zle -N killer
 
 hist() {
-  BUFFER=$(history 1 | cut -f4- -d' ' | fzf +s --tac --exact --query="$BUFFER")
+  BUFFER=$(history 1 | grcat conf.ps | cut -f4- -d' ' | fzf +s --tac --exact --query="$BUFFER")
   zle reset-prompt; CURSOR=${#BUFFER}
 }
 zle -N hist
