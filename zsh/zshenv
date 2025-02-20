@@ -55,8 +55,7 @@ export FZF_DEFAULT_OPTS="
 --preview-window='top,40%' --layout=reverse --prompt='› ' --pointer=█ --marker=▍
 --bind 'shift-delete:backward-kill-word'
 --bind 'C:execute-silent(wl-copy "{+}" --trim-newline)'
---bind 'alt-p:change-preview-window(hidden|top)'
---bind 'space:toggle'"
+--bind 'alt-p:change-preview-window(hidden|top)'"
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 export XCURSOR_SIZE=20 XCURSOR_THEME=Bibata-Kana
 

@@ -13,7 +13,7 @@ alias la="eza --icons -AF -s modified"
 alias ld="eza --icons -AF -lm -T --level=1 --time-style=relative"
 alias bu="rsync -avuP"
 alias cp="cp -r"
-alias del="\rm -rf"
+alias del="sudo \rm -rf"
 wipe() {
   local src=$([[ "$2" =~ ^(-r|--random)$ ]] && echo urandom)
   sudo dd if=/dev/${src:-zero} of=$1 bs=1M status=progress; }
@@ -60,7 +60,7 @@ alias root="\sudo -s"
 alias auth="pkexec"
 alias kernel="uname -r"
 alias about="hostnamectl | grep -E '(Operating|Model|Kernel)' | sed 's/^ *//' \
-&& sudo dmidecode -q -t System | grep 'Serial' | tr -d '\t'"
+&& [ $DEV_TYPE = "lap" ] && sudo dmidecode -q -t System | grep 'Serial' | tr -d '\t'"
 alias uptime="uptime -p"
 alias hw="hwinfo --short"
 alias user="echo $USER"
@@ -162,7 +162,6 @@ zle -N _v; zle -N t; zle -N fm
 alias h="runghc"
 alias hi="ghci"
 
-alias keys="showkey -a"
 alias fonts="fc-list : family"
 alias f="rg $RG_COLORS -iP"
 alias F="grep --color=auto --group-separator=$'\n———\n' -C3 -iP"
@@ -270,7 +269,7 @@ zle -N search
 
 killer() {
   pids=$(ps -u ${UID:-$(id -u)} -o pid,comm,cmd | grcat conf.ps \
-  | fzf -m --query="$BUFFER" --header-lines=1 | awk '{print $1}')
+  | fzf -m --query="$BUFFER" --header-lines=1 --bind 'space:toggle' | awk '{print $1}')
 
   if [ -n "$pids" ]; then echo $pids | xargs -r kill -${1:-9}; fi
   zle reset-prompt
