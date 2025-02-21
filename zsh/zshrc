@@ -17,22 +17,25 @@ RPROMPT=' %F{240}%2~%f'
 
 # —— EXTS ———————————————————————
 
-# load ohmyzsh plugins/sudo
-load ohmyzsh plugins/dirhistory
-
-load Aloxaf/fzf-tab
 load zsh-users/zsh-completions
-load RobSis/zsh-completion-generator
-# load marlonrichert/zsh-autocomplete
-load zsh-users/zsh-syntax-highlighting
-# load zdharma-continuum/fast-syntax-highlighting
-load zsh-users/zsh-autosuggestions
+load ohmyzsh plugins/dirhistory
+load ohmyzsh plugins/sudo
 
 eval "$(zoxide init zsh --cmd g)"
 zcomet compinit
 
+load RobSis/zsh-completion-generator
+load Aloxaf/fzf-tab
+
+# load marlonrichert/zsh-autocomplete
+load zsh-users/zsh-autosuggestions
+load zsh-users/zsh-syntax-highlighting
+# load zdharma-continuum/fast-syntax-highlighting
+
 # —— KEYS ———————————————————————
 
+bindkey '^[' autosuggest-clear
+# bindkey '^[[C' autosuggest-accept
 bindkey '^[[1;5C' forward-word          # power-navigation
 bindkey '^[[1;5D' backward-word
 bindkey '^[[3;2~' backward-kill-word    # keyd: S-bs -> S-del (compatibility)
