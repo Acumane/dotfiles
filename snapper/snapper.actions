@@ -1,0 +1,8 @@
+# Get snapshot description: dnf operation w/o options
+pre_transaction::::/usr/bin/sh -c echo\ "tmp.desc=$(ps\ -o\ command\ --no-headers\ -p\ '${pid}'\ |\ sed\ 's/^dnf\\s\\+//;s/-\\{1,2\\}\\S*\\s*//g')"
+
+# Create "pre" snapshot before transaction
+pre_transaction::::/usr/bin/sh -c echo\ "tmp.snapper_pre_number=$(snapper\ create\ -t\ pre\ -p\ -d\ 'pre-${tmp.desc}')"
+
+# If the complementary "pre" snapshot exists, create a "post" snapshot after transaction + cleanup
+post_transaction::::/usr/bin/sh -c [\ -n\ "${tmp.snapper_pre_number}"\ ]\ &&\ snapper\ create\ -t\ post\ --pre-number\ "${tmp.snapper_pre_number}"\ -d\ "post-${tmp.desc}"\ ;\ echo\ tmp.snapper_pre_number\ ;\ echo\ tmp.desc

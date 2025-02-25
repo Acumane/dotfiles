@@ -1,6 +1,7 @@
 # man snapper-configs
 
 SUBVOLUME="/home"
+FSTYPE="btrfs"
 
 # size constraints
 SPACE_LIMIT="0.2"
