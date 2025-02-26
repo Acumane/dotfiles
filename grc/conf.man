@@ -1,0 +1,7 @@
+regexp=\s+-\s+(.*)
+colour=dark white
+count=more
+-
+# Remove "unknown subject" descriptions
+regexp=\s+-\s+\(unknown subject\)
+replace=
