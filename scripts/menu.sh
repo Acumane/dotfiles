@@ -2,17 +2,10 @@
 
 pgrep -x rofi && exit
 
-x0=$(hyprctl monitors -j | jq '.[] | select(.focused == true) | .x')
-y=$(hyprctl monitors -j  | jq '.[] | select(.focused == true) | .y + 450')
-c=$(hyprctl monitors -j  | jq ".[] | select(.focused == true) | .width / 2 + $x0")
-
-w=""
 case $1 in
-    "run")  rofi -show drun -normal-window -show-icons;;
-    "copy") w="375" && cliphist list | rofi -normal-window -dmenu -display-columns 2 -p "" -theme-str "listview{lines:6;columns:1;} window{width:${w}px;}" \
-            | cliphist decode | wl-copy;;
-    "emoji") rofimoji --action clipboard --selector-args="-normal-window \
-            -theme-str 'listview{lines:4;columns:6;fixed-columns:true;flow:horizontal;} element-text{font:\"Akkurat 13\";} element{padding:11px;margin:3px;}'" \
+    "run")  rofi -show drun -show-icons;;
+    "copy") w="375" && cliphist list | rofi -dmenu -display-columns 2 -p "" -theme-str "listview{lines:6;columns:1;} window{width:${w}px;}" | cliphist decode | wl-copy;;
+    "emoji") rofimoji --action clipboard --selector-args="-theme-str 'listview{lines:4;columns:6;fixed-columns:true;flow:horizontal;} element-text{font:\"Akkurat 13\";} element{padding:11px;margin:3px;}'" \
             --hidden-descriptions -s neutral --max-recent 0 -r '';;
 esac
 
