@@ -1,12 +1,13 @@
 /* Forked from https://github.com/lr-tech/rofi-themes-collection */
 
 * {
-	bg:       #1F1F28;
-	fg:       #373743;
-	box:      #3b3b4580;	
+	bg:       #282835;
+	fg:       #40404B;
+	box:      #3B3A43CC;	
 	text:     #DDD8BB;
 	title:    #979589;
-	dim:      #47475780;
+	dim:      #4C4C50;
+	bord:     #3F3F50;
 
 	background-color:   transparent;
 	text-color:         @text;
@@ -17,20 +18,24 @@
 }
 
 window {
-	location:       center;
-	width: 325;
-	background-color:   @bg;
+	location:         center;
+	width:            325;
+	background-color: @bg;
+	border-radius:    10px;
+	border-color:     @bord;
+	border:           1px;
 }
 
 mainbox {
-	padding: 10px;
+	padding: 8px;
 }
 
 inputbar {
 	background-color:   @box;
 	border-radius:      6px;
 
-	padding:    6px 6px;
+	padding:    5px 6px;
+	margin:     4px 8px;
 	spacing:    8px;
 	children:   [ prompt, entry ];
 }
@@ -39,36 +44,32 @@ prompt {
 	text-color:       @title;
 	background-color: @dim;
 	border-radius:    100px;
-	font: "IBM Plex Mono Semibold 11";
 
-	padding:    2px 10.5px 1.5px 6px;
-	spacing:    8px;
+	font:    "IBM Plex Mono Semibold 11";
+	padding: 2px 10.5px 1.5px 6px;
+	spacing: 8px;
 }
 
 entry {
-	padding:            3.5px 0 3px 1px;
+	cursor-width: 1px;
+	padding:      2.5px 0 0 1px;
 }
 
 textbox {
-	padding:    8px 24px;
+	padding: 8px 24px;
 }
 
 listview {
-	// enabled: false;
-
-	background-color:   transparent;
-
-	margin:     12px 0 0;
-	lines:      4;
-	columns:    2;
-
-	fixed-height: false;
+	margin:  8px 0 1px 0;
+	lines:   4;
+	columns: 2;
 }
 
 element {
-	padding:        7px 14px;
-	spacing:        10px;
-	border-radius:  6px;
+	padding:       7px 8px 7px 12px;
+	margin:        1px;
+	spacing:       10px;
+	border-radius: 6px;
 }
 
 element selected normal, element selected active {
@@ -81,6 +82,6 @@ element-icon {
 }
 
 element-text {
-	padding: 0 0 1px 0;
+	padding:    0 0 1px 0;
 	text-color: inherit;
 }
