@@ -1,0 +1,16 @@
+#command
+k    forw-line
+i    back-line
+K    forw-scroll
+I    back-scroll
+j    left-scroll
+l    right-scroll
+
+t    goto-line
+b    goto-end
+
+#env
+LESS = -FSXKR
+
+# Disable command & search history
+LESSHISTFILE = -

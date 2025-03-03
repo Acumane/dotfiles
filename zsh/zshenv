@@ -49,6 +49,7 @@ export LS_COLORS="${LS_COLORS}:di=0;37:*.py=01;32:ln=04:*.md=36:ex=0:"
 export MANPAGER="nvim -c 'let g:no_man_maps = 1' -c 'Man!' -"
 export MANROFFOPT="-c"
 export TIMEFMT=$'\n%*Es'
+export LESS="-FSXKR" LESSHISTFILE=-
 export FZF_DEFAULT_COMMAND="fd -L --type f"
 export FZF_DEFAULT_OPTS="
 --height=20 --info=inline-right --exit-0 --select-1 --color "hl+:-1:reverse" --ansi
