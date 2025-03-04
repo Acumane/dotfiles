@@ -40,11 +40,12 @@ bindkey '^[[1;5C' forward-word          # power-navigation
 bindkey '^[[1;5D' backward-word
 bindkey '^[[3;2~' backward-kill-word    # keyd: S-bs -> S-del (compatibility)
 bindkey '^[^?' clear-screen             # clear everything but active
+bindkey -s '^[s' '^Usearch^M'
 bindkey '^[h' hist
-bindkey '^[s' search
 bindkey '^[?' where
 bindkey '^[f' opener
 bindkey '^[F' dirs
+bindkey '^[m' men
 bindkey '^[[3;3~' killer
 bindkey '^e'  files
 bindkey '^[e' files
@@ -54,6 +55,8 @@ bindkey '^[t' t
 
 # —— COMPLETIONS ————————————————
 
+compdef diag=dmesg
+compdef sys=systemctl
 compdef snap=snapper
 # compdef @=jj
 # compdef vm=quickemu

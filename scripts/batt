@@ -1,6 +1,6 @@
 #!/bin/bash
 
-perc=$(acpi -b | grep -v 'rate' | cut -d' ' -f 3-) # internal
+perc=$([ $DEV_TYPE = "lap" ] && acpi -b | grep -v 'rate' | cut -d' ' -f 3-) # internal
 # echo -e "$(hostname):\t\t${perc:-N/A}"
 [ -z "$perc" ] || echo -e "$perc\n"
 

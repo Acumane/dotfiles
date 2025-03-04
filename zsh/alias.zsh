@@ -32,8 +32,10 @@ alias mkd="mkdir -p"
 alias watch="entr -pc"
 alias first="head -n 1" 
 alias last="tail -n 1"
-
-alias sys="systemctl"
+sys() { systemctl "${@: -1}" 2> >(grep -q "Unknown command verb") && systemctl "$@" || sysz "$@"; }
+alias log="journalctl -p 0..4 -b"
+diag() { sudo dmesg -T --color=always "$@" | less -FSXK; }
+alias dmesg="diag"
 alias vigil="vigiland"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
@@ -143,6 +145,7 @@ app() {
     *) sudo dnf --forcearch=x86_64 "$@";;
   esac
 }
+alias pkg="app"
 alias copr="sudo dnf copr"
 ver() { dnf info "$1" --installed | grep "Ver" | awk '{print $NF}'; }
 activate() { source "$1/bin/activate"; }
@@ -163,9 +166,10 @@ alias h="runghc"
 alias hi="ghci"
 
 alias fonts="fc-list : family"
+alias s="fzf"
+alias into="xargs -r"
 alias f="rg $RG_COLORS -iP"
-alias F="grep --color=auto --group-separator=$'\n———\n' -C3 -iP"
-alias fp="pgrep"
+alias F="grep --color=auto --group-separator=$'\e[30m...\033[0m' -C3 -iP"
 hl() { grep --color -E -- "$1|\$" "${@:2}"; }
 alias re="perl -pe"
 p() {
@@ -189,20 +193,14 @@ csv() {
 }
 alias table="csv"
 
-snap() {
+snap() { # TBD
   case "$1" in
-    list) sudo snapper --csvout list --disable-used-space --all-configs -t all \
+    list|ls) sudo snapper --csvout list --disable-used-space --all-configs -t all \
       --columns subvolume,number,pre-number,date,description | column -t -s, | grcat conf.snapper | less -FSXKR ;;
-    create)
-      if [ "$2" = "--around" ]; then sudo snapper create --command "${@:3}"
-      else sudo snapper create "$@"
-      fi ;;
-    undo) sudo snapper undochange "${@:2}" ;;
     *) sudo snapper "$@" ;;
   esac
 }
 alias snaps="snap list"
-alias s="snap"
 
 zshaddhistory() { # Validate commands* before appending to HISTFILE
   [[ $1 =~ "(https?)://[^ ]+" ]] && return 1
@@ -241,64 +239,59 @@ alias -s {png,jpg,jpeg,gif,webp}="swayimg"
 # —— WIDGETS ————————————————————
 
 opener() {
-  IFS=$'\n'; setopt LOCAL_OPTIONS NO_MONITOR
-  files=($(fd -0LI --type f --color=always | fzf -m --read0 --query="$BUFFER" \
+  setopt LOCAL_OPTIONS NO_MONITOR
+  local file="$(fd -0LI --type f --color=always | fzf -m --read0 --query="$BUFFER" \
     --bind='alt-v:reload(fd -0LHI --type=f --exclude=.git --max-depth=4 --color=always)' \
-    --preview 'bat -n --color=always {}'))
-  for file in "${files[@]}"; do
-    xdg-open "$file" &> /dev/null
-  done
-  zle reset-prompt
+    --preview 'bat -n --color=always {}')"
+  [ -n "$file" ] && xdg-open "$file" &> /dev/null & disown
+  zle && zle reset-prompt
 }
 zle -N opener
 
 search() {
-  [ -z "$BUFFER" ] && return 1
-  IFS=$'\n'; setopt LOCAL_OPTIONS NO_MONITOR
-  files=($(rga -i --no-messages --max-count=1 --line-number --field-match-separator '\x00' --no-heading "$BUFFER" |
-    perl -pe 's/(.+)\x00(\d+)\x00(.*)/`echo "$1" | lscolors | tr -d "\n"` . ":" . $2/e' |
-    fzf -m --delimiter : --preview 'bat -n --color=always {1} --highlight-line {2}' --preview-window '+{2}/2'))
-  for file in "${files[@]}"; do
-    name=$(echo "$file" | perl -pe 's/(.+):\d+$/$1/')
-    xdg-open "$name" &> /dev/null
-  done
-  BUFFER=""
-  zle reset-prompt
+  setopt LOCAL_OPTIONS NO_MONITOR; RGA="rga --files-with-matches -iP"
+  local file="$(FZF_DEFAULT_COMMAND="$RGA '$1' | lscolors" fzf --sort --preview="[[ ! -z {} ]] && rga \
+    --color=always --colors='match:bg:yellow' --colors='match:fg:black' --context-separator=$'\e[30m...\033[0m' -C1 {q} {}" \
+    --phony -q "$1" --bind "change:reload:$RGA {q} | lscolors" --preview-window='50%')"
+  [ -n "$file" ] && xdg-open "$file" &> /dev/null & disown
 }
-zle -N search
+
+men() {
+  man -k . | grcat conf.man | s --exact | awk '{print $1}' | xargs -r man
+  zle && zle reset-prompt
+}
+zle -N men
 
 killer() {
-  pids=$(ps -u ${UID:-$(id -u)} -o pid,comm,cmd | grcat conf.ps \
-  | fzf -m --query="$BUFFER" --header-lines=1 --bind 'space:toggle' | awk '{print $1}')
-
-  if [ -n "$pids" ]; then echo $pids | xargs -r kill -${1:-9}; fi
-  zle reset-prompt
+  ps -u ${UID:-$(id -u)} -o pid,comm,cmd | grcat conf.ps \
+  | fzf -m --query="$BUFFER" --header-lines=1 --bind 'space:toggle' | awk '{print $1}' | xargs -r kill -${1:-9}
+  zle && zle reset-prompt
 }
 zle -N killer
 
 hist() {
   BUFFER=$(history 1 | grcat conf.ps | cut -f4- -d' ' | fzf +s --tac --exact --query="$BUFFER")
-  zle reset-prompt; CURSOR=${#BUFFER}
+  zle && zle reset-prompt; CURSOR=${#BUFFER}
 }
 zle -N hist
 
 where() {
-  RBUFFER=$(locate / | fzf +s)
-  zle reset-prompt; CURSOR=${#BUFFER}
+  RBUFFER=$(locate / | fzf +s --exact)
+  zle && zle reset-prompt; CURSOR=${#BUFFER}
 }
 zle -N where
 
 dirs() {
-  dir=$(fd -LI --type d . | fzf --query="$BUFFER" \
+  local dir=$(fd -LI --type d . | fzf --query="$BUFFER" \
     --bind='alt-v:reload(fd -LHI --type=d --exclude='.git' --max-depth=4)' \
     --preview 'eza --icons -AF --color=always {}' --preview-window='30%') && cd "$dir"
-  zle reset-prompt
+  zle && zle reset-prompt
 }
 zle -N dirs
 
 files() { 
   setopt LOCAL_OPTIONS NO_MONITOR
-  local DIR="${1:-.}"
-  nautilus "$DIR" &> /dev/null & disown
+  local dir="${1:-.}"
+  nautilus "$dir" &> /dev/null & disown
 }
 zle -N files
