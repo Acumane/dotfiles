@@ -202,16 +202,23 @@ noremap  J    g0
 nnoremap L    $
 vnoremap L    g_
 
-" commands (WIP)
-noremap / :
-nnoremap f /
-vnoremap f <Esc>*
-noremap <enter> n
-noremap <S-enter> N
-nnoremap <Esc> <Cmd>nohl<CR>
+" (n)ext occurence
+noremap n f
+noremap N F
+noremap , ;
+noremap < ,
 
-nnoremap ; `
-" <#>GG -> <#>g
+noremap / :
+" (f)ind
+nnoremap f /
+" clear search pattern register (@/):
+nnoremap <Esc> <Cmd>nohl<CR><Cmd>let @/ = ""<CR>
+
+" (S-)enter doubles as newline & search
+nnoremap <expr> <enter> @/ == "" ? 'o' : 'n'
+nnoremap <expr> <S-enter> @/ == "" ? 'O' : 'N'
+
+" <#>G -> <#>g
 nnoremap <nowait><expr> g v:count ? 'G' : 'g'
 
 " better newline!
