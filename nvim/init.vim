@@ -221,9 +221,17 @@ nnoremap <expr> <S-enter> @/ == "" ? 'O' : 'N'
 " <#>G -> <#>g
 nnoremap <nowait><expr> g v:count ? 'G' : 'g'
 
-" better newline!
-noremap n o
-noremap N O
+" ;<x> sets mark or goes to mark
+function! Mark()
+    let char = nr2char(getchar())
+    let pos = getpos("'" . char)
+    execute "normal! " . (pos[1] == 0 && pos[2] == 0 ? "m" : "`") . char
+endfunction
+nnoremap <silent> ; :call Mark()<CR>
+
+" delete mark(s)
+nnoremap <silent> d; :exec "delmarks ".nr2char(getchar())<CR>
+nnoremap <silent> da; :delmarks!<CR>
 
 " Tab in normal mode
 nnoremap <Tab>   >>
