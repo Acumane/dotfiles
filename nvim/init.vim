@@ -8,8 +8,8 @@ set autoindent
 set shiftwidth=4
 set expandtab
 set smartcase
-set cmdheight=2
 set laststatus=0
+set mps+=<:>
 
 if exists(':terminal')
   " issues #3681, #23645; my day is ruined
@@ -42,26 +42,23 @@ vnoremap hi <Esc>i
 map s v
 
 let surround =
-\ ['`', '"', '(', ')', '[', ']', '{', '}', '<', '>', '*', '_', '$']
+\ ['`', '"', ')', ']', '{', '}', '>', '*', '_', '$']
 
 for ch in surround
-  " autowrapping word in normal mode
-  exec "nnoremap <nowait>" ch "<Cmd>norm vhwS".ch."<CR>"
-  " autowrapping selection in visual mode
-  exec "vnoremap <nowait>" ch ":<C-u>exec 'norm gvS".ch."'<CR>"
+  exec "nnoremap <nowait>" ch "<Cmd>norm vhwS".ch."el<CR>"
+  " exec "nnoremap <nowait>" ch ":let w=winsaveview()<CR>:norm vhwS".ch."<CR>:call winrestview(w)<CR>l"
+  exec "vnoremap <nowait>" ch ":<C-u>exec 'norm gvS".ch."l'<CR>"
   " delete given pair (d*)
   exec "nmap d".ch "ds".ch
 endfor
 " TODO: mark conflict
-nnoremap ' <Cmd>norm vhwS'<CR>
-vnoremap ' :<C-u>exec "norm gvS'"<CR>
+nnoremap ' <Cmd>norm vhwS'el<CR>
+vnoremap ' :<C-u>exec "norm gvS'l"<CR>
 nmap d' ds'
 
 " cycle case/CASE
 vnoremap  ~ ~gv
-vnoremap  u ~gv
 nnoremap  ~ ~h
-nnoremap  u ~h
 
 map tk tn
 "   t* (to case) - WIP
@@ -116,11 +113,14 @@ inoremap <C-a> <Esc>gg^vG$h
 tnoremap <Esc> <C-\><C-n>
 
 if !exists('g:vscode')
-  " Power delete (kitty)
+  " <[S|C]-Del> (kitty)
   nmap <S-Del> dvb
   colorscheme kanagawa
   imap <S-Del> <C-w>
+  cmap <S-Del> <C-w>
   nnoremap q :q<CR>
+  set guicursor+=i-c:ver1
+  set guicursor+=n-i-c:blinkon500
   set cmdheight=0
 else
   set cmdheight=1
@@ -129,9 +129,10 @@ endif
 vmap <C-c> y
 vmap <C-x> x
 map  <C-p> p
-map  <C-u> u
-" map u <Nop>
-"    <C-r>
+
+"         <C-r>
+noremap   <C-u> u
+noremap u <Nop>
 
 " New text objects
 let new_obj = [ '*', '_', '$']
@@ -180,11 +181,6 @@ function! Word(m, ...)
   endwhile
 endfunction
 
-" better word nav
-" for [l, r] in items({'w': 'w', 'e': 'e', 'W': 'b', 'E': 'ge'})
-  " exec "nnoremap" l ":call Word('".r."')<CR>"
-  " exec "vnoremap" l ":call Word('".r."', 'gv')<CR>"
-" endfor
 "       w
 noremap W     b
 "       e
