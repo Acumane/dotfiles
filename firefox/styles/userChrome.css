@@ -65,6 +65,8 @@ toolbarbutton#alltabs-button {
 /* PiP */
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
 	div.controls-bottom-lower { display: none !important; }
+	#browser[type="content"] { margin: -1vh -1vw !important; }
+	button#close { display: none !important; }
 }
 
 label#userContext-label { /* Container label */
