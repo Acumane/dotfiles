@@ -32,7 +32,8 @@ alias mkd="mkdir -p"
 alias watch="entr -pc"
 alias first="head -n 1" 
 alias last="tail -n 1"
-sys() { systemctl "${@: -1}" 2> >(grep -q "Unknown command verb") && systemctl "$@" || sysz "$@"; }
+sys() { [ $# -eq 0 ] && sysz && return
+  systemctl "${@: -1}" 2> >(grep -q "Unknown command verb") && systemctl "$@" || sysz "$@"; }
 alias log="journalctl -p 0..4 -b"
 diag() { sudo dmesg -T --color=always "$@" | less -FSXK; }
 alias dmesg="diag"
@@ -78,6 +79,7 @@ ip() {
 }
 
 alias phone="scrcpy"
+alias cam="v4l2-ctl"
 vm() { cur=$(pwd);
 cd "$HOME/VMs" && quickemu --vm $1.conf ${@:2} && cd "$cur"; }
 spin() { cur=$(pwd);
@@ -101,7 +103,7 @@ tz() {
 alias loc="curl -s http://ip-api.com/json | jq -r '.city + \", \" + .region + \" \" + .zip'"
 vault() { setopt LOCAL_OPTIONS NO_MONITOR
   output=$(flatpak run io.github.mpobaschnig.Vaults -o "$1" 2>&1)
-  [[ $output == *"Opened vault successfully"* ]] && nautilus ~/"$1" 2>/dev/null; }
+  [[ $output == *"Opened vault successfully"* ]] && cd ~/"$1" && nautilus ~/"$1" 2>/dev/null; }
 # vault() { gocryptfs -allow_other -q -i 30m -- "$HOME/.enc/$1" "$HOME/$1"; }
 alias vpn="mullvad"
 net() {
@@ -124,9 +126,9 @@ mic() {
 
 dl() {
   case "${(L)1}" in
-    video | -v) yt-dlp -P ~/dl -N 4 $2;;
-    audio | -a) yt-dlp -P ~/dl -x -N 4 $2;;
-    *) wget -N -P ~/dl $1
+    video | -v) yt-dlp -P "$DL" -N 4 "$2";;
+    audio | -a) yt-dlp -P "$DL" -x -N 4 "$2";;
+    *) wget -N -P "$DL" "$1"
   esac
 }
 push() { tailscale file cp "$1:"; }
@@ -213,9 +215,9 @@ zshaddhistory() { # Validate commands* before appending to HISTFILE
 alias ...="cd ../../"
 alias ....="cd ../../../"
 
+alias -g dl/="$DL/"
 alias -g dots/="$DOTS/"
-alias -g dl/="$HOME/dl/"
-alias -g conf/="$HOME/.config/"
+alias -g conf/="$CONFIG/"
 alias -g dnf/="/etc/yum.repos.d/"
 alias -g bin/="/bin/"
 alias -g ubin/="/usr/bin/"
@@ -230,7 +232,7 @@ alias -g usys/="/etc/systemd/user/"
 alias -g flat/="/var/lib/flatpak/app/"
 alias -g uflat/="$HOME/.var/app/"
 alias -g usb/="/run/media/$USER/"
-alias -g trash/="$HOME/.local/share/Trash/files"
+alias -g trash/="$HOME/.local/share/Trash/files/"
 
 alias -s {mp4,mkv,webm,avi,mov}="mpv &> /dev/null"
 alias -s {mp3,m4a,flac,wav,ogg,opus}="play -q"

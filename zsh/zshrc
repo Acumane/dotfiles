@@ -14,7 +14,6 @@ fi
 
 RPROMPT=' %F{240}%2~%f'
 
-
 # —— EXTS ———————————————————————
 
 load zsh-users/zsh-completions

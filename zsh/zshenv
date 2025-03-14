@@ -5,19 +5,19 @@
 export HOME="/home/bren"
 export DOTS="$HOME/dotfiles"
 export SCRIPTS="$DOTS/scripts"
-export ZDOTDIR="$HOME/.config/zsh"
-export DOTFILES_REPO_PATH="$DOTS"
-export WINEPREFIX="$HOME/games"
+export CACHE="$HOME/.cache"
+export CONFIG="$HOME/.config"
+export DL="$HOME/dl"
 
 if [ -n "$(ls /sys/class/power_supply | grep -E '^BAT')" ]
     then export DEV_TYPE="lap"; else export DEV_TYPE="desk"
 fi
 
-export CACHE="$HOME/.cache"
-export CONFIG="$HOME/.config"
-
 export MODULAR_HOME="$HOME/.modular"
 export PNPM_HOME="$HOME/.local/share/pnpm"
+export ZDOTDIR="$HOME/.config/zsh"
+export DOTFILES_REPO_PATH="$DOTS"
+export WINEPREFIX="$HOME/games"
 
 typeset -U PATH path
 path+=(
