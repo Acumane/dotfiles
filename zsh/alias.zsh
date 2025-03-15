@@ -240,7 +240,7 @@ alias -s {png,jpg,jpeg,gif,webp}="swayimg"
 
 # —— WIDGETS ————————————————————
 
-opener() {
+files() {
   setopt LOCAL_OPTIONS NO_MONITOR
   local file="$(fd -0LI --type f --color=always | fzf -m --read0 --query="$BUFFER" \
     --bind='alt-v:reload(fd -0LHI --type=f --exclude=.git --max-depth=4 --color=always)' \
@@ -248,9 +248,17 @@ opener() {
   [ -n "$file" ] && xdg-open "$file" &> /dev/null & disown
   zle && zle reset-prompt
 }
-zle -N opener
+zle -N files
 
-search() {
+dirs() {
+  local dir=$(fd -LI --type d . | fzf --query="$BUFFER" \
+    --bind='alt-v:reload(fd -LHI --type=d --exclude='.git' --max-depth=4)' \
+    --preview 'eza --icons -AF --color=always {}' --preview-window='30%') && cd "$dir"
+  zle && zle reset-prompt
+}
+zle -N dirs
+
+scan() {
   setopt LOCAL_OPTIONS NO_MONITOR; RGA="rga --files-with-matches -iP"
   local file="$(FZF_DEFAULT_COMMAND="$RGA '$1' | lscolors" fzf --sort --preview="[[ ! -z {} ]] && rga \
     --color=always --colors='match:bg:yellow' --colors='match:fg:black' --context-separator=$'\e[30m...\033[0m' -C1 {q} {}" \
@@ -264,12 +272,12 @@ men() {
 }
 zle -N men
 
-killer() {
+hunt() {
   ps -u ${UID:-$(id -u)} -o pid,comm,cmd | grcat conf.ps \
   | fzf -m --query="$BUFFER" --header-lines=1 --bind 'space:toggle' | awk '{print $1}' | xargs -r kill -${1:-9}
   zle && zle reset-prompt
 }
-zle -N killer
+zle -N hunt
 
 hist() {
   BUFFER=$(history 1 | grcat conf.ps | cut -f4- -d' ' | fzf +s --tac --exact --query="$BUFFER")
@@ -278,22 +286,19 @@ hist() {
 zle -N hist
 
 where() {
-  RBUFFER=$(locate / | fzf +s --exact)
+  setopt LOCAL_OPTIONS NO_MONITOR
+  local item=$(sudo locate / | fzf +s --exact)
+  if [ -z "$BUFFER" ]; then
+    [ -f "$item" ] && { xdg-open "$item" &> /dev/null & disown; }
+    [ -d "$item" ] && cd "$item"
+  else RBUFFER="$item"; fi # use as arg
   zle && zle reset-prompt; CURSOR=${#BUFFER}
 }
 zle -N where
 
-dirs() {
-  local dir=$(fd -LI --type d . | fzf --query="$BUFFER" \
-    --bind='alt-v:reload(fd -LHI --type=d --exclude='.git' --max-depth=4)' \
-    --preview 'eza --icons -AF --color=always {}' --preview-window='30%') && cd "$dir"
-  zle && zle reset-prompt
-}
-zle -N dirs
-
-files() { 
+gui() { 
   setopt LOCAL_OPTIONS NO_MONITOR
   local dir="${1:-.}"
   nautilus "$dir" &> /dev/null & disown
 }
-zle -N files
+zle -N gui
