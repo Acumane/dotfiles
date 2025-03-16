@@ -13,7 +13,6 @@ set mps+=<:>
 
 if exists(':terminal')
   " issues #3681, #23645; my day is ruined
-  au!
   au TermOpen * setlocal nonumber norelativenumber
   au TermOpen * setlocal modifiable
   au TermOpen * startinsert
@@ -213,6 +212,16 @@ nnoremap <Esc> <Cmd>nohl<CR><Cmd>let @/ = ""<CR>
 " (S-)enter doubles as newline & search
 nnoremap <expr> <enter> @/ == "" ? 'o' : 'n'
 nnoremap <expr> <S-enter> @/ == "" ? 'O' : 'N'
+" (f)ind
+nnoremap <silent> f :let @/=expand('<cword>')<CR>:set hls<CR>:call feedkeys('/'.@/)<CR>
+vnoremap <silent> f y:let @/=@" <bar>:set hls<CR>gn
+
+" clear search pattern register (@/):
+nnoremap <Esc> <Cmd>nohl<CR><Cmd>let @/ = ""<CR>
+augroup ClearSearch
+  au! BufReadPost * let @/ = ""
+augroup END
+
 
 " <#>G -> <#>g
 nnoremap <nowait><expr> g v:count ? 'G' : 'g'
