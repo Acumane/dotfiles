@@ -194,7 +194,7 @@ map      B    GL
 noremap  I    {
 noremap  K    }
 noremap  J    g0
-nnoremap L    $
+noremap  L    $
 vnoremap L    g_
 
 " (n)ext occurence
@@ -203,15 +203,18 @@ noremap N F
 noremap , ;
 noremap < ,
 
-noremap / :
-" (f)ind
-nnoremap f /
-" clear search pattern register (@/):
-nnoremap <Esc> <Cmd>nohl<CR><Cmd>let @/ = ""<CR>
-
 " (S-)enter doubles as newline & search
 nnoremap <expr> <enter> @/ == "" ? 'o' : 'n'
 nnoremap <expr> <S-enter> @/ == "" ? 'O' : 'N'
+
+" (m)ulticursor
+if exists('g:vscode')
+  nmap <expr> m @/ == "" ? '\m' : 'gn\m<Cmd>norm! n<CR>'
+  vmap <nowait><expr> m @/ == "" ? '\m' : '\m<Cmd>norm! n<CR>'
+  nmap <expr> M @/ == "" ? '' : 'gN\m<Cmd>norm! N<CR>'
+  vmap <nowait><expr> M @/ == "" ? '' : '\m<Cmd>norm! NN<CR>'
+endif
+
 " (f)ind
 nnoremap <silent> f :let @/=expand('<cword>')<CR>:set hls<CR>:call feedkeys('/'.@/)<CR>
 vnoremap <silent> f y:let @/=@" <bar>:set hls<CR>gn

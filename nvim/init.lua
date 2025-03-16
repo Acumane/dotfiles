@@ -3,16 +3,32 @@ vim.opt.rtp:prepend(lazy_path)
 
 require("lazy").setup({
   "kylechui/nvim-surround",
+  "luochen1990/select-and-search",
   "johmsalas/text-case.nvim",
   "justinmk/vim-ipmotion",
   {
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    cond = (function() return not vim.g.vscode end)
+    cond = not vim.g.vscode
   },
   {
     "rebelot/kanagawa.nvim",
-    cond = (function() return not vim.g.vscode end)
+    cond = not vim.g.vscode
+  },
+  {
+    "vscode-neovim/vscode-multi-cursor.nvim",
+    event = "VeryLazy",
+    cond = not not vim.g.vscode,
+    opts = {},
+    config = function()
+      require("vscode-multi-cursor").setup({ default_mappings = false })
+      local cursors = require("vscode-multi-cursor")
+
+      local k = vim.keymap.set
+      k({ 'n', 'x' }, '<Leader>m', cursors.create_cursor, { expr = true })
+      k({ 'n' }, 'dm', cursors.cancel)
+      k({ 'n', 'x' }, '<Leader>H', cursors.start_right) -- TODO
+    end
   }
 })
 
