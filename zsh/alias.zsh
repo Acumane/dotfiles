@@ -164,8 +164,8 @@ fm() { exec &> /dev/null
   kitty sh -c "yazi"; }
 t() { nvim -c ':terminal' 2> /dev/null; }
 zle -N _v; zle -N t; zle -N fm
-alias h="runghc"
-alias hi="ghci"
+hl() { [ "$1" = "plug" ] && shift && hyprpm "$@" || hyprctl "$@"; }
+alias h="hl"
 
 alias fonts="fc-list : family"
 alias s="fzf"
