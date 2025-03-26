@@ -62,7 +62,7 @@ description.findbar-find-status[data-l10n-id] {
 	display: none;
 }
 
-image.toolbarbutton-icon {
+[class^="findbar-find-"]>image.toolbarbutton-icon {
 	padding-left: 2px;
 }
 

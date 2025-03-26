@@ -22,3 +22,9 @@
 .textLayer {
 	box-shadow: rgba(0, 0, 0, 0.3) 0px 4px 12px;
 }
+
+@-moz-document url("about:newtab") {
+	body {
+		background-color: #1E1E27;
+	}
+}

@@ -19,7 +19,7 @@
 }
 
 .titlebar-buttonbox-container {
-	padding: 0 3px !important;
+	padding: 0 !important;
 }
 
 /* Default window background */
@@ -54,7 +54,7 @@ tabs#tabbrowser-tabs {
 
 /* Hardcode unfocused colors (doesn't inherit theme) */
 :root:-moz-window-inactive {
-	--gnome-tabbar-tab-active-background: #3A3A46 !important; 
+	--gnome-tabbar-tab-active-background: #3A3A46 !important;
 	--gnome-headerbar-background: #2A2A37 !important;
 }
 
