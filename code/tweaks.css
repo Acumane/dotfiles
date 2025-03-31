@@ -43,3 +43,7 @@ a.action-label.codicon.codicon-close,
 .monaco-workbench.vs-dark .letterpress {
 	opacity: 0.2;
 }
+
+div.quick-input-titlebar {
+	display: none;
+}

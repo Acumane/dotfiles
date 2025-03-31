@@ -42,7 +42,7 @@ browser,
 tabs#tabbrowser-tabs {
 	&[orient="horizontal"] {
 		& tab { & .tab-content { & .tab-close-button {
-			fill-opacity: 0 !important;
+			visibility: hidden !important;
 		}}}
 	}
 }

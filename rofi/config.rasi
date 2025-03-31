@@ -16,6 +16,7 @@ configuration {
   kb-row-right: "Right";
   kb-move-char-back: "";
   kb-move-char-forward: "";
+  kb-remove-word-back: "Control+BackSpace";
 
   filebrowser {
   /*	directory: "/home";*/

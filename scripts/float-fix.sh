@@ -8,12 +8,12 @@ if [[ "$class" =~ (Nautilus)$ && "$floats" = "true" ]]; then
     [[ $w -eq 662 && $h -eq 305 ]] && hyprctl "dispatch setprop address:$addr rounding 10"
 fi
 
-if [[ "$class" =~ (firefox)$ ]]; then for _ in {1..32}; do
+if [[ "$class" =~ (firefox)$ ]]; then for _ in {1..64}; do
     sleep 0.08
 
     title=$(hyprctl clients -j | jq -r ".[] | select(.address == \"$addr\") | .title")
 
-    if [[ "$title" =~ ^(Extension|Sign [Ii]n) ]]; then
+    if [[ "$title" =~ ^(Extension|(Sign|Log) [Ii]n) ]]; then
         pos=$(hyprctl cursorpos | tr -d ',')
         hyprctl --batch "dispatch focuscurrentorlast; \
                          dispatch setfloating address:$addr; \

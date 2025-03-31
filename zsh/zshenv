@@ -44,7 +44,6 @@ export SUDO_PROMPT="Password: "
 export BAT_THEME="base16"
 export GREP_COLORS="ms=1;30;43"
 export RG_COLORS="--colors 'match:bg:yellow' --colors 'match:fg:black'"
-export LS_COLORS="$(vivid generate iceberg-dark)"
 export LS_COLORS="${LS_COLORS}:di=0;37:*.py=01;32:ln=04:*.md=36:ex=0:"
 export MANPAGER="nvim -c 'let g:no_man_maps = 1' -c 'Man!' -"
 export MANROFFOPT="-c"
@@ -58,7 +57,7 @@ export FZF_DEFAULT_OPTS="
 --bind 'C:execute-silent(wl-copy "{+}" --trim-newline)'
 --bind 'alt-p:change-preview-window(hidden|top)'"
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
-export XCURSOR_SIZE=20 XCURSOR_THEME=Bibata-Kana
+export XCURSOR_SIZE=20 XCURSOR_THEME="GoogleDot-Kana"
 
 export _ZO_RESOLVE_SYMLINKS=1 
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
