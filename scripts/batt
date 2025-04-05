@@ -11,3 +11,8 @@ bluetoothctl devices | while read -r _ mac name; do
         echo -e "$name: $perc"
     fi
 done
+
+if [ "$(adb get-state 2> /dev/null)" = "device" ]; then
+    name=$(adb shell settings get global device_name)
+    echo "$name: $(adb shell acpi 2> /dev/null | grep -oP "\d+%")"
+fi

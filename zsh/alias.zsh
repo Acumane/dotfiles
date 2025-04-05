@@ -78,7 +78,12 @@ ip() {
   esac
 }
 
-alias phone="scrcpy"
+phone() {
+case $1 in
+  audio | -a) scrcpy --no-video --no-window -w --start-app=\?Spotify "${@:2}" &> /dev/null;;
+  # scrcpy --video-source=camera --no-audio --camera-facing=front --v4l2-sink=/dev/video0 --orientation=270
+  *) scrcpy -w "$@" 2> /dev/null;; esac; }
+alias ph="phone"
 alias cam="v4l2-ctl"
 vm() { cur=$(pwd);
 cd "$HOME/VMs" && quickemu --vm $1.conf ${@:2} && cd "$cur"; }
