@@ -37,11 +37,7 @@ a.action-label.codicon.codicon-close,
 }
 
 .letterpress {
-	transform: scale(0.8);
-}
-
-.monaco-workbench.vs-dark .letterpress {
-	opacity: 0.2;
+	visibility: hidden;
 }
 
 div.quick-input-titlebar {

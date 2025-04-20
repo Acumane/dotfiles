@@ -13,7 +13,7 @@ if [[ "$class" =~ (firefox)$ ]]; then for _ in {1..64}; do
 
     title=$(hyprctl clients -j | jq -r ".[] | select(.address == \"$addr\") | .title")
 
-    if [[ "$title" =~ ^(Extension|(Sign|Log) [Ii]n) ]]; then
+    if [[ "$title" =~ (^Extension|Authorize|(Sign|Log) [Ii]n) ]]; then
         pos=$(hyprctl cursorpos | tr -d ',')
         hyprctl --batch "dispatch focuscurrentorlast; \
                          dispatch setfloating address:$addr; \

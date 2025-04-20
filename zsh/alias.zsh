@@ -119,7 +119,7 @@ net() {
     speed) fast -u --single-line;;
     type) nmcli -t -f TYPE,STATE device status | grep ":connected$" | head -n 1 | cut -d':' -f1;;
     scan) nmcli dev wifi rescan && nmcli dev wifi list;;
-    *) nmcli dev wifi ${@:1}
+    *) nmcli dev wifi $@
   esac
 }
 alias udev="udevadm"
@@ -136,7 +136,7 @@ dl() {
     *) wget -N -P "$DL" "$1"
   esac
 }
-push() { tailscale file cp "$1:"; }
+push() { tailscale file cp $1 $2:; }
 alias pull="sudo tailscale file get"
 
 alias pn="pnpm"
@@ -165,12 +165,11 @@ case $1 in
   past) shift; jj obslog "$@";;
   *) jj "$@";; esac; }
 _v() { nvim 2> /dev/null; }
-fm() { exec &> /dev/null
-  kitty sh -c "yazi"; }
 t() { nvim -c ':terminal' 2> /dev/null; }
+fm() { kitty sh -c "yazi" &> /dev/null; }
 zle -N _v; zle -N t; zle -N fm
-hl() { [ "$1" = "plug" ] && shift && hyprpm "$@" || hyprctl "$@"; }
-alias h="hl"
+hypr() { [ "$1" = "plug" ] && shift && hyprpm "$@" || hyprctl "$@"; }
+alias h="hypr"
 
 alias fonts="fc-list : family"
 alias s="fzf"
