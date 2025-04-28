@@ -17,7 +17,7 @@ export MODULAR_HOME="$HOME/.modular"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export ZDOTDIR="$HOME/.config/zsh"
 export DOTFILES_REPO_PATH="$DOTS"
-export WINEPREFIX="$HOME/games"
+export WINEPREFIX="$HOME/.games"
 
 typeset -U PATH path
 path+=(
