@@ -11,6 +11,7 @@ alias color="grc -es"
 alias l="eza --icons -F "; alias ls="l"
 alias la="eza --icons -AF -s modified"
 alias ld="eza --icons -AF -lm -T --level=1 --time-style=relative"
+alias lt="eza --icons -ATF --git-ignore"
 alias bu="rsync -avuP"
 alias cp="cp -r"
 alias del="sudo \rm -rf"
@@ -33,7 +34,8 @@ alias watch="entr -pc"
 alias first="head -n 1" 
 alias last="tail -n 1"
 sys() { [ $# -eq 0 ] && sysz && return
-  systemctl "${@: -1}" 2> >(grep -q "Unknown command verb") && systemctl "$@" || sysz "$@"; }
+  if [ "$1" = "status" ]; then sysz "$@" 
+  else systemctl "${@: -1}" 2> >(grep -q "Unknown command verb") && systemctl "$@" || sysz "$@"; fi }
 alias log="journalctl -p 0..4 -b"
 diag() { sudo dmesg -T --color=always "$@" | less -FSXK; }
 alias dmesg="diag"
@@ -86,7 +88,7 @@ case $1 in
 alias ph="phone"
 alias cam="v4l2-ctl"
 vm() { cur=$(pwd);
-cd "$HOME/VMs" && quickemu --vm $1.conf ${@:2} && cd "$cur"; }
+cd "$HOME/.VMs" && quickemu --vm $1.conf ${@:2} && cd "$cur"; }
 spin() { cur=$(pwd);
 cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
 key() {
@@ -123,6 +125,7 @@ net() {
   esac
 }
 alias udev="udevadm"
+alias wave="scope-tui --no-ui --scatter pulse pipewire.monitor"
 mic() {
   pactl load-module module-loopback 1> /dev/null
   trap "pactl unload-module module-loopback" EXIT INT TERM
@@ -187,6 +190,7 @@ alias pd="pwd"
 
 lc() { awk 'END {print NR, "lines"}' "$@"; }
 wc() { awk '{w += NF} END {print w, "words"}' "$@"; }
+await() { tail --pid=$1 -f /dev/null; }
 type() { file --mime-type "$1" | awk '{print $NF}'; }
 alias info="eza --icons -AF -lOXm -T --level=0 --git --smart-group --time-style=relative"
 alias space="grc lsblk -fne7 -o NAME,LABEL,SIZE,FSUSE%,MOUNTPOINTS"
@@ -210,6 +214,7 @@ alias snaps="snap list"
 
 zshaddhistory() { # Validate commands* before appending to HISTFILE
   [[ $1 =~ "(https?)://[^ ]+" ]] && return 1
+  [[ $(command wc -w <<< "$1") -le 1 ]] && return 1
   whence ${${(z)1}[1]} > /dev/null || return 1
 }
 

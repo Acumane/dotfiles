@@ -3,6 +3,7 @@ user_pref("browser.urlbar.update2.engineAliasRefresh", true);
 user_pref("browser.urlbar.ctrlCanonizesURLs", false);
 user_pref("browser.tabs.insertAfterCurrent", true);
 user_pref("ui.key.menuAccessKeyFocuses", false);
+user_pref("browser.tabs.allowTabDetach", false);
 // user_pref("permissions.default.shortcuts", 2);
 user_pref("findbar.highlightAll", true);
 
@@ -30,7 +31,7 @@ user_pref("media.hardware-video-decoding.force-enabled", true);
 user_pref("extensions.screenshots.disabled", true);
 
 // user_pref("ui.textHighlightBackground", "#EBBEFF");
-user_pref("ui.textHighlightBackground", "#f8CCAF");
+user_pref("ui.textHighlightBackground", "#F8CCAF");
 user_pref("ui.textHighlightForeground", "#000");
 user_pref("ui.textSelectAttentionBackground", "#40FFAA");
 user_pref("ui.textSelectAttentionForeground", "#000");
