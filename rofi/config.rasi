@@ -7,7 +7,7 @@ configuration {
 
   display-drun: "";
   drun-display-format: "{name}";
-  font: "Akkurat 11";
+  font: "sans-serif 11";
   eh: 1;
   /* dpi: 92; */
   yoffset: 20;

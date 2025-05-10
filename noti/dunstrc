@@ -15,7 +15,7 @@
   frame_color = "#F7C3A1"
   corner_radius = 8
 
-  font = Akkurat 10
+  font = sans-serif 10
   line_height = 2
 
   idle_threshold = 60

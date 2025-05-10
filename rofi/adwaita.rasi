@@ -21,7 +21,7 @@ window {
 	location:         center;
 	width:            325;
 	background-color: @bg;
-	border-radius:    10px;
+	border-radius:    12px;
 	border-color:     @bord;
 	border:           1px;
 }
@@ -45,8 +45,8 @@ prompt {
 	background-color: @dim;
 	border-radius:    100px;
 
-	font:    "IBM Plex Mono Semibold 11";
-	padding: 2px 10.5px 1.5px 6px;
+	padding: 2px 10.5px 2.5px 6px;
+	margin: 0px 0px 2px;
 	spacing: 8px;
 }
 
