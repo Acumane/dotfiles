@@ -2,12 +2,11 @@
 /* @import "tweaks/prevent-tab-overflow.css"; */
 @import "tweaks/floating-findbar.css";
 @import "tweaks/minimal-ext-menu.css";
-
-
-/* Icon color fix */
-:root {
+/* @import "tweaks/gtk-colors.css"; */
+ 
+:root { /* Icon color fix */
 	--gnome-icons-hack-filter: invert(1) sepia(35%) brightness(1.05) !important;
-	--gnome-window-color: var(--gnome-toolbar-color) !important; /* revert v121.1 */
+	--gnome-window-color: var(--gnome-entry-color) !important; /* revert v121.1 */
 }
 
 .tab-throbber::before {
@@ -39,12 +38,43 @@ browser,
 .tab-content:not([pinned])::before {
 	visibility: hidden !important;
 }
+
 tabs#tabbrowser-tabs {
 	&[orient="horizontal"] {
 		& tab { & .tab-content { & .tab-close-button {
 			visibility: hidden !important;
 		}}}
 	}
+}
+
+.tab-text {
+	margin-bottom: 1px !important;
+}
+
+
+.urlbar-input, #identity-icon-label, image#identity-icon[tooltiptext]:not(:empty) {
+	margin-bottom: 2px !important;
+}
+
+.tab-group-label {
+	color: var(--tab-group-color-pale) !important;
+	background-color: color-mix(in srgb, var(--tab-group-color-invert) 50%, transparent) !important;
+	margin: 0px 1px 6px !important;
+
+	#tabbrowser-tabs[orient="horizontal"] & {
+		padding: 2px 9px 3px !important;
+	}
+
+	&[tooltiptext=""] {
+		background-color: color-mix(in srgb, var(--tab-group-color-invert) 90%, transparent) !important;
+		min-height: unset !important; min-width: unset !important;
+		margin-top: 1px !important;
+		height: 18px;
+	}
+}
+
+#navigator-toolbox[fullscreenShouldAnimate] {
+	transition-duration: 0.3s !important;
 }
 
 /* PWA: hide the tabs, titlebar, headers, etc. */
@@ -58,6 +88,8 @@ tabs#tabbrowser-tabs {
 	--gnome-headerbar-background: #2A2A37 !important;
 }
 
+dialog { color: var(--gnome-window-color); }
+
 toolbarbutton#alltabs-button {
 	display: none !important;
 }
@@ -66,7 +98,8 @@ toolbarbutton#alltabs-button {
 @-moz-document url("chrome://global/content/pictureinpicture/player.xhtml") {
 	div.controls-bottom-lower { display: none !important; }
 	#browser[type="content"] { margin: -1vh -1vw !important; }
-	button#close { display: none !important; }
+	button#close, button#unpip { display: none !important; }
+	#scrubber, button#unpip { filter: sepia(35%); }
 }
 
 label#userContext-label { /* Container label */

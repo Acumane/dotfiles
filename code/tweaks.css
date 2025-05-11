@@ -3,10 +3,6 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-.linux {
-	font-family: Akkurat, sans-serif;
-}
-
 /* Hide "Custom CSS" icon in status bar */
 div#be5invis\.vscode-custom-css {
 	visibility: hidden !important;
@@ -42,4 +38,17 @@ a.action-label.codicon.codicon-close,
 
 div.quick-input-titlebar {
 	display: none;
+}
+
+/* Font scale issues */
+.tab .monaco-icon-label {
+	margin-top: -1px !important;
+}
+
+.monaco-icon-label:after {
+	margin-top: 1px !important;
+}
+
+h3.title {
+	margin-top: 1px !important;
 }
