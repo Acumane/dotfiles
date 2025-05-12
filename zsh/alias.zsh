@@ -33,13 +33,13 @@ alias mkd="mkdir -p"
 alias watch="entr -pc"
 alias first="head -n 1" 
 alias last="tail -n 1"
-sys() { [ $# -eq 0 ] && sysz && return
+sys() { [ $# -eq 0 ] && { sysz; return; }
   if [ "$1" = "status" ]; then sysz "$@" 
   else systemctl "${@: -1}" 2> >(grep -q "Unknown command verb") && systemctl "$@" || sysz "$@"; fi }
 alias log="journalctl -p 0..4 -b"
 diag() { sudo dmesg -T --color=always "$@" | less -FSXK; }
 alias dmesg="diag"
-alias vigil="vigiland"
+alias inhib="vigiland"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
 alias suspend="systemctl suspend"
@@ -110,7 +110,8 @@ tz() {
 alias loc="curl -s http://ip-api.com/json | jq -r '.city + \", \" + .region + \" \" + .zip'"
 vault() { setopt LOCAL_OPTIONS NO_MONITOR
   output=$(flatpak run io.github.mpobaschnig.Vaults -o "$1" 2>&1)
-  [[ $output == *"Opened vault successfully"* ]] && cd ~/"$1" && nautilus ~/"$1" 2>/dev/null; }
+  [[ $output == *"Opened vault successfully"* ]] && { cd ~/"$1" && nautilus ~/"$1" 2>/dev/null & source env; }
+}
 # vault() { gocryptfs -allow_other -q -i 30m -- "$HOME/.enc/$1" "$HOME/$1"; }
 alias vpn="mullvad"
 net() {
@@ -152,6 +153,7 @@ app() {
       *) dnf config-manager setopt $1.${2#--};;
     esac;;
     cleanup) sudo dnf autoremove;;
+    info|list|search) dnf --forcearch=x86_64 -C "$@";;
     *) sudo dnf --forcearch=x86_64 "$@";;
   esac
 }
@@ -171,7 +173,7 @@ _v() { nvim 2> /dev/null; }
 t() { nvim -c ':terminal' 2> /dev/null; }
 fm() { kitty sh -c "yazi" &> /dev/null; }
 zle -N _v; zle -N t; zle -N fm
-hypr() { [ "$1" = "plug" ] && shift && hyprpm "$@" || hyprctl "$@"; }
+hypr() { [[ "$1" =~ ^(plug|pm)$ ]] && shift && hyprpm "$@" || hyprctl "$@"; }
 alias h="hypr"
 
 alias fonts="fc-list : family"
@@ -192,15 +194,18 @@ lc() { awk 'END {print NR, "lines"}' "$@"; }
 wc() { awk '{w += NF} END {print w, "words"}' "$@"; }
 await() { tail --pid=$1 -f /dev/null; }
 type() { file --mime-type "$1" | awk '{print $NF}'; }
+entitle() {
+  local title="${2:-${1%.*}}" type=$(file --mime-type "$1" | awk '{print $NF}')
+  if [[ $type == *"matroska"* ]]; then mkvpropedit "$1" -e info -s title="$title"
+  else exiftool -Title="$title" -overwrite_original "$1"; fi
+}
 alias info="eza --icons -AF -lOXm -T --level=0 --git --smart-group --time-style=relative"
 alias space="grc lsblk -fne7 -o NAME,LABEL,SIZE,FSUSE%,MOUNTPOINTS"
 much() { du -h -d 1 $1 2>/dev/null | grep --color=none '[0-9]\+G'; }
 alias recover="foremost" # OR scalpel, photorec
 alias i="info"; alias t="type"
 
-csv() {
-  grc column -t -s, "$@" | less -FSXK
-}
+csv() { grc column -t -s, "$@" | less -FSXK; }
 alias table="csv"
 
 snap() { # TBD
