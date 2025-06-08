@@ -1,6 +1,4 @@
-[ids]
-*
-
+''
 [global]
 oneshot_timeout = 250
 overload_tap_timeout = 1000
@@ -80,3 +78,4 @@ r = C-r
 [meta+shift]
 
 [alt+shift]
+''
