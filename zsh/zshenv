@@ -33,8 +33,6 @@ export PATH
 
 # —— VARS ———————————————————————
 
-source $DOTS/.env
-
 export WORDCHARS=""
 export ZSHZ_OWNER="bren"
 export PROMPT_EOL_MARK=""
@@ -57,7 +55,7 @@ export FZF_DEFAULT_OPTS="
 --bind 'C:execute-silent(wl-copy "{+}" --trim-newline)'
 --bind 'alt-p:change-preview-window(hidden|top)'"
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
-export XCURSOR_SIZE=20 XCURSOR_THEME="Google"
+# export XCURSOR_SIZE=20 XCURSOR_THEME="Google"
 
 export _ZO_RESOLVE_SYMLINKS=1 
 export HSA_OVERRIDE_GFX_VERSION=10.3.0

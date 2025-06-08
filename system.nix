@@ -1,6 +1,6 @@
 # Help is available in configuration.nix(5)
 
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, lib, ... }:
 
 { 
   imports = [ 
@@ -11,15 +11,14 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.bren = import ./home.nix;
-    
+    # backupFileExtension = "backup";
     useGlobalPkgs = true;
   }; 
-
+  
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-14153b07-d8ae-47e3-b230-2111db354065".device = "/dev/disk/by-uuid/14153b07-d8ae-47e3-b230-2111db354065";
   networking.hostName = "stilas"; # Define your hostname.
 
   # Enable networking
@@ -67,6 +66,7 @@
 
   programs.firefox.enable = true;
   programs.zsh.enable = true;
+  environment.etc."zshenv".source = lib.mkForce ./zsh/zshenv;
   services.keyd.enable = true;
  
   
@@ -95,16 +95,22 @@
     mpv
     loupe
     resources
+    evince
+    papers
+
+    go
+    cargo
 
     eza
     fd
     fzf
     ripgrep-all
     git
+    git-lfs
     
     home-manager
   ];
-
+  
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
