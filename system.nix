@@ -8,6 +8,11 @@
     inputs.home-manager.nixosModules.home-manager
   ];
   
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
+  
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.bren = import ./home.nix;
@@ -64,20 +69,41 @@
     };
   };
 
+  # programs.rofi.enable = true;
+  programs.hyprland.enable = true;
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   programs.firefox.enable = true;
   programs.zsh.enable = true;
-  environment.etc."zshenv".source = lib.mkForce ./zsh/zshenv;
+  environment.etc = {
+    "zshenv".source = lib.mkForce ./zsh/zshenv;
+    "keyd/default.conf".source = lib.mkForce ./keyd/global.conf;
+  };
   services.keyd.enable = true;
- 
-  
-  services.keyd.keyboards.default = {
-    ids = ["*"];
-    extraConfig = import ./keyd/global.nix;
+  systemd.services.keyd.restartIfChanged = true;
+
+  systemd.user.services.keyd-application-mapper = {
+    description = "Application-Specific mappings for keyd";
+    documentation = [ "man:keyd-application-mapper" ];
+    after = [ "graphical-session.target" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.keyd}/bin/keyd-application-mapper -d";
+      Restart = "on-failure";
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    hyprland
+    (callPackage ./hypr/hyprscroller.nix {})
+    inputs.raise.defaultPackage.${system}
+    rofi
+    acpi
+    # niri
+
     neovim
     vim
     kitty
@@ -88,18 +114,33 @@
     niri
     wget
     zsh
-    
+
+    plymouth
+
     wbg
+    dunst
+    swaybg
     wlsunset
-    
+    wlr-randr
+    hyprpicker
+    hypridle
+    swayosd
+    playerctl
+
     mpv
     loupe
     resources
+    decibels
     evince
     papers
 
     go
     cargo
+    python3
+    cmake
+    ninja
+    gcc
+
 
     eza
     fd

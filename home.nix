@@ -13,6 +13,8 @@
     adw-gtk3
     google-cursor
     papirus-icon-theme
+    # papirus-folders
+    # papirus-nord
     nerd-fonts.jetbrains-mono
     # (nerdfonts.override { fonts = [ "Hermit" ]; })
     # (writeShellScriptBin "my-hello" ''
@@ -22,6 +24,7 @@
     eza
     fd
     fzf
+    sysz
     ripgrep
     ripgrep-all
     bat
@@ -30,6 +33,8 @@
     trash-cli
     xdg-utils
     file
+    entr
+    jq
     
     yt-dlp
     scrcpy
@@ -37,6 +42,7 @@
     exiftool
     docker-compose
     quickemu
+
   ];
 
   # Dotfiles
@@ -45,14 +51,23 @@
       source = ./nvim;
       recursive = true;
     };
+    ".config/hypr".source = ./hypr;
     ".config/kitty".source = ./kitty;
-
+    ".config/keyd/app.conf".source = ./keyd/app.conf;
     ".config/zsh/alias.zsh".source = ./zsh/alias.zsh;
     ".config/zsh/.zshrc".source = ./zsh/zshrc;
+    ".config/gtk-4.0/gtk.css".source = ./gtk/gtk.css;
+
+    ".local/bin/bt".source = ./scripts/bt;
+    ".local/bin/batt".source = ./scripts/batt;
+    ".local/bin/wm".source = ./scripts/wm;
+
+    ".local/lib/hyprscroller.so".source = 
+      "${pkgs.callPackage ./hypr/hyprscroller.nix {}}/lib/hyprscroller.so";
   };
 
   home.sessionVariables = rec {
-    # EDITOR = "emacs";
+    # EDITOR = "nvim";
   };
 
   programs.git = {
@@ -102,8 +117,6 @@
       show-hidden = true;
     };
   };
-  
-  
   
   home.file.".config/gtk-3.0/bookmarks".text = ''
     file:///home/bren/dl Downloads
