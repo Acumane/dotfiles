@@ -120,7 +120,7 @@
   
   home.file.".config/gtk-3.0/bookmarks".text = ''
     file:///home/bren/dl Downloads
-    file:///home/bren/nix Nix
+    file:///home/bren/dots Dotfiles
   '';
 
   programs.neovim = {
@@ -134,6 +134,7 @@
   xdg.mimeApps.defaultApplications = {
     "text/*" = [ "cursor.desktop" ];
     "image/*" = [ "loupe.desktop" ];
+    "audio/*" = [ "decibels.desktop" ];
     "video/*" = [ "mpv.desktop" ];
     "application/pdf" = [ "evince.desktop" ];
   };

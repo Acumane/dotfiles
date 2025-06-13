@@ -12,24 +12,36 @@
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nixpkgs.config.allowUnfree = true;
+  hardware.enableAllFirmware = true;
+  
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
   
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users.bren = import ./home.nix;
-    # backupFileExtension = "backup";
+    backupFileExtension = "backup";
     useGlobalPkgs = true;
   }; 
   
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  services.power-profiles-daemon.enable = true;
 
-  networking.hostName = "stilas"; # Define your hostname.
+  networking = {
+    hostName = "stilas";
+    networkmanager.enable = true;
+    interfaces.eno1 = {
+      useDHCP = true;
+    };
+  };
+  services.tailscale.enable = true;
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -46,6 +58,8 @@
     layout = "us";
     variant = "";
   };
+  
+   nix.settings.trusted-users = [ "root" "bren" ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -68,6 +82,8 @@
       extraGroups = [ "networkmanager" "wheel" "keyd" ];
     };
   };
+  
+  programs.adb.enable = true;
 
   # programs.rofi.enable = true;
   programs.hyprland.enable = true;
@@ -94,7 +110,6 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
     hyprland
@@ -114,14 +129,21 @@
     niri
     wget
     zsh
+    devenv
 
     plymouth
+    # polkit-gnome
+    android-tools
+    watchman
+    inotify-tools
 
     wbg
     dunst
     swaybg
     wlsunset
     wlr-randr
+    wl-clipboard
+    cliphist
     hyprpicker
     hypridle
     swayosd
@@ -136,12 +158,13 @@
 
     go
     cargo
-    python3
+    python312
+    python312Packages.pip
     cmake
     ninja
     gcc
-
-
+    direnv
+    uv
     eza
     fd
     fzf
@@ -150,14 +173,26 @@
     git-lfs
     
     home-manager
+    
+    ethtool
+    tailscale
   ];
   
   programs.gnupg.agent = {
     enable = true;
-    enableSSHSupport = true;
+    # enableSSHSupport = true;
   };
 
   services.openssh.enable = true;
+  programs.ssh = {
+    startAgent = true;
+    extraConfig = ''
+      Host GitHub
+        HostName github.com
+        User git
+    '';
+  };
+  
 
   system.stateVersion = "25.05";
 
