@@ -1,0 +1,9 @@
+[user]
+	name = Bren Paul
+	email = brenpaul@machindustries.com
+
+[github]
+    user = Acumane
+
+[core]
+    excludesfile = ~/.gitignore

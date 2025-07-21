@@ -1,0 +1,33 @@
+[user]
+    name = Bren Paul
+    email = brenpaul@machindustries.com
+
+[github]
+    user = Acumane
+
+[core]
+    excludesfile = ~/.gitignore
+
+# [filter "lfs"]
+#     clean = git lfs clean %f
+#     smudge = git lfs smudge %f
+#     required = true
+
+[alias]
+    undo = reset --soft HEAD~1
+    unstage = reset HEAD --
+    amend = commit --amend
+    retcon = commit --amend --no-edit --date
+    log = log --oneline --graph --decorate --date=relative
+    discard = checkout --
+    
+    tracked = ls-files
+    branches = branch -a
+    stashes = stash list
+    remotes = remote -v
+    tags = tag
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

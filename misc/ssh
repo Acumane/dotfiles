@@ -1,0 +1,17 @@
+Host GitHub
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_ed25519
+
+Host enlil
+  HostName enlil
+  User brenpaul
+  IdentityFile ~/.ssh/id_ed25519
+
+Host ISR
+  HostName 192.168.12.2
+  User jetson
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null
+  IdentityFile ~/.ssh/id_ed25519
+
