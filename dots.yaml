@@ -43,6 +43,15 @@
     ~/.config/kitty:
       glob: true
       path: kitty/*
+    ~/.config/fusuma/config.yml: fusuma/config.yml
+    ~/.config/dunst/dunstrc: noti/dunstrc
+    ~/.config/sway/osd.css: sway/osd.css
+    /var/spool/cron/bren:
+      path: noti/crontab
+      type: hardlink
+    ~/.config/rofi:
+      glob: true
+      path: rofi/*
     ~/:
       glob: true
       path: git/*
@@ -54,4 +63,3 @@
 - shell:
   - [ git submodule update --init --recursive, Installing submodules... ]
   - [ sudo keyd reload, Reloading keyd... ]
-
