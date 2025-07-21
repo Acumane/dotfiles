@@ -1,0 +1,57 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+      force: true
+
+- clean: ['~']
+- clean:
+    ~/.config:
+        recursive: true
+    ~/.local/bin:
+        recursive: true
+
+- link:
+    ~/.config/nvim/init.vim: nvim/init.vim
+    ~/.config/nvim/lua/init.lua: nvim/init.lua
+    ~/.config/user-dirs.dirs: misc/user.dirs
+    /etc/zshenv:
+      path: zsh/zshenv
+      type: hardlink
+    ~/.zshrc: zsh/zshrc
+    /etc/zsh/zshenv:
+      if: '. /etc/os-release && [ "$ID" = "ubuntu" ]'
+      path: zsh/zshenv
+      type: hardlink
+    ~/.config/zsh/.zshrc:
+      if: '. /etc/os-release && [ "$ID" = "ubuntu" ]'
+      path: zsh/zshrc
+    ~/.config/zsh/alias.zsh: zsh/alias.zsh
+    /etc/keyd/default.conf: 
+      path: keyd/global.conf
+      type: hardlink
+    ~/.config/keyd/app.conf: keyd/app.conf
+    ~/.config/fontconfig: misc/fontconfig
+    ~/.lesskey: misc/lesskey
+    ~/.ssh/config: misc/ssh
+    ~/.local/bin:
+      glob: true
+      path: bin/*
+    ~/.config/mpv:
+      glob: true
+      path: mpv/*
+    ~/.config/kitty:
+      glob: true
+      path: kitty/*
+    ~/:
+      glob: true
+      path: git/*
+      prefix: '.'
+
+- create:
+  - ~/mach
+
+- shell:
+  - [ git submodule update --init --recursive, Installing submodules... ]
+  - [ sudo keyd reload, Reloading keyd... ]
+
