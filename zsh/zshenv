@@ -3,14 +3,21 @@
 # —— PATHS ——————————————————————
 
 export HOME="/home/bren"
-export DOTS="$HOME/dotfiles"
+export DOTS="$HOME/dots"
 export SCRIPTS="$DOTS/scripts"
 export CACHE="$HOME/.cache"
 export CONFIG="$HOME/.config"
 export DL="$HOME/dl"
 
+source /etc/os-release
+
 if [ -n "$(ls /sys/class/power_supply | grep -E '^BAT')" ]
     then export DEV_TYPE="lap"; else export DEV_TYPE="desk"
+fi
+
+profile_d="/nix/var/nix/profiles/default/etc/profile.d"
+if [ -e "$profile_d/nix-daemon.sh" ]; then
+  . "$profile_d/nix-daemon.sh"
 fi
 
 export MODULAR_HOME="$HOME/.modular"
