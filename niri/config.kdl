@@ -1,0 +1,152 @@
+spawn-sh-at-startup "keyd-application-mapper -d"
+spawn-sh-at-startup "wl-paste --watch cliphist store"
+// spawn-sh-at-startup "/usr/libexec/polkit-gnome-authentication-agent-1"
+spawn-sh-at-startup "swayosd-server -s $DOTS/sway/osd.css"
+// spawn-sh-at-startup "adb start-server"
+spawn-sh-at-startup "firefox & code & sleep 2s && kitty"
+// spawn-sh-at-startup "syncthing serve --no-browser"
+// spawn-sh-at-startup "sudo tailscale up --operator=$USER"
+spawn-sh-at-startup "wlsunset -S 8:00 -s 22:00 -t 3500 -d 1800"
+spawn-sh-at-startup "play -q $HOME/audio/sounds/greet.flac &"
+spawn-sh-at-startup "swaybg -c '#0A0815'"
+
+input {
+    keyboard {
+        repeat-delay 500
+        repeat-rate 25
+    }
+
+    mouse {
+        scroll-factor 1.25
+    }
+
+    warp-mouse-to-focus
+}
+
+prefer-no-csd
+
+layout {
+    gaps 12
+    
+    struts {
+        left -5
+        right -5
+        top -5
+        bottom -5
+    }
+
+    preset-column-widths {
+        proportion 0.25
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 0.75
+        proportion 1.0
+    }
+    
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+
+    default-column-width { proportion 0.5; }
+
+    border {
+        width 1
+        active-color "#3F3F50"
+        inactive-color "#2A2A37"
+        urgent-color "#E67B7F"
+    }
+
+    focus-ring {
+        width 1
+        active-color "#3F3F50"
+        inactive-color "#2A2A37"
+        urgent-color "#E67B7F"
+    }
+
+    shadow {
+        on
+        softness 45
+        offset x=0 y=4
+        color "#0A00102A"
+    }
+}
+
+window-rule {
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+binds {
+    // Media control keys
+    XF86AudioMute { spawn-sh "$SCRIPTS/amute.sh -t"; }
+    XF86AudioRaiseVolume { spawn-sh "swayosd-client --output-volume +5"; }
+    XF86AudioLowerVolume { spawn-sh "swayosd-client --output-volume -5"; }
+    XF86AudioPlay { spawn-sh "$SCRIPTS/player.sh"; }
+    XF86AudioPrev { spawn-sh "playerctl previous"; }
+    XF86AudioNext { spawn-sh "playerctl next"; }
+
+    // Applications
+    Mod+Slash { spawn-sh "kitty"; }
+    Mod+Equal { spawn-sh "hyprpicker -a"; }
+    Mod+W { spawn-sh "firefox"; }
+    Mod+E { spawn-sh "nautilus"; }
+
+    Mod+Q { close-window; }
+    Mod+F { fullscreen-window; }
+    Mod+A { spawn-sh "flatpak run com.saivert.pwvucontrol"; }
+    Mod+Space { screenshot; }
+    // Mod+Shift+Space { spawn-sh "grimrec gif area save"; }
+    Mod+Grave { spawn-sh "flatpak run net.nokyan.Resources"; }
+    Mod+H { spawn-sh "flatpak run io.github.nokse22.inspector"; }
+
+    // Mod+Super_L { spawn-sh "$SCRIPTS/menu.sh run"; }
+    // Mod+Comma { spawn-sh "$SCRIPTS/menu.sh emoji"; }
+    // Mod+V { spawn-sh "$SCRIPTS/menu.sh copy"; }
+
+    // Movement and focus
+    Mod+J { focus-column-left; }
+    Mod+L { focus-column-right; }
+    Mod+I { focus-window-up; }
+    Mod+K { focus-window-down; }
+
+    Mod+Shift+J { consume-or-expel-window-left; }
+    Mod+Shift+L { consume-or-expel-window-right; }
+    Mod+Shift+I { move-window-up; }
+    Mod+Shift+K { move-window-down; }
+
+    Mod+Ctrl+J { move-column-left; }
+    Mod+Ctrl+L { move-column-right; }
+
+    Mod+Left { move-column-left; }
+    Mod+Right { move-column-right; }
+    Mod+Return { center-column; }
+
+    // Workspaces
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+
+    // Column width cycling
+    Mod+BracketLeft { switch-preset-column-width; }
+    Mod+BracketRight { switch-preset-column-width; }
+    Mod+Shift+BracketLeft { switch-preset-window-height; }
+    Mod+Shift+BracketRight { switch-preset-window-height; }
+
+    Mod+Shift+Q { quit; }
+}
+
+cursor {
+    xcursor-theme "Google"
+    xcursor-size 20
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
