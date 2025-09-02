@@ -18,18 +18,15 @@
     /etc/zshenv:
       path: zsh/zshenv
       type: hardlink
-    ~/.zshrc: zsh/zshrc
-    /etc/zsh/zshenv:
-      if: '. /etc/os-release && [ "$ID" = "ubuntu" ]'
-      path: zsh/zshenv
-      type: hardlink
-    ~/.config/zsh/.zshrc:
-      if: '. /etc/os-release && [ "$ID" = "ubuntu" ]'
-      path: zsh/zshrc
+    ~/.config/zsh/.zshrc: zsh/zshrc
     ~/.config/zsh/alias.zsh: zsh/alias.zsh
     /etc/keyd/default.conf: 
       path: keyd/global.conf
       type: hardlink
+    ~/.config/hypr:
+      glob: true
+      path: hypr/*
+    ~/.config/niri/config.kdl: niri/config.kdl
     ~/.config/keyd/app.conf: keyd/app.conf
     ~/.config/fontconfig: misc/fontconfig
     ~/.lesskey: misc/lesskey
@@ -61,5 +58,4 @@
   - ~/mach
 
 - shell:
-  - [ git submodule update --init --recursive, Installing submodules... ]
   - [ sudo keyd reload, Reloading keyd... ]

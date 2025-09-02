@@ -144,6 +144,7 @@ push() { tailscale file cp $1 $2:; }
 alias pull="sudo tailscale file get"
 
 alias pn="pnpm"
+alias python="python3"
 alias py="python"
 app() {
   case $1 in
