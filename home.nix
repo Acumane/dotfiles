@@ -14,23 +14,57 @@
     enable = true;
     lfs.enable = true;
     userName = "Bren Paul";
-    userEmail = "brenpaul@machindustries.com";
+    userEmail = "git@bren.page";
   };
 
-  gtk = with pkgs; {
-    enable = true;
-    theme.name = "adw-gtk3-dark";
-    iconTheme = {
-      package = papirus-icon-theme;
-      name = "Papirus-Dark";
+  # gtk = with pkgs; {
+  #   enable = true;
+  #   theme.name = "adw-gtk3-dark";
+  #   iconTheme = {
+  #     package = papirus-icon-theme;
+  #     name = "Papirus-Dark";
+  #   };
+  #   cursorTheme = {
+  #     package = google-cursor;
+  #     name = "GoogleDot-Blue";
+  #     size = 20;
+  #   };
+  # };
+
+  systemd.user.enable = true;
+
+  systemd.user.services = {
+    # syncthing.enable = true;
+    # dunst.enable = true;
+    # cloudflare.enable = true;
+    # xwayland-satellite.enable = true;
+    
+    keyd-application-mapper = {
+      Service = {
+        ExecStart = "keyd-application-mapper";
+        Restart = "always";
+      };
+      Install.WantedBy = [ "default.target" ];
     };
-    cursorTheme = {
-      package = google-cursor;
-      name = "GoogleDot-Blue";
-      size = 20;
+
+    cliphist = {
+      Service = {
+        ExecStart = "wl-paste --watch %h/.local/bin/cliphist store";
+        Restart = "always";
+        Environment = "PATH=/usr/bin:/usr/local/bin:%h/.local/bin";
+      };
+      Install.WantedBy = [ "default.target" ];
+    };
+
+    swayosd-server = {
+      Service = {
+        ExecStart = "swayosd-server -s %h/.config/sway/osd.css";
+        Restart = "always";
+      };
+      Install.WantedBy = [ "default.target" ];
     };
   };
-  
+
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
@@ -63,13 +97,13 @@
     file:///home/bren/dots Dotfiles
   '';
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    plugins = with pkgs.vimPlugins; [
-      lazy-nvim
-    ];
-  };
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  #   plugins = with pkgs.vimPlugins; [
+  #     lazy-nvim
+  #   ];
+  # };
   
   xdg.mimeApps.defaultApplications = {
     "text/*" = [ "cursor.desktop" ];
@@ -79,8 +113,8 @@
     "application/pdf" = [ "evince.desktop" ];
   };
   
-  programs.zsh = {
-    enable = true;
-  };
+  # programs.zsh = {
+  #   enable = true;
+  # };
 }
 

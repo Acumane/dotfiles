@@ -8,7 +8,7 @@ spawn-sh-at-startup "firefox & code & sleep 2s && kitty"
 // spawn-sh-at-startup "sudo tailscale up --operator=$USER"
 spawn-sh-at-startup "wlsunset -S 8:00 -s 22:00 -t 3500 -d 1800"
 spawn-sh-at-startup "play -q $HOME/audio/sounds/greet.flac &"
-spawn-sh-at-startup "swaybg -c '#0A0815'"
+spawn-sh-at-startup "niriusd"
 
 input {
     keyboard {
@@ -20,39 +20,23 @@ input {
         scroll-factor 1.25
     }
 
-    warp-mouse-to-focus
+    // warp-mouse-to-focus
+    focus-follows-mouse max-scroll-amount="10%"
 }
 
 prefer-no-csd
 
 layout {
     gaps 12
+    background-color "#0A0815"
     
     struts {
-        left -5
-        right -5
-        top -5
-        bottom -5
+        left -5; right  -5
+        top  -5; bottom -5
     }
 
-    preset-column-widths {
-        proportion 0.25
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-        proportion 0.75
-        proportion 1.0
-    }
+    // default-column-width { proportion 0.5; }
     
-    preset-window-heights {
-        proportion 0.33333
-        proportion 0.5
-        proportion 0.66667
-        proportion 1.0
-    }
-
-    default-column-width { proportion 0.5; }
-
     border {
         width 1
         active-color "#3F3F50"
@@ -69,14 +53,26 @@ layout {
 
     shadow {
         on
-        softness 45
+        softness 30
         offset x=0 y=4
-        color "#0A00102A"
+        color "#0A001080"
+    }
+}
+
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}
+
+overview {
+    backdrop-color "#0A0815"
+    workspace-shadow {
+        off
     }
 }
 
 window-rule {
-    geometry-corner-radius 10
+    geometry-corner-radius 8
     clip-to-geometry true
 }
 
@@ -90,11 +86,14 @@ binds {
     XF86AudioNext { spawn-sh "playerctl next"; }
 
     // Applications
-    Mod+Slash { spawn-sh "kitty"; }
     Mod+Equal { spawn-sh "hyprpicker -a"; }
-    Mod+W { spawn-sh "firefox"; }
-    Mod+E { spawn-sh "nautilus"; }
-
+    Mod+Slash { spawn-sh "nirius focus-or-spawn --app-id='kitty' -- kitty"; }
+    Mod+Shift+Slash { spawn-sh "kitty"; }
+    Mod+W { spawn-sh "nirius focus-or-spawn --app-id='.*firefox' -- firefox"; }
+    Mod+Shift+W { spawn-sh "firefox"; }
+    Mod+E { spawn-sh "nirius focus-or-spawn --app-id='.*Nautilus' -- nautilus -w"; }
+    Mod+Shift+E { spawn-sh "nautilus -w"; }
+    
     Mod+Q { close-window; }
     Mod+F { fullscreen-window; }
     Mod+A { spawn-sh "flatpak run com.saivert.pwvucontrol"; }
@@ -106,6 +105,8 @@ binds {
     // Mod+Super_L { spawn-sh "$SCRIPTS/menu.sh run"; }
     // Mod+Comma { spawn-sh "$SCRIPTS/menu.sh emoji"; }
     // Mod+V { spawn-sh "$SCRIPTS/menu.sh copy"; }
+
+    Mod+Tab repeat=false { toggle-overview; }
 
     // Movement and focus
     Mod+J { focus-column-left; }
@@ -123,7 +124,6 @@ binds {
 
     Mod+Left { move-column-left; }
     Mod+Right { move-column-right; }
-    Mod+Return { center-column; }
 
     // Workspaces
     Mod+1 { focus-workspace 1; }
@@ -134,19 +134,41 @@ binds {
     Mod+Shift+3 { move-column-to-workspace 3; }
 
     // Column width cycling
-    Mod+BracketLeft { switch-preset-column-width; }
-    Mod+BracketRight { switch-preset-column-width; }
-    Mod+Shift+BracketLeft { switch-preset-window-height; }
-    Mod+Shift+BracketRight { switch-preset-window-height; }
+    Mod+BracketLeft { set-column-width "-20%"; }
+    Mod+BracketRight { set-column-width "+20%"; }
+    Mod+Shift+BracketRight { set-window-height "-20%"; }
+    Mod+Shift+BracketLeft { set-window-height "+20%"; }
 
+    // Alt+Tab { toggle-column-tabbed-display; }
     Mod+Shift+Q { quit; }
+    Mod+M { spawn-sh "niri msg action maximize-column && niri msg action reset-window-height"; }
+    Mod+Period { center-column; }
 }
 
 cursor {
     xcursor-theme "Google"
     xcursor-size 20
+
+    hide-when-typing
+    hide-after-inactive-ms 3000
 }
 
 hotkey-overlay {
     skip-at-startup
+}
+
+window-rule {
+    match app-id=".*firefox$" title="^Picture-in-Picture$"
+    
+    open-floating true; open-focused false
+    
+    min-width 560; min-height 315
+    max-width 560; max-height 315
+    
+    default-floating-position x=50 y=50 relative-to="bottom-right"
+}
+
+environment {
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORM "wayland"
 }

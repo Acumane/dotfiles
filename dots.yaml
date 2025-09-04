@@ -26,6 +26,7 @@
     ~/.config/hypr:
       glob: true
       path: hypr/*
+    ~/.config/home-manager/home.nix: home.nix
     ~/.config/niri/config.kdl: niri/config.kdl
     ~/.config/keyd/app.conf: keyd/app.conf
     ~/.config/fontconfig: misc/fontconfig
