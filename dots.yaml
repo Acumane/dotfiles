@@ -27,6 +27,9 @@
       glob: true
       path: hypr/*
     ~/.config/home-manager/home.nix: home.nix
+    ~/.config/systemd/user/:
+      glob: true
+      path: systemd/*
     ~/.config/niri/config.kdl: niri/config.kdl
     ~/.config/keyd/app.conf: keyd/app.conf
     ~/.config/fontconfig: misc/fontconfig
@@ -60,3 +63,4 @@
 
 - shell:
   - [ sudo keyd reload, Reloading keyd... ]
+  - [ systemctl --user daemon-reload; sudo systemctl daemon-reload, Reloading systemd... ]

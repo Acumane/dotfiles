@@ -1,0 +1,12 @@
+[Unit]
+Description=Application key remapper (keyd)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=keyd-application-mapper
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

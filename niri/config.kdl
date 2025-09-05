@@ -1,14 +1,6 @@
-spawn-sh-at-startup "keyd-application-mapper -d"
-spawn-sh-at-startup "wl-paste --watch cliphist store"
-// spawn-sh-at-startup "/usr/libexec/polkit-gnome-authentication-agent-1"
-spawn-sh-at-startup "swayosd-server -s $DOTS/sway/osd.css"
-// spawn-sh-at-startup "adb start-server"
+// TODO: systemd/*
 spawn-sh-at-startup "firefox & code & sleep 2s && kitty"
-// spawn-sh-at-startup "syncthing serve --no-browser"
-// spawn-sh-at-startup "sudo tailscale up --operator=$USER"
-spawn-sh-at-startup "wlsunset -S 8:00 -s 22:00 -t 3500 -d 1800"
 spawn-sh-at-startup "play -q $HOME/audio/sounds/greet.flac &"
-spawn-sh-at-startup "niriusd"
 
 input {
     keyboard {
@@ -36,10 +28,15 @@ layout {
     }
 
     // default-column-width { proportion 0.5; }
+
+    tab-indicator {
+        gap 6
+        place-within-column
+    }
     
     border {
         width 1
-        active-color "#3F3F50"
+        active-color "#2A2A37"
         inactive-color "#2A2A37"
         urgent-color "#E67B7F"
     }
@@ -47,21 +44,8 @@ layout {
     focus-ring {
         width 1
         active-color "#3F3F50"
-        inactive-color "#2A2A37"
         urgent-color "#E67B7F"
     }
-
-    shadow {
-        on
-        softness 30
-        offset x=0 y=4
-        color "#0A001080"
-    }
-}
-
-layer-rule {
-    match namespace="^wallpaper$"
-    place-within-backdrop true
 }
 
 overview {
@@ -72,6 +56,8 @@ overview {
 }
 
 window-rule {
+    min-width 360; min-height 240  // 3:2, sane
+
     geometry-corner-radius 8
     clip-to-geometry true
 }
@@ -100,9 +86,9 @@ binds {
     Mod+Space { screenshot; }
     // Mod+Shift+Space { spawn-sh "grimrec gif area save"; }
     Mod+Grave { spawn-sh "flatpak run net.nokyan.Resources"; }
-    Mod+H { spawn-sh "flatpak run io.github.nokse22.inspector"; }
+    Mod+D { spawn-sh "flatpak run io.github.nokse22.inspector"; }
 
-    // Mod+Super_L { spawn-sh "$SCRIPTS/menu.sh run"; }
+    // Mod+SuperL { spawn-sh "$SCRIPTS/menu.sh run"; }
     // Mod+Comma { spawn-sh "$SCRIPTS/menu.sh emoji"; }
     // Mod+V { spawn-sh "$SCRIPTS/menu.sh copy"; }
 
@@ -139,8 +125,7 @@ binds {
     Mod+Shift+BracketRight { set-window-height "-20%"; }
     Mod+Shift+BracketLeft { set-window-height "+20%"; }
 
-    // Alt+Tab { toggle-column-tabbed-display; }
-    Mod+Shift+Q { quit; }
+    Alt+Tab { toggle-column-tabbed-display; }
     Mod+M { spawn-sh "niri msg action maximize-column && niri msg action reset-window-height"; }
     Mod+Period { center-column; }
 }
@@ -157,15 +142,71 @@ hotkey-overlay {
     skip-at-startup
 }
 
+window-rule {  // firefox PiP
+    match app-id=".*firefox$" title="^Picture-in-Picture$"
+
+    open-floating true; open-focused false
+
+    // min-width 560; min-height 315  // 16:9
+    // max-width 560; max-height 315
+
+    default-floating-position x=50 y=50 relative-to="bottom-right"
+}
+
+window-rule {  // floating windows
+    match is-floating=true
+    geometry-corner-radius 12
+
+    border {
+        inactive-color "#32323D"
+    }
+
+    shadow {
+        on
+        softness 30
+        spread 1
+        offset x=0 y=2
+        color "#08000A66"
+    }
+}
+
 window-rule {
+    match is-floating=true is-focused=true
+
+    shadow {
+        on
+        softness 35
+        spread 3
+        offset x=0 y=4
+        color "#08000A66"
+    }
+}
+
+window-rule {  // media
+    match app-id="mpv|scrcpy|.*Loupe|.*Celluloid"
     match app-id=".*firefox$" title="^Picture-in-Picture$"
     
-    open-floating true; open-focused false
-    
-    min-width 560; min-height 315
-    max-width 560; max-height 315
-    
-    default-floating-position x=50 y=50 relative-to="bottom-right"
+    open-floating true
+    border {
+        active-color "#595970"
+        inactive-color "#3F3F50"
+    }
+
+    focus-ring {
+        active-color "#59597075"
+    }
+}
+
+// TODO:
+window-rule {  // applets
+    match app-id=".*(Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
+    match app-id="^rofi$"
+    open-floating true
+}
+
+window-rule {  // applets (tiled)
+    match app-id=".*Nautilus|Fragments|Resources|kitty"
+    default-column-width { proportion 0.25; }
 }
 
 environment {

@@ -1,0 +1,12 @@
+[Unit]
+Description=OpenRGB server
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=openrgb --startminimized --profile "main" --server
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

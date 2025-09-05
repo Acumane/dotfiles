@@ -1,0 +1,13 @@
+[Unit]
+Description=Clipboard history manager
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/bin/sh -c 'wl-paste --watch %h/.local/bin/cliphist store'
+Restart=on-failure
+Environment=PATH=/usr/bin:/usr/local/bin:%h/.local/bin
+
+[Install]
+WantedBy=graphical-session.target
