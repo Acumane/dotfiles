@@ -1,5 +1,5 @@
 #!/bin/bash
 
-# Run hyprctl dispatch as root w/o env vars
-HIS=$(ls "/run/user/$(id -u)/hypr" | head -n 1)
-HYPRLAND_INSTANCE_SIGNATURE=$HIS hyprctl dispatch "$@"
+# Run `niri msg action` as root w/o env
+socket=$(find /run/user/$(id -u)/niri.* | head -n 1)
+NIRI_SOCKET=$socket niri msg action "$@"

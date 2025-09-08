@@ -160,6 +160,7 @@ zle -N _v; zle -N t; zle -N fm
 
 alias fonts="fc-list : family"
 alias s="fzf"
+alias ub="unbuffer"
 alias into="xargs -r"
 alias f="rg $RG_COLORS -iP"
 alias F="grep --color=auto --group-separator=$'\e[30m...\033[0m' -C3 -iP"

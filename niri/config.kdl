@@ -17,6 +17,12 @@ input {
     focus-follows-mouse max-scroll-amount="10%"
 }
 
+gestures {
+    hot-corners {
+        off
+    }
+}
+
 prefer-no-csd
 
 layout {
@@ -73,24 +79,27 @@ binds {
 
     // Applications
     Mod+Equal { spawn-sh "hyprpicker -a"; }
+    Mod+Delete { spawn-sh "kill -9 $(niri msg -j pick-window | jq .pid)"; }
     Mod+Slash { spawn-sh "nirius focus-or-spawn --app-id='kitty' -- kitty"; }
     Mod+Shift+Slash { spawn-sh "kitty"; }
     Mod+W { spawn-sh "nirius focus-or-spawn --app-id='.*firefox' -- firefox"; }
     Mod+Shift+W { spawn-sh "firefox"; }
     Mod+E { spawn-sh "nirius focus-or-spawn --app-id='.*Nautilus' -- nautilus -w"; }
     Mod+Shift+E { spawn-sh "nautilus -w"; }
-    
+    Mod+C { spawn-sh "nirius focus-or-spawn --app-id='code' -- code"; }
+    Mod+Shift+C { spawn-sh "code"; }
+
     Mod+Q { close-window; }
     Mod+F { fullscreen-window; }
     Mod+A { spawn-sh "flatpak run com.saivert.pwvucontrol"; }
     Mod+Space { screenshot; }
-    Mod+Shift+Space { spawn-sh "grimrec gif area save"; }
     Mod+Grave { spawn-sh "flatpak run net.nokyan.Resources"; }
     Mod+D { spawn-sh "flatpak run io.github.nokse22.inspector"; }
 
-    Mod+C { spawn-sh "$SCRIPTS/menu.sh run"; }
-    Mod+Period { spawn-sh "$SCRIPTS/menu.sh emoji"; }
-    Mod+V { spawn-sh "$SCRIPTS/menu.sh copy"; }
+    XF86Search { spawn-sh "vicinae vicinae://toggle"; }
+    Mod+S { spawn-sh "vicinae vicinae://extensions/vicinae/file/search"; }
+    Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/vicinae/search-emojis"; }
+    Mod+V { spawn-sh "vicinae vicinae://extensions/vicinae/clipboard/history"; }
     Mod+Backspace { spawn-sh "hyprlock --immediate"; }
 
     // Movement and focus
@@ -162,11 +171,26 @@ window-rule {  // floating windows
 
     shadow {
         on
-        softness 30
         spread 1
-        offset x=0 y=2
+        softness 30
         color "#08000A54"
     }
+}
+
+layer-rule {
+    geometry-corner-radius 12
+
+    shadow {
+        on
+        spread 1
+        softness 30
+        color "#08000A54"
+    }
+}
+
+layer-rule {
+    match namespace="swayosd"
+    geometry-corner-radius 999
 }
 
 window-rule {  // media
@@ -187,7 +211,6 @@ window-rule {  // media
 // TODO:
 window-rule {  // applets
     match app-id=".*(Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
-    match app-id="^Rofi$"
     open-floating true
 }
 
