@@ -1,22 +1,3 @@
-@import "firefox-gnome-theme/userChrome.css";
-/* @import "tweaks/prevent-tab-overflow.css"; */
-@import "tweaks/floating-findbar.css";
-@import "tweaks/minimal-ext-menu.css";
-/* @import "tweaks/gtk-colors.css"; */
- 
-:root { /* Icon color fix */
-	--gnome-icons-hack-filter: invert(1) sepia(35%) brightness(1.05) !important;
-	--gnome-window-color: var(--gnome-entry-color) !important; /* revert v121.1 */
-}
-
-.tab-throbber::before {
-	filter: sepia(35%) saturate(500%) !important;
-}
-
-#downloads-button, #downloads-indicator-icon .toolbarbutton-icon {
-	filter: none !important;
-}
-
 .titlebar-buttonbox-container {
 	padding: 0 !important;
 }
@@ -28,70 +9,15 @@ browser,
 }
 
 /* Hide UI elements */
+toolbarbutton#alltabs-button, hbox.urlbar-addon-page-action
 #reader-mode-button, #pageActionButton, #new-tab-button,
 #tabbrowser-arrowscrollbox-periphery, #fxa-toolbar-menu-button,
 #identity-permission-box, #stop-reload-button {
 	display: none !important;
 }
 
-/* Remove tab "x" and gradient */
-.tab-content:not([pinned])::before {
-	visibility: hidden !important;
-}
-
-tabs#tabbrowser-tabs {
-	&[orient="horizontal"] {
-		& tab { & .tab-content { & .tab-close-button {
-			visibility: hidden !important;
-		}}}
-	}
-}
-
-.tab-text {
-	margin-bottom: 1px !important;
-}
-
-
-.urlbar-input, #identity-icon-label, image#identity-icon[tooltiptext]:not(:empty) {
-	margin-bottom: 2px !important;
-}
-
-.tab-group-label {
-	color: var(--tab-group-color-pale) !important;
-	background-color: color-mix(in srgb, var(--tab-group-color-invert) 50%, transparent) !important;
-	margin: 0px 1px 6px !important;
-
-	#tabbrowser-tabs[orient="horizontal"] & {
-		padding: 2px 9px 3px !important;
-	}
-
-	&[tooltiptext=""] {
-		background-color: color-mix(in srgb, var(--tab-group-color-invert) 90%, transparent) !important;
-		min-height: unset !important; min-width: unset !important;
-		margin-top: 1px !important;
-		height: 18px;
-	}
-}
-
 #navigator-toolbox[fullscreenShouldAnimate] {
 	transition-duration: 0.3s !important;
-}
-
-/* PWA: hide the tabs, titlebar, headers, etc. */
-/* #titlebar, #navigator-toolbox {
-	visibility: collapse !important;
-} */
-
-/* Hardcode unfocused colors (doesn't inherit theme) */
-:root:-moz-window-inactive {
-	--gnome-tabbar-tab-active-background: #3A3A46 !important;
-	--gnome-headerbar-background: #2A2A37 !important;
-}
-
-dialog { color: var(--gnome-window-color); }
-
-toolbarbutton#alltabs-button {
-	display: none !important;
 }
 
 /* PiP */
@@ -100,20 +26,4 @@ toolbarbutton#alltabs-button {
 	#browser[type="content"] { margin: -1vh -1vw !important; }
 	button#close, button#unpip { display: none !important; }
 	#scrubber, button#unpip { filter: sepia(35%); }
-}
-
-label#userContext-label { /* Container label */
-	display: none;
-}
-
-/* Container add-on */
-.identity-icon-circle {
-	height: 12px !important;
-}
-hbox.urlbar-addon-page-action {
-	display: none;
-}
-
-#navigator-toolbox {
-	border: 1px solid #32323D !important;
 }

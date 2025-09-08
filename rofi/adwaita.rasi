@@ -1,7 +1,7 @@
 /* Forked from https://github.com/lr-tech/rofi-themes-collection */
 
 * {
-	bg:       #282835;
+	bg:       #2A2A37;
 	fg:       #40404B;
 	box:      #3B3A43CC;	
 	text:     #DDD8BB;
@@ -22,8 +22,6 @@ window {
 	width:            325;
 	background-color: @bg;
 	border-radius:    12px;
-	border-color:     @bord;
-	border:           1px;
 }
 
 mainbox {

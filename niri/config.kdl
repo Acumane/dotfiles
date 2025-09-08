@@ -1,6 +1,7 @@
 // TODO: systemd/*
-spawn-sh-at-startup "firefox & code & sleep 2s && kitty"
+spawn-sh-at-startup "hyprlock --immediate"
 spawn-sh-at-startup "play -q $HOME/audio/sounds/greet.flac &"
+spawn-sh-at-startup "firefox & code & sleep 2s && kitty"  // scuffed
 
 input {
     keyboard {
@@ -56,20 +57,19 @@ overview {
 }
 
 window-rule {
-    min-width 360; min-height 240  // 3:2, sane
-
+    // min-width 360; min-height 240  // 3:2, sane
     geometry-corner-radius 8
     clip-to-geometry true
 }
 
 binds {
     // Media control keys
-    XF86AudioMute { spawn-sh "$SCRIPTS/amute.sh -t"; }
-    XF86AudioRaiseVolume { spawn-sh "swayosd-client --output-volume +5"; }
-    XF86AudioLowerVolume { spawn-sh "swayosd-client --output-volume -5"; }
-    XF86AudioPlay { spawn-sh "$SCRIPTS/player.sh"; }
-    XF86AudioPrev { spawn-sh "playerctl previous"; }
-    XF86AudioNext { spawn-sh "playerctl next"; }
+    XF86AudioMute allow-when-locked=true { spawn-sh "$SCRIPTS/amute.sh -t"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -5"; }
+    XF86AudioPlay allow-when-locked=true { spawn-sh "$SCRIPTS/player.sh"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
 
     // Applications
     Mod+Equal { spawn-sh "hyprpicker -a"; }
@@ -84,15 +84,14 @@ binds {
     Mod+F { fullscreen-window; }
     Mod+A { spawn-sh "flatpak run com.saivert.pwvucontrol"; }
     Mod+Space { screenshot; }
-    // Mod+Shift+Space { spawn-sh "grimrec gif area save"; }
+    Mod+Shift+Space { spawn-sh "grimrec gif area save"; }
     Mod+Grave { spawn-sh "flatpak run net.nokyan.Resources"; }
     Mod+D { spawn-sh "flatpak run io.github.nokse22.inspector"; }
 
-    // Mod+SuperL { spawn-sh "$SCRIPTS/menu.sh run"; }
-    // Mod+Comma { spawn-sh "$SCRIPTS/menu.sh emoji"; }
-    // Mod+V { spawn-sh "$SCRIPTS/menu.sh copy"; }
-
-    Mod+Tab repeat=false { toggle-overview; }
+    Mod+C { spawn-sh "$SCRIPTS/menu.sh run"; }
+    Mod+Period { spawn-sh "$SCRIPTS/menu.sh emoji"; }
+    Mod+V { spawn-sh "$SCRIPTS/menu.sh copy"; }
+    Mod+Backspace { spawn-sh "hyprlock --immediate"; }
 
     // Movement and focus
     Mod+J { focus-column-left; }
@@ -125,9 +124,9 @@ binds {
     Mod+Shift+BracketRight { set-window-height "-20%"; }
     Mod+Shift+BracketLeft { set-window-height "+20%"; }
 
-    Alt+Tab { toggle-column-tabbed-display; }
+    Mod+Tab { toggle-column-tabbed-display; }
     Mod+M { spawn-sh "niri msg action maximize-column && niri msg action reset-window-height"; }
-    Mod+Period { center-column; }
+    // Mod+Period { center-column; }
 }
 
 cursor {
@@ -166,19 +165,7 @@ window-rule {  // floating windows
         softness 30
         spread 1
         offset x=0 y=2
-        color "#08000A66"
-    }
-}
-
-window-rule {
-    match is-floating=true is-focused=true
-
-    shadow {
-        on
-        softness 35
-        spread 3
-        offset x=0 y=4
-        color "#08000A66"
+        color "#08000A54"
     }
 }
 
@@ -200,7 +187,7 @@ window-rule {  // media
 // TODO:
 window-rule {  // applets
     match app-id=".*(Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
-    match app-id="^rofi$"
+    match app-id="^Rofi$"
     open-floating true
 }
 

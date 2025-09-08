@@ -1,5 +1,4 @@
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
-user_pref("media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled", true);
 user_pref("browser.urlbar.update2.engineAliasRefresh", true);
 user_pref("browser.urlbar.ctrlCanonizesURLs", false);
 user_pref("browser.tabs.insertAfterCurrent", true);

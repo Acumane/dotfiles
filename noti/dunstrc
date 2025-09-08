@@ -1,6 +1,6 @@
 
 [global]
-  offset = 15x15
+  offset = (15, 15)
   width = (0, 250)
 
   notification_limit = 3

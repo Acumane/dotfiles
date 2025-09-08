@@ -25,7 +25,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
 precmd() { vcs_info }
-zstyle ':vcs_info:git:*' formats '  %F{15} %b%f'
+zstyle ':vcs_info:git:*' formats ' %F{8}@ %f%F{4}%b%f'
 
 venv_status() { [[ -n "$VIRTUAL_ENV" ]] && echo "%F{8}($(basename $VIRTUAL_ENV))%f " }
 

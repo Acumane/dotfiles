@@ -30,9 +30,13 @@
     ~/.config/systemd/user/:
       glob: true
       path: systemd/*
+    ~/.mozilla/firefox/main/chrome:
+      glob: true
+      path: firefox/styles/*
+    ~/.mozilla/firefox/main/user.js: firefox/user.js
     ~/.config/niri/config.kdl: niri/config.kdl
     ~/.config/keyd/app.conf: keyd/app.conf
-    ~/.config/fontconfig: misc/fontconfig
+    ~/.config/fontconfig/fonts.conf: misc/fontconfig
     ~/.lesskey: misc/lesskey
     ~/.ssh/config: misc/ssh
     ~/.local/bin:

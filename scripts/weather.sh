@@ -7,7 +7,7 @@ if [ -f "$cache" ] && [ $((now - $(stat -c %Y "$cache"))) -lt 1800 ]; then
     cat "$cache" # Use cache <30m old
 else
     data=$(curl -s 'wttr.in/?format=j1' 2>&1)
-    [[ -z "$data" || $data =~ ^(Unknown).+ ]] && echo "⚠️" && exit 1
+    [[ -z "$data" || $data =~ ^(Unknown).+ ]] && exit 1
  
     i=$(( $(date +%H) / 3 )) # current time block ([0-7] x 3h)
     block=".weather[0].hourly[$i]"
@@ -31,7 +31,7 @@ else
     [[ $desc =~ (rain|drizzle) ]] && icon="💧"
     [[ $desc =~ ([Mm]oderate|[Hh]eavy)\ .*(rain) ]] && icon="🌧️"
     [[ $desc =~ (snow|sleet) ]] && icon="❄️"
-    (( dewpt >= 65 )) && icon+="♨️"
+    (( dewpt >= 65 && temp >= 80 )) && icon+="♨️"
     (( wind >= 20 )) && icon+="💨"
 
     echo "$temp° $trend⠀$icon" | tee "$cache"

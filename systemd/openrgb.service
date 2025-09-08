@@ -5,7 +5,7 @@ After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=openrgb --startminimized --profile "main" --server
+ExecStart=openrgb --profile "main" --server
 Restart=on-failure
 
 [Install]

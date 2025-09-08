@@ -1,10 +1,7 @@
 # —— ALIASES ————————————————————
 
 alias reload="exec zsh"
-alias bundle="antigen bundle"
-alias using="antigen use"
 alias load="zcomet load"
-alias sudo="\sudo -E env PATH=$PATH "
 alias dots="dotfiles"
 
 alias color="grc -es"
@@ -14,15 +11,12 @@ alias ld="eza --icons -AF -lm -T --level=1 --time-style=relative"
 alias lt="eza --icons -ATF --git-ignore"
 alias bu="rsync -avuP"
 alias cp="cp -r"
-alias del="sudo \rm -rf"
+alias rm="rm -rf"
 wipe() {
   local src=$([[ "$2" =~ ^(-r|--random)$ ]] && echo urandom)
   sudo dd if=/dev/${src:-zero} of=$1 bs=1M status=progress; }
 alias shred="shred -u" # OR scrub
-alias rm="trash-put"
-alias toss="trash-put"
-alias trash="trash-list"
-alias restore="trash-restore"
+alias trash="trash-put"
 alias dump="trash-empty --all-users -f"
 alias rn="mv"
 mk() {
@@ -30,27 +24,23 @@ mk() {
   || touch "$1"
 }
 alias mkd="mkdir -p"
-alias watch="entr -pc"
+alias watch="inotifywait -qm"
 alias first="head -n 1" 
 alias last="tail -n 1"
-sys() { [ $# -eq 0 ] && { sysz; return; }
-  if [ "$1" = "status" ]; then sysz "$@" 
-  else systemctl "${@: -1}" 2> >(grep -q "Unknown command verb") && systemctl "$@" || sysz "$@"; fi }
+alias sys="systemctl"
 alias log="journalctl -p 0..4 -b"
 diag() { sudo dmesg -T --color=always "$@" | less -FSXK; }
 alias dmesg="diag"
 alias inhib="vigiland"
+alias lock="hyprlock --immediate"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
-alias suspend="systemctl suspend"
-alias hibernate="$DOTS/scripts/idle-lap.sh -i && /bin/systemctl hibernate"
-alias off="hibernate"; alias hiber="hibernate"
+alias suspend="lock && systemctl suspend"
+alias hibernate="lock && /bin/systemctl hibernate"
 alias logout="hyprctl dispatch exit"
-alias lock="$DOTS/scripts/idle-lap.sh -f"
 bios() {
   case "${(L)1}" in
-    -v) sudo dmidecode -q -t bios | grep -E "Version|Revision" | \
-          tr -d "\t";;
+    -v) sudo dmidecode -q -t bios | grep -E "Version|Revision" | tr -d "\t";;
     *) sudo systemctl reboot --firmware-setup
   esac
 }
@@ -64,21 +54,14 @@ alias ping="grc ping -c 5"
 alias root="\sudo -s"
 alias auth="pkexec"
 alias kernel="uname -r"
-alias about="hostnamectl | grep -E '(Operating|Model|Kernel)' | sed 's/^ *//' \
-&& [ $DEV_TYPE = "lap" ] && sudo dmidecode -q -t System | grep 'Serial' | tr -d '\t'"
+alias about="hostnamectl | grep -E '(Operating|Model|Kernel)' | sed 's/^ *//'"
 alias uptime="uptime -p"
 alias hw="hwinfo --short"
 alias user="echo $USER"
 alias name="echo $(hostname)/$(echo $USER)"
 alias ports='grc netstat -tulanp'
 alias sockets='grc netstat -xlanp'
-alias mac="ifconfig | grep ether | awk '{print \$2}'"
-ip() {
-  case "${(L)1}" in
-    pub|public) curl -s "http://ifconfig.me";;
-    *) command ip -br -c addr | grep -vE "br-|docker";;
-  esac
-}
+alias ifs="command ip -br -c addr | grep -vE 'br-|docker'"
 
 phone() {
 case $1 in
@@ -88,9 +71,9 @@ case $1 in
 alias ph="phone"
 alias cam="v4l2-ctl"
 vm() { cur=$(pwd);
-cd "$HOME/.VMs" && quickemu --vm $1.conf ${@:2} && cd "$cur"; }
+  cd "$HOME/.VMs" && quickemu --vm $1.conf ${@:2} && cd "$cur"; }
 spin() { cur=$(pwd);
-cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
+  cd "$HOME/.local/share/$1" && docker compose ${@:2} && cd "$cur"; }
 key() {
 case $1 in
   reload) sudo cp $DOTS/keyd/global.conf /etc/keyd/default.conf && keyd reload;;
@@ -174,8 +157,6 @@ _v() { nvim 2> /dev/null; }
 t() { nvim -c ':terminal' 2> /dev/null; }
 fm() { kitty sh -c "yazi" &> /dev/null; }
 zle -N _v; zle -N t; zle -N fm
-hypr() { [[ "$1" =~ ^(plug|pm)$ ]] && shift && hyprpm "$@" || hyprctl "$@"; }
-alias h="hypr"
 
 alias fonts="fc-list : family"
 alias s="fzf"
