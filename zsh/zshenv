@@ -20,7 +20,6 @@ if [ -e "$profile_d/nix-daemon.sh" ]; then
   . "$profile_d/nix-daemon.sh"
 fi
 
-export MODULAR_HOME="$HOME/.modular"
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export ZDOTDIR="$HOME/.config/zsh"
 export DOTFILES_REPO_PATH="$DOTS"
@@ -33,7 +32,6 @@ path+=(
     "$HOME/.cabal/bin"
     "$HOME/.ghcup/bin"
     "$(go env GOPATH)/bin"
-    "$MODULAR_HOME"
     "$PNPM_HOME"
 )
 export PATH

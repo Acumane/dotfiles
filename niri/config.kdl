@@ -100,6 +100,8 @@ binds {
     Mod+S { spawn-sh "vicinae vicinae://extensions/vicinae/file/search"; }
     Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/vicinae/search-emojis"; }
     Mod+V { spawn-sh "vicinae vicinae://extensions/vicinae/clipboard/history"; }
+    Mod+B { spawn-sh "vicinae vicinae://extensions/Gelei/bluetooth/devices"; }
+    Mod+Shift+B { spawn-sh "vicinae vicinae://extensions/Gelei/bluetooth/scan"; }
     Mod+Backspace { spawn-sh "hyprlock --immediate"; }
 
     // Movement and focus
@@ -210,7 +212,7 @@ window-rule {  // media
 
 // TODO:
 window-rule {  // applets
-    match app-id=".*(Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
+    match app-id=".*(NautilusPreviewer|Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
     open-floating true
 }
 

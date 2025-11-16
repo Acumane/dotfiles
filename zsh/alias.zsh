@@ -35,9 +35,8 @@ alias inhib="vigiland"
 alias lock="hyprlock --immediate"
 alias reboot="sudo reboot"
 alias shutdown="sudo shutdown now"
-alias suspend="lock && systemctl suspend"
-alias hibernate="lock && /bin/systemctl hibernate"
-alias logout="hyprctl dispatch exit"
+alias suspend="systemctl suspend"
+alias hibernate="/bin/systemctl hibernate"
 bios() {
   case "${(L)1}" in
     -v) sudo dmidecode -q -t bios | grep -E "Version|Revision" | tr -d "\t";;

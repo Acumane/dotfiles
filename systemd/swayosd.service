@@ -6,7 +6,7 @@ After=graphical-session.target
 [Service]
 Type=simple
 ExecStart=/bin/sh -c 'swayosd-server -s %h/.config/sway/osd.css'
-Restart=on-failure
+Restart=always
 
 [Install]
 WantedBy=graphical-session.target
