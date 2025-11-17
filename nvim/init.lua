@@ -31,9 +31,34 @@ require("lazy").setup({
       local k = vim.keymap.set
       k({ 'n', 'x' }, '<Leader>m', cursors.create_cursor, { expr = true })
       k({ 'n' }, 'dm', cursors.cancel)
-      k({ 'n', 'x' }, '<Leader>H', cursors.start_right) -- TODO
+      k({ 'n', 'x' }, '<Leader>H', cursors.start_right)
     end
   }
+})
+
+vim.opt.compatible = false
+vim.opt.shortmess = "IA"
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.clipboard = "unnamedplus"
+vim.opt.fillchars = { eob = " " }
+vim.opt.smartindent = true
+vim.opt.autoindent = true
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartcase = true
+vim.opt.laststatus = 0
+vim.opt.matchpairs:append("<:>")
+
+-- Terminal settings
+vim.api.nvim_create_autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.modifiable = true
+    vim.cmd("startinsert")
+  end
 })
 
 require("textcase").setup({
@@ -57,11 +82,12 @@ require("nvim-surround").setup({
 })
 
 require('kanagawa').setup({
-  transparent = true, dimInactive = true,
-  colors = {theme = {all = {ui = {bg_gutter = "none"}}}}
+  transparent = true,
+  dimInactive = true,
+  colors = { theme = { all = { ui = { bg_gutter = "none" } } } }
 })
 
-require('lualine').setup {
+require('lualine').setup({
   options = {
     theme = { normal = { z = { fg = "#54546D", bg = nil } } },
     section_separators = {},
@@ -70,8 +96,244 @@ require('lualine').setup {
   sections = {
     lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {},
     lualine_z = {{
-      'location', padding = 0.5,
-      fmt = function(str) return string.gsub(str, ":", ", "); end,
+      'location',
+      padding = 0.5,
+      fmt = function(str) return string.gsub(str, ":", ", ") end,
     }}
   }
+})
+
+local function map(mode, lhs, rhs, opts)
+  opts = opts or {}
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+local function nmap(lhs, rhs, opts) map('n', lhs, rhs, opts) end
+local function vmap(lhs, rhs, opts) map('v', lhs, rhs, opts) end
+local function xmap(lhs, rhs, opts) map('x', lhs, rhs, opts) end
+local function omap(lhs, rhs, opts) map('o', lhs, rhs, opts) end
+local function imap(lhs, rhs, opts) map('i', lhs, rhs, opts) end
+local function tmap(lhs, rhs, opts) map('t', lhs, rhs, opts) end
+local function cmap(lhs, rhs, opts) map('c', lhs, rhs, opts) end
+
+nmap('i', 'gk')
+vmap('i', 'gk')
+map('', 'j', '<Left>')
+map('', 'k', 'gj')
+
+-- (h)ere = insert
+map('', 'h', 'i')
+nmap('H', 'a')
+omap('<Down>', '<Nop>')
+
+-- Center screen on insert
+vim.api.nvim_create_autocmd("InsertEnter", {
+  pattern = "*",
+  command = "norm! zz"
+})
+
+-- Enter normal mode in the same place
+vim.api.nvim_create_autocmd("InsertLeave", {
+  pattern = "*",
+  command = "exec \"normal! `^\""
+})
+
+vmap('H', 'A')
+vmap('hh', '<Esc>i')
+vmap('hi', '<Esc>i')
+map('', 's', 'v')
+
+local surround_chars = { '`', '"', ')', ']', '{', '}', '>', '*', '_', '$' }
+
+for _, ch in ipairs(surround_chars) do
+  nmap(ch, '<Cmd>norm vhwS' .. ch .. 'el<CR>', { nowait = true })
+  vmap(ch, ':<C-u>exec "norm gvS' .. ch .. 'l"<CR>', { nowait = true })
+  nmap('d' .. ch, 'ds' .. ch)
+end
+
+nmap("'", "<Cmd>norm vhwS'el<CR>")
+vmap("'", ":<C-u>exec \"norm gvS'l\"<CR>")
+nmap("d'", "ds'")
+
+vmap('~', '~gv')
+nmap('~', '~h')
+
+map('', 'tk', 'tn')
+map('', 'tt', ':lua require("textcase").current_word("to_phrase_case")<CR>')
+
+nmap('=', '<C-a>')
+nmap('+', '<C-a>')
+nmap('-', '<C-x>')
+
+nmap('<space>', 'i<space><esc>')
+nmap('<backspace>', 'h<Del><esc>')
+
+nmap('o', '%')
+nmap('O', '%')
+
+-- r = replace (was c)
+map('', 'r', '"_c')
+nmap('R', '"_cc')
+nmap('rr', '"_cc')
+
+-- rl = replace letter
+nmap('rl', 'r')
+nmap('ri', '<Nop>')
+nmap('rj', '<Nop>')
+
+-- c = copy (was y)
+map('', 'c', 'y')
+nmap('C', 'yy')
+nmap('cc', 'yy')
+
+-- x = cut (was d)
+map('', 'x', 'd')
+nmap('X', 'dd')
+nmap('xx', 'dd')
+
+-- Restore transpose
+nmap('xp', 'xp')
+vmap('p', '"_dP')
+
+-- d = true delete
+map('', 'd', '"_d')
+nmap('D', '"_dd')
+nmap('dd', '"_dd')
+
+nmap('<C-a>', 'gg^vG$h')
+vmap('<C-a>', 'gg^oG$h')
+imap('<C-a>', '<Esc>gg^vG$h')
+tmap('<Esc>', '<C-\\><C-n>')
+
+if not vim.g.vscode then
+  nmap('<S-Del>', 'dvb')
+  imap('<S-Del>', '<C-w>')
+  cmap('<S-Del>', '<C-w>')
+  nmap('q', ':q<CR>')
+  vim.opt.guicursor:append('i-c:ver1')
+  vim.opt.guicursor:append('n-i-c:blinkon500')
+  vim.opt.cmdheight = 0
+  vim.cmd('colorscheme kanagawa')
+else
+  vim.opt.cmdheight = 1
+end
+
+vmap('<C-c>', 'y')
+vmap('<C-x>', 'x')
+map('', '<C-p>', 'p')
+
+map('', '<C-u>', 'u')
+map('', 'u', '<Nop>')
+
+local new_obj = { '*', '_', '$' }
+
+for _, ch in ipairs(new_obj) do
+  omap('i' .. ch, ':<C-u>norm! T' .. ch .. 'vt' .. ch .. '<CR>')
+  vmap('h' .. ch, 'T' .. ch .. 'ot' .. ch)
+  omap('a' .. ch, ':<C-u>norm! F' .. ch .. 'vf' .. ch .. '<CR>')
+  vmap('a' .. ch, 'F' .. ch .. 'of' .. ch)
+end
+
+-- Mnemonic text objects
+local mnemonic_pairs = {
+  p = ')', b = ']', B = '}', q = '"', t = '>', u = '_', e = '*', m = '$'
 }
+
+for l, r in pairs(mnemonic_pairs) do
+  omap('i' .. l, 'i' .. r)
+  omap('h' .. l, 'i' .. r)
+  vmap('h' .. l, 'i' .. r)
+  omap('a' .. l, 'a' .. r)
+  vmap('a' .. l, 'a' .. r)
+  nmap('rs' .. l, 'css' .. r)
+  nmap('d' .. l, 'ds' .. r)
+end
+
+omap('hP', 'ip')
+vmap('hP', 'ip')
+omap('aP', 'ap')
+vmap('aP', 'ap')
+
+local obj = {
+  't', 'p', 'b', 'B', 'u', 'e', 'm', 'q', 's',
+  '>', ')', ']', '}', '_', '*', '$', '"', "'", '`'
+}
+
+for _, a in ipairs(obj) do
+  for _, b in ipairs(obj) do
+    nmap('r' .. a .. b, 'cs' .. a .. b)
+  end
+end
+
+map('', 'W', 'b')
+map('', 'E', 'ge')
+
+map('', 'T', 'gg')
+map('', 'B', 'GL')
+
+map('', 'I', '{')
+map('', 'K', '}')
+map('', 'J', 'g0')
+map('', 'L', '$')
+vmap('L', 'g_')
+
+map('', 'n', 'f')
+map('', 'N', 'F')
+map('', ',', ';')
+map('', '<', ',')
+
+nmap('<enter>', function()
+  return vim.fn.getreg('/') == '' and 'o' or 'n'
+end, { expr = true })
+
+nmap('<S-enter>', function()
+  return vim.fn.getreg('/') == '' and 'O' or 'N'
+end, { expr = true })
+
+if vim.g.vscode then
+  nmap('m', function()
+    return vim.fn.getreg('/') == '' and '\\m' or 'gn\\m<Cmd>norm! n<CR>'
+  end, { expr = true })
+  
+  vmap('m', function()
+    return vim.fn.getreg('/') == '' and '\\m' or '\\m<Cmd>norm! n<CR>'
+  end, { expr = true, nowait = true })
+  
+  nmap('M', function()
+    return vim.fn.getreg('/') == '' and '' or 'gN\\m<Cmd>norm! N<CR>'
+  end, { expr = true })
+  
+  vmap('M', function()
+    return vim.fn.getreg('/') == '' and '' or '\\m<Cmd>norm! NN<CR>'
+  end, { expr = true, nowait = true })
+end
+
+nmap('f', function()
+  vim.fn.setreg('/', vim.fn.expand('<cword>'))
+  vim.opt.hlsearch = true
+  vim.fn.feedkeys('/' .. vim.fn.getreg('/'))
+end, { silent = true })
+
+vmap('f', 'y:let @/=@" <bar>:set hls<CR>gn', { silent = true })
+
+nmap('<Esc>', '<Cmd>nohl<CR><Cmd>let @/ = ""<CR>')
+
+vim.api.nvim_create_augroup('ClearSearch', { clear = true })
+vim.api.nvim_create_autocmd('BufReadPost', {
+  group = 'ClearSearch',
+  pattern = '*',
+  callback = function()
+    vim.fn.setreg('/', '')
+  end
+})
+
+nmap('g', function()
+  return vim.v.count > 0 and 'G' or 'g'
+end, { expr = true, nowait = true })
+
+nmap('<Tab>', '>>')
+nmap('<S-Tab>', '<<')
+vmap('<Tab>', '>><Esc>gv')
+vmap('<S-Tab>', '<<<Esc>gv')
+
+vmap('b', '<C-v>')

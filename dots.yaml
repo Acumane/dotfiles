@@ -12,8 +12,7 @@
         recursive: true
 
 - link:
-    ~/.config/nvim/init.vim: nvim/init.vim
-    ~/.config/nvim/lua/init.lua: nvim/init.lua
+    ~/.config/nvim/init.lua: nvim/init.lua
     ~/.config/user-dirs.dirs: misc/user.dirs
     /etc/zshenv:
       path: zsh/zshenv
