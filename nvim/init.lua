@@ -77,31 +77,32 @@ require("nvim-surround").setup({
     ["e"] = "*",
     ["m"] = "$",
     ["q"] = "\"",
-    ["s"] = { "}", "]", ")", ">", '"', "'", "`", "_", "*", "$" },
   },
 })
 
-require('kanagawa').setup({
-  transparent = true,
-  dimInactive = true,
-  colors = { theme = { all = { ui = { bg_gutter = "none" } } } }
-})
+if not vim.g.vscode then
+  require('kanagawa').setup({
+    transparent = true,
+    dimInactive = true,
+    colors = { theme = { all = { ui = { bg_gutter = "none" } } } }
+  })
 
-require('lualine').setup({
-  options = {
-    theme = { normal = { z = { fg = "#54546D", bg = nil } } },
-    section_separators = {},
-    globalstatus = true,
-  },
-  sections = {
-    lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {},
-    lualine_z = {{
-      'location',
-      padding = 0.5,
-      fmt = function(str) return string.gsub(str, ":", ", ") end,
-    }}
-  }
-})
+  require('lualine').setup({
+    options = {
+      theme = { normal = { z = { fg = "#54546D", bg = nil } } },
+      section_separators = {},
+      globalstatus = true,
+    },
+    sections = {
+      lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {},
+      lualine_z = {{
+        'location',
+        padding = 0.5,
+        fmt = function(str) return string.gsub(str, ":", ", ") end,
+      }}
+    }
+  })
+end
 
 local function map(mode, lhs, rhs, opts)
   opts = opts or {}
@@ -126,23 +127,21 @@ map('', 'h', 'i')
 nmap('H', 'a')
 omap('<Down>', '<Nop>')
 
--- Center screen on insert
 vim.api.nvim_create_autocmd("InsertEnter", {
   pattern = "*",
-  command = "norm! zz"
+  command = "norm! zz"  -- center screen
 })
 
--- Enter normal mode in the same place
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
-  command = "exec \"normal! `^\""
+  command = "exec \"normal! `^\""  -- last pos
 })
 
 vmap('H', 'A')
 vmap('hh', '<Esc>i')
 vmap('hi', '<Esc>i')
-map('', 's', 'v')
 
+-- surround shortcuts
 local surround_chars = { '`', '"', ')', ']', '{', '}', '>', '*', '_', '$' }
 
 for _, ch in ipairs(surround_chars) do
@@ -155,38 +154,41 @@ nmap("'", "<Cmd>norm vhwS'el<CR>")
 vmap("'", ":<C-u>exec \"norm gvS'l\"<CR>")
 nmap("d'", "ds'")
 
+-- cycle case/CASE
 vmap('~', '~gv')
 nmap('~', '~h')
 
+-- (t)o (c)ase
 map('', 'tk', 'tn')
 map('', 'tt', ':lua require("textcase").current_word("to_phrase_case")<CR>')
 
+-- sane <inc|dec>rement
 nmap('=', '<C-a>')
 nmap('+', '<C-a>')
 nmap('-', '<C-x>')
 
+-- (Back)space in normal mode
 nmap('<space>', 'i<space><esc>')
 nmap('<backspace>', 'h<Del><esc>')
 
+-- (o)ther in pair
 nmap('o', '%')
 nmap('O', '%')
 
--- r = replace (was c)
+-- (r)eplace
 map('', 'r', '"_c')
 nmap('R', '"_cc')
 nmap('rr', '"_cc')
 
--- rl = replace letter
-nmap('rl', 'r')
-nmap('ri', '<Nop>')
-nmap('rj', '<Nop>')
+-- (s)ubstitute
+map('', 's', 'r')
 
--- c = copy (was y)
+-- (c)opy
 map('', 'c', 'y')
 nmap('C', 'yy')
 nmap('cc', 'yy')
 
--- x = cut (was d)
+-- x (cut)
 map('', 'x', 'd')
 nmap('X', 'dd')
 nmap('xx', 'dd')
@@ -195,17 +197,23 @@ nmap('xx', 'dd')
 nmap('xp', 'xp')
 vmap('p', '"_dP')
 
--- d = true delete
+-- true (d)elete
 map('', 'd', '"_d')
 nmap('D', '"_dd')
 nmap('dd', '"_dd')
 
-nmap('<C-a>', 'gg^vG$h')
-vmap('<C-a>', 'gg^oG$h')
-imap('<C-a>', '<Esc>gg^vG$h')
-tmap('<Esc>', '<C-\\><C-n>')
+-- Disable 'down' in motions (useless)
+local ops = {'d', 'c', 'r', 'x'}
+local useless = {'k'}
+for _, op in ipairs(ops) do
+  for _, dir in ipairs(useless) do
+    nmap(op .. dir, '<Nop>')
+  end
+end
 
+-- vscode-neovim settings
 if not vim.g.vscode then
+  -- <[S|C]-Del> (kitty)
   nmap('<S-Del>', 'dvb')
   imap('<S-Del>', '<C-w>')
   cmap('<S-Del>', '<C-w>')
@@ -218,13 +226,21 @@ else
   vim.opt.cmdheight = 1
 end
 
+-- canonical functions
+nmap('<C-a>', 'gg^vG$h')
+vmap('<C-a>', 'gg^oG$h')
+imap('<C-a>', '<Esc>gg^vG$h')
+tmap('<Esc>', '<C-\\><C-n>')
+
 vmap('<C-c>', 'y')
 vmap('<C-x>', 'x')
 map('', '<C-p>', 'p')
 
 map('', '<C-u>', 'u')
+imap('<C-u>', '<C-o>u')
 map('', 'u', '<Nop>')
 
+-- new text objects
 local new_obj = { '*', '_', '$' }
 
 for _, ch in ipairs(new_obj) do
@@ -240,20 +256,25 @@ local mnemonic_pairs = {
 }
 
 for l, r in pairs(mnemonic_pairs) do
-  omap('i' .. l, 'i' .. r)
-  omap('h' .. l, 'i' .. r)
-  vmap('h' .. l, 'i' .. r)
-  omap('a' .. l, 'a' .. r)
-  vmap('a' .. l, 'a' .. r)
-  nmap('rs' .. l, 'css' .. r)
-  nmap('d' .. l, 'ds' .. r)
+  for _, mode in ipairs({'o', 'v'}) do
+    vim.keymap.set(mode, 'i' .. l, 'i' .. r)
+    vim.keymap.set(mode, 'h' .. l, 'i' .. r)
+    vim.keymap.set(mode, 'a' .. l, 'a' .. r)
+  end
+  
+  -- Surround commands 
+  vim.cmd('nmap rs' .. l .. ' css' .. r)
+  vim.cmd('nmap d' .. l .. ' ds' .. r)
 end
 
-omap('hP', 'ip')
-vmap('hP', 'ip')
-omap('aP', 'ap')
-vmap('aP', 'ap')
+-- (P)aragraph text objects
+for _, mode in ipairs({'o', 'v'}) do
+  vim.keymap.set(mode, 'iP', 'ip')
+  vim.keymap.set(mode, 'hP', 'ip')
+  vim.keymap.set(mode, 'aP', 'ap')
+end
 
+-- pair replace
 local obj = {
   't', 'p', 'b', 'B', 'u', 'e', 'm', 'q', 's',
   '>', ')', ']', '}', '_', '*', '$', '"', "'", '`'
@@ -261,7 +282,7 @@ local obj = {
 
 for _, a in ipairs(obj) do
   for _, b in ipairs(obj) do
-    nmap('r' .. a .. b, 'cs' .. a .. b)
+    vim.cmd('nmap r' .. a .. b .. ' cs' .. a .. b)
   end
 end
 
@@ -277,11 +298,13 @@ map('', 'J', 'g0')
 map('', 'L', '$')
 vmap('L', 'g_')
 
+-- (n)ext occurence
 map('', 'n', 'f')
 map('', 'N', 'F')
 map('', ',', ';')
 map('', '<', ',')
 
+-- (S-)enter: newline OR search
 nmap('<enter>', function()
   return vim.fn.getreg('/') == '' and 'o' or 'n'
 end, { expr = true })
@@ -290,24 +313,7 @@ nmap('<S-enter>', function()
   return vim.fn.getreg('/') == '' and 'O' or 'N'
 end, { expr = true })
 
-if vim.g.vscode then
-  nmap('m', function()
-    return vim.fn.getreg('/') == '' and '\\m' or 'gn\\m<Cmd>norm! n<CR>'
-  end, { expr = true })
-  
-  vmap('m', function()
-    return vim.fn.getreg('/') == '' and '\\m' or '\\m<Cmd>norm! n<CR>'
-  end, { expr = true, nowait = true })
-  
-  nmap('M', function()
-    return vim.fn.getreg('/') == '' and '' or 'gN\\m<Cmd>norm! N<CR>'
-  end, { expr = true })
-  
-  vmap('M', function()
-    return vim.fn.getreg('/') == '' and '' or '\\m<Cmd>norm! NN<CR>'
-  end, { expr = true, nowait = true })
-end
-
+-- (f)ind
 nmap('f', function()
   vim.fn.setreg('/', vim.fn.expand('<cword>'))
   vim.opt.hlsearch = true
@@ -316,6 +322,7 @@ end, { silent = true })
 
 vmap('f', 'y:let @/=@" <bar>:set hls<CR>gn', { silent = true })
 
+-- clear search pattern register (@/):
 nmap('<Esc>', '<Cmd>nohl<CR><Cmd>let @/ = ""<CR>')
 
 vim.api.nvim_create_augroup('ClearSearch', { clear = true })
@@ -327,13 +334,16 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end
 })
 
+-- <#>G -> <#>g
 nmap('g', function()
   return vim.v.count > 0 and 'G' or 'g'
 end, { expr = true, nowait = true })
 
+-- use Tab
 nmap('<Tab>', '>>')
 nmap('<S-Tab>', '<<')
 vmap('<Tab>', '>><Esc>gv')
 vmap('<S-Tab>', '<<<Esc>gv')
 
+-- block mode (C-v is copy)
 vmap('b', '<C-v>')
