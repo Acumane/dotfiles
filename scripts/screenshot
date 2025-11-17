@@ -1,0 +1,8 @@
+#!/bin/bash
+
+file="$(xdg-user-dir PICTURES)/$(openssl rand -hex 3).png"
+
+grim -g "$(slurp)" "$file" && { 
+    play -v 0.5 $HOME/audio/sounds/capture.ogg
+    wl-copy -t image/png < "$file" 
+}
