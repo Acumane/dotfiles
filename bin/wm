@@ -1,5 +1,5 @@
 #!/bin/bash
 
 # Run `niri msg action` as root w/o env
-socket=$(find /run/user/$(id -u)/niri.* | head -n 1)
-NIRI_SOCKET=$socket niri msg action "$@"
+socket=$(find /run/user/*/niri.* 2>/dev/null | head -n 1)
+sudo -u "$(stat -c %U "$socket")" NIRI_SOCKET="$socket" niri msg action "$@"
