@@ -1,5 +1,5 @@
 #!/bin/bash
-MUSIC="/home/bren/audio/Spotify"
+MUSIC="$HOME/audio/Spotify"
 find $MUSIC -type f -name "*.spotdl" | while read path
 do
   dir=$(dirname "$path")

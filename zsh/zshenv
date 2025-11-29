@@ -2,7 +2,7 @@
 
 # —— PATHS ——————————————————————
 
-export HOME="/home/bren"
+export HOME=~
 export DOTS="$HOME/dots"
 export SCRIPTS="$DOTS/scripts"
 export CACHE="$HOME/.cache"
@@ -38,10 +38,10 @@ export PATH
 
 # —— VARS ———————————————————————
 
-source $DOTS/.env
+source $HOME/.env
 
 export WORDCHARS=""
-export ZSHZ_OWNER="bren"
+export ZSHZ_OWNER="$USER"
 export PROMPT_EOL_MARK=""
 export EDITOR="nvim"
 export SUDO_PROMPT="Password: "
