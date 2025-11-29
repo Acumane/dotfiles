@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+# Normalize steps +/-(2-22)
+size="${1#[+-]}"
+cur=$(brillo -G)
+step=$((.05*size*cur+2))
+
+# brillo -c -s <controller> -S 1
+case $1 in
+    +*) brillo -A ${step%.*} -u 100000 ;;
+    -*) brillo -U ${step%.*} -u 100000 ;;
+esac
+
+swayosd-client --brightness +0

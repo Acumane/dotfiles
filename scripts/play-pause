@@ -2,7 +2,7 @@
 
 if [ "$(adb get-state 2> /dev/null)" = "device" ]; then
     if pgrep -f "scrcpy --no-video"; then
-    adb shell input keyevent 85 # play/pause
+    adb shell input keyevent 85  # play/pause
     exit 0
   fi
 fi
