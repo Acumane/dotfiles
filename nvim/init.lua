@@ -257,10 +257,10 @@ local mnemonic_pairs = {
 
 for l, r in pairs(mnemonic_pairs) do
   for _, mode in ipairs({'o', 'v'}) do
-    vim.keymap.set(mode, 'i' .. l, 'i' .. r)
     vim.keymap.set(mode, 'h' .. l, 'i' .. r)
     vim.keymap.set(mode, 'a' .. l, 'a' .. r)
   end
+  omap('i' .. l, 'i' .. r)
   
   -- Surround commands 
   vim.cmd('nmap rs' .. l .. ' css' .. r)
@@ -269,10 +269,10 @@ end
 
 -- (P)aragraph text objects
 for _, mode in ipairs({'o', 'v'}) do
-  vim.keymap.set(mode, 'iP', 'ip')
   vim.keymap.set(mode, 'hP', 'ip')
   vim.keymap.set(mode, 'aP', 'ap')
 end
+omap('iP', 'ip')
 
 -- pair replace
 local obj = {
