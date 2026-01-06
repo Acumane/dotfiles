@@ -2,12 +2,6 @@
 	padding: 0 !important;
 }
 
-/* Default window background */
-browser,
-#tabbrowser-tabpanels {
-	background-color: #1E1E27 !important;
-}
-
 /* Hide UI elements */
 toolbarbutton#alltabs-button, hbox.urlbar-addon-page-action
 #reader-mode-button, #pageActionButton, #new-tab-button,

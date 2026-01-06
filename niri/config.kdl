@@ -3,6 +3,12 @@ spawn-sh-at-startup "hyprlock --immediate"
 spawn-sh-at-startup "play -q $HOME/audio/sounds/greet.flac &"
 spawn-sh-at-startup "firefox & code & sleep 2s && kitty"  // scuffed
 
+output "HDMI-A-1" {
+    mode "3840x2160@60.000"
+    scale 1.0
+    position x=0 y=0
+}
+
 input {
     keyboard {
         repeat-delay 500
@@ -11,10 +17,16 @@ input {
 
     mouse {
         scroll-factor 1.25
+        accel-profile "flat"
     }
 
     // warp-mouse-to-focus
     focus-follows-mouse max-scroll-amount="10%"
+
+    touchpad {
+        tap
+        natural-scroll
+    }
 }
 
 gestures {
@@ -26,7 +38,7 @@ gestures {
 prefer-no-csd
 
 layout {
-    gaps 12
+    gaps 6
     background-color "#0A0815"
     
     struts {
@@ -71,9 +83,11 @@ window-rule {
 binds {
     // Media control keys
     XF86AudioMute allow-when-locked=true { spawn-sh "$SCRIPTS/amute.sh -t"; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +5"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -5"; }
-    XF86AudioPlay allow-when-locked=true { spawn-sh "$SCRIPTS/player.sh"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +4"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -4"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "$SCRIPTS/brightness +5"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "$SCRIPTS/brightness -5"; }
+    XF86AudioPlay allow-when-locked=true { spawn-sh "$SCRIPTS/play-pause"; }
     XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
     XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
 
@@ -143,7 +157,7 @@ binds {
 
 cursor {
     xcursor-theme "Google"
-    xcursor-size 20
+    xcursor-size 24
 
     hide-when-typing
     hide-after-inactive-ms 3000
@@ -166,7 +180,7 @@ window-rule {  // firefox PiP
 
 window-rule {  // floating windows
     match is-floating=true
-    geometry-corner-radius 12
+    geometry-corner-radius 8
 
     border {
         inactive-color "#32323D"
@@ -181,7 +195,7 @@ window-rule {  // floating windows
 }
 
 layer-rule {
-    geometry-corner-radius 12
+    geometry-corner-radius 8
 
     shadow {
         on
@@ -219,7 +233,7 @@ window-rule {  // applets
 
 window-rule {  // applets (tiled)
     match app-id=".*Nautilus|Fragments|Resources|kitty"
-    default-column-width { proportion 0.25; }
+    default-column-width { proportion 0.4; }
 }
 
 environment {

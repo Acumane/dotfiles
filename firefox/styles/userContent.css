@@ -1,14 +1,7 @@
-@-moz-document url("about:newtab") {
-	body { background-color: #1E1E27 !important; }
-}
 
 @media{ /* Image preview */
 	html { background-image: none !important }
 } 
-
-:root { /* PDF */
-	--body-bg-color: #1E1E27 !important; 
-}
 
 .toolbar {
 	display: none !important;

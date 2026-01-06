@@ -2,6 +2,7 @@
 
 window#osd {
     border: 1px solid alpha(#4E4E62, 0.9);
+    border-radius: 999px;
     background: alpha(#2A2A37, 0.9);
 }
 
