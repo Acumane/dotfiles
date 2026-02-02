@@ -8,7 +8,7 @@ if [ -f "$cache" ] && [ $((now - $(stat -c %Y "$cache"))) -lt 1800 ]; then
 else
     data=$(curl -s 'wttr.in/?format=j1' 2>&1)
     [[ -z "$data" || $data =~ ^(Unknown).+ ]] && exit 1
- 
+
     i=$(( $(date +%H) / 3 )) # current time block ([0-7] x 3h)
     block=".weather[0].hourly[$i]"
     cur=".current_condition[0]"

@@ -1,12 +1,13 @@
 // TODO: systemd/*
-spawn-sh-at-startup "hyprlock --immediate"
 spawn-sh-at-startup "play -q $HOME/audio/sounds/greet.flac &"
-spawn-sh-at-startup "firefox & code & sleep 2s && kitty"  // scuffed
+spawn-sh-at-startup "xhost +SI:localuser:root"
+spawn-sh-at-startup "xsetroot -cursor_name left_ptr"
 
 output "HDMI-A-1" {
-    mode "3840x2160@60.000"
-    scale 1.0
-    position x=0 y=0
+    position x=0 y=580
+}
+output "DP-3" {
+    transform "90"
 }
 
 input {
@@ -38,7 +39,7 @@ gestures {
 prefer-no-csd
 
 layout {
-    gaps 6
+    gaps 10
     background-color "#0A0815"
     
     struts {
@@ -55,14 +56,15 @@ layout {
     
     border {
         width 1
-        active-color "#2A2A37"
-        inactive-color "#2A2A37"
+        active-color "#505065"
+        inactive-color "#3F3F50"
         urgent-color "#E67B7F"
     }
 
     focus-ring {
         width 1
-        active-color "#3F3F50"
+        active-color "#96bbee"
+        inactive-color "00000000"
         urgent-color "#E67B7F"
     }
 }
@@ -157,7 +159,7 @@ binds {
 
 cursor {
     xcursor-theme "Google"
-    xcursor-size 24
+    xcursor-size 32
 
     hide-when-typing
     hide-after-inactive-ms 3000
@@ -181,10 +183,6 @@ window-rule {  // firefox PiP
 window-rule {  // floating windows
     match is-floating=true
     geometry-corner-radius 8
-
-    border {
-        inactive-color "#32323D"
-    }
 
     shadow {
         on
@@ -210,24 +208,12 @@ layer-rule {
     geometry-corner-radius 999
 }
 
-window-rule {  // media
-    match app-id="mpv|scrcpy|.*Loupe|.*Celluloid"
+window-rule {  // floating
+    match app-id="mpv|scrcpy|.*Loupe|.*Celluloid|GStreamer"
+    match app-id=".*(NautilusPreviewer|Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
+    match title="^(Open|Save|Select|Sign in)"
     match app-id=".*firefox$" title="^Picture-in-Picture$"
     
-    open-floating true
-    border {
-        active-color "#595970"
-        inactive-color "#3F3F50"
-    }
-
-    focus-ring {
-        active-color "#59597075"
-    }
-}
-
-// TODO:
-window-rule {  // applets
-    match app-id=".*(NautilusPreviewer|Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
     open-floating true
 }
 

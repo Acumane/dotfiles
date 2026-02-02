@@ -48,6 +48,8 @@
       glob: true
       path: kitty/*
     ~/.config/fusuma/config.yml: fusuma/config.yml
+    ~/.config/gtk-3.0/gtk.css: gtk/gtk.css
+    ~/.config/gtk-4.0/gtk.css: gtk/gtk.css
     ~/.config/dunst/dunstrc: noti/dunstrc
     ~/.config/sway/osd.css: sway/osd.css
     /var/spool/cron/bren:

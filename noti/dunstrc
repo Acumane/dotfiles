@@ -1,6 +1,7 @@
 
 [global]
-  offset = (15, 15)
+  origin = top-right
+  offset = 15x15
   width = (0, 250)
 
   notification_limit = 3
