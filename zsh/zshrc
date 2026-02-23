@@ -31,7 +31,8 @@ zle -N self-insert url-quote-magic
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 setopt PROMPT_SUBST
 autoload -Uz vcs_info
-precmd() { vcs_info }
+preexec() { print -Pn "\e]2;$1\a" }
+precmd() { vcs_info; print -Pn "\e]2;%1~\a" }
 zstyle ':vcs_info:git:*' formats ' %F{8}@ %f%F{4}%b%f'
 
 venv_status() { [[ -n "$VIRTUAL_ENV" ]] && echo "%F{8}($(basename $VIRTUAL_ENV))%f " }
@@ -68,9 +69,10 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
 bindkey '^[' autosuggest-clear
+
 bindkey '^[[1;5C' forward-word
 bindkey '^[[1;5D' backward-word
-bindkey '^[[3;2~' backward-kill-word    # keyd: S-bs -> S-del 
+bindkey '^H'      backward-kill-word
 bindkey '^[^?' clear-screen
 bindkey '^[h' hist
 bindkey '^[f' files
