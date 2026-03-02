@@ -37,7 +37,8 @@ zstyle ':vcs_info:git:*' formats ' %F{8}@ %f%F{4}%b%f'
 
 venv_status() { [[ -n "$VIRTUAL_ENV" ]] && echo "%F{8}($(basename $VIRTUAL_ENV))%f " }
 
-[[ $EUID -eq 0 ]] && PROMPT="%F{1}»%f " || PROMPT="%F{246}›%f "
+_ssh_prefix() { [[ -n "$SSH_TTY" || -n "$SSH_CLIENT" ]] && echo "%F{242}%m%f " }
+[[ $EUID -eq 0 ]] && PROMPT='$(_ssh_prefix)%F{1}»%f ' || PROMPT='$(_ssh_prefix)%F{246}›%f '
 RPROMPT='$(venv_status)%F{240}%1~%f${vcs_info_msg_0_}'
 
 # —— EXTS ———————————————————————

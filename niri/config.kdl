@@ -3,12 +3,7 @@ spawn-sh-at-startup "play -q $HOME/audio/sounds/greet.flac &"
 spawn-sh-at-startup "xhost +SI:localuser:root"
 spawn-sh-at-startup "xsetroot -cursor_name left_ptr"
 
-output "HDMI-A-1" {
-    position x=0 y=580
-}
-output "DP-3" {
-    transform "90"
-}
+include "laptop.kdl"
 
 input {
     keyboard {
@@ -27,6 +22,7 @@ input {
     touchpad {
         tap
         natural-scroll
+        scroll-factor 0.8
     }
 }
 
@@ -63,9 +59,23 @@ layout {
 
     focus-ring {
         width 1
-        active-color "#96bbee"
+        active-color "#96BBEE"
         inactive-color "00000000"
         urgent-color "#E67B7F"
+    }
+}
+
+recent-windows {
+    open-delay-ms 0
+
+    highlight {
+        active-color "#71718E"
+        urgent-color "#E67B7F"
+
+        corner-radius 12
+    }
+    binds {
+        Mod+Tab { next-window; }
     }
 }
 
@@ -85,8 +95,8 @@ window-rule {
 binds {
     // Media control keys
     XF86AudioMute allow-when-locked=true { spawn-sh "$SCRIPTS/amute.sh -t"; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +4"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -4"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume +5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "swayosd-client --output-volume -5"; }
     XF86MonBrightnessUp allow-when-locked=true { spawn-sh "$SCRIPTS/brightness +5"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn-sh "$SCRIPTS/brightness -5"; }
     XF86AudioPlay allow-when-locked=true { spawn-sh "$SCRIPTS/play-pause"; }
@@ -98,8 +108,8 @@ binds {
     Mod+Delete { spawn-sh "kill -9 $(niri msg -j pick-window | jq .pid)"; }
     Mod+Slash { spawn-sh "nirius focus-or-spawn --app-id='kitty' -- kitty"; }
     Mod+Shift+Slash { spawn-sh "kitty"; }
-    Mod+W { spawn-sh "nirius focus-or-spawn --app-id='.*firefox' -- firefox"; }
-    Mod+Shift+W { spawn-sh "firefox"; }
+    Mod+W { spawn-sh "nirius focus-or-spawn --app-id='.*helium' -- gtk-launch helium.desktop"; }
+    Mod+Shift+W { spawn-sh "gtk-launch helium.desktop"; }
     Mod+E { spawn-sh "nirius focus-or-spawn --app-id='.*Nautilus' -- nautilus -w"; }
     Mod+Shift+E { spawn-sh "nautilus -w"; }
     Mod+C { spawn-sh "nirius focus-or-spawn --app-id='code' -- code"; }
@@ -114,29 +124,26 @@ binds {
     Mod+D { spawn-sh "flatpak run io.github.nokse22.inspector"; }
 
     XF86Search { spawn-sh "vicinae vicinae://toggle"; }
-    Mod+S { spawn-sh "vicinae vicinae://extensions/vicinae/file/search"; }
-    Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/vicinae/search-emojis"; }
+    Mod+S { spawn-sh "vicinae vicinae://extensions/vicinae/files/search"; }
+    Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/core/search-emojis"; }
     Mod+V { spawn-sh "vicinae vicinae://extensions/vicinae/clipboard/history"; }
-    Mod+B { spawn-sh "vicinae vicinae://extensions/Gelei/bluetooth/devices"; }
-    Mod+Shift+B { spawn-sh "vicinae vicinae://extensions/Gelei/bluetooth/scan"; }
     Mod+Backspace { spawn-sh "hyprlock --immediate"; }
 
     // Movement and focus
     Mod+J { focus-column-left; }
     Mod+L { focus-column-right; }
-    Mod+I { focus-window-up; }
-    Mod+K { focus-window-down; }
+    Mod+I { focus-window-or-workspace-up; }
+    Mod+K { focus-window-or-workspace-down; }
 
     Mod+Shift+J { consume-or-expel-window-left; }
     Mod+Shift+L { consume-or-expel-window-right; }
     Mod+Shift+I { move-window-up; }
     Mod+Shift+K { move-window-down; }
 
-    Mod+Ctrl+J { move-column-left; }
-    Mod+Ctrl+L { move-column-right; }
-
     Mod+Left { move-column-left; }
     Mod+Right { move-column-right; }
+    Mod+Up { move-column-to-workspace-up; }
+    Mod+Down { move-column-to-workspace-down; }
 
     // Workspaces
     Mod+1 { focus-workspace 1; }
@@ -152,14 +159,13 @@ binds {
     Mod+Shift+BracketRight { set-window-height "-20%"; }
     Mod+Shift+BracketLeft { set-window-height "+20%"; }
 
-    Mod+Tab { toggle-column-tabbed-display; }
     Mod+M { spawn-sh "niri msg action maximize-column && niri msg action reset-window-height"; }
     // Mod+Period { center-column; }
 }
 
 cursor {
     xcursor-theme "Google"
-    xcursor-size 32
+    xcursor-size 28
 
     hide-when-typing
     hide-after-inactive-ms 3000
@@ -182,7 +188,7 @@ window-rule {  // firefox PiP
 
 window-rule {  // floating windows
     match is-floating=true
-    geometry-corner-radius 8
+    geometry-corner-radius 12
 
     shadow {
         on
@@ -193,7 +199,7 @@ window-rule {  // floating windows
 }
 
 layer-rule {
-    geometry-corner-radius 8
+    geometry-corner-radius 12
 
     shadow {
         on
@@ -204,22 +210,17 @@ layer-rule {
 }
 
 layer-rule {
-    match namespace="swayosd"
-    geometry-corner-radius 999
+    match namespace="swayosd|vicinae"
+    geometry-corner-radius 25
 }
 
-window-rule {  // floating
+window-rule {  // float
     match app-id="mpv|scrcpy|.*Loupe|.*Celluloid|GStreamer"
     match app-id=".*(NautilusPreviewer|Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
-    match title="^(Open|Save|Select|Sign in)"
+    match title="^(Open|Save|Select|Sign in|Picture in picture|Meet)"
     match app-id=".*firefox$" title="^Picture-in-Picture$"
-    
-    open-floating true
-}
 
-window-rule {  // applets (tiled)
-    match app-id=".*Nautilus|Fragments|Resources|kitty"
-    default-column-width { proportion 0.4; }
+    open-floating true
 }
 
 environment {

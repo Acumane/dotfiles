@@ -14,9 +14,22 @@ window#osd image {
     -gtk-icon-transform: scale(0.6);
     margin: -12px;
     margin-right: -4px;
+    color: #DCD7BA;
 }
 
 window#osd progressbar {
     min-height: 4px;
     /* min-width: 100px; */
+}
+
+window#osd trough {
+    min-height: inherit;
+    border-radius: 999px;
+    background: alpha(#DCD7BA, 0.25);
+}
+
+window#osd progress {
+    min-height: inherit;
+    border-radius: 999px;
+    background: #DCD7BA;
 }

@@ -26,6 +26,7 @@
       glob: true
       path: hypr/*
     ~/.config/home-manager/home.nix: home.nix
+    ~/.config/vicinae/settings.json: vicinae/settings.json
     ~/.config/systemd/user/:
       glob: true
       path: systemd/*
@@ -33,7 +34,9 @@
       glob: true
       path: firefox/styles/*
     ~/.mozilla/firefox/main/user.js: firefox/user.js
-    ~/.config/niri/config.kdl: niri/config.kdl
+    ~/.config/niri:
+      glob: true
+      path: niri/*
     ~/.config/keyd/app.conf: keyd/app.conf
     ~/.config/fontconfig/fonts.conf: misc/fontconfig
     ~/.lesskey: misc/lesskey

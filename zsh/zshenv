@@ -63,7 +63,7 @@ export FZF_DEFAULT_OPTS="
 --bind 'alt-p:change-preview-window(hidden|top)'"
 export _ZO_FZF_OPTS=$FZF_DEFAULT_OPTS
 export XCURSOR_PATH="$HOME/.local/share/icons"
-export XCURSOR_SIZE=32 XCURSOR_THEME="Google"
+export XCURSOR_SIZE=28 XCURSOR_THEME="Google"
 
 export _ZO_RESOLVE_SYMLINKS=1 
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
