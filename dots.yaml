@@ -39,6 +39,7 @@
       path: niri/*
     ~/.config/keyd/app.conf: keyd/app.conf
     ~/.config/fontconfig/fonts.conf: misc/fontconfig
+    ~/.config/handlr/handlr.toml: xdg/handlr.toml
     ~/.lesskey: misc/lesskey
     ~/.ssh/config: misc/ssh
     ~/.local/bin:
@@ -70,5 +71,6 @@
   - ~/mach
 
 - shell:
+  - [ ./xdg-defaults, Setting XDG defaults... ]
   - [ sudo keyd reload, Reloading keyd... ]
   - [ systemctl --user daemon-reload; sudo systemctl daemon-reload, Reloading systemd... ]

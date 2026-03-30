@@ -1,0 +1,17 @@
+#!/bin/sh
+rm -f ~/.config/mimeapps.list
+handlr set 'audio/*'                   org.gnome.Decibels.desktop
+handlr set 'video/*'                   mpv.desktop
+handlr set 'image/*'                   org.gnome.Loupe.desktop
+handlr set 'font/*'                    org.gnome.font-viewer.desktop
+handlr set 'text/*'                    code.desktop
+handlr set 'application/xml'           code.desktop
+handlr set 'application/json'          code.desktop
+handlr set 'application/yaml'          code.desktop
+handlr set 'application/toml'          code.desktop
+handlr set 'application/pdf'           org.gnome.Evince.desktop
+handlr set 'text/html'                 helium.desktop
+handlr set 'x-scheme-handler/http'     helium.desktop
+handlr set 'x-scheme-handler/https'    helium.desktop
+handlr set 'x-scheme-handler/about'    helium.desktop
+handlr set 'x-scheme-handler/unknown'  helium.desktop
