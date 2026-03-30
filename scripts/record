@@ -4,7 +4,7 @@ if pkill -SIGINT wl-screenrec; then
     play -v 0.5 $HOME/audio/sounds/record_stop.flac
 else
     region=$(slurp) && {
-        wl-screenrec -g "$region" -f "$(xdg-user-dir VIDEOS)/$(openssl rand -hex 3).mkv" &
+        wl-screenrec --codec hevc -g "$region" -f "$(xdg-user-dir VIDEOS)/$(openssl rand -hex 3).mkv" &
         play -v 0.5 $HOME/audio/sounds/record_start.flac
     }
 fi

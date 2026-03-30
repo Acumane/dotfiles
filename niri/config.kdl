@@ -112,8 +112,10 @@ binds {
     Mod+Shift+W { spawn-sh "gtk-launch helium.desktop"; }
     Mod+E { spawn-sh "nirius focus-or-spawn --app-id='.*Nautilus' -- nautilus -w"; }
     Mod+Shift+E { spawn-sh "nautilus -w"; }
-    Mod+C { spawn-sh "nirius focus-or-spawn --app-id='code' -- code"; }
-    Mod+Shift+C { spawn-sh "code"; }
+    Mod+C { spawn-sh "nirius focus-or-spawn --app-id='code|cursor' -- cursor"; }
+    Mod+Shift+C { spawn-sh "cursor"; }
+    Mod+Comma { spawn-sh "nirius focus-or-spawn --app-id='Slack' -- slack"; }
+    Mod+Shift+Comma { spawn-sh "slack"; }
 
     Mod+Q { close-window; }
     Mod+F { fullscreen-window; }
@@ -130,8 +132,8 @@ binds {
     Mod+Backspace { spawn-sh "hyprlock --immediate"; }
 
     // Movement and focus
-    Mod+J { focus-column-left; }
-    Mod+L { focus-column-right; }
+    Mod+J { focus-column-or-monitor-left; }
+    Mod+L { focus-column-or-monitor-right; }
     Mod+I { focus-window-or-workspace-up; }
     Mod+K { focus-window-or-workspace-down; }
 
@@ -140,8 +142,8 @@ binds {
     Mod+Shift+I { move-window-up; }
     Mod+Shift+K { move-window-down; }
 
-    Mod+Left { move-column-left; }
-    Mod+Right { move-column-right; }
+    Mod+Left { move-column-left-or-to-monitor-left; }
+    Mod+Right { move-column-right-or-to-monitor-right; }
     Mod+Up { move-column-to-workspace-up; }
     Mod+Down { move-column-to-workspace-down; }
 
@@ -149,9 +151,13 @@ binds {
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
     Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
     Mod+Shift+1 { move-column-to-workspace 1; }
     Mod+Shift+2 { move-column-to-workspace 2; }
     Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
 
     // Column width cycling
     Mod+BracketLeft { set-column-width "-20%"; }

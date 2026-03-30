@@ -37,6 +37,7 @@
     ~/.config/niri:
       glob: true
       path: niri/*
+    ~/.config/xdg-desktop-portal/portals.conf: misc/portals.conf
     ~/.config/keyd/app.conf: keyd/app.conf
     ~/.config/fontconfig/fonts.conf: misc/fontconfig
     ~/.config/handlr/handlr.toml: xdg/handlr.toml
