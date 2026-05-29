@@ -21,7 +21,9 @@ if [ -e "$profile_d/nix-daemon.sh" ]; then
 fi
 
 export PNPM_HOME="$HOME/.local/share/pnpm"
-export ZDOTDIR="$HOME/.config/zsh"
+# don't clobber shell integration's ZDOTDIR
+: "${ZDOTDIR:=$HOME/.config/zsh}"
+export ZDOTDIR
 export DOTFILES_REPO_PATH="$DOTS"
 export WINEPREFIX="$HOME/.games"
 
@@ -38,7 +40,7 @@ export PATH
 
 # —— VARS ———————————————————————
 
-source $HOME/.env
+[ -f "$HOME/.env" ] && source "$HOME/.env"
 
 export WORDCHARS=""
 export ZSHZ_OWNER="$USER"
@@ -49,7 +51,7 @@ export SUDO_PROMPT="Password: "
 export BAT_THEME="base16"
 export GREP_COLORS="ms=1;30;43"
 export RG_COLORS="--colors 'match:bg:yellow' --colors 'match:fg:black'"
-export LS_COLORS="${LS_COLORS}:di=0;37:*.py=01;32:ln=04:*.md=36:ex=0:"
+export LS_COLORS="${LS_COLORS}:di=01:*.py=01;32:ln=04:*.md=36:ex=0:"
 export MANPAGER="nvim -c 'let g:no_man_maps = 1' -c 'Man!' -"
 export MANROFFOPT="-c"
 export TIMEFMT=$'\n%*Es'

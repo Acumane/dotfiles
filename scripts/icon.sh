@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ICONS="$HOME/.local/share/icons"
-PAPIRUS="/usr/share/icons/Papirus-Dark"
+PAPIRUS="$HOME/.local/share/icons/Papirus-Dark"
 
 name="Custom" # Papirus tweaks ft. Adwaita
 color="nordic" # paleorange : #EECA8F
 
-categories=(places mimetypes devices status)
+categories=(places mimetypes devices status apps)
 sizes=(16 22 24 32 48 64 96 128)
 
 for size in "${sizes[@]}"; do
@@ -42,7 +42,7 @@ fd -t l "(AppImage|application-(default-icon|x(-ms-dos)?-executable))\.svg$" \
         "$ICONS"/"$name" -x rm {} \; -x ln -s "$EXEC" {} \;
 
 # Generate index.theme
-declare -A ctx=([places]=Places [mimetypes]=MimeTypes [devices]=Devices [status]=Status)
+declare -A ctx=([places]=Places [mimetypes]=MimeTypes [devices]=Devices [status]=Status [apps]=Applications)
 dirs=$(for cat in "${categories[@]}"; do printf "$cat/%s," "${sizes[@]}"; done | sed 's/,$//')
 {
     cat <<-EOF

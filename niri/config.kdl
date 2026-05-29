@@ -3,7 +3,7 @@ spawn-sh-at-startup "play -q $HOME/audio/sounds/greet.flac &"
 spawn-sh-at-startup "xhost +SI:localuser:root"
 spawn-sh-at-startup "xsetroot -cursor_name left_ptr"
 
-include "laptop.kdl"
+include "desktop.kdl"
 
 input {
     keyboard {
@@ -58,8 +58,8 @@ layout {
     }
 
     focus-ring {
-        width 1
-        active-color "#96BBEE"
+        width 1.5
+        active-color "#B9C3FF"
         inactive-color "00000000"
         urgent-color "#E67B7F"
     }
@@ -86,6 +86,12 @@ overview {
     }
 }
 
+blur {
+    passes 4
+    noise 0.06
+    saturation 4.0
+}
+
 window-rule {
     // min-width 360; min-height 240  // 3:2, sane
     geometry-corner-radius 8
@@ -106,8 +112,8 @@ binds {
     // Applications
     Mod+Equal { spawn-sh "hyprpicker -a"; }
     Mod+Delete { spawn-sh "kill -9 $(niri msg -j pick-window | jq .pid)"; }
-    Mod+Slash { spawn-sh "nirius focus-or-spawn --app-id='kitty' -- kitty"; }
-    Mod+Shift+Slash { spawn-sh "kitty"; }
+    Mod+Slash { spawn-sh "nirius focus-or-spawn --app-id='com.mitchellh.ghostty' -- ghostty"; }
+    Mod+Shift+Slash { spawn-sh "ghostty"; }
     Mod+W { spawn-sh "nirius focus-or-spawn --app-id='.*helium' -- gtk-launch helium.desktop"; }
     Mod+Shift+W { spawn-sh "gtk-launch helium.desktop"; }
     Mod+E { spawn-sh "nirius focus-or-spawn --app-id='.*Nautilus' -- nautilus -w"; }
@@ -116,6 +122,7 @@ binds {
     Mod+Shift+C { spawn-sh "cursor"; }
     Mod+Comma { spawn-sh "nirius focus-or-spawn --app-id='Slack' -- slack"; }
     Mod+Shift+Comma { spawn-sh "slack"; }
+    Mod+D { spawn-sh "toggle-color-scheme"; }
 
     Mod+Q { close-window; }
     Mod+F { fullscreen-window; }
@@ -123,12 +130,11 @@ binds {
     Mod+Shift+Space { spawn-sh "$SCRIPTS/record"; }
     Mod+A { spawn-sh "flatpak run com.saivert.pwvucontrol"; }
     Mod+Grave { spawn-sh "flatpak run net.nokyan.Resources"; }
-    Mod+D { spawn-sh "flatpak run io.github.nokse22.inspector"; }
 
     XF86Search { spawn-sh "vicinae vicinae://toggle"; }
-    Mod+S { spawn-sh "vicinae vicinae://extensions/vicinae/files/search"; }
-    Mod+Period { spawn-sh "vicinae vicinae://extensions/vicinae/core/search-emojis"; }
-    Mod+V { spawn-sh "vicinae vicinae://extensions/vicinae/clipboard/history"; }
+    Mod+S { spawn-sh "vicinae vicinae://launch/files/search?toggle=true"; }
+    Mod+Period { spawn-sh "vicinae vicinae://launch/core/search-emojis?toggle=true"; }
+    Mod+V { spawn-sh "vicinae vicinae://launch/clipboard/history?toggle=true"; }
     Mod+Backspace { spawn-sh "hyprlock --immediate"; }
 
     // Movement and focus
@@ -165,7 +171,9 @@ binds {
     Mod+Shift+BracketRight { set-window-height "-20%"; }
     Mod+Shift+BracketLeft { set-window-height "+20%"; }
 
-    Mod+M { spawn-sh "niri msg action maximize-column && niri msg action reset-window-height"; }
+    Mod+M { spawn-sh \
+        "niri msg action maximize-column && niri msg action reset-window-height";
+    }
     // Mod+Period { center-column; }
 }
 
@@ -181,16 +189,6 @@ hotkey-overlay {
     skip-at-startup
 }
 
-window-rule {  // firefox PiP
-    match app-id=".*firefox$" title="^Picture-in-Picture$"
-
-    open-floating true; open-focused false
-
-    // min-width 560; min-height 315  // 16:9
-    // max-width 560; max-height 315
-
-    default-floating-position x=50 y=50 relative-to="bottom-right"
-}
 
 window-rule {  // floating windows
     match is-floating=true
@@ -199,7 +197,7 @@ window-rule {  // floating windows
     shadow {
         on
         spread 1
-        softness 30
+        softness 25
         color "#08000A54"
     }
 }
@@ -210,26 +208,37 @@ layer-rule {
     shadow {
         on
         spread 1
-        softness 30
+        softness 25
         color "#08000A54"
     }
 }
 
 layer-rule {
-    match namespace="swayosd|vicinae"
-    geometry-corner-radius 25
+    match namespace="vicinae|swayosd|notifications"
+
+    background-effect {
+        blur true
+        xray false
+    }
+}
+
+layer-rule {
+    match namespace="swayosd"
+
+    geometry-corner-radius 999
 }
 
 window-rule {  // float
-    match app-id="mpv|scrcpy|.*Loupe|.*Celluloid|GStreamer"
-    match app-id=".*(NautilusPreviewer|Vaults|Recorder|Decibels|Calculator|pwvucontrol|inspector)$" 
-    match title="^(Open|Save|Select|Sign in|Picture in picture|Meet)"
-    match app-id=".*firefox$" title="^Picture-in-Picture$"
+    match app-id="^(chrome-|xdg-)"
+    match app-id="mpv|scrcpy|.*Loupe|GStreamer"
+    match app-id=".*(NautilusPreviewer|Calculator)$" 
+    match title="^(Sign in|Picture in picture|Meet)"
 
     open-floating true
 }
 
 environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORMTHEME "xdgdesktopportal"
     QT_QPA_PLATFORM "wayland"
 }

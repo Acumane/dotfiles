@@ -1,39 +1,38 @@
 # Font
-font-family = JetBrainsMono Nerd Font
-font-size = 10
+font-family = Monofoki Nerd Font
+font-size = 11
 adjust-cell-height = 20%
+alpha-blending = linear
 cursor-style = bar
-adjust-cursor-thickness = 2
+adjust-cursor-thickness = 1
 
 # Window
 window-padding-x = 10
 window-padding-y = 10
 window-decoration = false
 window-inherit-font-size = false
+resize-overlay = never
 unfocused-split-opacity = 0.6
-split-divider-color = #3F3F50
+split-divider-color = #505065
 
-theme = kana
+theme = light:iTerm2 Solarized Light,dark:kana
 
 # Behavior
 mouse-hide-while-typing = true
 shell-integration = zsh
 bell-features = no-audio, no-title
+notify-on-command-finish = unfocused
+confirm-close-surface = true
 
 # Keybindings
 keybind = performable:ctrl+c=copy_to_clipboard
 keybind = ctrl+v=paste_from_clipboard
 keybind = alt+n=new_split:down
 keybind = alt+q=close_surface
-# keybind = alt+n=new_tab
-# keybind = alt+l=next_tab
-# keybind = alt+j=previous_tab
-# keybind = alt+q=close_tab
-# keybind = alt+shift+j=move_tab:-1
-# keybind = alt+shift+l=move_tab:1
 keybind = ctrl+tab=toggle_command_palette
 keybind = ctrl+down=scroll_to_bottom
 keybind = ctrl+up=scroll_to_top
+keybind = ctrl+f=start_search
 
 keybind = alt+tab=goto_split:next
 keybind = alt+shift+tab=goto_split:previous

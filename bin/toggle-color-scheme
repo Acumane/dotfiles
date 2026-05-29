@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Toggle system color scheme.
+
+if [[ $(gsettings get org.gnome.desktop.interface color-scheme) == *dark* ]]; then
+  scheme=prefer-light
+else
+  scheme=prefer-dark
+fi
+
+gsettings set org.gnome.desktop.interface color-scheme "$scheme"
+# TODO: other IPC

@@ -29,6 +29,7 @@
       path: hypr/*
     ~/.config/home-manager/home.nix: home.nix
     ~/.config/vicinae/settings.json: vicinae/settings.json
+    ~/.local/share/vicinae/themes/kana.toml: vicinae/themes/kana.toml
     ~/.config/systemd/user/:
       glob: true
       path: systemd/*
@@ -54,6 +55,9 @@
     ~/.config/kitty:
       glob: true
       path: kitty/*
+    ~/.config/ghostty:
+      glob: true
+      path: ghostty/*
     ~/.config/fusuma/config.yml: fusuma/config.yml
     ~/.config/gtk-3.0/gtk.css: gtk/gtk.css
     ~/.config/gtk-4.0/gtk.css: gtk/gtk.css
