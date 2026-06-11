@@ -15,19 +15,17 @@ for _, v in ipairs(verbs) do
   set('n', lhs..lhs, line_rhs)
 end
 
--- Restore transpose
-set('n', 'xp', 'xp', { nowait = true })
-set('v', 'p', '"_dP')
-
--- H/hh = (i)nsert alts
-set('n', 'H',  'a',         { desc = 'Append after cursor' })
-set('v', 'H',  'A',         { desc = 'Append after selection' })
-set('v', 'hh', '<Esc>i',    { desc = 'Insert at selection start' })
-
--- Disable 'down' in motions (useless)
+-- Disable 'down' in motions; `i` is still insert
 for _, op in ipairs({'c','d','r','x'}) do
   set('n', op..'k', '<Nop>')
 end
+
+-- visual paste preserves register
+set('v', 'p', '"_dP')
+
+-- H = (a)ppend
+set('n', 'H',  'a',         { desc = 'Append after cursor' })
+set('v', 'H',  'A',         { desc = 'Append after selection' })
 
 -- Canonical functions
 set('n', '<C-a>', 'gg^vG$h',       { desc = 'Select all' })
@@ -37,15 +35,14 @@ set('t', '<Esc>', '<C-\\><C-n>')
 
 set('v', '<C-c>', 'y',  { desc = 'Copy (visual)' })
 set('v', '<C-x>', 'x',  { desc = 'Cut (visual)' })
-set(M,   '<C-p>', 'p',  { desc = 'Paste' })
 
 set(M,   '<C-u>', 'u',          { desc = 'Undo' })
 set('i', '<C-u>', '<C-o>u')
 set(M,   'u',     '<Nop>')
 
--- cycle case/CASE
-set('v', 't', '~gv',  { desc = 'Cycle case (visual)' })
-set('n', 't', '~h',   { desc = 'Cycle case' })
+-- ~ toggle case
+set('n', '~', '~h')
+set('v', '~', '~gv')
 
 -- sane <inc|dec>rement
 set('n', '=', '<C-a>', { desc = 'Increment' })

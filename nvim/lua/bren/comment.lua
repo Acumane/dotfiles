@@ -8,7 +8,5 @@ require('mini.comment').setup({
   },
 })
 
--- free since cword-search uses <C-f>
-local set = vim.keymap.set
-set({'n','x'}, '<C-/>', '<C-_>', { remap = true, desc = 'Toggle comment' })
-set({'n','x'}, '/',     '<C-_>', { remap = true, desc = 'Toggle comment' })
+-- <C-/> reaches nvim as either <C-_> (terminal byte form) or <C-/> (kitty proto)
+vim.keymap.set({'n','x'}, '<C-/>', '<C-_>', { remap = true, desc = 'Toggle comment' })

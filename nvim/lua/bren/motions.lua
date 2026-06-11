@@ -17,11 +17,14 @@ local motions = {
   K = '}',   I = '{',
   T = 'gg',  B = 'G',
   W = 'b',   E = 'ge',
-  o = '%',   O = '%',
 }
 for lhs, rhs in pairs(motions) do
-  set({'n','v','o'}, lhs, rhs)
+  -- nowait: vscode-neovim has J<x>/K<x> etc.
+  set({'n','v','o'}, lhs, rhs, { nowait = true })
 end
+
+-- (o)ther in pair (NOT in visual)
+set({'n','o'}, 'o', '%', { nowait = true })
 
 set('v', 'L', 'g_')  -- last non-blank (don't grab newline)
 

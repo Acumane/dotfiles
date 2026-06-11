@@ -12,7 +12,7 @@ set('n', '<C-f>', function()
   local w = vim.fn.expand('<cword>')
   vim.fn.setreg('/', w)
   vim.opt.hlsearch = true
-  vim.fn.feedkeys('/' .. w, 'n')   -- 'n': skip remap (`/` is comment toggle)
+  vim.fn.feedkeys('/' .. w)
 end, { silent = true, desc = 'Find <cword>' })
 
 set('v', '<C-f>', 'y:let @/=@" <bar>:set hls<CR>gn',

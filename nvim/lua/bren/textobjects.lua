@@ -33,9 +33,9 @@ for letter, suffix in pairs({ w = 'w', W = 'W', s = 's', P = 'p' }) do
 end
 
 -- (P)aragraph text objects
-set({'o','x'}, 'iP', 'ip')
+set('o', 'iP', 'ip')
 
--- Route i<mnemonic> -> h<mnemonic> so `dip` hits paren, not stock paragraph
+-- Route i<mnemonic> -> h<mnemonic> (in visual use h<x>)
 for letter in pairs(P.mnemonics) do
-  set({'o','x'}, 'i' .. letter, 'h' .. letter, { remap = true })
+  set('o', 'i' .. letter, 'h' .. letter, { remap = true })
 end

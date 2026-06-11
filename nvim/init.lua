@@ -1,3 +1,8 @@
+-- Leader ------------------------------------------------------------
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+vim.keymap.set({'n','v'}, '<Space>', '<Nop>', { silent = true })
+
 -- Editor options ----------------------------------------------------
 
 local opt = vim.opt
@@ -39,16 +44,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
--- Re-center on InsertEnter
-vim.api.nvim_create_autocmd("InsertEnter", {
-  group = group("bren.insert"),
-  pattern = "*",
-  command = "norm! zz",
-})
-
 -- Return to last pos on leave
 vim.api.nvim_create_autocmd("InsertLeave", {
-  group = "bren.insert",
+  group = group("bren.insert"),
   pattern = "*",
   command = [[exec "normal! `^"]],
 })
