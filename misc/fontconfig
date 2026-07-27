@@ -13,7 +13,7 @@
     <test name="family">
       <string>monospace</string>
     </test>
-    <edit name="family" mode="prepend">
+    <edit name="family" mode="prepend" binding="strong">
       <string>Monofoki Nerd Font</string>
     </edit>
   </match>
@@ -48,5 +48,9 @@
     <edit name="family" mode="prepend">
       <string>Akkurat</string>
     </edit>
+  </match>
+  <match target="pattern">
+    <test name="family"><string>Monofoki Nerd Font</string></test>
+    <edit name="family" mode="append" binding="strong"><string>Noto Sans Symbols 2</string></edit>
   </match>
 </fontconfig>

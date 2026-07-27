@@ -13,7 +13,7 @@
   gap_size = 10
 
   frame_width = 1
-  frame_color = "#4E4E62"
+  frame_color = "#656580E6"
   corner_radius = 8
 
   font = sans-serif 10

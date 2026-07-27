@@ -74,9 +74,9 @@ recent-windows {
 
         corner-radius 12
     }
-    binds {
-        Mod+Tab { next-window; }
-    }
+    // binds {
+    //     Mod+Tab { next-window; }
+    // }
 }
 
 overview {
@@ -112,8 +112,8 @@ binds {
     // Applications
     Mod+Equal { spawn-sh "hyprpicker -a"; }
     Mod+Delete { spawn-sh "kill -9 $(niri msg -j pick-window | jq .pid)"; }
-    Mod+Slash { spawn-sh "nirius focus-or-spawn --app-id='com.mitchellh.ghostty' -- ghostty"; }
-    Mod+Shift+Slash { spawn-sh "ghostty"; }
+    Mod+Slash { spawn-sh "nirius focus-or-spawn --app-id='kitty' -- kitty"; }
+    Mod+Shift+Slash { spawn-sh "kitty"; }
     Mod+W { spawn-sh "nirius focus-or-spawn --app-id='.*helium' -- gtk-launch helium.desktop"; }
     Mod+Shift+W { spawn-sh "gtk-launch helium.desktop"; }
     Mod+E { spawn-sh "nirius focus-or-spawn --app-id='.*Nautilus' -- nautilus -w"; }
@@ -148,10 +148,15 @@ binds {
     Mod+Shift+I { move-window-up; }
     Mod+Shift+K { move-window-down; }
 
-    Mod+Left { move-column-left-or-to-monitor-left; }
-    Mod+Right { move-column-right-or-to-monitor-right; }
-    Mod+Up { move-column-to-workspace-up; }
-    Mod+Down { move-column-to-workspace-down; }
+    Mod+Ctrl+J { move-column-left-or-to-monitor-left; }
+    Mod+Ctrl+L { move-column-right-or-to-monitor-right; }
+    Mod+Ctrl+I { move-column-to-workspace-up; }
+    Mod+Ctrl+K { move-column-to-workspace-down; }
+
+    Mod+Ctrl+Shift+I { move-workspace-up; }
+    Mod+Ctrl+Shift+K { move-workspace-down; }
+    Mod+Ctrl+Shift+J { move-workspace-to-monitor-left; }
+    Mod+Ctrl+Shift+L { move-workspace-to-monitor-right; }
 
     // Workspaces
     Mod+1 { focus-workspace 1; }
@@ -194,6 +199,10 @@ window-rule {  // floating windows
     match is-floating=true
     geometry-corner-radius 12
 
+    border {
+        inactive-color "#505065"
+    }
+
     shadow {
         on
         spread 1
@@ -233,6 +242,7 @@ window-rule {  // float
     match app-id="mpv|scrcpy|.*Loupe|GStreamer"
     match app-id=".*(NautilusPreviewer|Calculator)$" 
     match title="^(Sign in|Picture in picture|Meet)"
+    match title="termfilechooser"
 
     open-floating true
 }
