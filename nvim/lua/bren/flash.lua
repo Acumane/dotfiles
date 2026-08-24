@@ -7,7 +7,10 @@ flash.setup({
   prompt = { prefix = {} },          -- no prompt prefix
 
   modes = {
-    search = { enabled = true },     -- enhance any /-prompt with labels
+    search = {
+      enabled   = true,              -- enhance any /-prompt with labels
+      highlight = { backdrop = true },
+    },
     char = {
       enabled = true,
       jump_labels = false,           -- jump to first match
@@ -20,8 +23,10 @@ flash.setup({
 })
 
 local set = vim.keymap.set
-set({ 'n', 'x', 'o' }, 'f', function() flash.jump() end,       { desc = 'Flash jump' })
-set({ 'n', 'x', 'o' }, 'S', function() flash.treesitter() end, { desc = 'Flash treesitter select' })
+set({ 'n', 'x', 'o' }, 'f', function() flash.jump() end, { desc = 'Flash jump' })
+
+-- Syntax-node select on visual (`vv`)
+set('x', 'v', function() flash.treesitter() end, { desc = 'Expand to syntax node' })
 
 -- Disable FlashBackdrop italics: links to Comment, which kanagawa renders italic
 vim.api.nvim_create_autocmd({ 'VimEnter', 'ColorScheme' }, {

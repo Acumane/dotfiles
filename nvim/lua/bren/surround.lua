@@ -1,7 +1,7 @@
 -- Surround via mini.surround:
---   s<ch>    surround word     (saiw<ch>)
---   d<ch>    delete surround   (sd<ch>)
---   r<a><b>  replace surround  (sr<a><b>)
+--   s<ch>    surround word     (saiw<ch> OR sa<ch>)
+--   ds<ch>   delete surround   (sd<ch>)
+--   rs<a><b> replace surround  (sr<a><b>)
 
 local P = require('bren.pairs')
 
@@ -30,12 +30,9 @@ local recursive = { remap = true }
 
 for _, ch in ipairs(chars) do
   set('n', 's' .. ch, 'saiw' .. ch, recursive)
-  set('n', 'd' .. ch, 'sd'   .. ch, recursive)
+  set('x', 's' .. ch, 'sa'   .. ch, recursive)
 end
 
--- pair replace
-for _, a in ipairs(chars) do
-  for _, b in ipairs(chars) do
-    set('n', 'r' .. a .. b, 'sr' .. a .. b, recursive)
-  end
-end
+-- pair delete, replace
+set('n', 'ds', 'sd', recursive)
+set('n', 'rs', 'sr', recursive)

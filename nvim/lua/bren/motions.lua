@@ -11,10 +11,25 @@ set('n', 'h', 'i', { desc = 'Insert here' })
 -- remove annoying dir motion in op-pending
 set('o', '<Down>', '<Nop>')
 
+-- Whitespace-friendly paragraph motions
+local function paragraph(back)
+  local pat   = [[^\s*$\|]] .. (back and [[\%^]] or [[\%$]])
+  local flags = back and 'bW' or 'W'
+  return function()
+    vim.fn.setpos("''", vim.fn.getpos('.'))   -- so `` returns here
+    vim.fn.cursor(vim.fn.line('.'), 1)
+    for _ = 1, vim.v.count1 do
+      vim.fn.search(pat, flags)
+    end
+  end
+end
+
+set({'n','v','o'}, 'K', paragraph(false), { desc = 'Next paragraph' })
+set({'n','v','o'}, 'I', paragraph(true),  { desc = 'Prev paragraph' })
+
 -- Capital = "stronger" lowercase motion
 local motions = {
   L = '$',   J = 'g0',
-  K = '}',   I = '{',
   T = 'gg',  B = 'G',
   W = 'b',   E = 'ge',
 }

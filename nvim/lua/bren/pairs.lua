@@ -6,7 +6,6 @@ M.mnemonics = {
   p = { '(', ')' }, b = { '[', ']' },
   B = { '{', '}' }, t = { '<', '>' },
   q = { '"', '"' },
-  u = { '_', '_' }, e = { '*', '*' }, m = { '$', '$' },
 }
 
 -- { outer, inner-extract } for mini.* `input` spec

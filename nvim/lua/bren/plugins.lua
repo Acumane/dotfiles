@@ -4,9 +4,6 @@ return {
   -- mini.* configured in bren.{surround,textobjects,comment,move}
   "echasnovski/mini.nvim",
 
-  -- Paragraph motion enhancements
-  "justinmk/vim-ipmotion",
-
   -- Setup in bren.flash
   "folke/flash.nvim",
 
@@ -29,28 +26,6 @@ return {
   },
 
   -- Non-VSCode UI
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    cond = not vim.g.vscode,
-    config = function()
-      require("lualine").setup({
-        options = {
-          theme = { normal = { z = { fg = "#54546D", bg = nil } } },
-          section_separators = {},
-          globalstatus = true,
-        },
-        sections = {
-          lualine_a = {}, lualine_b = {}, lualine_c = {}, lualine_x = {}, lualine_y = {},
-          lualine_z = {{
-            "location",
-            padding = 0.5,
-            fmt = function(s) return s:gsub(":", ", ") end,
-          }},
-        },
-      })
-    end,
-  },
   {
     "rebelot/kanagawa.nvim",
     cond = not vim.g.vscode,

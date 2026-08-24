@@ -1,5 +1,5 @@
 -- Text objects via mini.ai. h<x> = inner, a<x> = around.
---   Mnemonics: p () b [] B {} t <> q " u _ e * m $
+--   Mnemonics: p () b [] B {} t <> q "
 
 local P = require('bren.pairs')
 
@@ -7,11 +7,6 @@ local custom = {}
 for letter, pair in pairs(P.mnemonics) do
   custom[letter] = P.input(pair[1], pair[2])
 end
-
--- new text objects
-custom['*'] = P.input('*', '*')
-custom['_'] = P.input('_', '_')
-custom['$'] = P.input('$', '$')
 
 require('mini.ai').setup({
   n_lines = 50,
@@ -35,7 +30,7 @@ end
 -- (P)aragraph text objects
 set('o', 'iP', 'ip')
 
--- Route i<mnemonic> -> h<mnemonic> (in visual use h<x>)
-for letter in pairs(P.mnemonics) do
-  set('o', 'i' .. letter, 'h' .. letter, { remap = true })
+-- Route i<ch> -> h<ch>
+for ch in pairs(P.mnemonics) do
+  set('o', 'i' .. ch, 'h' .. ch, { remap = true })
 end

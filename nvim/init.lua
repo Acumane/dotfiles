@@ -15,8 +15,10 @@ opt.smartindent    = true
 opt.autoindent     = true
 opt.shiftwidth     = 4
 opt.expandtab      = true
+opt.ignorecase     = true
 opt.smartcase      = true
-opt.laststatus     = 0
+opt.laststatus     = 3
+opt.statusline     = "%=%#StatusLineNC#%l, %c "
 opt.matchpairs:append("<:>")        -- <> as a balanced pair for %
 
 if not vim.g.vscode then
