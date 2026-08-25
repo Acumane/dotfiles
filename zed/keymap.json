@@ -1,0 +1,403 @@
+[
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "j": "vim::Left",
+      "k": [
+        "vim::Down",
+        {
+          "display_lines": true
+        }
+      ],
+      "shift-l": "vim::EndOfLine",
+      "shift-j": [
+        "vim::StartOfLine",
+        {
+          "display_lines": true
+        }
+      ],
+      "shift-k": "vim::EndOfParagraph",
+      "shift-i": "vim::StartOfParagraph",
+      "shift-t": "vim::StartOfDocument",
+      "shift-b": "vim::EndOfDocument",
+      "shift-w": "vim::PreviousWordStart",
+      "shift-e": "vim::PreviousWordEnd",
+      "o": [
+        "vim::Matching",
+        {
+          "match_quotes": true
+        }
+      ],
+      "u": null,
+      "ctrl-u": "vim::Undo",
+      "ctrl-p": "vim::Paste",
+      "n": [
+        "vim::PushFindForward",
+        {
+          "before": false,
+          "multiline": true
+        }
+      ],
+      "shift-n": [
+        "vim::PushFindBackward",
+        {
+          "after": false,
+          "multiline": true
+        }
+      ]
+    }
+  },
+  {
+    "context": "vim_mode == normal || vim_mode == visual",
+    "bindings": {
+      "i": [
+        "vim::Up",
+        {
+          "display_lines": true
+        }
+      ],
+      "d": [
+        "workspace::SendKeystrokes",
+        "\" _ x"
+      ],
+      "r": [
+        "workspace::SendKeystrokes",
+        "\" _ ctrl-alt-c"
+      ],
+      "f": "vim::HelixJumpToWord"
+    }
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "h": "vim::InsertBefore",
+      "shift-h": "vim::InsertAfter",
+      "c": "vim::PushYank",
+      "x": "vim::PushDelete",
+      "shift-c": "vim::YankLine",
+      "shift-x": [
+        "workspace::SendKeystrokes",
+        "x x"
+      ],
+      "shift-d": [
+        "workspace::SendKeystrokes",
+        "\" _ x x"
+      ],
+      "shift-r": [
+        "workspace::SendKeystrokes",
+        "\" _ ctrl-alt-c r"
+      ],
+      "ctrl-alt-c": "vim::PushChange",
+      "enter": "vim::InsertLineBelow",
+      "shift-enter": "vim::InsertLineAbove",
+      "tab": "editor::Indent",
+      "shift-tab": "editor::Outdent",
+      "space": [
+        "workspace::SendKeystrokes",
+        "h space escape"
+      ],
+      "backspace": "vim::DeleteLeft",
+      "shift-delete": [
+        "editor::DeleteToPreviousWordStart",
+        {
+          "ignore_newlines": false,
+          "ignore_brackets": false
+        }
+      ],
+      "=": "vim::Increment",
+      "+": "vim::Increment",
+      "-": "vim::Decrement",
+      "/": "buffer_search::Deploy",
+      "ctrl-/": [
+        "editor::ToggleComments",
+        {
+          "advance_downwards": false
+        }
+      ],
+      "ctrl-f": "buffer_search::Deploy",
+      "ctrl-a": "editor::SelectAll",
+      "q": "pane::CloseActiveItem",
+      "up": "editor::MoveLineUp",
+      "down": "editor::MoveLineDown",
+      "left": "editor::Outdent",
+      "right": "editor::Indent",
+      "s": null,
+      "s p": [
+        "workspace::SendKeystrokes",
+        "y s i w )"
+      ],
+      "s b": [
+        "workspace::SendKeystrokes",
+        "y s i w ]"
+      ],
+      "s shift-b": [
+        "workspace::SendKeystrokes",
+        "y s i w }"
+      ],
+      "s t": [
+        "workspace::SendKeystrokes",
+        "y s i w >"
+      ],
+      "s q": [
+        "workspace::SendKeystrokes",
+        "y s i w \""
+      ],
+      "s )": [
+        "workspace::SendKeystrokes",
+        "y s i w )"
+      ],
+      "s ]": [
+        "workspace::SendKeystrokes",
+        "y s i w ]"
+      ],
+      "s }": [
+        "workspace::SendKeystrokes",
+        "y s i w }"
+      ],
+      "s >": [
+        "workspace::SendKeystrokes",
+        "y s i w >"
+      ],
+      "s \"": [
+        "workspace::SendKeystrokes",
+        "y s i w \""
+      ],
+      "s '": [
+        "workspace::SendKeystrokes",
+        "y s i w '"
+      ],
+      "s `": [
+        "workspace::SendKeystrokes",
+        "y s i w `"
+      ],
+      "s (": [
+        "workspace::SendKeystrokes",
+        "y s i w ("
+      ],
+      "s [": [
+        "workspace::SendKeystrokes",
+        "y s i w ["
+      ],
+      "s {": [
+        "workspace::SendKeystrokes",
+        "y s i w {"
+      ],
+      "s <": [
+        "workspace::SendKeystrokes",
+        "y s i w <"
+      ],
+      "~": [
+        "workspace::SendKeystrokes",
+        "~ j"
+      ],
+      "s *": [
+        "workspace::SendKeystrokes",
+        "y s i w *"
+      ],
+      "s _": [
+        "workspace::SendKeystrokes",
+        "y s i w _"
+      ],
+      "s $": [
+        "workspace::SendKeystrokes",
+        "y s i w $"
+      ]
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "h": [
+        "vim::PushObject",
+        {
+          "around": false
+        }
+      ],
+      "h h": "vim::InsertBefore",
+      "shift-h": "vim::InsertAfter",
+      "shift-l": "vim::EndOfLineDownward",
+      "c": "vim::VisualYank",
+      "x": "vim::VisualDelete",
+      "ctrl-alt-c": "vim::Substitute",
+      "p": [
+        "vim::Paste",
+        {
+          "preserve_clipboard": true
+        }
+      ],
+      "ctrl-p": "vim::Paste",
+      "ctrl-c": "vim::VisualYank",
+      "ctrl-x": "vim::VisualDelete",
+      "ctrl-f": "buffer_search::Deploy",
+      "ctrl-a": "editor::SelectAll",
+      "b": "vim::ToggleVisualBlock",
+      "tab": "editor::Indent",
+      "shift-tab": "editor::Outdent",
+      "/": "buffer_search::Deploy",
+      "ctrl-/": [
+        "editor::ToggleComments",
+        {
+          "advance_downwards": false
+        }
+      ],
+      "up": "editor::MoveLineUp",
+      "down": "editor::MoveLineDown",
+      "left": "editor::Outdent",
+      "right": "editor::Indent",
+      "v": "editor::SelectLargerSyntaxNode",
+      "ctrl-alt-s": [
+        "vim::PushAddSurrounds",
+        {}
+      ],
+      "s p": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s )"
+      ],
+      "s b": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s ]"
+      ],
+      "s shift-b": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s }"
+      ],
+      "s t": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s >"
+      ],
+      "s q": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s \""
+      ],
+      "s )": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s )"
+      ],
+      "s ]": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s ]"
+      ],
+      "s }": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s }"
+      ],
+      "s >": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s >"
+      ],
+      "s \"": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s \""
+      ],
+      "s '": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s '"
+      ],
+      "s `": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s `"
+      ],
+      "s (": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s ("
+      ],
+      "s [": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s ["
+      ],
+      "s {": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s {"
+      ],
+      "s <": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s <"
+      ],
+      "s *": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s *"
+      ],
+      "s _": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s _"
+      ],
+      "s $": [
+        "workspace::SendKeystrokes",
+        "ctrl-alt-s $"
+      ],
+      "~": "editor::ConvertToOppositeCase"
+    }
+  },
+  {
+    "context": "vim_mode == operator",
+    "bindings": {
+      "h": [
+        "vim::PushObject",
+        {
+          "around": false
+        }
+      ],
+      "k": null,
+      "down": null
+    }
+  },
+  {
+    "context": "vim_operator == y",
+    "bindings": {
+      "c": "vim::CurrentLine"
+    }
+  },
+  {
+    "context": "vim_operator == d",
+    "bindings": {
+      "x": "vim::CurrentLine"
+    }
+  },
+  {
+    "context": "vim_operator == c",
+    "bindings": {
+      "r": "vim::CurrentLine"
+    }
+  },
+  {
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      "p": "vim::Parentheses",
+      "shift-p": "vim::Paragraph",
+      "b": "vim::SquareBrackets",
+      "shift-b": "vim::CurlyBrackets",
+      "t": "vim::AngleBrackets",
+      "q": "vim::DoubleQuotes"
+    }
+  },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "ctrl-u": "editor::Undo",
+      "ctrl-a": "editor::SelectAll",
+      "shift-delete": [
+        "editor::DeleteToPreviousWordStart",
+        {
+          "ignore_newlines": false,
+          "ignore_brackets": false
+        }
+      ],
+      "ctrl-backspace": [
+        "editor::DeleteToPreviousWordStart",
+        {
+          "ignore_newlines": false,
+          "ignore_brackets": false
+        }
+      ],
+      "ctrl-f": "buffer_search::Deploy",
+      "escape": "vim::SwitchToNormalMode"
+    }
+  },
+  {
+    "context": "BufferSearchBar && !in_replace",
+    "bindings": {
+      "enter": "search::SelectNextMatch",
+      "shift-enter": "search::SelectPreviousMatch"
+    }
+  }
+]

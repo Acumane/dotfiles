@@ -1,0 +1,29 @@
+{
+  "proxy": "",
+  "ui_font_family": "Akkurat",
+  "buffer_line_height": "comfortable",
+  "buffer_font_family": "Monofoki Nerd Font",
+  "terminal": {
+    "font_size": 14.0,
+    "font_family": "Monofoki Nerd Font",
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "vim_mode": true,
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_smartcase_find": true,
+  },
+  "use_smartcase_search": true,
+  "seed_search_query_from_cursor": "always",
+  "relative_line_numbers": "enabled",
+  "tab_size": 4,
+  "ui_font_size": 16.0,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Light",
+    "dark": "Kanagawa Wave",
+  },
+}
