@@ -20,7 +20,7 @@ require('mini.surround').setup({
 
 -- surround shortcuts
 local chars = {
-  'p', 'b', 'B', 't', 'q', 'u', 'e', 'm',
+  'p', 'b', 'B', 't', 'q',
   ')', ']', '}', '>', '"', "'", '`', '*', '_', '$',
   '(', '[', '{', '<',
 }

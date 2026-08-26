@@ -1,19 +1,112 @@
 {
+  "diff_view_style": "split",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Colored Zed Icons Theme Dark"
+  },
+  "drag_and_drop_selection": {
+    "enabled": false
+  },
+  "toolbar": {
+    "code_actions": false,
+    "agent_review": false,
+    "selections_menu": false,
+    "quick_actions": false,
+    "breadcrumbs": false
+  },
+  "minimap": {
+    "show": "never"
+  },
+  "agent": {
+    "button": false,
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git": {
+    "file_diff": {
+      "show_full_file": false
+    }
+  },
+  "git_panel": {
+    "entry_primary_click_action": "file_diff",
+    "tree_view": false,
+    "group_by": "staging",
+    "sort_by": "name",
+    "button": false
+  },
+  "outline_panel": {
+    "button": false
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "tabs": {
+    "show_close_button": "hover",
+    "file_icons": true
+  },
+  "tab_bar": {
+    "show_tab_bar_buttons": true,
+    "show_nav_history_buttons": false,
+    "show": true
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_user_picture": false,
+    "show_user_menu": true,
+    "show_sign_in": true,
+    "show_onboarding_banner": true
+  },
+  "debugger": {
+    "button": false
+  },
+  "search": {
+    "button": false
+  },
+  "diagnostics": {
+    "button": true
+  },
+  "status_bar": {
+    "cursor_position_button": true,
+    // "experimental.show": false
+  },
+  "project_panel": {
+    "button": false,
+    "folder_icons": false,
+    "file_icons": true,
+    "default_width": 400,
+    "hide_root": true,
+    "starts_open": false,
+    "sticky_scroll": true
+  },
+  "scroll_beyond_last_line": "vertical_scroll_margin",
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
+  },
+  "current_line_highlight": "gutter",
   "proxy": "",
   "ui_font_family": "Akkurat",
   "buffer_line_height": "comfortable",
   "buffer_font_family": "Monofoki Nerd Font",
   "terminal": {
+    "button": false,
     "font_size": 14.0,
-    "font_family": "Monofoki Nerd Font",
+    "font_family": "Monofoki Nerd Font"
+  },
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": true,
+    "anthropic_retention": false
   },
   "session": {
-    "trust_all_worktrees": true,
+    "trust_all_worktrees": true
   },
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "always",
-    "use_smartcase_find": true,
+    "use_smartcase_find": true
   },
   "use_smartcase_search": true,
   "seed_search_query_from_cursor": "always",
@@ -24,6 +117,22 @@
   "theme": {
     "mode": "dark",
     "light": "Gruvbox Light",
-    "dark": "Kanagawa Wave",
+    "dark": "Melange Dark",
   },
+  "theme_overrides": {
+      "Kanagawa Wave": {
+          "border.variant": "#363646",
+          "panel.focused_border": "#505065",
+      },
+      "Melange Dark": {
+        "syntax": {
+            "comment": { "font_style": "italic" },
+            "comment.doc": { "font_style": "italic" },
+        },
+      }
+  },
+  "gutter": {
+      "min_line_number_digits": 0,
+  },
+  "extend_comment_on_newline": false,
 }
