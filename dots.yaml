@@ -21,6 +21,7 @@
       type: hardlink
     ~/.config/zsh/.zshrc: zsh/zshrc
     ~/.config/zsh/alias.zsh: zsh/alias.zsh
+    ~/.config/zsh/vim.zsh: zsh/vim.zsh
     /etc/keyd/default.conf: 
       path: keyd/global.conf
       type: hardlink
