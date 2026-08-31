@@ -1,5 +1,79 @@
 [
   {
+    "bindings": {
+      "alt-f": "file_finder::Toggle",
+      "alt-o": "outline::Toggle",
+      "alt-c": "command_palette::Toggle",
+      "alt-h": "projects::OpenRecent",
+      "alt-p": "projects::OpenRecent",
+      "alt-n": "workspace::NewFile",
+      "ctrl-o": "workspace::Open",
+      "ctrl-s": "workspace::Save",
+      "alt-e": "project_panel::ToggleFocus",
+      "alt-g": "git_panel::ToggleFocus",
+      "alt-m": "workspace::ToggleLeftDock",
+      "alt-z": "workspace::ToggleCenteredLayout",
+      "alt-/": "terminal_panel::Toggle",
+      "alt-j": [
+        "pane::ActivatePreviousItem",
+        {
+          "wrap_around": false
+        }
+      ],
+      "alt-l": [
+        "pane::ActivateNextItem",
+        {
+          "wrap_around": false
+        }
+      ],
+      "alt-q": "pane::CloseActiveItem",
+      "alt-r": "pane::ReopenClosedItem",
+      "shift-alt-j": "pane::SwapItemLeft",
+      "shift-alt-l": "pane::SwapItemRight",
+      "alt-[": [
+        "workspace::DecreaseActiveDockSize",
+        {
+          "px": 40
+        }
+      ],
+      "alt-]": [
+        "workspace::IncreaseActiveDockSize",
+        {
+          "px": 40
+        }
+      ],
+      "alt-{": [
+        "workspace::DecreaseActiveDockSize",
+        {
+          "px": 40
+        }
+      ],
+      "alt-}": [
+        "workspace::IncreaseActiveDockSize",
+        {
+          "px": 40
+        }
+      ],
+      "alt-s": ["workspace::SendKeystrokes", "ctrl-alt-shift-5 ctrl-alt-right"],
+      "ctrl-alt-shift-5": "pane::DeploySearch",
+      "alt-tab": "workspace::ActivateNextPane",
+      "shift-alt-tab": "workspace::ActivatePreviousPane",
+      "alt-w": "git::Worktree",
+      "alt-b": "git::Switch",
+      "alt-left": "pane::GoBack",
+      "alt-right": "pane::GoForward",
+      "alt-d": "theme::ToggleMode",
+      "alt-a": "agent::Toggle"
+    }
+  },
+  {
+    "context": "Pane || Workspace",
+    "bindings": {
+      "alt-i": "tab_switcher::Toggle",
+      "alt-k": "tab_switcher::Toggle"
+    }
+  },
+  {
     "context": "VimControl && !menu",
     "bindings": {
       "j": "vim::Left",
@@ -31,21 +105,25 @@
       "u": null,
       "ctrl-u": "vim::Undo",
       "ctrl-p": "vim::Paste",
-      "n": [
-        "vim::PushFindForward",
-        {
-          "before": false,
-          "multiline": true
-        }
-      ],
-      "shift-n": [
-        "vim::PushFindBackward",
-        {
-          "after": false,
-          "multiline": true
-        }
-      ],
-      "ctrl-v": "vim::Paste"
+      "ctrl-v": "vim::Paste",
+
+      "n": "vim::SelectNext",
+      "shift-n": null,
+
+      // (g)o: put cursor somewhere
+      "g .": "editor::OpenExcerpts",
+      "g d": "editor::GoToDefinition",
+      "g i": "editor::GoToDiagnostic",  // (i)ssues
+      "g I": "diagnostics::Deploy",
+      "g r": "editor::FindAllReferences",
+
+      // (g)it
+      "G s": "git::ToggleStaged",
+      "G r": "git::Restore",
+      "G b": "git::Blame",
+      "G d": "git::OpenFileDiff",
+      "G D": "git::Diff",
+      "G c": "git::Commit"
     }
   },
   {
@@ -117,7 +195,6 @@
       ],
       "ctrl-f": "buffer_search::Deploy",
       "ctrl-a": "editor::SelectAll",
-      "q": "pane::CloseActiveItem",
       "up": "editor::MoveLineUp",
       "down": "editor::MoveLineDown",
       "left": "editor::Outdent",
@@ -214,7 +291,7 @@
           "around": false
         }
       ],
-      "h h": "vim::InsertBefore",
+      "shift-a": "vim::InsertBefore",
       "shift-h": "vim::InsertAfter",
       "shift-l": "vim::EndOfLineDownward",
       "c": "vim::VisualYank",
@@ -250,6 +327,7 @@
         "vim::PushAddSurrounds",
         {}
       ],
+      "s": null,
       "s p": [
         "workspace::SendKeystrokes",
         "ctrl-alt-s )"
@@ -404,100 +482,32 @@
     }
   },
   {
-    "context": "Editor || Terminal || ProjectPanel || Dock || Workspace",
-    "bindings": {
-      "alt-f": "file_finder::Toggle",
-      "alt-c": "command_palette::Toggle",
-      "alt-h": "projects::OpenRecent",
-      "alt-n": "workspace::NewFile",
-      "ctrl-o": "workspace::Open",
-      "ctrl-s": "workspace::Save",
-      "alt-e": "project_panel::ToggleFocus",
-      "alt-g": "git_panel::ToggleFocus",
-      "alt-m": "workspace::ToggleRightDock",
-      "alt-z": "workspace::ToggleCenteredLayout",
-      "alt-/": "terminal_panel::Toggle",
-      "alt-j": [
-        "pane::ActivatePreviousItem",
-        {
-          "wrap_around": false
-        }
-      ],
-      "alt-l": [
-        "pane::ActivateNextItem",
-        {
-          "wrap_around": false
-        }
-      ],
-      "alt-q": "pane::CloseActiveItem",
-      "alt-r": "pane::ReopenClosedItem",
-      "shift-alt-j": "pane::SwapItemLeft",
-      "shift-alt-l": "pane::SwapItemRight",
-      "alt-i": "workspace::ActivatePaneUp",
-      "alt-k": "workspace::ActivatePaneDown",
-      "ctrl-alt-i": [
-        "workspace::MoveItemToPaneInDirection",
-        {
-          "direction": "up"
-        }
-      ],
-      "ctrl-alt-k": [
-        "workspace::MoveItemToPaneInDirection",
-        {
-          "direction": "down"
-        }
-      ],
-      "ctrl-alt-j": [
-        "workspace::MoveItemToPaneInDirection",
-        {
-          "direction": "left"
-        }
-      ],
-      "ctrl-alt-l": [
-        "workspace::MoveItemToPaneInDirection",
-        {
-          "direction": "right"
-        }
-      ],
-      "alt-[": [
-        "workspace::DecreaseActiveDockSize",
-        {
-          "px": 50
-        }
-      ],
-      "alt-]": [
-        "workspace::IncreaseActiveDockSize",
-        {
-          "px": 50
-        }
-      ],
-      "shift-alt-[": [
-        "workspace::DecreaseActiveDockSize",
-        {
-          "px": 50
-        }
-      ],
-      "shift-alt-]": [
-        "workspace::IncreaseActiveDockSize",
-        {
-          "px": 50
-        }
-      ],
-      "alt-s": "pane::DeploySearch",
-      "alt-=": "git::OpenFileDiff"
-    }
-  },
-  {
     "context": "Editor",
     "bindings": {
       "shift-alt-i": "editor::MoveLineUp",
       "shift-alt-k": "editor::MoveLineDown",
       "ctrl-h": "buffer_search::DeployReplace",
       "alt-.": "pane::TogglePinTab",
-      "alt-[": "vim::ResizePaneLeft",
-      "alt-]": "vim::ResizePaneRight",
-      "shift-alt-[": "vim::ResizePaneDown",
-      "shift-alt-]": "vim::ResizePaneUp",
+      "alt-[": [
+        "workspace::SendKeystrokes",
+        "5 ctrl-alt-shift-1"
+      ],
+      "alt-]": [
+        "workspace::SendKeystrokes",
+        "5 ctrl-alt-shift-2"
+      ],
+      "alt-{": [
+        "workspace::SendKeystrokes",
+        "2 ctrl-alt-shift-4"
+      ],
+      "alt-}": [
+        "workspace::SendKeystrokes",
+        "2 ctrl-alt-shift-3"
+      ],
+      "ctrl-alt-shift-1": "vim::ResizePaneLeft",
+      "ctrl-alt-shift-2": "vim::ResizePaneRight",
+      "ctrl-alt-shift-3": "vim::ResizePaneUp",
+      "ctrl-alt-shift-4": "vim::ResizePaneDown",
       "ctrl-alt-up": [
         "workspace::MoveItemToPaneInDirection",
         {
@@ -521,7 +531,8 @@
         {
           "direction": "right"
         }
-      ]
+      ],
+      "ctrl-.": "editor::Hover",
     }
   },
   {
@@ -538,14 +549,26 @@
     "bindings": {
       "j": "project_panel::CollapseSelectedEntry",
       "l": "project_panel::ExpandSelectedEntry",
-      "ctrl-n": "project_panel::NewFile",
-      "ctrl-shift-n": "project_panel::NewDirectory"
+      "[": "project_panel::CollapseSelectedEntry",
+      "]": "project_panel::ExpandSelectedEntry",
+      "{": "project_panel::CollapseAllEntries",
+      "}": "project_panel::ExpandAllEntries",
+      "n": "project_panel::NewFile",
+      "N": "project_panel::NewDirectory",
+      "r": "project_panel::Rename"
+    },
+    "unbind": {
+      "shift-r": "project_panel::Rename"
     }
   },
   {
     "context": "OutlinePanel && not_editing",
     "bindings": {
       "j": "outline_panel::CollapseSelectedEntry",
+      "[": "outline_panel::CollapseSelectedEntry",
+      "]": "outline_panel::ExpandSelectedEntry",
+      "{": "outline_panel::CollapseAllEntries",
+      "}": "outline_panel::ExpandAllEntries",
       "l": "outline_panel::ExpandSelectedEntry"
     }
   },
@@ -557,28 +580,12 @@
     }
   },
   {
-    "context": "Pane",
-    "bindings": {
-      "alt-s": "project_search::ToggleFocus"
-    }
-  },
-  {
-    "context": "ProjectPanel && not_editing",
-    "bindings": {
-      "ctrl-r": "project_panel::Rename"
-    }
-  },
-  {
-    "context": "ProjectPanel && not_editing",
-    "unbind": {
-      "shift-r": "project_panel::Rename"
-    }
-  },
-  {
     "context": "GitPanel",
     "bindings": {
       "alt-j": "git_panel::ActivateChangesTab",
-      "alt-l": "git_panel::ActivateHistoryTab"
+      "alt-l": "git_panel::ActivateHistoryTab",
+      "ctrl-up": "git::Push",
+      "ctrl-down": "git::Pull"
     }
   },
   {
@@ -587,13 +594,67 @@
       "shift-t": "git_panel::FirstEntry",
       "shift-b": "git_panel::LastEntry",
       "j": null,
-      "l": null
+      "l": null,
+      "enter": "menu::SecondaryConfirm"
     }
   },
   {
-    "context": "GitPanel && ChangesList",
+    "context": "TabSwitcher",
     "bindings": {
-      "enter": "menu::SecondaryConfirm"
+      "alt-i": "menu::SelectPrevious",
+      "alt-k": "menu::SelectNext",
+      "alt-q": "tab_switcher::CloseSelectedItem"
     }
-  }
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      "ctrl-e": "editor::RevealInFileManager",
+    }
+  },
+  {
+    // normal mode only -- unscoped, these eat [ ] { } while typing
+    "context": "Editor && mode == full && vim_mode == normal",
+    "bindings": {
+      "[": "editor::Fold",
+      "]": "editor::UnfoldLines",
+      "{": "editor::FoldAll",
+      "}": "editor::UnfoldAll",
+    }
+  },
+  {
+    "context": "Editor && extension == md",
+    "bindings": {
+      "alt-v": "markdown::OpenPreviewToTheSide"
+    }
+  },
+  {
+    "context": "!SettingsWindow",
+    "bindings": {
+      "alt-,": "zed::OpenSettings"
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "super-n": "workspace::NewWindow"
+    }
+  },
+  {
+    "context": "MarkdownPreview",
+    "bindings": {
+      "i": "markdown::ScrollUp",
+      "k": "markdown::ScrollDown",
+      "T": "markdown::ScrollToTop",
+      "B": "markdown::ScrollToBottom",
+    },
+  },
+  {
+    "context": "Editor && multiple_selections",
+    "bindings": {
+      "enter": ["editor::SelectNext", { "replace_newest": true }],
+      "shift-enter": ["editor::SelectPrevious", { "replace_newest": true }],
+      "shift-n": "editor::UndoSelection"
+    }
+  },
 ]

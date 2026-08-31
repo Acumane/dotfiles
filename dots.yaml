@@ -29,6 +29,7 @@
       path: hypr/*
     ~/.config/home-manager/home.nix: home.nix
     ~/.config/vicinae/settings.json: vicinae/settings.json
+    ~/.config/worktrunk/config.toml: worktrunk/config.toml
     ~/.config/zed/keymap.json: zed/keymap.json
     ~/.config/zed/settings.json: zed/settings.json
     ~/.local/share/vicinae/themes/kana.toml: vicinae/themes/kana.toml

@@ -1,0 +1,7 @@
+# Optionally sparse-checkout, specify cone
+[[pre-start]]
+sparse = 'dirs="${CONE:-$(git config --get wt.sparse || true)}"; if [ -n "$dirs" ]; then git sparse-checkout set --cone $dirs; fi'
+
+# No-op w/o submodules
+[[pre-start]]
+submodules = "git submodule update --init --recursive"
