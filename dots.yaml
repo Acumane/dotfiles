@@ -78,9 +78,6 @@
       path: git/*
       prefix: '.'
 
-- create:
-  - ~/mach
-
 - shell:
   - [ ./xdg-defaults, Setting XDG defaults... ]
   - [ sudo keyd reload, Reloading keyd... ]

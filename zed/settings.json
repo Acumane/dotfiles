@@ -1,4 +1,7 @@
 {
+  "edit_predictions": {
+    "provider": "copilot"
+  },
   "excerpt_context_lines": 3,
   "middle_click_paste": false,
   "double_click_in_multibuffer": "open",
@@ -25,16 +28,15 @@
     "claude-acp": {
       "type": "registry"
     },
-    "Factory Droid": {
-      "default_config_options": {
-        "model": "claude-opus-5"
-      },
-      "type": "custom",
-      "command": "/home/bren/.local/bin/droid",
-      "args": ["exec", "--output-format", "acp"]
+    "codex-acp": {
+      "type": "registry"
+    },
+    "factory-droid": {
+      "type": "registry"
     }
   },
   "agent": {
+    "thinking_display": "always_collapsed",
     "dock": "right",
     "sidebar_side": "right",
     "button": false,
@@ -146,7 +148,7 @@
   "buffer_font_size": 14.0,
   "theme": {
     "mode": "dark",
-    "light": "Gruvbox Light",
+    "light": "Gruvbox Light Hard",
     "dark": "Melange Dark",
   },
   "theme_overrides": {

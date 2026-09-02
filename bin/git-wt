@@ -1,0 +1,33 @@
+#!/bin/bash
+# Create a worktree with an optional sparse cone
+# Usage: git wt [-n <dir>] <branch> [cone-dir...]
+set -eu
+
+exec 3>&1 1>&2  # stdout carries the path; git's chatter goes to stderr
+
+name=""
+[ "${1-}" = "-n" ] && { name=${2-}; shift 2; }
+branch=${1-}
+[ -n "$branch" ] || { echo "usage: git wt [-n <dir>] <branch> [cone-dir...]"; exit 2; }
+shift
+
+gitdir=$(git rev-parse --path-format=absolute --git-common-dir)
+dir="$(dirname "$(dirname "$gitdir")")/${name:-${branch##*/}}"
+[ -e "$dir" ] && { echo "git wt: $dir already exists"; exit 1; }
+
+# Don't create new branch off HEAD if remote exists
+git show-ref --verify --quiet "refs/heads/$branch" \
+  || git fetch -q origin "+$branch:refs/remotes/origin/$branch" 2> /dev/null || true
+
+if git show-ref --verify --quiet "refs/heads/$branch" \
+|| git show-ref --verify --quiet "refs/remotes/origin/$branch"
+then git worktree add --no-checkout "$dir" "$branch"     # existing branch, or track origin's
+else git worktree add --no-checkout -b "$branch" "$dir"  # new branch off current HEAD
+fi
+
+[ $# -gt 0 ] && git -C "$dir" sparse-checkout set "$@"
+git -C "$dir" checkout "$branch"
+# submodule update reads the index, not the sparse cone -- limit it by pathspec
+git -C "$dir" submodule update --init --recursive -- "$@"
+
+printf '%s\n' "$dir" >&3

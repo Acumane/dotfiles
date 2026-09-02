@@ -66,17 +66,7 @@ layout {
 }
 
 recent-windows {
-    open-delay-ms 0
-
-    highlight {
-        active-color "#71718E"
-        urgent-color "#E67B7F"
-
-        corner-radius 12
-    }
-    // binds {
-    //     Mod+Tab { next-window; }
-    // }
+    off
 }
 
 overview {
@@ -118,7 +108,7 @@ binds {
     Mod+Shift+W { spawn-sh "gtk-launch helium.desktop"; }
     Mod+E { spawn-sh "nirius focus-or-spawn --app-id='.*Nautilus' -- nautilus -w"; }
     Mod+Shift+E { spawn-sh "nautilus -w"; }
-    Mod+C { spawn-sh "nirius focus-or-spawn --app-id='code|cursor' -- cursor"; }
+    Mod+C { spawn-sh "nirius focus-or-spawn --app-id='code|cursor|zed' -- cursor"; }
     Mod+Shift+C { spawn-sh "cursor"; }
     Mod+Comma { spawn-sh "nirius focus-or-spawn --app-id='Slack' -- slack"; }
     Mod+Shift+Comma { spawn-sh "slack"; }
@@ -135,7 +125,7 @@ binds {
     Mod+S { spawn-sh "vicinae vicinae://launch/files/search?toggle=true"; }
     Mod+Period { spawn-sh "vicinae vicinae://launch/core/search-emojis?toggle=true"; }
     Mod+V { spawn-sh "vicinae vicinae://launch/clipboard/history?toggle=true"; }
-    Mod+Backspace { spawn-sh "hyprlock --immediate"; }
+    Mod+Backspace { spawn-sh "hyprlock --grace 0"; }
 
     // Movement and focus
     Mod+J { focus-column-or-monitor-left; }
@@ -158,17 +148,11 @@ binds {
     Mod+Ctrl+Shift+J { move-workspace-to-monitor-left; }
     Mod+Ctrl+Shift+L { move-workspace-to-monitor-right; }
 
-    // Workspaces
-    Mod+1 { focus-workspace 1; }
-    Mod+2 { focus-workspace 2; }
-    Mod+3 { focus-workspace 3; }
-    Mod+4 { focus-workspace 4; }
-    Mod+5 { focus-workspace 5; }
-    Mod+Shift+1 { move-column-to-workspace 1; }
-    Mod+Shift+2 { move-column-to-workspace 2; }
-    Mod+Shift+3 { move-column-to-workspace 3; }
-    Mod+Shift+4 { move-column-to-workspace 4; }
-    Mod+Shift+5 { move-column-to-workspace 5; }
+    // Monitors, ordered L->R
+    Mod+Tab { focus-monitor-next; }
+    Mod+1 { spawn-sh "$SCRIPTS/monitor 1"; }
+    Mod+2 { spawn-sh "$SCRIPTS/monitor 2"; }
+    Mod+3 { spawn-sh "$SCRIPTS/monitor 3"; }
 
     // Column width cycling
     Mod+BracketLeft { set-column-width "-20%"; }

@@ -25,18 +25,20 @@ alias ...="cd ../../"
 alias ....="cd ../../../"
 
 zshaddhistory() {
-  [[ $(command wc -w <<< "$1") -le 1 ]] && return 1
-  whence ${${(z)1}[1]} > /dev/null || return 1
+  local -a words=( ${(Z+n+)1} )
+  (( $#words > 1 )) || return 1
+  while [[ $words[1] == [A-Za-z_]*=* ]]; do shift words; done
+  (( $#words )) || return 1
+  whence -- $words[1] > /dev/null || return 1
 }
 
 # —— WIDGETS ————————————————————
 
 files() {
-  setopt LOCAL_OPTIONS NO_MONITOR
-  local file="$(fd -0LI --type f --color=always | fzf -m --read0 --query="$BUFFER" \
+  local -a picked=(${(f)"$(fd -0LI --type f --color=always | fzf -m --read0 \
     --bind='alt-v:reload(fd -0LHI --type=f --exclude=.git --max-depth=4 --color=always)' \
-    --preview 'bat -n --color=always {}')"
-  [ -n "$file" ] && xdg-open "$file" &> /dev/null & disown
+    --preview 'bat -n --color=always {}')"})
+  (( $#picked )) && LBUFFER="${LBUFFER%% }${LBUFFER:+ }${(j: :)${(@q+)picked}} "
   zle && zle reset-prompt
 }
 zle -N files
